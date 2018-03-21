@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.6" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.6">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.6">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.6">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.6" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.0.6',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="版权声明：本文为博主原创文章，未经博主允许不得转载 前言Java 代理模式在 Android 中有很多的应用。比如 Android 中 Binder 的 Client 部分就是通过代理模式来访问 Server 端的、代理 Activity 或 Fragment 模式、还有很多开源框架也都使用了代理模式 (主要是动态代理)。 概念简单地说，代理模式就是代理对象为其他真实对象 (也叫被代理对象) 提供">
+<meta name="keywords" content="Java设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java代理模式与Android的情结">
+<meta property="og:url" content="http://yoursite.com/2017/05/15/Java代理模式与Android的情结/index.html">
+<meta property="og:site_name" content="Rongxuanhong&#39;s Blog">
+<meta property="og:description" content="版权声明：本文为博主原创文章，未经博主允许不得转载 前言Java 代理模式在 Android 中有很多的应用。比如 Android 中 Binder 的 Client 部分就是通过代理模式来访问 Server 端的、代理 Activity 或 Fragment 模式、还有很多开源框架也都使用了代理模式 (主要是动态代理)。 概念简单地说，代理模式就是代理对象为其他真实对象 (也叫被代理对象) 提供">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1ffmdhtgsm3j20c706tmx3.jpg">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/13430/201705/13430-20170516223354650-984999229.png">
+<meta property="og:updated_time" content="2017-09-08T14:14:21.382Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java代理模式与Android的情结">
+<meta name="twitter:description" content="版权声明：本文为博主原创文章，未经博主允许不得转载 前言Java 代理模式在 Android 中有很多的应用。比如 Android 中 Binder 的 Client 部分就是通过代理模式来访问 Server 端的、代理 Activity 或 Fragment 模式、还有很多开源框架也都使用了代理模式 (主要是动态代理)。 概念简单地说，代理模式就是代理对象为其他真实对象 (也叫被代理对象) 提供">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1ffmdhtgsm3j20c706tmx3.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/15/Java代理模式与Android的情结/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Java代理模式与Android的情结 | Rongxuanhong's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> 
+
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Rongxuanhong's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">脚踏实地地做好自己</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+          
+  <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Categories</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+</li>
+
+      
+
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/15/Java代理模式与Android的情结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java代理模式与Android的情结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-15T20:45:12+08:00">2017-05-15</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/15/Java代理模式与Android的情结/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/05/15/Java代理模式与Android的情结/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/05/15/Java代理模式与Android的情结/" class="leancloud_visitors" data-flag-title="Java代理模式与Android的情结">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Views:</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             Views: 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>版权声明：本文为博主原创文章，未经博主允许不得转载</strong></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><code>Java</code> 代理模式在 <code>Android</code> 中有很多的应用。比如 <code>Android</code> 中 <code>Binder</code> 的 <code>Client</code> 部分就是通过代理模式来访问 <code>Server</code> 端的、代理 <code>Activity</code> 或 <code>Fragment</code> 模式、还有很多开源框架也都使用了代理模式 (<strong>主要是动态代理</strong>)。</p>
+<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p><strong>简单地说</strong>，代理模式就是代理对象为其他真实对象 (<strong>也叫被代理对象</strong>) 提供代理机制，以便控制对真实对象的访问。此时，如果真实对象不想直接和客户端接触，则可让代理对象充当真实对象与客户端之间的中介来联系二者，完成事务联系。<br><strong>抽象地说</strong>，代理对象和被代理对象一般实现相同的接口，调用者与代理对象进行交互。代理的存在对于调用者来说是透明的，调用者看到的只是接口。代理对象则可以封装一些内部的处理逻辑，如访问控制、远程通信、日志、缓存等。比如一个对象访问代理就可以在普通的访问机制之上添加缓存的支持</p>
+<p>举个简单的例子，比如中国移动 (<strong>真实对象</strong>) 和用户 (<strong>客户端</strong>) 之间的这种业务关系。首先，我们老百姓不可能直接和中国移动总部接触，因而中国移动会将业务的操作权下放到各个省市乡的代理点       ( <strong>代理对象</strong>),而用户到代理店办的业务其实就是总部的业务，这样一来便可大大地扩大业务，也能更方便服务用户。  </p>
+<h1 id="代理模式的分类"><a href="#代理模式的分类" class="headerlink" title="代理模式的分类"></a>代理模式的分类</h1><h2 id="静态代理"><a href="#静态代理" class="headerlink" title="静态代理"></a>静态代理</h2><h3 id="UML类图"><a href="#UML类图" class="headerlink" title="UML类图"></a>UML类图</h3><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ffmdhtgsm3j20c706tmx3.jpg" alt=""><br><strong>UML解析：</strong>首先,定义了一个 <code>Subject</code> 类型的接口，并声明了接口方法 <code>DoAction()</code>;其次，分别定义了两个实现了 <code>Subject</code> 接口的代理类 <code>Proxy</code> 以及 真实对象类 <code>RealSubject</code> ,其中代理类代表了(<code>delegate</code>)真实对象类；最后，客户端 <code>Cient</code> 依赖关联 <code>Subject</code>,再由 <code>Subject</code> 操作 <code>DoAction()</code>。  </p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><pre><code>public interface Subject {
+//做操作
+void doAction();
+}
+
+public class RealSubject implements Subject{
+
+@Override
+public void doAction() {
+
+}
+}  
+
+public class Proxy implements Subject {
+private RealSubject mRealSubject=null;
+private void preDoAction(){
+    //do something before doAction
+}
+@Override
+public void doAction() {
+   if (mRealSubject==null)
+       mRealSubject=new RealSubject();
+    preDoAction();//代理类准备事情
+    //代理类与真实对象类搞事情了，等于代理类执行了真实类中对应的那个方法了，
+    //即代理类隐藏了真实类中方法的实现细节。
+    mRealSubject.doAction();
+    postDoAction();//代理类善后
+}
+private void postDoAction(){
+    //do something after doAction
+}
+ }  
+
+
+public class Client {
+public static void main(String[] args) throws Throwable {
+    Subject subject=new Proxy();
+    subject.doAction();//代理类代替真实类做事情
+}
+}
+</code></pre><p>以上就是静态代理的代码实现。你可以看见，每个代理类都需要一个真实类来对应，即代理类依赖于真实类的对象。</p>
+<h3 id="静态代理如何用"><a href="#静态代理如何用" class="headerlink" title="静态代理如何用"></a>静态代理如何用</h3><p>我先举个场景。我们需要拿到数据,而数据分别来源于本地、内存及网络，定义一个方法 <code>getData()</code> 用于获取数据。由于我们数据有三种，我们必然需要分别实现 <code>getData()</code>,此时，我们将此方法抽取到接口中，三个实现类各自实现接口即可。然而，现在我们需要在每次获取数据前后执行一些公共操作，比如缓存，日志处理等。那么，最差的做法就是每个实现类都去实现一样的逻辑后再去调用。而如果我们利用静态代理，就可以将此方法代理出去。在代理方法中完整的执行获取数据及其公共操作部分，而隐藏 <code>getData()</code><br>的实现细节，实现细节交由各个实现类处理。这样一来，调用者只需调用这个代理方法，而无需和其他实现类交互。在代码层面，客户端调用获取数据的方法时代码调用趋于固定，而如果以后需要修改 <code>getData()</code>  实现细节，也只需要改动实现类中对应的方法即可，这样便提高了可扩展性。</p>
+<blockquote>
+<p>注：getData()类似上述Subject中的doAction(),代理方法类似Proxy中的doAction()</p>
+</blockquote>
+<p>然而，当每个代理类都对应一个真实类，那么大量使用的话会引起代码量的急剧膨胀，因而我们就需要一种机制–不需要提前知道真实类，而是在动态运行中才指定这样一个类。那么这样就引入了代理模式的另一种方式–动态代理。  </p>
+<h2 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h2><h3 id="涉及到的几个类"><a href="#涉及到的几个类" class="headerlink" title="涉及到的几个类"></a>涉及到的几个类</h3><ol>
+<li><strong>接口</strong> <code>InvocationHandler</code>：该接口中仅定义了一个方法 <code>Object：invoke(Object obj,Method method, Object[] args)</code>。在实际使用时，第一个参数 <code>obj</code> 一般是指代理类，<code>method</code> 是被代理的方法，如上例中的 <code>doAction()</code>，<code>args</code> 为该方法的参数对象数组。这个抽象方法在代理类中动态实现<strong>(反射调用)</strong>。  </li>
+<li><strong>Proxy</strong>：该类即为生成的动态代理类的父类，作用类似于静态代理中的 <code>Proxy</code>，其中主要包含以下内容：<ul>
+<li>构造函数 <code>Protected Proxy(InvocationHandler h)</code>，其中子类 (<strong>生成的动态代理类</strong>)继承父类构造方法可获得 <strong>h</strong> 实例 。  </li>
+<li><code>Static Class getProxyClass (ClassLoaderloader, Class[] interfaces)</code>：获得一个代理类，其中 <strong>loader</strong> 是类装载器引用，<strong>interfaces</strong> 是被代理类所拥有的全部接口的数组。</li>
+<li><code>Static Object newProxyInstance(ClassLoaderloader, Class[] interfaces, InvocationHandler h)</code>：返回代理类的一个实例，返回后的代理类可以当作被代理类使用(可使用被代理类的在 <code>Subject</code> 接口中声明过的方法),也就是此时代理类已获得被代理类的类似功能，故你只需操作代理类完成所需请求即可。  </li>
+</ul>
+</li>
+</ol>
+<h3 id="机制分析"><a href="#机制分析" class="headerlink" title="机制分析"></a>机制分析</h3><p>动态代理允许客户端在运行时刻动态地创建出实现了多个接口的代理类及其对象。其中每一个代理类的对象都会关联一个表示内部处理逻辑的接口类 <code>InvocationHandler</code> (<strong>继承父类含参构造方法可得到接口引用</strong>)实现。当客户端调用了代理对象所代理的接口方法时，信息会被 <code>InvocationHandler</code> 中的 <code>invoke()</code> 方法拦截处理。在 <code>invoke()</code> 方法里可以截取到代理类的对象，代理方法对应的 <code>Method</code> 对象以及实际调用的参数,然后再经过处理而后返回新的对象。</p>
+<p>接下来我们来看看代码实现。  </p>
+<h3 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h3><p><code>Subject</code> 以及 <code>RealSubject</code> 同上  </p>
+<ol>
+<li><p><strong>实现了调用处理器监听的动态代理类</strong>   </p>
+<pre><code>public class DynamicProxyObject implements InvocationHandler {
+private Object mObject;//被代理对象的引用
+
+public DynamicProxyObject(Object object) {
+    mObject = object;
+}
+
+@Override
+public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+    System.out.println(&quot;before calling &quot; + method);
+    Object object=method.invoke(mObject,args);
+    System.out.println(&quot;after calling &quot; + method);
+    return object;
+}
+}
+</code></pre></li>
+<li><p><strong>客户端类</strong>   </p>
+<pre><code>public class Client {
+public static void main(String[] args) throws Throwable {
+    RealSubject rs = new RealSubject();
+    InvocationHandler handler = new DynamicProxyObject(rs);
+    Class cl = rs.getClass();
+    //第一种.分解步骤得到代理类对象
+    //Class c = Proxy.getProxyClass(cl.getClassLoader(), cl.getInterfaces());
+    //Constructor ct = c.getConstructor(new Class[]{InvocationHandler.class});
+    //Subject subject1 = (Subject) ct.newInstance(new Object[]{handler});
+   //第二种.一次性得到代理类对象
+    Subject subject=
+    (Subject) Proxy.newProxyInstance(cl.getClassLoader(),cl.getInterfaces(),handler);
+     subject.doAction();
+}
+}
+</code></pre></li>
+<li><p><strong>总结</strong>  </p>
+<p> 通过这种方式，被代理的对象(<code>RealSubject</code>)可以在运行时动态改变，需要控制的接口(<code>Subject</code> 接口)可以在运行时改变，控制的方式(<code>DynamicProxyObject</code> 类)也可以动态改变，从而实现了非常灵活的动态代理机制。</p>
+<h1 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h1><p>主要以 <code>Proxy</code> 类为主 (<code>该类位于java.lang.reflect 包下</code>)</p>
+<h2 id="几个重要的静态变量"><a href="#几个重要的静态变量" class="headerlink" title="几个重要的静态变量"></a>几个重要的静态变量</h2><pre><code>private final static String proxyClassNamePrefix = &quot;$Proxy&quot;;
+
+//动态代理类的构造函数参数类数组
+private final static Class[] constructorParams ={ InvocationHandler.class };
+
+//映射表：用于维护类加载器对象到其对应的代理类缓存
+private static Map&lt;ClassLoader, Map&lt;List&lt;String&gt;, Object&gt;&gt; loaderToCache
+        = new WeakHashMap&lt;&gt;();
+
+//标记动态代理类正在创建中
+private static Object pendingGenerationMarker = new Object();
+
+//用于创建唯一的动态代理类名而定义的 number，可递增
+private static long nextUniqueNumber = 0;
+private static Object nextUniqueNumberLock = new Object();
+
+//同步表：记录所有已创建的动态代理类实例类型，可供 isProxyClass() 使用
+private static Map&lt;Class&lt;?&gt;, Void&gt; proxyClasses =
+        Collections.synchronizedMap(new WeakHashMap&lt;Class&lt;?&gt;, Void&gt;());
+
+//动态代理类关联的 InvocationHandler
+protected InvocationHandler h;  
+</code></pre><h2 id="获取动态代理类实例的方法1"><a href="#获取动态代理类实例的方法1" class="headerlink" title="获取动态代理类实例的方法1"></a>获取动态代理类实例的方法1</h2><pre><code>private static Class&lt;?&gt; getProxyClass(ClassLoader loader, Class&lt;?&gt;... interfaces) 
+throws IllegalArgumentException
+{ 
+ Class&lt;?&gt; proxyClass = null;
+
+//收集接口名用来作为代理类缓存的key
+String[] interfaceNames = new String[interfaces.length];
+
+//用于检测重复接口名
+Set&lt;Class&lt;?&gt;&gt; interfaceSet = new HashSet&lt;&gt;();
+
+for (int i = 0; i &lt; interfaces.length; i++) {
+    //验证class loader 解析出来的接口是否与反射出来的类对象相同
+    String interfaceName = interfaces[i].getName();
+    Class&lt;?&gt; interfaceClass = null;
+    try {
+        //Java反射得到一个类对象
+        interfaceClass = Class.forName(interfaceName, false, loader);
+    } catch (ClassNotFoundException e) {
+    }
+    //当前反射得到的类对象不等于接口数组中的接口类对象
+    if (interfaceClass != interfaces[i]) {
+        throw new IllegalArgumentException(
+                interfaces[i] + &quot; is not visible from class loader&quot;);
+    }
+
+    //验证反射出来的类对象是否是接口
+    if (!interfaceClass.isInterface()) {
+        throw new IllegalArgumentException(
+                interfaceClass.getName() + &quot; is not an interface&quot;);
+    }
+
+    //验证接口类对象不重复
+    if (interfaceSet.contains(interfaceClass)) {
+        throw new IllegalArgumentException(
+                &quot;repeated interface: &quot; + interfaceClass.getName());
+    }
+    //每次反射得到的类对象即接口对象存入 Set 集合
+    interfaceSet.add(interfaceClass);
+    //数组记录接口类名
+    interfaceNames[i] = interfaceName;
+}
+
+//接口名数组转接口名集合,以作为代理类缓存的 key
+List&lt;String&gt; key = Arrays.asList(interfaceNames);
+
+//为类加载实例查找或者创建代理类缓存
+Map&lt;List&lt;String&gt;, Object&gt; cache;
+synchronized (loaderToCache) {
+    cache = loaderToCache.get(loader);
+    if (cache == null) {//无则创建加入缓存映射表
+        cache = new HashMap&lt;&gt;();
+        loaderToCache.put(loader, cache);
+    }
+}
+//接下来就是使用 key 检索代理类缓存。而这次检索将会产生以下三张情况
+//1.空值 null. 意味着当前类加载器中没有该代理类
+//2.正在创建的对象.意味着一个代理类正在创建中.
+//3.类对象的一个弱引用,意味着代理类此时已经创建.
+
+synchronized (cache) {
+    do {
+        Object value = cache.get(key);
+        if (value instanceof Reference) {
+            proxyClass = (Class&lt;?&gt;) ((Reference) value).get();
+        }
+        if (proxyClass != null) {
+            //上述情况3，直接返回代理类实例
+            return proxyClass;
+        } else if (value == pendingGenerationMarker) {
+            // 上述情况2，需要等待创建成功
+            try {
+                cache.wait();
+            } catch (InterruptedException e) {
+
+            }
+            continue;
+        } else {
+
+            //上述情况1，标记正在创建.
+            cache.put(key, pendingGenerationMarker);
+            break;
+        }
+    } while (true);
+}
+
+try {
+    String proxyPkg = null;     //定义代理类所在的包名
+
+    //记录非公有代理类接口的包名以便代理类都能被定义在相同包名下,
+    // 并验证所有的非公有代理类接口都在相同包名下.
+    for (int i = 0; i &lt; interfaces.length; i++) {
+        int flags = interfaces[i].getModifiers();
+        if (!Modifier.isPublic(flags)) {//是否公有
+            String name = interfaces[i].getName();
+            int n = name.lastIndexOf(&apos;.&apos;);
+            String pkg = ((n == -1) ? &quot;&quot; : name.substring(0, n + 1));
+            if (proxyPkg == null) {//接口名作为包名
+                proxyPkg = pkg;
+            } else if (!pkg.equals(proxyPkg)) {//包名不同
+                throw new IllegalArgumentException(
+                        &quot;non-public interfaces from different packages&quot;);
+            }
+        }
+    }
+
+    if (proxyPkg == null) {
+        proxyPkg = &quot;&quot;;
+    }
+     //直接生成代理类引用
+    {
+        //得到所有接口的方法对象集合
+        List&lt;Method&gt; methods = getMethods(interfaces);
+        //方法对象集合排序
+        Collections.sort(methods, ORDER_BY_SIGNATURE_AND_SUBTYPE);
+        //验证每个方法的返回类型
+        validateReturnTypes(methods);
+        //去掉重复的方法，并收集异常
+        List&lt;Class&lt;?&gt;[]&gt; exceptions = deduplicateAndGetExceptions(methods);
+
+        Method[] methodsArray = methods.toArray(new Method[methods.size()]);
+        Class&lt;?&gt;[][] exceptionsArray =
+        exceptions.toArray(new Class&lt;?&gt;[exceptions.size()][]);
+
+        //定义动态代理类的名字 proxyName
+        final long num;
+        synchronized (nextUniqueNumberLock) {
+            num = nextUniqueNumber++;
+        }
+        String proxyName = proxyPkg + proxyClassNamePrefix + num;
+        //利用 generateProxy() 方法传入所需参数得到动态代理类的引用
+        proxyClass = generateProxy(proxyName, interfaces, loader, methodsArray,
+                exceptionsArray);
+    }
+    //保存数据
+    proxyClasses.put(proxyClass, null);
+
+} finally {
+
+    //异常进入处理，如果代理类创建成功则用弱引用处理后加入代理类缓存中，
+    // 否则去除该key所对应的正在创键的代理类
+    synchronized (cache) {
+        if (proxyClass != null) {
+            cache.put(key, new WeakReference&lt;Class&lt;?&gt;&gt;(proxyClass));
+        } else {
+            cache.remove(key);
+        }
+        //刷新缓存集合
+        cache.notifyAll();
+    }
+}
+return proxyClass;
+}
+</code></pre><h2 id="动态创建代理类实例的方法2"><a href="#动态创建代理类实例的方法2" class="headerlink" title="动态创建代理类实例的方法2"></a>动态创建代理类实例的方法2</h2><pre><code> public static Object newProxyInstance(ClassLoader loader,Class&lt;?&gt;[] interfaces,
+InvocationHandler h) throws IllegalArgumentException
+{
+ if (h == null) {
+    throw new NullPointerException();
+}
+Class&lt;?&gt; cl = getProxyClass(loader, interfaces);
+
+/*
+ * @param constructorParams 构造器参数类数组
+ * 利用构造器反射得到关联了 InvocationHandler 的代理类实例
+ *
+ */
+try {
+    final Constructor&lt;?&gt; cons = cl.getConstructor(constructorParams);
+    return newInstance(cons, h);//实际调用了  cons.newInstance(new Object[] {h} );
+} catch (NoSuchMethodException e) {
+    throw new InternalError(e.toString());
+}
+   }  
+</code></pre><h2 id="动态创建出实现了接口方法的代理类代码例子"><a href="#动态创建出实现了接口方法的代理类代码例子" class="headerlink" title="动态创建出实现了接口方法的代理类代码例子"></a>动态创建出实现了接口方法的代理类代码例子</h2><pre><code>import com.example.hrx.mvpdemo.bean.Subject;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+import java.lang.reflect.UndeclaredThrowableException;
+
+public final class DynamicProxyType extends Proxy implements Subject {
+private static Method m1;
+private static Method m0;
+private static Method m3;
+private static Method m2;
+
+//构造方法，参数就是一开始实例化的InvocationHandler接口的实例 继承自 Proxy
+public $Proxy1(InvocationHandler var1){
+    super(var1);
+}
+
+public final boolean equals(Object var1){
+    try {
+        return ((Boolean)super.h.invoke(this, m1, new Object[]{var1})).booleanValue();
+    } catch (RuntimeException | Error var3) {
+        throw var3;
+    } catch (Throwable var4) {
+        throw new UndeclaredThrowableException(var4);
+    }
+}
+
+public final int hashCode() {
+    try {
+        return ((Integer)super.h.invoke(this, m0, (Object[])null)).intValue();
+    } catch (RuntimeException | Error var2) {
+        throw var2;
+    } catch (Throwable var3) {
+        throw new UndeclaredThrowableException(var3);
+    }
+}
+//动态代理类代理的方法实现
+public final void doAction()  {
+    try {
+        super.h.invoke(this, m3, (Object[])null);
+    } catch (RuntimeException | Error var2) {
+        throw var2;
+    } catch (Throwable var3) {
+        throw new UndeclaredThrowableException(var3);
+    }
+}
+
+public final String toString()  {
+    try {
+        return (String)super.h.invoke(this, m2, (Object[])null);
+    } catch (RuntimeException | Error var2) {
+        throw var2;
+    } catch (Throwable var3) {
+        throw new UndeclaredThrowableException(var3);
+    }
+}
+
+//static代码块加载Method对象
+static {
+    try {
+        m1 = Class.forName(&quot;java.lang.Object&quot;).getMethod(&quot;equals&quot;, new Class[]{Class.forName(&quot;java.lang.Object&quot;)});
+        m0 = Class.forName(&quot;java.lang.Object&quot;).getMethod(&quot;hashCode&quot;, new Class[0]);
+        m3 = Class.forName(&quot;com.example.hrx.Subject&quot;).getMethod(&quot;doAction&quot;, new Class[0]);
+        m2 = Class.forName(&quot;java.lang.Object&quot;).getMethod(&quot;toString&quot;, new Class[0]);
+    } catch (NoSuchMethodException var2) {
+        throw new NoSuchMethodError(var2.getMessage());
+    } catch (ClassNotFoundException var3) {
+        throw new NoClassDefFoundError(var3.getMessage());
+    }
+}
+}
+</code></pre><h3 id="动态代理怎么用"><a href="#动态代理怎么用" class="headerlink" title="动态代理怎么用"></a>动态代理怎么用</h3><p>我们仍以静态代理怎么用中的场景为例。当实现类越来越多时，利用动态代理，能够大大简化代码量。而我们在静态代理的代理方法实现类似地被放在了动态代理中invoke()中，但是实现形式有差异。后者主要利用反射来拿到所需要的实现类的被代理方法，其他则和静态代理无异。</p>
+<h1 id="与-Android-的情结"><a href="#与-Android-的情结" class="headerlink" title="与 Android 的情结"></a>与 Android 的情结</h1><p>##Retrofit 中自定义的网络请求到 OkHttp.Call 的适配<br>我们都知道可以使用类似 <code>GitHub github = retrofit.create(GitHub.class)</code> 来获得接口的引用；其实在内部是创建了一个实现了我们自定义的接口 <code>GitHub</code> 的动态代理类，当我们开始执行网络请求时，代理类会按照 <code>Retrofit</code> 先前配置的逻辑来处理我们发出的网络请求：比如交由 <code>okhttp3.Call</code> 来进行网络请求。<code>Retrofit</code> 完成的是封装客户网络请求的高效工作，而真正的网络请求的工作是委托给了 <code>OkHttp</code> 来完成。  </p>
+</li>
+</ol>
+<p><strong>关键代码:</strong></p>
+<pre><code>public final class Retrofit {
+
+  public &lt;T&gt; T create(final Class&lt;T&gt; service) {
+    //此处同样应用上述创建动态代理类实例方法
+    return (T) Proxy.newProxyInstance(service.getClassLoader(), new Class&lt;?&gt;[] 
+    { service },new InvocationHandler() {
+          private final Platform platform = Platform.get();
+           @Override
+           public Object invoke(Object proxy, Method method, Object... args)
+              throws Throwable {
+            // method来自Object.class则不做自定义处理
+            if (method.getDeclaringClass() == Object.class) {
+              return method.invoke(this, args);
+            }
+            //默认处理，即根据平台类型（Android、Java8、IOS）做处理
+            if (platform.isDefaultMethod(method)) {
+              return platform.invokeDefaultMethod(method, service, proxy, args);
+            }
+            ServiceMethod serviceMethod = loadServiceMethod(method);
+            OkHttpCall okHttpCall = new OkHttpCall&lt;&gt;(serviceMethod, args);
+            return serviceMethod.callAdapter.adapt(okHttpCall);
+          }
+        });
+  }
+}  
+</code></pre><h2 id="binder机制"><a href="#binder机制" class="headerlink" title="binder机制"></a>binder机制</h2><p>在跨进程通信中，<code>binder</code> 作为通信的媒介，联系了客户端 <code>Client</code> 与服务端 <code>Server</code> 的信息交流。<br>接下来，我们来看一张图：<br><img src="http://images2015.cnblogs.com/blog/13430/201705/13430-20170516223354650-984999229.png" alt=""><br>注：图中 <strong>SM</strong> 表示 <code>ServerManager</code>，其在 <code>Android</code> 中是联系这四大组件的关键。  </p>
+<p>首先,<code>Server</code> 必须先注册到 <strong>SM</strong> 中，才能够有机会和 <code>Client</code> 通信，然后 <code>Client</code> 发起请求想要调用 <code>Server</code> 中的方法 <code>add()</code>，然而 <code>Client</code> 与 <code>Server</code> 处在不同的进程当中。如果没有媒介<code>binder</code> 驱动的帮助，进程间就无法完成通信。因此，透过 <code>binder</code> 的作用，<code>Server</code> 可以给 <code>Client</code> 下发一个代理对象，以便能够调用 <code>Server</code>中的方法。这样以来，<code>Client</code> 就无法知道 <code>Server</code> 的逻辑，而只能调用被 <code>Server</code> 代理出去的方法 <code>add()</code>。这一通信过程，便是跨进程通信。  </p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p><code>Java</code> 代理模式的应用还是相当广泛的。对于静态代理模式，我们可以用它来代理 <code>Activity</code> 或者 <code>Fragment</code> 的生命周期方法，定义一个不注册的 <code>ActivityDelegate</code> 或者   <code>FragmentDelegate</code>,这个可能会是比较特别的高级技巧。对于动态代理，涉及到的大多是第三方框架，其中思想很多包含有动态代理。</p>
+<h1 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h1><p><a href="http://blog.csdn.net/liangbinny/article/details/18656791" target="_blank" rel="noopener">Java设计模式之代理模式(Proxy)</a><br><a href="http://blog.csdn.net/jianghuxiaoxiami/article/details/3403924" target="_blank" rel="noopener">JAVA 代理模式（Proxy）</a><br><a href="http://coderbao.com/2016/06/04/ProxyPattern&amp;DynamicProxyInJava/" target="_blank" rel="noopener">代理模式和Java中的动态代理机制</a><br><a href="http://blog.csdn.net/jspandasp/article/details/72511465" target="_blank" rel="noopener">写给Android App开发人员看的Android底层知识</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java设计模式/" rel="tag"># Java设计模式</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/13/Hexo与Disqus引入的故事/" rel="next" title="Hexo与Disqus引入的故事">
+                <i class="fa fa-chevron-left"></i> Hexo与Disqus引入的故事
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/15/一起看画布Canvas/" rel="prev" title="一起看画布Canvas">
+                一起看画布Canvas <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg"
+                alt="洪荣宣" />
+            
+              <p class="site-author-name" itemprop="name">洪荣宣</p>
+              <p class="site-description motion-element" itemprop="description">Rongxuanhong's Blog</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/rongxuanhong" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#概念"><span class="nav-number">2.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代理模式的分类"><span class="nav-number">3.</span> <span class="nav-text">代理模式的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#静态代理"><span class="nav-number">3.1.</span> <span class="nav-text">静态代理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UML类图"><span class="nav-number">3.1.1.</span> <span class="nav-text">UML类图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现"><span class="nav-number">3.1.2.</span> <span class="nav-text">代码实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态代理如何用"><span class="nav-number">3.1.3.</span> <span class="nav-text">静态代理如何用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态代理"><span class="nav-number">3.2.</span> <span class="nav-text">动态代理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#涉及到的几个类"><span class="nav-number">3.2.1.</span> <span class="nav-text">涉及到的几个类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#机制分析"><span class="nav-number">3.2.2.</span> <span class="nav-text">机制分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现-1"><span class="nav-number">3.2.3.</span> <span class="nav-text">代码实现</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#源码分析"><span class="nav-number">4.</span> <span class="nav-text">源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#几个重要的静态变量"><span class="nav-number">4.1.</span> <span class="nav-text">几个重要的静态变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取动态代理类实例的方法1"><span class="nav-number">4.2.</span> <span class="nav-text">获取动态代理类实例的方法1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态创建代理类实例的方法2"><span class="nav-number">4.3.</span> <span class="nav-text">动态创建代理类实例的方法2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态创建出实现了接口方法的代理类代码例子"><span class="nav-number">4.4.</span> <span class="nav-text">动态创建出实现了接口方法的代理类代码例子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#动态代理怎么用"><span class="nav-number">4.4.1.</span> <span class="nav-text">动态代理怎么用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#与-Android-的情结"><span class="nav-number">5.</span> <span class="nav-text">与 Android 的情结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#binder机制"><span class="nav-number">5.1.</span> <span class="nav-text">binder机制</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#感谢"><span class="nav-number">7.</span> <span class="nav-text">感谢</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">洪荣宣</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.0.6</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="Total Visitors">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="Total Views">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/reading_progress/reading_progress.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.6"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.6"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.0.6"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.0.6"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.6"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.6"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.6"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'PHg2RRIUgmj5CjX5xB2yjkbQ-gzGzoHsz',
+        appKey: '3feashi2HbnYMycDoEQPqaIx',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("PHg2RRIUgmj5CjX5xB2yjkbQ-gzGzoHsz", "3feashi2HbnYMycDoEQPqaIx");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            
+            counter.save(null, {
+              success: function(counter) {
+                
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            
+              var newcounter = new Counter();
+              /* Set ACL */
+              var acl = new AV.ACL();
+              acl.setPublicReadAccess(true);
+              acl.setPublicWriteAccess(true);
+              newcounter.setACL(acl);
+              /* End Set ACL */
+              newcounter.set("title", title);
+              newcounter.set("url", url);
+              newcounter.set("time", 1);
+              newcounter.save(null, {
+                success: function(newcounter) {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                },
+                error: function(newcounter, error) {
+                  console.log('Failed to create');
+                }
+              });
+            
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

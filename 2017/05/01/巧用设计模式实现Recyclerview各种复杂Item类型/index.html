@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.6" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.6">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.6">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.6">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.6" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.0.6',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="版权声明：本文为博主原创文章，未经博主允许不得转载 引言  在实际项目的开发中，首页的布局基本上都是复杂的 UI，而我们的实现思路一般就是利用 RecyclerView 结合 getItemType()，并在适配器里根据不同的 item 类型去创建不同的 ViewHolder,最后在 onBindViewHolder() 中依然是根据 item 类型来绑定对应的数据。这种方法是最基本的方法，相信大">
+<meta name="keywords" content="Recyclerview">
+<meta property="og:type" content="article">
+<meta property="og:title" content="巧用设计模式实现Recyclerview各种复杂Item类型">
+<meta property="og:url" content="http://yoursite.com/2017/05/01/巧用设计模式实现Recyclerview各种复杂Item类型/index.html">
+<meta property="og:site_name" content="Rongxuanhong&#39;s Blog">
+<meta property="og:description" content="版权声明：本文为博主原创文章，未经博主允许不得转载 引言  在实际项目的开发中，首页的布局基本上都是复杂的 UI，而我们的实现思路一般就是利用 RecyclerView 结合 getItemType()，并在适配器里根据不同的 item 类型去创建不同的 ViewHolder,最后在 onBindViewHolder() 中依然是根据 item 类型来绑定对应的数据。这种方法是最基本的方法，相信大">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1ff5p96ef3lj20dw0e53yz.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1ff5uwck661j209p05qdfq.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fjdetu2ltuj20fd0i7gmf.jpg">
+<meta property="og:updated_time" content="2017-09-09T08:56:11.653Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="巧用设计模式实现Recyclerview各种复杂Item类型">
+<meta name="twitter:description" content="版权声明：本文为博主原创文章，未经博主允许不得转载 引言  在实际项目的开发中，首页的布局基本上都是复杂的 UI，而我们的实现思路一般就是利用 RecyclerView 结合 getItemType()，并在适配器里根据不同的 item 类型去创建不同的 ViewHolder,最后在 onBindViewHolder() 中依然是根据 item 类型来绑定对应的数据。这种方法是最基本的方法，相信大">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1ff5p96ef3lj20dw0e53yz.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/01/巧用设计模式实现Recyclerview各种复杂Item类型/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>巧用设计模式实现Recyclerview各种复杂Item类型 | Rongxuanhong's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> 
+
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Rongxuanhong's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">脚踏实地地做好自己</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+          
+  <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Categories</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+</li>
+
+      
+
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/巧用设计模式实现Recyclerview各种复杂Item类型/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">巧用设计模式实现Recyclerview各种复杂Item类型</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-01T21:05:50+08:00">2017-05-01</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/01/巧用设计模式实现Recyclerview各种复杂Item类型/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/05/01/巧用设计模式实现Recyclerview各种复杂Item类型/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/05/01/巧用设计模式实现Recyclerview各种复杂Item类型/" class="leancloud_visitors" data-flag-title="巧用设计模式实现Recyclerview各种复杂Item类型">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Views:</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             Views: 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>版权声明：本文为博主原创文章，未经博主允许不得转载</strong></p>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>  在实际项目的开发中，首页的布局基本上都是复杂的 UI，而我们的实现思路一般就是利用 <code>RecyclerView</code> 结合 <code>getItemType()</code>，并在适配器里根据不同的 <code>item</code> 类型去创建不同的 <code>ViewHolder</code>,最后在 <code>onBindViewHolder()</code> 中依然是根据 <code>item</code> 类型来绑定对应的数据。这种方法是最基本的方法，相信大家都懂。但是，其缺点也很明显，就是可扩展性太差。</p>
+<p> 接下来，我将介绍另一种更为巧妙的方法来实现，以期大大提高其扩展性。我们将以 <code>item</code> 的布局 <code>id</code> 作为区别<code>item</code>的唯一标志并结合两种设计模式,为大家呈现一种新颖，简洁的方式来实现此类复杂布局。其中如有纰漏，望请悉心指出。  </p>
+<h1 id="必备知识"><a href="#必备知识" class="headerlink" title="必备知识"></a>必备知识</h1><p>本实现方法主要用到了 <code>Java</code> 设计模式中的访问者模式和工厂方法模式，亦涉及到 <code>ViewHolder</code> 的封装技巧。  </p>
+<h1 id="访问者模式"><a href="#访问者模式" class="headerlink" title="访问者模式"></a>访问者模式</h1><ol>
+<li><p><strong>概念</strong><br><code>Java</code> 中的访问者模式属于一种行为型设计模式，核心主要由访问者与被访问者两部分组成。一般对于同一场景来说，被访问者都是由不同类的类型所表示，而不同的访问者可以对被访问者进行不同的访问操作。其中，被访问者常利用集合结构来存储(比如 <code>List</code> )，访问者通过遍历集合实现对其中存储的元素的逐个操作。  </p>
+</li>
+<li><p><strong>UML类图</strong></p>
+</li>
+</ol>
+<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ff5p96ef3lj20dw0e53yz.jpg" alt="访问者模式UML类图"> </p>
+<blockquote>
+<p>出处:<a href="https://zh.wikipedia.org/wiki/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95" target="_blank" rel="noopener">维基百科</a>  </p>
+</blockquote>
+<p><strong>UML解读</strong></p>
+<p>   该<code>UML</code>类图中有两个类：访问者(<code>Visitor</code>)和被访问者(<code>Element</code>),然后有多个具体访问者继承访问者 <code>Visitor</code>（eg: <code>ConcreateVisitor1</code> ），也有多个具体被访问者继承被访问者 <code>Element</code>（eg: <code>ConcreateElementA</code> ） 。首先，<code>Visitor</code> 中为每个具体被访问者定义了一个可访问具体被访问者操作的方法(通过注入具体被访问者的引用)；其次，<code>Element</code> 中定义了一个接受访问的方法 <code>accept</code>，并且依赖注入访问者 <code>visitor</code>，以便访问者可以访问被访问者；然后，<code>Object Structure</code> 对象结构主要用于存储被访问者。因此，对于每个被访问者都应先从该对象结构中取出来。最后，客户端 <code>Client</code> 定义集合对象收集被访问者数据，通过对集合的遍历完成访问者对每一个被访问元素的访问操作。  </p>
+<blockquote>
+<p>具体例子详见推荐博客 <a href="http://blog.csdn.net/janice0529/article/details/41151987" target="_blank" rel="noopener">Java设计模式之 访问者模式【Visitor Pattern】</a>  </p>
+</blockquote>
+<h1 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h1><ol>
+<li><p><strong>概念</strong>  </p>
+<p> 工厂方法模式是一种实现了“工厂”概念的面向对象设计模式 ,是处理在不指定对象具体类型的情况下创建对象的问题。工厂方法模式的实质是“定义一个创建对象的接口，但让实现这个接口的类来决定实例化哪个类。工厂方法让类的实例化推迟到子类中进行。”</p>
+</li>
+<li><p><strong>UML类图</strong></p>
+<p> <img src="http://ww1.sinaimg.cn/large/8992ce25gy1ff5uwck661j209p05qdfq.jpg" alt="工厂模式"></p>
+<blockquote>
+<p>出处:<a href="https://zh.wikipedia.org/wiki/%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F" target="_blank" rel="noopener">维基百科</a>  </p>
+</blockquote>
+</li>
+</ol>
+<p><strong>UML解读</strong>  </p>
+<p>   首先在创建器 <code>Creator</code> 中定义一个工厂方法用于生产未指定具体类型的产品，其次，子类–具体创建器 <code>ConcreteCreator</code> 实现父类工厂方法，给出创建具体产品类型的实现，最后，客户端只需调用具体创建者中的方法即可得到所需的产品。  </p>
+<blockquote>
+<p>具体例子详见推荐博客<a href="http://blog.csdn.net/zhengzhb/article/details/7348707" target="_blank" rel="noopener">工厂方法模式</a></p>
+</blockquote>
+<h1 id="BaseViewHolder的封装"><a href="#BaseViewHolder的封装" class="headerlink" title="BaseViewHolder的封装"></a>BaseViewHolder的封装</h1><pre><code>/**
+ * 封装的 viewholder 用于获取各个 item 上的控件 采用集合存储取过的控件
+ */
+
+public  class BaseViewHolder extends RecyclerView.ViewHolder {
+protected View itemView;//每个item的布局视图view
+protected SparseArray&lt;View&gt; list;//itemView上所有控件的集合
+
+public BaseViewHolder(View itemView) {
+    super(itemView);
+    this.itemView = itemView;
+    list=new SparseArray&lt;&gt;();
+}
+/**
+*获取 itemView 上控件
+*/
+ public &lt;T&gt; T getView(int id) {
+    View view = list.get(id);
+    if (view == null) {
+        view = itemView.findViewById(id);
+        list.put(id, view);
+    }
+    return (T) view;
+}
+</code></pre><p><code>BaseViewHolder</code> 继承至 <code>RecyclerView.ViewHolder</code> ，可作为 <code>Recyclerview</code> 适配器中通用的 <code>ViewHolder</code> 来使用，因此你无需在每个适配器里面再定义内部类 <code>MyViewHolder</code>。<code>BaseViewHolder</code> 可以在构造器中获取到每个 <code>item</code> 的 <code>itemView</code>，然后就可以定义一个快速获取 <code>itemView</code> 上各个子控件的方法 <code>getView</code>,以后在适配器中获取 <code>item</code> 子控件能够随时调用此方法.  </p>
+<p>#BetterViewHolder</p>
+<pre><code>public abstract class BetterViewHolder&lt;T&gt; extends BaseViewHolder {
+public BetterViewHolder(View itemView) {
+    super(itemView);
+}
+
+/**
+ * 绑定 item 的数据
+ * @param t 每个item的实体引用
+ */
+public abstract void bindDataToItem(T t,int position);
+}  
+</code></pre><p><code>BetterViewHolder</code> 声明为抽象类型，在 <code>BaseViewHolder</code> 基础上再次封装了一层。主要定义了一个抽象方法用于实现适配器中 <code>onBindViewHolder（T t，int position)</code> 的功能。但由于子类的实体类型不可确定，故需要借助泛型技巧,定义T来表示子类的泛型。因此，子类只需继承该类，并指定子类所需的实体类型即可。  </p>
+<h1 id="实例解析"><a href="#实例解析" class="headerlink" title="实例解析"></a>实例解析</h1><ul>
+<li><p>本例中定义了四种 <code>item</code> 布局类型,如下图所示  </p>
+<p>  <img src="http://ww1.sinaimg.cn/large/8992ce25gy1fjdetu2ltuj20fd0i7gmf.jpg" alt=""></p>
+</li>
+</ul>
+<p><strong>布局代码见底部源码</strong>  </p>
+<ul>
+<li>定义访问者 <code>TypeFactory</code>   </li>
+</ul>
+<pre><code>public abstract class TypeFactory {  
+
+public abstract int type(Banner banner);
+
+public abstract int type(Category category);
+
+public abstract int type(Item item);
+
+public abstract int type(Footer footer);
+//工厂方法模式应用 
+public  abstract BetterViewHolder onCreateViewHolder(View itemView,int  type);
+}
+</code></pre><ul>
+<li>定义被访问者 <code>Visitable</code></li>
+</ul>
+<pre><code>/*
+*定义抽象的被访问者 type方法，用来接收/引用一个抽象访问者对象,以便利用这个对象进行操作;
+*/
+public abstract class Visitable {
+public abstract int type(TypeFactory factory);
+}  
+</code></pre><ul>
+<li><p>定义四个实体类并继承<code>Visitable</code>  </p>
+<pre><code>/**
+  * Created by hrx on 2017/4/30.
+ * 具体的被访问者
+  * 实现type抽象方法，通过传入的具体访问者参数、
+  * 调用具体访问者对该对象的访问操作方法实现访问逻辑;
+ * 比如这就是利用抽象访问者 TypeFactory 引用来调用操作方法获取对应该 Banner 关联的布局  id
+ */
+
+public class Banner extends Visitable{
+     @Override
+    public int type(TypeFactory factory) {
+     return factory.type(this);
+    }
+ }  
+
+public class Category extends Visitable {
+  @Override
+  public int type(TypeFactory factory) {
+     return factory.type(this);
+  }
+}  
+public class Item extends Visitable {
+    private int position;
+    @Override
+    public int type(TypeFactory factory) {
+        return factory.type(this);
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+}
+public class Footer extends Visitable {
+  @Override
+   public int type(TypeFactory factory) {
+      return factory.type(this);
+      }
+ }  
+</code></pre></li>
+<li><p>具体访问者 <code>TypeFactoryList</code>   </p>
+<pre><code>/*
+ * 具体的访问者实现了抽象访问者的方法
+* 同时 onCreateViewHolder 也是利用工厂方法模式创建了各个 item 的 viewholder 实例
+*/
+
+public class TypeFactoryList extends TypeFactory {
+//声明每个item的布局id
+public static final int BANNER = R.layout.banner;
+public static final int CATEGORY = R.layout.category;
+public static final int ITEM = R.layout.item;
+public static final int FOOTER = R.layout.footer;
+
+@Override
+public int type(Banner banner) {
+    return BANNER;
+}
+
+@Override
+public int type(Category category) {
+    return CATEGORY;
+}
+
+@Override
+public int type(Item item) {
+    return ITEM;
+}
+
+@Override
+public int type(Footer footer) {
+    return FOOTER;
+}
+
+@Override
+public BetterViewHolder onCreateViewHolder(View itemView, int type) {
+    BetterViewHolder viewHolder = null;
+    switch (type) {
+        case BANNER:
+            viewHolder = new BannerViewHolder(itemView);
+            break;
+        case CATEGORY:
+            viewHolder = new CategoryViewHolder(itemView);
+            break;
+        case ITEM:
+            viewHolder = new ItemViewHolder(itemView);
+            break;
+        case FOOTER:
+            viewHolder = new FooterViewHolder(itemView);
+            break;
+        default:
+            break;
+    }
+    return viewHolder;
+ }
+}  
+</code></pre></li>
+<li><p>定义适配器   </p>
+<pre><code>public class MainActivityAdapter extends RecyclerView.Adapter&lt;BetterViewHolder&gt; {
+private List&lt;Visitable&gt; mVisitables;
+private TypeFactory factory;
+
+public MainActivityAdapter(List&lt;Visitable&gt; mVisitables) {
+    this.mVisitables = mVisitables;
+    factory = new TypeFactoryList();
+}
+//此 ViewHolder 的创建细节已经抽象到 TypeFactoryList 中去实现了 此处等同与获取工厂生产的产品
+@Override
+public BetterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    View itemView = View.inflate(parent.getContext(), viewType, null);
+    return factory.onCreateViewHolder(itemView, viewType);
+}
+
+//此处的实现交由 BetterViewHolder 的各个子类去实现，故此处 Java 会根据相应的子类去获取其下实现的 bindDataToItem（）,利用JAVA动态分派而无需进行类型检查
+@Override
+public void onBindViewHolder(BetterViewHolder holder, int position) {
+    holder.bindDataToItem(mVisitables.get(position),position);
+}
+
+//此处即代表访问者模式中的客户端调用被访问者的 type()，进行访问操作获取其布局 id
+@Override
+public int getItemViewType(int position) {
+    return mVisitables.get(position).type(factory);
+}
+@Override
+public int getItemCount() {
+    return mVisitables.size();
+}
+}  
+</code></pre><p>该适配器的数据就是得到访问者模式中的对象结构 <code>Object Structure</code> 中存储的被访问者集合，对应到例子中就是 <code>mVisitables</code> 集合。同时需要一个访问者引用,以便该适配器(客户端)能够利用这个引用获取每个被访问者关联到的布局Id(利用该引用执行某些操作)，如<code>mVisitables.ge(position).type(factory)</code>可以获取到每个被访问者关联到的布局 <code>id</code>。  </p>
+</li>
+<li><p>四个 <code>BetterViewHolder</code> 的子类  </p>
+<p>  四个子类代表了其对应 <code>item</code> 的 <code>ViewHolder</code> ,可以在该类上实现 <code>item</code> 上的操作，比如点击事件，设置 <code>item</code> 上子控件的所有数据等。  </p>
+</li>
+</ul>
+<p><strong>代码见底部源码</strong>  </p>
+<ul>
+<li><code>Activity</code> 收集数据并设置适配器  </li>
+</ul>
+<pre><code>    public class MainActivity extends AppCompatActivity {
+
+    private RecyclerView recyclerView;
+    private List&lt;Visitable&gt; mVisitable;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+        //默认4列
+        final GridLayoutManager manager = new GridLayoutManager(this, 4);
+        //此方法定义每个item占几列,有点类似线性布局的权重属性
+        manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if (position &gt; 2 &amp;&amp; position &lt; 7) {
+                    return 1;
+                }
+                return 4;
+            }
+        });
+        recyclerView.setLayoutManager(manager);
+        initData();
+        recyclerView.setAdapter(new MainActivityAdapter(mVisitable));
+
+    }
+
+    private void initData() {
+        mVisitable = new ArrayList&lt;&gt;();
+        //按布局的顺序依次加入各个被访问者
+        Banner banner = new Banner();
+        mVisitable.add(banner);
+        Category category = new Category();
+        mVisitable.add(category);
+        //加入4个item
+        for (int i = 0; i &lt; 5; i++) {
+            Item item = new Item();
+            item.setPosition(i + 2);
+            mVisitable.add(item);
+        }
+        Footer footer = new Footer();
+        mVisitable.add(footer);
+    }
+}
+</code></pre><blockquote>
+<p>注:<code>mVisitable</code> 集合中被访问者的加入顺序即代表了最终显示出来的顺序，并且集合中的每个元素仅能代表其中一个 <code>item</code>，意味着如果你要重复该 <code>item</code> 就要重复声明一个实体再加入集合中。</p>
+</blockquote>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>利用访问者模式和工厂方法模式大大解耦了上述复杂布局的实现过程，同时可扩展性大大提高。如果往后还需修改布局，只需修改对应 <code>item</code> 的布局文件和数据的绑定。而若是增加 <code>item</code>，那么只需定义新的实体加入被访问者集合中，同时编写布局文件及对应的 <code>ViewHolder</code> 实现即可。这样一来，不同 <code>item</code> 间就不会相互影响，变得易维护和易扩展，相信你学会之后，一定会爱上此法。  </p>
+<p>最后，谢谢你看到这里，欢迎交流意见。   </p>
+<p><a href="https://github.com/rongxuanhong/MultiItemLayout" target="_blank" rel="noopener">源码地址</a></p>
+<h1 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h1><blockquote>
+<p><a href="http://www.jianshu.com/p/c6a44e18badb" target="_blank" rel="noopener">[译]关于 Android Adapter，你的实现方式可能一直都有问题</a><br><a href="http://blog.csdn.net/janice0529/article/details/41151987" target="_blank" rel="noopener">Java设计模式之 访问者模式【Visitor Pattern】</a><br><a href="http://blog.csdn.net/zhengzhb/article/details/7348707" target="_blank" rel="noopener">Java设计模式之 工厂方法模式</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Recyclerview/" rel="tag"># Recyclerview</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/13/Hexo与Disqus引入的故事/" rel="prev" title="Hexo与Disqus引入的故事">
+                Hexo与Disqus引入的故事 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg"
+                alt="洪荣宣" />
+            
+              <p class="site-author-name" itemprop="name">洪荣宣</p>
+              <p class="site-description motion-element" itemprop="description">Rongxuanhong's Blog</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/rongxuanhong" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#必备知识"><span class="nav-number">2.</span> <span class="nav-text">必备知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#访问者模式"><span class="nav-number">3.</span> <span class="nav-text">访问者模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#工厂方法模式"><span class="nav-number">4.</span> <span class="nav-text">工厂方法模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BaseViewHolder的封装"><span class="nav-number">5.</span> <span class="nav-text">BaseViewHolder的封装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实例解析"><span class="nav-number">6.</span> <span class="nav-text">实例解析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#感谢"><span class="nav-number">8.</span> <span class="nav-text">感谢</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">洪荣宣</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.0.6</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="Total Visitors">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="Total Views">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/reading_progress/reading_progress.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.6"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.6"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.0.6"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.0.6"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.6"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.6"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.6"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'PHg2RRIUgmj5CjX5xB2yjkbQ-gzGzoHsz',
+        appKey: '3feashi2HbnYMycDoEQPqaIx',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("PHg2RRIUgmj5CjX5xB2yjkbQ-gzGzoHsz", "3feashi2HbnYMycDoEQPqaIx");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            
+            counter.save(null, {
+              success: function(counter) {
+                
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            
+              var newcounter = new Counter();
+              /* Set ACL */
+              var acl = new AV.ACL();
+              acl.setPublicReadAccess(true);
+              acl.setPublicWriteAccess(true);
+              newcounter.setACL(acl);
+              /* End Set ACL */
+              newcounter.set("title", title);
+              newcounter.set("url", url);
+              newcounter.set("time", 1);
+              newcounter.save(null, {
+                success: function(newcounter) {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                },
+                error: function(newcounter, error) {
+                  console.log('Failed to create');
+                }
+              });
+            
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
