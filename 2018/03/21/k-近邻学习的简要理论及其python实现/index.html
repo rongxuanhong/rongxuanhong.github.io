@@ -99,24 +99,27 @@
 
 
 
-  <meta name="description" content="title: categoriesdate: 2017-04-15 17:09:20type: “categories”comment: false">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Rongxuanhong&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/categories/index.html">
+  <meta name="description" content="前言k-近邻学习(kNN)是一种监督学习的方法。它采用测量不同特征值之间的距离方法(如欧式距离)来进行分类。它也是懒惰学习(lazy learning)的著名代表，即它不在训练阶段学习，而是在测试阶段计算后连同给出分类结果。 算法原理我们都知道，kNN 的训练样本都是有分类标签的。那么，当给定一个测试样本时，我们可以根据某种衡量距离的计算方法来比较测试样本对应的特征向量与每个训练样本对应的特征向量">
+<meta name="keywords" content="机器学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="k-近邻学习的简要理论及其python实现">
+<meta property="og:url" content="http://yoursite.com/2018/03/21/k-近邻学习的简要理论及其python实现/index.html">
 <meta property="og:site_name" content="Rongxuanhong&#39;s Blog">
-<meta property="og:description" content="title: categoriesdate: 2017-04-15 17:09:20type: “categories”comment: false">
+<meta property="og:description" content="前言k-近邻学习(kNN)是一种监督学习的方法。它采用测量不同特征值之间的距离方法(如欧式距离)来进行分类。它也是懒惰学习(lazy learning)的著名代表，即它不在训练阶段学习，而是在测试阶段计算后连同给出分类结果。 算法原理我们都知道，kNN 的训练样本都是有分类标签的。那么，当给定一个测试样本时，我们可以根据某种衡量距离的计算方法来比较测试样本对应的特征向量与每个训练样本对应的特征向量">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-05-13T09:28:40.000Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpjjcgtcg9j20wq0dxdgy.jpg">
+<meta property="og:updated_time" content="2018-03-21T14:00:42.559Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Rongxuanhong&#39;s Blog">
-<meta name="twitter:description" content="title: categoriesdate: 2017-04-15 17:09:20type: “categories”comment: false">
+<meta name="twitter:title" content="k-近邻学习的简要理论及其python实现">
+<meta name="twitter:description" content="前言k-近邻学习(kNN)是一种监督学习的方法。它采用测量不同特征值之间的距离方法(如欧式距离)来进行分类。它也是懒惰学习(lazy learning)的著名代表，即它不在训练阶段学习，而是在测试阶段计算后连同给出分类结果。 算法原理我们都知道，kNN 的训练样本都是有分类标签的。那么，当给定一个测试样本时，我们可以根据某种衡量距离的计算方法来比较测试样本对应的特征向量与每个训练样本对应的特征向量">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpjjcgtcg9j20wq0dxdgy.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/21/k-近邻学习的简要理论及其python实现/"/>
 
 
 
@@ -126,7 +129,7 @@
   };
 </script>
 
-  <title> | Rongxuanhong's Blog</title>
+  <title>k-近邻学习的简要理论及其python实现 | Rongxuanhong's Blog</title>
   
 
 
@@ -282,73 +285,214 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/21/k-近邻学习的简要理论及其python实现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-<h1 class="post-title" itemprop="name headline"></h1>
-
-<div class="post-meta">
-  
-  
-
-
-
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <hr>
-<p>title: categories<br>date: 2017-04-15 17:09:20<br>type: “categories”<br>comment: false</p>
-
+          <h1 class="post-title" itemprop="name headline">k-近邻学习的简要理论及其python实现</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-21T22:00:08+08:00">2018-03-21</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/21/k-近邻学习的简要理论及其python实现/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/03/21/k-近邻学习的简要理论及其python实现/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/03/21/k-近邻学习的简要理论及其python实现/" class="leancloud_visitors" data-flag-title="k-近邻学习的简要理论及其python实现">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Views:</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>k-近邻学习(kNN)是一种监督学习的方法。它采用测量不同特征值之间的距离方法(如欧式距离)来进行分类。它也是懒惰学习(lazy learning)的著名代表，即它不在训练阶段学习，而是在测试阶段计算后连同给出分类结果。</p>
+<h1 id="算法原理"><a href="#算法原理" class="headerlink" title="算法原理"></a>算法原理</h1><p>我们都知道，kNN 的训练样本都是有分类标签的。那么，当给定一个测试样本时，我们可以根据某种衡量距离的计算方法来比较测试样本对应的特征向量与每个训练样本对应的特征向量之间的距离。但是，一般我们只取 <strong>k</strong> 个 与测试样本距离最近的训练样本来比较(一般 <strong>k</strong> 是不大于20的整数)。</p>
+<p>在分类问题中，测试样本的分类结果取决于这 <strong>k</strong>个训练样本中出现最多的那个标签。而在回归问题中，测试的分类结果可取决于这 <strong>k</strong> 个训练样本的标签值的平均值。另外，还可以根据距离的远近进行加权平均或加权投票。  </p>
+<blockquote>
+<p>算法名称中 <strong>k</strong> 表示我们只选取与测试样本最相似的 <strong>k</strong> 个训练样本。</p>
+</blockquote>
+<p>接下来，我以 kNN 分类器为例，利用 python 实现其算法思想。</p>
+<h1 id="python实现"><a href="#python实现" class="headerlink" title="python实现"></a>python实现</h1><p>首先，若选择欧式距离衡量两个向量点xA和xB之间的距离,则其公式如下:<br>$$ \cdot \<br>d=\sqrt {\left( xA_{0}-xB_{0}\right) ^{2}+\left( xA_{1}-xB_{1}\right) ^{2}} $$  </p>
+<p>接下来，定义函数 <code>classify0()</code>传入相应参数即可完成 kNN 分类。<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpjjcgtcg9j20wq0dxdgy.jpg" alt=""></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li>&lt;&lt;机器学习&gt;&gt;周志华  </li>
+<li>&lt;&lt;机器学习实战&gt;&gt;</li>
+</ul>
+
       
     </div>
+
     
+
+    
+    
+    
+	<div>
+
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+
+        
+-------------本文结束感谢您的阅读-------------
+
+    
+</div>
+  	
+</div>
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author: </strong>洪荣宣</li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="http://yoursite.com/2018/03/21/k-近邻学习的简要理论及其python实现/" title="k-近邻学习的简要理论及其python实现">http://yoursite.com/2018/03/21/k-近邻学习的简要理论及其python实现/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>All articles in this blog are licensed under 本文由 rongxuanhong 原创，采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">保留署名-非商业性使用-禁止演绎 4.0-国际许可协议</a></br>转载请保留以上声明信息! unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"><i class="fa fa-tag"></i> 机器学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/20/剑指offer2笔记之赋值运算符函数/" rel="next" title="剑指offer2笔记之赋值运算符函数">
+                <i class="fa fa-chevron-left"></i> 剑指offer2笔记之赋值运算符函数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
 
 
 
-    
-    
-    
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -381,8 +525,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -484,6 +637,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法原理"><span class="nav-number">2.</span> <span class="nav-text">算法原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#python实现"><span class="nav-number">3.</span> <span class="nav-text">python实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
