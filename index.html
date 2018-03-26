@@ -407,8 +407,7 @@
 <h3 id="基于信息增益率-C4-5"><a href="#基于信息增益率-C4-5" class="headerlink" title="基于信息增益率(C4.5)"></a>基于信息增益率(C4.5)</h3><p>信息增益率为信息增益的改进版本。由于信息增益对可取值数目较多的属性有所偏好，为减少这种偏好所带来的不利影响，信息增益率应运而生。增益率定义为:<br>$$ IV\left( a\right) =-\sum ^{V}_{v=1}\dfrac {\left| D^{v}\right| }{\left| D\right| }\log _{2}\dfrac {\left| D^{v}\right| }{\left| D\right| }   $$<br>$$ Gain\_ ratio\left( D,a\right) =\dfrac {Gain\left( D,a\right) }{IV\left( a\right) } $$  </p>
 <p>这其实比之前的版本多除了一个分母，IV(a)其实表示就是属性 a 的各个属性值对应的香农熵总和。  </p>
 <p>需要注意的是，增益率对可取值数目较少的属性也有所偏好，所以 C4.5 算法并不是取增益率最大的那个最为最佳划分方式，而是先从候选属性中找出信息增益高于平均水平的属性(ID3 算法)，再从中计算出信息增益率最高的那个属性。</p>
-<h3 id="基于基尼指数-CART"><a href="#基于基尼指数-CART" class="headerlink" title="基于基尼指数(CART)"></a>基于基尼指数(CART)</h3><p>在前面介绍的 ID3 和 C4.5 算法其实都是采用熵模型进行计算，并且涉及到大量的对数运算。计算相对复杂。<br>那么，基尼指数呢。它可以也用来衡量数据集的纯度，但是它与前面二者相反，基尼指数越小，数据集的纯度反而是越高的。对于数据集 D 的纯度可用基尼值来衡量:  </p>
-<p>在分类问题中，假设有 k 个类别，第 k 个类别的占比为pk:<br>$$ Gini\left( D\right) =\sum ^{K}_{k=1}p_{k}\left( 1-p_{k}\right)=1-\sum ^{K}<em>{k=1}p^{2}\</em>{k} $$    </p>
+<h3 id="基于基尼指数-CART"><a href="#基于基尼指数-CART" class="headerlink" title="基于基尼指数(CART)"></a>基于基尼指数(CART)</h3><p>在前面介绍的 ID3 和 C4.5 算法其实都是采用熵模型进行计算，并且涉及到大量的对数运算。计算相对复杂。<br>那么，基尼指数呢。它可以也用来衡量数据集的纯度，但是它与前面二者相反，基尼指数越小，数据集的纯度反而是越高的。对于数据集 D 的纯度可用基尼值来衡量(在分类问题中，假设有 k 个类别，第 k 个类别的占比为pk):<br>$$ Gini\left( D\right) =\sum ^{K}_{k=1}p_{k}\left( 1-p_{k}\right)=1-\sum ^{K}<em>{k=1}p^{2}\</em>{k} $$    </p>
 <p>对于属性a，我们给出它的基尼系数定义为:<br>$$ Gini\<em>index\left( D,a\right)=\sum ^{V}\</em>{v=1}\dfrac {\left| D^{v}\right| }{\left| D\right| }Gini\left( D\right) $$  </p>
 <p>最后我们选择基尼指数最小的属性作为最优划分属性。特别注意的是，利用基尼指数来划分数据集只会对数据集二分，不多分。怎样理解?，对于多分类问题，可以利用整体思想，把数据集分成两大类，常见的有一对多，多对多,即一边是正例，一边是反例，因此使用基尼指数进行最优属性划分后得到的树是一颗优雅的二叉树。  </p>
 <h2 id="基于ID3的python代码实现"><a href="#基于ID3的python代码实现" class="headerlink" title="基于ID3的python代码实现"></a>基于ID3的python代码实现</h2><h3 id="根据指定特征的属性值返回数据集的子集"><a href="#根据指定特征的属性值返回数据集的子集" class="headerlink" title="根据指定特征的属性值返回数据集的子集"></a>根据指定特征的属性值返回数据集的子集</h3><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fppz8qd2gvj20wl0b33z0.jpg" alt="">  </p>
@@ -416,7 +415,13 @@
 <p>注意 extend与append 的用法区别,前者为抽取元素加入列表，后者可能会将整个列表作为元素加入列表中。</p>
 </blockquote>
 <h3 id="选择最好的数据集划分"><a href="#选择最好的数据集划分" class="headerlink" title="选择最好的数据集划分"></a>选择最好的数据集划分</h3><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fppze09xvnj212t0ilwg3.jpg" alt="">  </p>
-<h3 id="创建决策树"><a href="#创建决策树" class="headerlink" title="创建决策树"></a>创建决策树</h3><h4 id="根据标签列表”投票”选出最多标签的"><a href="#根据标签列表”投票”选出最多标签的" class="headerlink" title="根据标签列表”投票”选出最多标签的"></a>根据标签列表”投票”选出最多标签的</h4><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fppzm3upfcj212z06ydg6.jpg" alt="">   </p>
+<pre><code>其实大致步骤可以概括为：  
+1. 遍历每个属性；  
+2. 得到每个属性的属性值集合，并遍历；  
+3. 对每个属性值进行划分，计算各个子集的信息熵期望；  
+4. 计算信息增益；  
+5. 比较不同属性划分下的信息增益，取最大的信息增益对应的特征索引返回。
+</code></pre><h3 id="创建决策树"><a href="#创建决策树" class="headerlink" title="创建决策树"></a>创建决策树</h3><h4 id="根据标签列表”投票”选出最多标签的"><a href="#根据标签列表”投票”选出最多标签的" class="headerlink" title="根据标签列表”投票”选出最多标签的"></a>根据标签列表”投票”选出最多标签的</h4><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fppzm3upfcj212z06ydg6.jpg" alt="">   </p>
 <p>主要使用字典记录类别的个数，然后再按递减排序即可。</p>
 <h4 id="决策树具体算法"><a href="#决策树具体算法" class="headerlink" title="决策树具体算法"></a>决策树具体算法</h4><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpq0f4x6m9j212t0j3t9y.jpg" alt="">  </p>
 <h3 id="使用决策树分类"><a href="#使用决策树分类" class="headerlink" title="使用决策树分类"></a>使用决策树分类</h3><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpq0xt6dk3j212v0cwab6.jpg" alt="">  </p>
