@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.6" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.6">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.6">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.6">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.6" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.0.6',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="前言决策树是机器学习中非常重要的一类监督学习方法。它可以对数据进行分类和回归学习。我们来看一下一个简单的决策树模型，如下图所示。  注意：本文 python 实现都是基于标签值位于样本的最后一列进行计算。    在进行垃圾邮件分类的时候，首先从根节点开始判断，如果发送的邮件域名为:myEmployer.com，那么将其分类为”无聊时需要阅读的邮件”，否则进一步判断是否为包含单词”曲棍”的邮件，如果">
+<meta name="keywords" content="机器学习，决策树">
+<meta property="og:type" content="article">
+<meta property="og:title" content="决策树的简要理论及其部分python实现">
+<meta property="og:url" content="http://yoursite.com/2018/03/26/决策树的简要理论及其部分python实现/index.html">
+<meta property="og:site_name" content="Rongxuanhong&#39;s Blog">
+<meta property="og:description" content="前言决策树是机器学习中非常重要的一类监督学习方法。它可以对数据进行分类和回归学习。我们来看一下一个简单的决策树模型，如下图所示。  注意：本文 python 实现都是基于标签值位于样本的最后一列进行计算。    在进行垃圾邮件分类的时候，首先从根节点开始判断，如果发送的邮件域名为:myEmployer.com，那么将其分类为”无聊时需要阅读的邮件”，否则进一步判断是否为包含单词”曲棍”的邮件，如果">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpnonwvpkjj20fu07jq3f.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fppa1di77qj20wk0dlwf4.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fppampx7anj20dj06oaa3.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fppz8qd2gvj20wl0b33z0.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fppze09xvnj212t0ilwg3.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fppzm3upfcj212z06ydg6.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpq0f4x6m9j212t0j3t9y.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpq0xt6dk3j212v0cwab6.jpg">
+<meta property="og:updated_time" content="2018-03-26T03:21:19.014Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="决策树的简要理论及其部分python实现">
+<meta name="twitter:description" content="前言决策树是机器学习中非常重要的一类监督学习方法。它可以对数据进行分类和回归学习。我们来看一下一个简单的决策树模型，如下图所示。  注意：本文 python 实现都是基于标签值位于样本的最后一列进行计算。    在进行垃圾邮件分类的时候，首先从根节点开始判断，如果发送的邮件域名为:myEmployer.com，那么将其分类为”无聊时需要阅读的邮件”，否则进一步判断是否为包含单词”曲棍”的邮件，如果">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpnonwvpkjj20fu07jq3f.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/26/决策树的简要理论及其部分python实现/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>决策树的简要理论及其部分python实现 | Rongxuanhong's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> 
+
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Rongxuanhong's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">脚踏实地地做好自己</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+          
+  <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Categories</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+</li>
+
+      
+
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/26/决策树的简要理论及其部分python实现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">决策树的简要理论及其部分python实现</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-26T11:19:41+08:00">2018-03-26</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/26/决策树的简要理论及其部分python实现/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/03/26/决策树的简要理论及其部分python实现/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             Views: 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>决策树是机器学习中非常重要的一类监督学习方法。它可以对数据进行分类和回归学习。我们来看一下一个简单的决策树模型，如下图所示。</p>
+<blockquote>
+<p>注意：本文 python 实现都是基于标签值位于样本的最后一列进行计算。  </p>
+</blockquote>
+<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpnonwvpkjj20fu07jq3f.jpg" alt=""><br>在进行垃圾邮件分类的时候，首先从根节点开始判断，如果发送的邮件域名为:myEmployer.com，那么将其分类为”无聊时需要阅读的邮件”，否则进一步判断是否为包含单词”曲棍”的邮件，如果是则被列入”需要及时处理的朋友邮件”，否则被归入”无需阅读的垃圾邮件”。总之，像这样一步步缩小判断范围，至到找到目标分类的过程就是决策树不断作出决策的机制。  </p>
+<h1 id="决策树的构造"><a href="#决策树的构造" class="headerlink" title="决策树的构造"></a>决策树的构造</h1><h2 id="决策树的优缺点"><a href="#决策树的优缺点" class="headerlink" title="决策树的优缺点"></a>决策树的优缺点</h2><ol>
+<li>优点：计算复杂度不高，输出结果易于理解，对中间值的缺失不敏感，可以处理不相关特征数据。</li>
+<li>缺点：可能会产生过拟合的问题。</li>
+<li>适用数据类型：数值型(回归分析)和标称型(分类任务)</li>
+</ol>
+<h2 id="决策树的一般流程"><a href="#决策树的一般流程" class="headerlink" title="决策树的一般流程"></a>决策树的一般流程</h2><ol>
+<li>收集数据:可以使用任何方法;</li>
+<li>准备数据:树的构造算法只适用于标称型数据，因此数值型的数据需要离散化；</li>
+<li>分析数据：可以使用任何方法，构造树完成之后，需要检查决策树是符合预期；</li>
+<li>训练算法：构造树的数据结构；</li>
+<li>测试算法：使用经验树计算错误率；</li>
+<li>使用算法：使用决策树可以更好地理解数据的内在含义。</li>
+</ol>
+<h2 id="熵的概念及其公式"><a href="#熵的概念及其公式" class="headerlink" title="熵的概念及其公式"></a>熵的概念及其公式</h2><p>熵，也称信息熵，它是度量样本集合纯度的一种指标。也就说，样本集合中越不纯，那么表示信息越杂乱无序(如集合中类别越多,表示这个集合信息越杂乱)，则其含有的信息量就越大。而比较官方的定义是，熵是对不确定性的度量，即越不确定,信息量越大。<br>在衡量样本集合的熵时，单个类别的信息量我们可以定义为<br>$$ h\left( x_{i}\right) =-\log p\left( x_{i}\right) $$<br>其中p(x)是类别占比(该类别的数目占总类别数目的概率)<br>而熵是信息(或单个类别所含信息)的期望值,因此最终(香农)熵的公式为:<br>$$ H=-\sum ^{N}_{i=1}P\left( x_{i}\right) \log P\left( x_{i}\right) $$   </p>
+<h2 id="计算给定数据的香农熵"><a href="#计算给定数据的香农熵" class="headerlink" title="计算给定数据的香农熵"></a>计算给定数据的香农熵</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fppa1di77qj20wk0dlwf4.jpg" alt=""><br>其实就是把每个类别在样本集合中的占比计算出来,即p(xi),再利用上述公式计算即可。  </p>
+<h2 id="划分数据集"><a href="#划分数据集" class="headerlink" title="划分数据集"></a>划分数据集</h2><p>决策的时候其实也是划分数据集的过程，你需要一个依据来将数据集划分开，一步一步地缩小可选的范围。所以我们此时需要一个依据，也就是能让我们作出最好决策的一个依据。然后根据这个依据将数据集划分开。<br>在决策树算法中，常用的依据主要有三种算法：ID3、C4.5和CART。  </p>
+<h3 id="基于信息增益-ID3"><a href="#基于信息增益-ID3" class="headerlink" title="基于信息增益(ID3)"></a>基于信息增益(ID3)</h3><p>信息增益主要是利用集合的香农熵来计算的。信息增益衡量的是集合划分前的香农熵与划分后各子集香农熵的期望之差。<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fppampx7anj20dj06oaa3.jpg" alt="简单决策树"><br>我们以上图为例。假设样本集合为 D，年龄为每个样本具备的其中一个特征，记作 a，它共有三个属性值(青年、中年、老年)，设 v 为属性值的个数,D^v 为属性值为v的样本集合(被划分为青年的人数)。记 Ent(D) 表示样本集合 D 对应的熵,那么信息增益的计算公式为:<br>$$ Gain\left( D,a\right) =Ent\left( D\right) -\sum ^{3}_{v=1}\dfrac {\left| D^{v}\right| }{\left| D\right| }Ent\left( D^{v}\right) $$<br>我们用  Gain(D,a) 表示样本集合 D 依据属性 a 进行划分时的信息增益。那么，在实际中，属性 a 可以有多个，即划分方式有多种，但是我们只取信息增益最大的那个划分方式来划分数据集。  </p>
+<h3 id="基于信息增益率-C4-5"><a href="#基于信息增益率-C4-5" class="headerlink" title="基于信息增益率(C4.5)"></a>基于信息增益率(C4.5)</h3><p>信息增益率为信息增益的改进版本。由于信息增益对可取值数目较多的属性有所偏好，为减少这种偏好所带来的不利影响，信息增益率应运而生。增益率定义为:<br>$$ IV\left( a\right) =-\sum ^{V}_{v=1}\dfrac {\left| D^{v}\right| }{\left| D\right| }\log _{2}\dfrac {\left| D^{v}\right| }{\left| D\right| }   $$<br>$$ Gain\_ ratio\left( D,a\right) =\dfrac {Gain\left( D,a\right) }{IV\left( a\right) } $$  </p>
+<p>这其实比之前的版本多除了一个分母，IV(a)其实表示就是属性 a 的各个属性值对应的香农熵总和。  </p>
+<p>需要注意的是，增益率对可取值数目较少的属性也有所偏好，所以 C4.5 算法并不是取增益率最大的那个最为最佳划分方式，而是先从候选属性中找出信息增益高于平均水平的属性(ID3 算法)，再从中计算出信息增益率最高的那个属性。</p>
+<h3 id="基于基尼指数-CART"><a href="#基于基尼指数-CART" class="headerlink" title="基于基尼指数(CART)"></a>基于基尼指数(CART)</h3><p>在前面介绍的 ID3 和 C4.5 算法其实都是采用熵模型进行计算，并且涉及到大量的对数运算。计算相对复杂。<br>那么，基尼指数呢。它可以也用来衡量数据集的纯度，但是它与前面二者相反，基尼指数越小，数据集的纯度反而是越高的。对于数据集 D 的纯度可用基尼值来衡量:  </p>
+<p>在分类问题中，假设有 k 个类别，第 k 个类别的占比为pk:  </p>
+<p>$$ Gini\left( D\right) =\sum ^{K}_{k=1}p_{k}\left( 1-p_{k}\right)=1-\sum ^{K}<em>{k=1}p^{2}\</em>{k} $$<br>对于属性a，我们给出它的基尼系数定义为:  </p>
+<p>$$ Gini\<em>index\left( D,a\right)=\sum ^{V}\</em>{v=1}\dfrac {\left| D^{v}\right| }{\left| D\right| }Gini\left( D\right)  $$  </p>
+<p>最后我们选择基尼指数最小的属性作为最优划分属性。特别注意的是，利用基尼指数来划分数据集只会对数据集二分，不多分。怎样理解?，对于多分类问题，可以利用整体思想，把数据集分成两大类，常见的有一对多，多对多,即一边是正例，一边是反例，因此使用基尼指数进行最优属性划分后得到的树是一颗优雅的二叉树。  </p>
+<h2 id="基于ID3的python代码实现"><a href="#基于ID3的python代码实现" class="headerlink" title="基于ID3的python代码实现"></a>基于ID3的python代码实现</h2><h3 id="根据指定特征的属性值返回数据集的子集"><a href="#根据指定特征的属性值返回数据集的子集" class="headerlink" title="根据指定特征的属性值返回数据集的子集"></a>根据指定特征的属性值返回数据集的子集</h3><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fppz8qd2gvj20wl0b33z0.jpg" alt="">  </p>
+<blockquote>
+<p>注意 extend与append 的用法区别,前者为抽取元素加入列表，后者可能会将整个列表作为元素加入列表中。</p>
+</blockquote>
+<h3 id="选择最好的数据集划分"><a href="#选择最好的数据集划分" class="headerlink" title="选择最好的数据集划分"></a>选择最好的数据集划分</h3><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fppze09xvnj212t0ilwg3.jpg" alt="">  </p>
+<p>其实大致步骤可以概括为：  </p>
+<ol>
+<li>遍历每个属性；  </li>
+<li>得到每个属性的属性值集合，并遍历；  </li>
+<li>对每个属性值进行划分，计算各个子集的信息熵期望；  </li>
+<li>计算信息增益；  </li>
+<li>比较不同属性划分下的信息增益，取最大的信息增益对应的特征索引返回。<h3 id="创建决策树"><a href="#创建决策树" class="headerlink" title="创建决策树"></a>创建决策树</h3><h4 id="根据标签列表”投票”选出最多标签的"><a href="#根据标签列表”投票”选出最多标签的" class="headerlink" title="根据标签列表”投票”选出最多标签的"></a>根据标签列表”投票”选出最多标签的</h4><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fppzm3upfcj212z06ydg6.jpg" alt="">   </li>
+</ol>
+<p>主要使用字典记录类别的个数，然后再按递减排序即可。</p>
+<h4 id="决策树具体算法"><a href="#决策树具体算法" class="headerlink" title="决策树具体算法"></a>决策树具体算法</h4><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpq0f4x6m9j212t0j3t9y.jpg" alt="">  </p>
+<h3 id="使用决策树分类"><a href="#使用决策树分类" class="headerlink" title="使用决策树分类"></a>使用决策树分类</h3><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpq0xt6dk3j212v0cwab6.jpg" alt="">  </p>
+<p>使用决策树分类，就是从根节点开始递归寻找待分类样本所能到达的分类节点位置,然后确定最终的分类。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>决策树分类器就像带有终止块的流程图，终止块表示分类结果。开始处理数据集时，我们需要先衡量数据集中数据的不一致性，即熵，然后寻找最佳特征确定划分方式、分割数据集，直到数据集中的所有数据属于同一分类，或者已无可划分的特征了就停止。其实上述详细介绍的 ID3    算法局限性也比较大，它只能处理标称型的数据，对于连续值、缺失值无法处理，因而后面改进的 C4.5和CART 算法都改进了此点，我们下次再详细介绍，就这样了。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;机器学习实战&gt;&gt;<br>&lt;&lt;机器学习&gt;&gt;周志华<br><a href="http://www.cnblogs.com/pinard/p/6050306.html" target="_blank" rel="noopener">决策树算法原理</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+
+        
+-------------本文结束感谢您的阅读-------------
+
+    
+</div>
+  	
+</div>
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author: </strong>洪荣宣</li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="http://yoursite.com/2018/03/26/决策树的简要理论及其部分python实现/" title="决策树的简要理论及其部分python实现">http://yoursite.com/2018/03/26/决策树的简要理论及其部分python实现/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>All articles in this blog are licensed under 本文由 rongxuanhong 原创，采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">保留署名-非商业性使用-禁止演绎 4.0-国际许可协议</a></br>转载请保留以上声明信息! unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习，决策树/" rel="tag"><i class="fa fa-tag"></i> 机器学习，决策树</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/23/剑指offer2笔记之数组/" rel="next" title="剑指offer2笔记之数组">
+                <i class="fa fa-chevron-left"></i> 剑指offer2笔记之数组
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg"
+                alt="洪荣宣" />
+            
+              <p class="site-author-name" itemprop="name">洪荣宣</p>
+              <p class="site-description motion-element" itemprop="description">Rongxuanhong's Blog</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/rongxuanhong" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:francishongrx@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.jianshu.com/u/68e7b05458bc" target="_blank" title="简书"><i class="fa fa-fw fa-globe"></i>简书</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://blog.csdn.net/u013534680" target="_blank" title="CSDN"><i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#决策树的构造"><span class="nav-number">2.</span> <span class="nav-text">决策树的构造</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#决策树的优缺点"><span class="nav-number">2.1.</span> <span class="nav-text">决策树的优缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#决策树的一般流程"><span class="nav-number">2.2.</span> <span class="nav-text">决策树的一般流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#熵的概念及其公式"><span class="nav-number">2.3.</span> <span class="nav-text">熵的概念及其公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算给定数据的香农熵"><span class="nav-number">2.4.</span> <span class="nav-text">计算给定数据的香农熵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#划分数据集"><span class="nav-number">2.5.</span> <span class="nav-text">划分数据集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于信息增益-ID3"><span class="nav-number">2.5.1.</span> <span class="nav-text">基于信息增益(ID3)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于信息增益率-C4-5"><span class="nav-number">2.5.2.</span> <span class="nav-text">基于信息增益率(C4.5)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于基尼指数-CART"><span class="nav-number">2.5.3.</span> <span class="nav-text">基于基尼指数(CART)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于ID3的python代码实现"><span class="nav-number">2.6.</span> <span class="nav-text">基于ID3的python代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#根据指定特征的属性值返回数据集的子集"><span class="nav-number">2.6.1.</span> <span class="nav-text">根据指定特征的属性值返回数据集的子集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选择最好的数据集划分"><span class="nav-number">2.6.2.</span> <span class="nav-text">选择最好的数据集划分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建决策树"><span class="nav-number">2.6.3.</span> <span class="nav-text">创建决策树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#根据标签列表”投票”选出最多标签的"><span class="nav-number">2.6.3.1.</span> <span class="nav-text">根据标签列表”投票”选出最多标签的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#决策树具体算法"><span class="nav-number">2.6.3.2.</span> <span class="nav-text">决策树具体算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用决策树分类"><span class="nav-number">2.6.4.</span> <span class="nav-text">使用决策树分类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">洪荣宣</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="Total Visitors">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="Total Views">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/reading_progress/reading_progress.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.6"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.6"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.0.6"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.0.6"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.6"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.6"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.6"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'PHg2RRIUgmj5CjX5xB2yjkbQ-gzGzoHsz',
+        appKey: '3feashi2HbnYMycDoEQPqaIx',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  <!-- 页面点击小红心 start--> 
+  <script type="text/javascript" src="/js/src/love.js"></script>
+<!-- 页面点击小红心 end--> 
+
+<!--崩溃欺骗-->
+<script>
+var OriginTitile = document.title;
+ var titleTime;
+ document.addEventListener('visibilitychange', function () {
+     if (document.hidden) {
+        // $('[rel="icon"]').attr('href', "/img/TEP.ico");
+         document.title = '╭(°A°`)╮ 页面崩溃啦 ~ ';
+         clearTimeout(titleTime);
+     }
+     else {
+       //  $('[rel="icon"]').attr('href', "/favicon.ico");
+         document.title = '(ฅ>ω<*ฅ) 噫又好了~' + OriginTitile;
+         titleTime = setTimeout(function () {
+             document.title = OriginTitile;
+         }, 2000);
+     }
+ });
+ </script>
+</body>
+</html>
