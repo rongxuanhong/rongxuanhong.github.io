@@ -115,7 +115,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fppzm3upfcj212z06ydg6.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpq0f4x6m9j212t0j3t9y.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpq0xt6dk3j212v0cwab6.jpg">
-<meta property="og:updated_time" content="2018-03-26T04:46:35.012Z">
+<meta property="og:updated_time" content="2018-03-26T04:52:43.133Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="决策树的简要理论及其部分python实现">
 <meta name="twitter:description" content="前言决策树是机器学习中非常重要的一类监督学习方法。它可以对数据进行分类和回归学习。我们来看一下一个简单的决策树模型，如下图所示。  注意：本文 python 实现都是基于标签值位于样本的最后一列进行计算。    在进行垃圾邮件分类的时候，首先从根节点开始判断，如果发送的邮件域名为:myEmployer.com，那么将其分类为”无聊时需要阅读的邮件”，否则进一步判断是否为包含单词”曲棍”的邮件，如果">
@@ -432,14 +432,7 @@
 <p>注意 extend与append 的用法区别,前者为抽取元素加入列表，后者可能会将整个列表作为元素加入列表中。</p>
 </blockquote>
 <h3 id="选择最好的数据集划分"><a href="#选择最好的数据集划分" class="headerlink" title="选择最好的数据集划分"></a>选择最好的数据集划分</h3><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fppze09xvnj212t0ilwg3.jpg" alt="">  </p>
-<p>其实大致步骤可以概括为：  </p>
-<ol>
-<li>遍历每个属性；  </li>
-<li>得到每个属性的属性值集合，并遍历；  </li>
-<li>对每个属性值进行划分，计算各个子集的信息熵期望；  </li>
-<li>计算信息增益；  </li>
-<li>比较不同属性划分下的信息增益，取最大的信息增益对应的特征索引返回。<h3 id="创建决策树"><a href="#创建决策树" class="headerlink" title="创建决策树"></a>创建决策树</h3><h4 id="根据标签列表”投票”选出最多标签的"><a href="#根据标签列表”投票”选出最多标签的" class="headerlink" title="根据标签列表”投票”选出最多标签的"></a>根据标签列表”投票”选出最多标签的</h4><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fppzm3upfcj212z06ydg6.jpg" alt="">   </li>
-</ol>
+<h3 id="创建决策树"><a href="#创建决策树" class="headerlink" title="创建决策树"></a>创建决策树</h3><h4 id="根据标签列表”投票”选出最多标签的"><a href="#根据标签列表”投票”选出最多标签的" class="headerlink" title="根据标签列表”投票”选出最多标签的"></a>根据标签列表”投票”选出最多标签的</h4><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fppzm3upfcj212z06ydg6.jpg" alt="">   </p>
 <p>主要使用字典记录类别的个数，然后再按递减排序即可。</p>
 <h4 id="决策树具体算法"><a href="#决策树具体算法" class="headerlink" title="决策树具体算法"></a>决策树具体算法</h4><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpq0f4x6m9j212t0j3t9y.jpg" alt="">  </p>
 <h3 id="使用决策树分类"><a href="#使用决策树分类" class="headerlink" title="使用决策树分类"></a>使用决策树分类</h3><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpq0xt6dk3j212v0cwab6.jpg" alt="">  </p>
