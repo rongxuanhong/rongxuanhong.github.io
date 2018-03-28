@@ -106,7 +106,7 @@
 <meta property="og:site_name" content="Rongxuanhong&#39;s Blog">
 <meta property="og:description" content="前言 自定义 View 知识作为 Android 的一大基础，重要性不言而喻。而对 View 的测量则是第一步，因此我们必须掌握好它。而且,也只有理解了 View 的测量规则，然后我们才能更好地编写测量自定义控件的逻辑。  注：本源码基于SDK25    我们先来看看 View中的测量相关代码。 MeasureSpec解析 MeasureSpec 封装了父 ViewGroup 传递给子 View">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-27T14:50:12.029Z">
+<meta property="og:updated_time" content="2018-03-28T02:22:03.645Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="View源码解析之测量Measure">
 <meta name="twitter:description" content="前言 自定义 View 知识作为 Android 的一大基础，重要性不言而喻。而对 View 的测量则是第一步，因此我们必须掌握好它。而且,也只有理解了 View 的测量规则，然后我们才能更好地编写测量自定义控件的逻辑。  注：本源码基于SDK25    我们先来看看 View中的测量相关代码。 MeasureSpec解析 MeasureSpec 封装了父 ViewGroup 传递给子 View">
@@ -797,7 +797,7 @@ private void setMeasuredDimensionRaw(int measuredWidth, int measuredHeight) {
 </tbody>
 </table>
 <p>表格的第一行为 <code>ViewGroup</code> 对 <code>children</code> 对测量模式，第一列为 <code>children</code> 具体的 <code>LayoutParams</code> ，结果为 <code>children</code> 最终的测量尺寸和测量模式。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>在第一部分，首先，我们从 <code>MeasureSpec</code>这个类切入，详细解析了三大测量模式的含义，以及指定新测量规格的方法等；其次，分析了 <code>measure()</code> ，知道了 <code>View</code> 中其实是有缓存测量过的信息的，否则 <code>view</code> 才会重新测量,也知道了真正的测量工作其实是在 <code>onMeasure ()</code> 方法中进行，因此我们可以重新该方法，重新定义 <code>view</code>的测量逻辑；再来，我们通过调用 <code>setMeasureDimension()</code>为 <code>view</code>重新定义了新的宽度和高度；最后，我们又解析了方法 <code>resolveSize()</code>的作用，它作为一个工具方法能够辅助你进行测量工作。  </p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>在第一部分，首先，我们从 <code>MeasureSpec</code>这个类切入，详细解析了三大测量模式的含义，以及指定新测量规格的方法等；其次，分析了 <code>measure()</code> ，知道了 <code>View</code> 中其实是有缓存测量过的信息的，否则 <code>view</code> 才会重新测量,也知道了真正的测量工作其实是在 <code>onMeasure ()</code> 方法中进行，因此我们可以重写该方法，重新定义 <code>view</code>的测量逻辑；再来，我们通过调用 <code>setMeasureDimension()</code>为 <code>view</code>重新定义了新的宽度和高度；最后，我们又解析了方法 <code>resolveSize()</code>的作用，它作为一个工具方法能够辅助你进行测量工作。  </p>
 <p>在第二部分，首先我们研究了 <code>ViewGroup</code>中测量 <code>children</code> 的方法 <code>measureChildren()</code> ，知道其实它是通过遍历每个child进行测量的，然后进一步研究了测量单个 <code>child</code> 的方法 <code>measureChild()</code> 以及 <code>measureChildWithMargins()</code> ，而两者内部其实关键在于 <code>getChildMeasureSpec()</code> 的调用，该方法对于 <code>ViewGroup</code> 与 <code>Children</code> 之间可能存在的各种布局关系进行了分类讨论，以至于能够得到一个最佳的 <code>child</code> 测量规格。</p>
 <h1 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h1><p><a href="http://blog.csdn.net/iispring/article/details/49403315" target="_blank" rel="noopener">源码解析Android中View的measure量算过程</a><br>感谢您看到这里，期望留下您的印迹。</p>
 
@@ -945,7 +945,7 @@ private void setMeasuredDimensionRaw(int measuredWidth, int measuredHeight) {
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
