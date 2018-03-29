@@ -99,31 +99,29 @@
 
 
 
-  <meta name="description" content="版权声明：本文为博主原创文章，未经博主允许不得转载 前言Disqus 是一个支持向各个网络平台提供留言服务的公司，属于美国本土的公司。但由于国内目前不支持访问，故 Disqus 评论框的显示必须翻墙方可显示，这也是其中的一个局限。    注册 Disqus注册方式有多种，支持 google 帐号、facebook、twitter 等第三方帐号登录，选择一种即可。   添加 disqus 到 网址">
-<meta name="keywords" content="Hexo">
+  <meta name="description" content="前言树是一种在实际编程中经常遇到的数据结构。它的逻辑结构很简单：除了根节点以外，每个节点只有一个父节点；除叶节点之外所有节点都有一个或多个子节点。父节点和子节点之间用指针链接。由于树会涉及到大量的指针，因此与树有关的面试题成为了面试官的青睐。那么需要掌握哪些？就其中一部分来说，关于树的三大遍历方式：前序遍历、中序遍历、后序遍历都必须掌握，并且由于每种遍历方式都有递归和循环两种实现方式，因此我们需要">
+<meta name="keywords" content="剑指offer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo与Disqus引入的故事">
-<meta property="og:url" content="http://yoursite.com/2017/05/13/Hexo与Disqus引入的故事/index.html">
+<meta property="og:title" content="剑指offer2笔记之重建二叉树">
+<meta property="og:url" content="http://yoursite.com/2018/03/29/剑指offer2笔记之重建二叉树/index.html">
 <meta property="og:site_name" content="Rongxuanhong&#39;s Blog">
-<meta property="og:description" content="版权声明：本文为博主原创文章，未经博主允许不得转载 前言Disqus 是一个支持向各个网络平台提供留言服务的公司，属于美国本土的公司。但由于国内目前不支持访问，故 Disqus 评论框的显示必须翻墙方可显示，这也是其中的一个局限。    注册 Disqus注册方式有多种，支持 google 帐号、facebook、twitter 等第三方帐号登录，选择一种即可。   添加 disqus 到 网址">
+<meta property="og:description" content="前言树是一种在实际编程中经常遇到的数据结构。它的逻辑结构很简单：除了根节点以外，每个节点只有一个父节点；除叶节点之外所有节点都有一个或多个子节点。父节点和子节点之间用指针链接。由于树会涉及到大量的指针，因此与树有关的面试题成为了面试官的青睐。那么需要掌握哪些？就其中一部分来说，关于树的三大遍历方式：前序遍历、中序遍历、后序遍历都必须掌握，并且由于每种遍历方式都有递归和循环两种实现方式，因此我们需要">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1ffjsfbpxs7j204s08omx3.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1ffjsi1qfukj20ao06tq2x.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1ffjskuswudj20hl0hb0tc.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1ffjsuls2svj207z089weg.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1ffjszk07q3j20l90eut91.jpg">
-<meta property="og:updated_time" content="2017-06-08T13:19:08.000Z">
+<meta property="og:image" content="https://img-blog.csdn.net/20170927101737391?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMTQ3NTIxMA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpr7d95w1ij20v6047wej.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpr7fonarfj20v70lcq4q.jpg">
+<meta property="og:updated_time" content="2018-03-29T12:29:50.493Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo与Disqus引入的故事">
-<meta name="twitter:description" content="版权声明：本文为博主原创文章，未经博主允许不得转载 前言Disqus 是一个支持向各个网络平台提供留言服务的公司，属于美国本土的公司。但由于国内目前不支持访问，故 Disqus 评论框的显示必须翻墙方可显示，这也是其中的一个局限。    注册 Disqus注册方式有多种，支持 google 帐号、facebook、twitter 等第三方帐号登录，选择一种即可。   添加 disqus 到 网址">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1ffjsfbpxs7j204s08omx3.jpg">
+<meta name="twitter:title" content="剑指offer2笔记之重建二叉树">
+<meta name="twitter:description" content="前言树是一种在实际编程中经常遇到的数据结构。它的逻辑结构很简单：除了根节点以外，每个节点只有一个父节点；除叶节点之外所有节点都有一个或多个子节点。父节点和子节点之间用指针链接。由于树会涉及到大量的指针，因此与树有关的面试题成为了面试官的青睐。那么需要掌握哪些？就其中一部分来说，关于树的三大遍历方式：前序遍历、中序遍历、后序遍历都必须掌握，并且由于每种遍历方式都有递归和循环两种实现方式，因此我们需要">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20170927101737391?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMTQ3NTIxMA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/05/13/Hexo与Disqus引入的故事/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/29/剑指offer2笔记之重建二叉树/"/>
 
 
 
@@ -133,7 +131,7 @@
   };
 </script>
 
-  <title>Hexo与Disqus引入的故事 | Rongxuanhong's Blog</title>
+  <title>剑指offer2笔记之重建二叉树 | Rongxuanhong's Blog</title>
   
 
 
@@ -311,7 +309,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/13/Hexo与Disqus引入的故事/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/29/剑指offer2笔记之重建二叉树/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="洪荣宣">
@@ -328,7 +326,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hexo与Disqus引入的故事</h1>
+          <h1 class="post-title" itemprop="name headline">剑指offer2笔记之重建二叉树</h1>
         
 
         <div class="post-meta">
@@ -340,7 +338,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-13T16:37:35+08:00">2017-05-13</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-29T20:29:10+08:00">2018-03-29</time>
             
 
             
@@ -358,8 +356,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/05/13/Hexo与Disqus引入的故事/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/05/13/Hexo与Disqus引入的故事/" itemprop="commentCount"></span>
+                <a href="/2018/03/29/剑指offer2笔记之重建二叉树/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/03/29/剑指offer2笔记之重建二叉树/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -395,21 +393,16 @@
       
 
       
-        <p><strong>版权声明：本文为博主原创文章，未经博主允许不得转载</strong></p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><a href="https://disqus.com/" target="_blank" rel="noopener">Disqus</a> 是一个支持向各个网络平台提供留言服务的公司，属于美国本土的公司。但由于国内目前不支持访问，故 Disqus 评论框的显示必须翻墙方可显示，这也是其中的一个局限。  </p>
-<hr>
-<h1 id="注册-Disqus"><a href="#注册-Disqus" class="headerlink" title="注册 Disqus"></a>注册 Disqus</h1><p>注册方式有多种，支持 google 帐号、facebook、twitter 等第三方帐号登录，选择一种即可。  </p>
-<h1 id="添加-disqus-到-网址"><a href="#添加-disqus-到-网址" class="headerlink" title="添加 disqus 到 网址"></a>添加 disqus 到 网址</h1><ol>
-<li>首先，前往个人中心选择 add disqus to site<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ffjsfbpxs7j204s08omx3.jpg" alt="">  </li>
-<li>其次，进入新页面下滑至底部，点击 GET STARTED<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ffjsi1qfukj20ao06tq2x.jpg" alt="">  </li>
-<li>然后，选择 I want to install Disqus on my site  </li>
-<li>到了创建阶段，填好你的 website name（<strong>很重要，后面有用,可以取名字缩写</strong>），选好其他选项，点击 create site<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ffjskuswudj20hl0hb0tc.jpg" alt="">  <h1 id="最后-Disqus-的配置"><a href="#最后-Disqus-的配置" class="headerlink" title="最后 Disqus 的配置"></a>最后 Disqus 的配置</h1>可直接跳到第二步选择支持平台或者其他平台按操作添加相关代码。但如果你的网站是Hexo 平台(已集成 Disqus),则无需选择平台了,可直接调到第三步完成配置。</li>
-</ol>
-<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ffjsuls2svj207z089weg.jpg" alt=""><br>第三步配置 disqus,仅需把你要添加评论的网址填入 Website URL 即可，最后完成创建，完毕。<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ffjszk07q3j20l90eut91.jpg" alt="">  </p>
-<h1 id="Hexo里的配置"><a href="#Hexo里的配置" class="headerlink" title="Hexo里的配置"></a>Hexo里的配置</h1><ul>
-<li>以 next 主题为例，首先到 Hexo 下的 theme 中找到主题配置文件:<strong>_config.yml</strong>,再定位至 <strong>disqus</strong> 字段，开启 enable，并填入你之前在 Disqus 官网填入的 Website Name 到 disqus 字段下的<strong>shortname</strong> 处。  </li>
-<li>执行<strong>hexo clean,hexo g,hexo d</strong>，更新部署新的样式到远程。至此故事结束。  </li>
-</ul>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>树是一种在实际编程中经常遇到的数据结构。它的逻辑结构很简单：除了根节点以外，每个节点只有一个父节点；除叶节点之外所有节点都有一个或多个子节点。父节点和子节点之间用指针链接。由于树会涉及到大量的指针，因此与树有关的面试题成为了面试官的青睐。<br>那么需要掌握哪些？就其中一部分来说，关于树的三大遍历方式：前序遍历、中序遍历、后序遍历都必须掌握，并且由于每种遍历方式都有递归和循环两种实现方式，因此我们需要<strong>掌握</strong>三种遍历六种实现方式。  </p>
+<p>后期需要掌握的我们后面再提…</p>
+<h1 id="题目描述-重建二叉树"><a href="#题目描述-重建二叉树" class="headerlink" title="题目描述(重建二叉树)"></a>题目描述(重建二叉树)</h1><p>题目：输入某二叉树的前序遍历和中序遍历的结果，请重建该二叉树。(假设输入的前序遍历和中序遍历的结果中都不含重复的数字)  </p>
+<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>首先，重建一棵二叉树，我们可以通过树的两种遍历方式推出树的结构，其中中序遍历是必不可少的序列。<br>题目给定的是前序遍历和中序遍历，我们知道在前序序列中第一个值root 一定是根节点，而这个 root 所在的中序序列中也是根节点,那么根据前序遍历的特性–先根再左再右，我们知道左右子树的序列一定从前序序列的root的下一个位置开始，而中序遍历的特性是–先左再根再右,那么，对于中序序列，左子树的中序序列从第一个位置到 root 的前一位置的范围内，而右子树的中序序列则从 root 的下一位置到末位置。再者，无论是前序序列还是中序序列，前序序列的左子树序列长度一定等于中序序列的左子树序列长度，右子树亦是。最后其实我们分别得到了 root 节点的左子树对应的前序序列和中序序列，以及右子树对应的前序序列和中序序列。</p>
+<p><strong>关键的地方来了</strong>，我们还需要对左子树和右子树进行重建二叉树，我们发现这个过程已经在以根节点为 root 的二叉树上走过了，只是序列长度缩短了，那么我们其实可以再次调用一次这个过程(函数)，只要确定左右子树前序和中序序列的范围即可，那么这个过程其实就是利用树的递归特性。而递归的出口就是处理好叶节点的创建。<br>一个形象的图例:<br><img src="https://img-blog.csdn.net/20170927101737391?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMTQ3NTIxMA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><h2 id="建立树的数据结构"><a href="#建立树的数据结构" class="headerlink" title="建立树的数据结构"></a>建立树的数据结构</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpr7d95w1ij20v6047wej.jpg" alt="">  </p>
+<h2 id="重建二叉树"><a href="#重建二叉树" class="headerlink" title="重建二叉树"></a>重建二叉树</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpr7fonarfj20v70lcq4q.jpg" alt="">  </p>
+<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>每次在中序遍历序列中找到根节点的位置需要 O(n) 的查找时间。<br>则T(n)=2T(2/n)+O(n),(两个子问题的时间加中序序列上的查找时间)那么T(n)=O(nlogn)。</p>
+<h2 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h2><p>由于每个节点都会被递归到，所以递归栈需要 O(n) 的空间。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
 
       
     </div>
@@ -442,7 +435,7 @@
     <strong>Post author: </strong>洪荣宣</li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="http://yoursite.com/2017/05/13/Hexo与Disqus引入的故事/" title="Hexo与Disqus引入的故事">http://yoursite.com/2017/05/13/Hexo与Disqus引入的故事/</a>
+    <a href="http://yoursite.com/2018/03/29/剑指offer2笔记之重建二叉树/" title="剑指offer2笔记之重建二叉树">http://yoursite.com/2018/03/29/剑指offer2笔记之重建二叉树/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>All articles in this blog are licensed under 本文由 rongxuanhong 原创，采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">保留署名-非商业性使用-禁止演绎 4.0-国际许可协议</a></br>转载请保留以上声明信息! unless stating additionally.</li>
@@ -455,7 +448,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Hexo/" rel="tag"><i class="fa fa-tag"></i> Hexo</a>
+            <a href="/tags/剑指offer/" rel="tag"><i class="fa fa-tag"></i> 剑指offer</a>
           
         </div>
       
@@ -468,8 +461,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/01/巧用设计模式实现Recyclerview各种复杂Item类型/" rel="next" title="巧用设计模式实现Recyclerview各种复杂Item类型">
-                <i class="fa fa-chevron-left"></i> 巧用设计模式实现Recyclerview各种复杂Item类型
+              <a href="/2018/03/28/剑指offer2笔记之替换空格/" rel="next" title="剑指offer2笔记之替换空格">
+                <i class="fa fa-chevron-left"></i> 剑指offer2笔记之替换空格
               </a>
             
           </div>
@@ -477,10 +470,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/05/15/Java代理模式与Android的情结/" rel="prev" title="Java代理模式与Android的情结">
-                Java代理模式与Android的情结 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -656,7 +645,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注册-Disqus"><span class="nav-number">2.</span> <span class="nav-text">注册 Disqus</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加-disqus-到-网址"><span class="nav-number">3.</span> <span class="nav-text">添加 disqus 到 网址</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最后-Disqus-的配置"><span class="nav-number">4.</span> <span class="nav-text">最后 Disqus 的配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hexo里的配置"><span class="nav-number">5.</span> <span class="nav-text">Hexo里的配置</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目描述-重建二叉树"><span class="nav-number">2.</span> <span class="nav-text">题目描述(重建二叉树)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解题思路"><span class="nav-number">3.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现"><span class="nav-number">4.</span> <span class="nav-text">算法实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#建立树的数据结构"><span class="nav-number">4.1.</span> <span class="nav-text">建立树的数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重建二叉树"><span class="nav-number">4.2.</span> <span class="nav-text">重建二叉树</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂度分析"><span class="nav-number">5.</span> <span class="nav-text">复杂度分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#时间复杂度"><span class="nav-number">5.1.</span> <span class="nav-text">时间复杂度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#空间复杂度"><span class="nav-number">5.2.</span> <span class="nav-text">空间复杂度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
