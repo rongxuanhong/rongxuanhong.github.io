@@ -99,29 +99,23 @@
 
 
 
-  <meta name="description" content="版权声明：本文为博主原创文章，未经博主允许不得转载 引言  在实际项目的开发中，首页的布局基本上都是复杂的 UI，而我们的实现思路一般就是利用 RecyclerView 结合 getItemType()，并在适配器里根据不同的 item 类型去创建不同的 ViewHolder,最后在 onBindViewHolder() 中依然是根据 item 类型来绑定对应的数据。这种方法是最基本的方法，相信大">
-<meta name="keywords" content="Recyclerview">
-<meta property="og:type" content="article">
-<meta property="og:title" content="巧用设计模式实现Recyclerview各种复杂Item类型">
-<meta property="og:url" content="http://yoursite.com/2017/05/01/巧用设计模式实现Recyclerview各种复杂Item类型/index.html">
+  <meta name="description" content="Rongxuanhong&apos;s Blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Rongxuanhong&#39;s Blog">
+<meta property="og:url" content="http://yoursite.com/page/4/index.html">
 <meta property="og:site_name" content="Rongxuanhong&#39;s Blog">
-<meta property="og:description" content="版权声明：本文为博主原创文章，未经博主允许不得转载 引言  在实际项目的开发中，首页的布局基本上都是复杂的 UI，而我们的实现思路一般就是利用 RecyclerView 结合 getItemType()，并在适配器里根据不同的 item 类型去创建不同的 ViewHolder,最后在 onBindViewHolder() 中依然是根据 item 类型来绑定对应的数据。这种方法是最基本的方法，相信大">
+<meta property="og:description" content="Rongxuanhong&apos;s Blog">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1ff5p96ef3lj20dw0e53yz.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1ff5uwck661j209p05qdfq.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fjdetu2ltuj20fd0i7gmf.jpg">
-<meta property="og:updated_time" content="2017-09-09T08:56:11.653Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="巧用设计模式实现Recyclerview各种复杂Item类型">
-<meta name="twitter:description" content="版权声明：本文为博主原创文章，未经博主允许不得转载 引言  在实际项目的开发中，首页的布局基本上都是复杂的 UI，而我们的实现思路一般就是利用 RecyclerView 结合 getItemType()，并在适配器里根据不同的 item 类型去创建不同的 ViewHolder,最后在 onBindViewHolder() 中依然是根据 item 类型来绑定对应的数据。这种方法是最基本的方法，相信大">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1ff5p96ef3lj20dw0e53yz.jpg">
+<meta name="twitter:title" content="Rongxuanhong&#39;s Blog">
+<meta name="twitter:description" content="Rongxuanhong&apos;s Blog">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/05/01/巧用设计模式实现Recyclerview各种复杂Item类型/"/>
+  <link rel="canonical" href="http://yoursite.com/page/4/"/>
 
 
 
@@ -131,7 +125,7 @@
   };
 </script>
 
-  <title>巧用设计模式实现Recyclerview各种复杂Item类型 | Rongxuanhong's Blog</title>
+  <title>Rongxuanhong's Blog</title>
   
 
 
@@ -178,7 +172,8 @@
     
   
 
-  <div class="container sidebar-position-right page-post-detail">
+  <div class="container sidebar-position-right 
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -290,9 +285,9 @@
           
           <div id="content" class="content">
             
-
-  <div id="posts" class="posts-expand">
+  <section id="posts" class="posts-expand">
     
+      
 
   
 
@@ -300,8 +295,6 @@
   
   
 
-  
-    <div class="reading-progress-bar"></div>
   
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
@@ -326,7 +319,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">巧用设计模式实现Recyclerview各种复杂Item类型</h1>
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/05/01/巧用设计模式实现Recyclerview各种复杂Item类型/" itemprop="url">巧用设计模式实现Recyclerview各种复杂Item类型</a></h1>
         
 
         <div class="post-meta">
@@ -367,14 +362,6 @@
           
 
           
-            <span class="post-meta-divider">|</span>
-            <span class="post-meta-item-icon"
-            >
-            <i class="fa fa-eye"></i>
-             Views: 
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
-            </span>
-          
 
           
 
@@ -393,7 +380,9 @@
       
 
       
-        <p><strong>版权声明：本文为博主原创文章，未经博主允许不得转载</strong></p>
+        
+          
+            <p><strong>版权声明：本文为博主原创文章，未经博主允许不得转载</strong></p>
 <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>  在实际项目的开发中，首页的布局基本上都是复杂的 UI，而我们的实现思路一般就是利用 <code>RecyclerView</code> 结合 <code>getItemType()</code>，并在适配器里根据不同的 <code>item</code> 类型去创建不同的 <code>ViewHolder</code>,最后在 <code>onBindViewHolder()</code> 中依然是根据 <code>item</code> 类型来绑定对应的数据。这种方法是最基本的方法，相信大家都懂。但是，其缺点也很明显，就是可扩展性太差。</p>
 <p> 接下来，我将介绍另一种更为巧妙的方法来实现，以期大大提高其扩展性。我们将以 <code>item</code> 的布局 <code>id</code> 作为区别<code>item</code>的唯一标志并结合两种设计模式,为大家呈现一种新颖，简洁的方式来实现此类复杂布局。其中如有纰漏，望请悉心指出。  </p>
 <h1 id="必备知识"><a href="#必备知识" class="headerlink" title="必备知识"></a>必备知识</h1><p>本实现方法主要用到了 <code>Java</code> 设计模式中的访问者模式和工厂方法模式，亦涉及到 <code>ViewHolder</code> 的封装技巧。  </p>
@@ -694,6 +683,8 @@ public int getItemCount() {
 <p><a href="http://www.jianshu.com/p/c6a44e18badb" target="_blank" rel="noopener">[译]关于 Android Adapter，你的实现方式可能一直都有问题</a><br><a href="http://blog.csdn.net/janice0529/article/details/41151987" target="_blank" rel="noopener">Java设计模式之 访问者模式【Visitor Pattern】</a><br><a href="http://blog.csdn.net/zhengzhb/article/details/7348707" target="_blank" rel="noopener">Java设计模式之 工厂方法模式</a></p>
 </blockquote>
 
+          
+        
       
     </div>
 
@@ -704,68 +695,24 @@ public int getItemCount() {
     
 	<div>
 
-    <div style="text-align:center;color: #ccc;font-size:14px;">
-
-        
--------------本文结束感谢您的阅读-------------
-
-    
-</div>
-  	
 </div>
 
     
 
     
 
-    
-      <div>
-        <ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>Post author: </strong>洪荣宣</li>
-  <li class="post-copyright-link">
-    <strong>Post link:</strong>
-    <a href="http://yoursite.com/2017/05/01/巧用设计模式实现Recyclerview各种复杂Item类型/" title="巧用设计模式实现Recyclerview各种复杂Item类型">http://yoursite.com/2017/05/01/巧用设计模式实现Recyclerview各种复杂Item类型/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>Copyright Notice: </strong>All articles in this blog are licensed under 本文由 rongxuanhong 原创，采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">保留署名-非商业性使用-禁止演绎 4.0-国际许可协议</a></br>转载请保留以上声明信息! unless stating additionally.</li>
-</ul>
-
-      </div>
     
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Recyclerview/" rel="tag"><i class="fa fa-tag"></i> Recyclerview</a>
-          
-        </div>
+
+      
+
       
 
       
       
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/05/13/Hexo与Disqus引入的故事/" rel="prev" title="Hexo与Disqus引入的故事">
-                Hexo与Disqus引入的故事 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -775,22 +722,18 @@ public int getItemCount() {
   </article>
 
 
+    
+  </section>
 
-    <div class="post-spread">
-      
-    </div>
-  </div>
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+  </nav>
+
 
 
           </div>
           
-
-  
-    <div class="comments" id="comments">
-    </div>
-  
-
-
 
         </div>
         
@@ -811,17 +754,8 @@ public int getItemCount() {
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -925,22 +859,6 @@ public int getItemCount() {
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#必备知识"><span class="nav-number">2.</span> <span class="nav-text">必备知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#访问者模式"><span class="nav-number">3.</span> <span class="nav-text">访问者模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#工厂方法模式"><span class="nav-number">4.</span> <span class="nav-text">工厂方法模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BaseViewHolder的封装"><span class="nav-number">5.</span> <span class="nav-text">BaseViewHolder的封装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实例解析"><span class="nav-number">6.</span> <span class="nav-text">实例解析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#感谢"><span class="nav-number">8.</span> <span class="nav-text">感谢</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -1096,10 +1014,6 @@ public int getItemCount() {
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.6"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=6.0.6"></script>
-
-
 
   
 
@@ -1175,6 +1089,10 @@ public int getItemCount() {
   
 
   
+  
+    
+      
+    
   
 
   
