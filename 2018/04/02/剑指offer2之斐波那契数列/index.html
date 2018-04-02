@@ -113,7 +113,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpyap51rrrj20v507x0sr.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpyaqdwn7lj20v909nq37.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpyatme8trj20v207ymxa.jpg">
-<meta property="og:updated_time" content="2018-04-02T06:38:59.568Z">
+<meta property="og:updated_time" content="2018-04-02T06:42:20.995Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="剑指offer2之斐波那契数列">
 <meta name="twitter:description" content="前言在这之前的题目大多属于考察数据结构，然后对于 算法 的考查也是很重要的 。      有很多的算法都可以通过递归和循环两种方式来实现，虽说前者的实现较为简洁，但是在性能上并不占优。但在面试的时候，如果面试官没有不允许使用递归，还是可以优先使用递归来解决问题，毕竟递归实现简单一些。   对于排序和查找也是算法考察的两大重点。其中应该 重点掌握二分查找、归并排序、快速排序 。   如果是对二维数组">
@@ -422,12 +422,16 @@
 <h2 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpvzj4b3d5j20v10asgm3.jpg" alt=""> </p>
 <h1 id="题目三-变态青蛙跳台阶"><a href="#题目三-变态青蛙跳台阶" class="headerlink" title="题目三(变态青蛙跳台阶)"></a>题目三(变态青蛙跳台阶)</h1><p>题目：一只青蛙一次可以跳上 1 级台阶，也可以跳上 2 级……它也可以跳上 n 级台阶，此时青蛙跳上一个 n 级的台阶总共有多少种跳法。</p>
 <h2 id="算法思路-1"><a href="#算法思路-1" class="headerlink" title="算法思路"></a>算法思路</h2><p>假设青蛙跳到 n 级台阶的跳法数为f(n),那么  </p>
-<ol>
-<li>青蛙可以从第n-1级跳到n级，共有f(n-1)种跳法；  </li>
-<li>青蛙也可以从第n-2级跳到n级，共有f(n-2)种跳法;  </li>
-<li>青蛙也可以从第n-3级跳到n级，共有f(n-3)种跳法;  </li>
-<li>依次类推…直到青蛙从第1级跳到n级，共有f(1)种跳法；  </li>
-<li>因此青蛙跳到n级的跳法为以上跳法数之和。<br>f(n)=f(n-1)+f(n-2)+…+f(1);又f(n-1)=f(n-2)+…+f(1)<br>因此得到关系：f(n)=2*f(n-1)(n&gt;1),当n=1时，跳法数为1。<h2 id="算法实现-1"><a href="#算法实现-1" class="headerlink" title="算法实现"></a>算法实现</h2><h3 id="递归版本"><a href="#递归版本" class="headerlink" title="递归版本"></a>递归版本</h3><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpyap51rrrj20v507x0sr.jpg" alt="">  <h3 id="循环版本"><a href="#循环版本" class="headerlink" title="循环版本"></a>循环版本</h3><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpyaqdwn7lj20v909nq37.jpg" alt="">  <h3 id="移位版本"><a href="#移位版本" class="headerlink" title="移位版本"></a>移位版本</h3><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpyatme8trj20v207ymxa.jpg" alt=""><h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1></li>
+<pre><code>1. 青蛙可以从第n-1级跳到n级，共有f(n-1)种跳法；  
+2. 青蛙也可以从第n-2级跳到n级，共有f(n-2)种跳法;  
+3. 青蛙也可以从第n-3级跳到n级，共有f(n-3)种跳法;  
+4. 依次类推...直到青蛙从第1级跳到n级，共有f(1)种跳法；  
+5. 因此青蛙跳到n级的跳法为以上跳法数之和。  
+</code></pre><p>f(n)=f(n-1)+f(n-2)+…+f(1);又f(n-1)=f(n-2)+…+f(1)<br>因此得到关系：f(n)=2*f(n-1)(n&gt;1),当n=1时，跳法数为1。</p>
+<h2 id="算法实现-1"><a href="#算法实现-1" class="headerlink" title="算法实现"></a>算法实现</h2><h3 id="递归版本"><a href="#递归版本" class="headerlink" title="递归版本"></a>递归版本</h3><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpyap51rrrj20v507x0sr.jpg" alt="">  </p>
+<h3 id="循环版本"><a href="#循环版本" class="headerlink" title="循环版本"></a>循环版本</h3><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpyaqdwn7lj20v909nq37.jpg" alt="">  </p>
+<h3 id="移位版本"><a href="#移位版本" class="headerlink" title="移位版本"></a>移位版本</h3><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpyatme8trj20v207ymxa.jpg" alt=""></p>
+<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><ol>
 <li>对于递归版本的斐波那契，由于每次计算都是将问题分为两个子问题，故 T(n)=T(n-1)+T(n-2)+O(1)，则 T(n)=O(1.618^n);另外由于空间复杂度取决于递归的深度，那么其空间复杂度为 O(n)。 </li>
 <li>对于循环版本的斐波那契，很明显时间复杂度为O(n)，空间复杂度为O(1)。</li>
 </ol>
