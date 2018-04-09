@@ -99,29 +99,28 @@
 
 
 
-  <meta name="description" content="前言树是一种在实际编程中经常遇到的数据结构。它的逻辑结构很简单：除了根节点以外，每个节点只有一个父节点；除叶节点之外所有节点都有一个或多个子节点。父节点和子节点之间用指针链接。由于树会涉及到大量的指针，因此与树有关的面试题成为了面试官的青睐。那么需要掌握哪些？就其中一部分来说，关于树的三大遍历方式：前序遍历、中序遍历、后序遍历都必须掌握，并且由于每种遍历方式都有递归和循环两种实现方式，因此我们需要">
+  <meta name="description" content="前言查找和排序是在程序设计中经常用到的算法。查找相对而言不外乎顺序查找、二分查找、哈希表查找和二叉排序树查找，因此只要我们掌握了这些查找技巧，然后在面对不同问题的时候就可以选择合适的查找方法解决。最重要的是，二分查找是面试时候的重点，也是面试官最喜欢考查的查找方式。   哈希表和二叉排序树查找的重点在于构建对应的数据结构而不是算法本身。哈希表主要的优点是可以在 O(1) 的时间内查找某一元素，是效">
 <meta name="keywords" content="剑指offer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="剑指offer2笔记之重建二叉树">
-<meta property="og:url" content="http://yoursite.com/2018/03/29/剑指offer2笔记之重建二叉树/index.html">
+<meta property="og:title" content="剑指offer2之旋转数组">
+<meta property="og:url" content="http://yoursite.com/2018/04/09/剑指offer2之旋转数组/index.html">
 <meta property="og:site_name" content="Rongxuanhong&#39;s Blog">
-<meta property="og:description" content="前言树是一种在实际编程中经常遇到的数据结构。它的逻辑结构很简单：除了根节点以外，每个节点只有一个父节点；除叶节点之外所有节点都有一个或多个子节点。父节点和子节点之间用指针链接。由于树会涉及到大量的指针，因此与树有关的面试题成为了面试官的青睐。那么需要掌握哪些？就其中一部分来说，关于树的三大遍历方式：前序遍历、中序遍历、后序遍历都必须掌握，并且由于每种遍历方式都有递归和循环两种实现方式，因此我们需要">
+<meta property="og:description" content="前言查找和排序是在程序设计中经常用到的算法。查找相对而言不外乎顺序查找、二分查找、哈希表查找和二叉排序树查找，因此只要我们掌握了这些查找技巧，然后在面对不同问题的时候就可以选择合适的查找方法解决。最重要的是，二分查找是面试时候的重点，也是面试官最喜欢考查的查找方式。   哈希表和二叉排序树查找的重点在于构建对应的数据结构而不是算法本身。哈希表主要的优点是可以在 O(1) 的时间内查找某一元素，是效">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://img-blog.csdn.net/20170927101737391?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMTQ3NTIxMA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpr7d95w1ij20v6047wej.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpr7fonarfj20v70lcq4q.jpg">
-<meta property="og:updated_time" content="2018-03-29T12:29:50.493Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpzgka8w6uj20gp03d3z4.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpzgr0mh3tj20va0jmabl.jpg">
+<meta property="og:updated_time" content="2018-04-09T05:17:34.278Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="剑指offer2笔记之重建二叉树">
-<meta name="twitter:description" content="前言树是一种在实际编程中经常遇到的数据结构。它的逻辑结构很简单：除了根节点以外，每个节点只有一个父节点；除叶节点之外所有节点都有一个或多个子节点。父节点和子节点之间用指针链接。由于树会涉及到大量的指针，因此与树有关的面试题成为了面试官的青睐。那么需要掌握哪些？就其中一部分来说，关于树的三大遍历方式：前序遍历、中序遍历、后序遍历都必须掌握，并且由于每种遍历方式都有递归和循环两种实现方式，因此我们需要">
-<meta name="twitter:image" content="https://img-blog.csdn.net/20170927101737391?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMTQ3NTIxMA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta name="twitter:title" content="剑指offer2之旋转数组">
+<meta name="twitter:description" content="前言查找和排序是在程序设计中经常用到的算法。查找相对而言不外乎顺序查找、二分查找、哈希表查找和二叉排序树查找，因此只要我们掌握了这些查找技巧，然后在面对不同问题的时候就可以选择合适的查找方法解决。最重要的是，二分查找是面试时候的重点，也是面试官最喜欢考查的查找方式。   哈希表和二叉排序树查找的重点在于构建对应的数据结构而不是算法本身。哈希表主要的优点是可以在 O(1) 的时间内查找某一元素，是效">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpzgka8w6uj20gp03d3z4.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/29/剑指offer2笔记之重建二叉树/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/09/剑指offer2之旋转数组/"/>
 
 
 
@@ -131,7 +130,7 @@
   };
 </script>
 
-  <title>剑指offer2笔记之重建二叉树 | Rongxuanhong's Blog</title>
+  <title>剑指offer2之旋转数组 | Rongxuanhong's Blog</title>
   
 
 
@@ -309,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/29/剑指offer2笔记之重建二叉树/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/09/剑指offer2之旋转数组/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="洪荣宣">
@@ -326,7 +325,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">剑指offer2笔记之重建二叉树</h1>
+          <h1 class="post-title" itemprop="name headline">剑指offer2之旋转数组</h1>
         
 
         <div class="post-meta">
@@ -338,7 +337,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-29T20:29:10+08:00">2018-03-29</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-09T13:17:10+08:00">2018-04-09</time>
             
 
             
@@ -356,8 +355,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/03/29/剑指offer2笔记之重建二叉树/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/03/29/剑指offer2笔记之重建二叉树/" itemprop="commentCount"></span>
+                <a href="/2018/04/09/剑指offer2之旋转数组/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/09/剑指offer2之旋转数组/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -393,15 +392,20 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>树是一种在实际编程中经常遇到的数据结构。它的逻辑结构很简单：除了根节点以外，每个节点只有一个父节点；除叶节点之外所有节点都有一个或多个子节点。父节点和子节点之间用指针链接。由于树会涉及到大量的指针，因此与树有关的面试题成为了面试官的青睐。<br>那么需要掌握哪些？就其中一部分来说，关于树的三大遍历方式：前序遍历、中序遍历、后序遍历都必须掌握，并且由于每种遍历方式都有递归和循环两种实现方式，因此我们需要<strong>掌握</strong>三种遍历六种实现方式。  </p>
-<p>后期需要掌握的我们后面再提…</p>
-<h1 id="题目描述-重建二叉树"><a href="#题目描述-重建二叉树" class="headerlink" title="题目描述(重建二叉树)"></a>题目描述(重建二叉树)</h1><p>题目：输入某二叉树的前序遍历和中序遍历的结果，请重建该二叉树。(假设输入的前序遍历和中序遍历的结果中都不含重复的数字)  </p>
-<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>首先，重建一棵二叉树，我们可以通过树的两种遍历方式推出树的结构，其中中序遍历是必不可少的序列。<br>题目给定的是前序遍历和中序遍历，我们知道在前序序列中第一个值root 一定是根节点，而这个 root 所在的中序序列中也是根节点,那么根据前序遍历的特性–先根再左再右，我们知道左右子树的序列一定从前序序列的root的下一个位置开始，而中序遍历的特性是–先左再根再右,那么，对于中序序列，左子树的中序序列从第一个位置到 root 的前一位置的范围内，而右子树的中序序列则从 root 的下一位置到末位置。再者，无论是前序序列还是中序序列，前序序列的左子树序列长度一定等于中序序列的左子树序列长度，右子树亦是。最后其实我们分别得到了 root 节点的左子树对应的前序序列和中序序列，以及右子树对应的前序序列和中序序列。</p>
-<p><strong>关键的地方来了</strong>，我们还需要对左子树和右子树进行重建二叉树，我们发现这个过程已经在以根节点为 root 的二叉树上走过了，只是序列长度缩短了，那么我们其实可以再次调用一次这个过程(函数)，只要确定左右子树前序和中序序列的范围即可，那么这个过程其实就是利用树的递归特性。而递归的出口就是处理好叶节点的创建。<br>一个形象的图例:<br><img src="https://img-blog.csdn.net/20170927101737391?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMTQ3NTIxMA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
-<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><h2 id="建立树的数据结构"><a href="#建立树的数据结构" class="headerlink" title="建立树的数据结构"></a>建立树的数据结构</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpr7d95w1ij20v6047wej.jpg" alt="">  </p>
-<h2 id="重建二叉树"><a href="#重建二叉树" class="headerlink" title="重建二叉树"></a>重建二叉树</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpr7fonarfj20v70lcq4q.jpg" alt="">  </p>
-<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>每次在中序遍历序列中找到根节点的位置需要 O(n) 的查找时间。<br>则T(n)=2T(2/n)+O(n),(两个子问题的时间加中序序列上的查找时间)那么T(n)=O(nlogn)。</p>
-<h2 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h2><p>由于每个节点都会被递归到，所以递归栈需要 O(n) 的空间。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>查找和排序是在程序设计中经常用到的算法。查找相对而言不外乎<strong>顺序查找、二分查找、哈希表查找和二叉排序树查找</strong>，因此只要我们掌握了这些查找技巧，然后在面对不同问题的时候就可以选择合适的查找方法解决。最重要的是，<strong>二分查找</strong>是面试时候的重点，也是面试官最喜欢考查的查找方式。  </p>
+<p>哈希表和二叉排序树查找的重点在于构建对应的数据结构而不是算法本身。哈希表主要的优点是可以在 O(1) 的时间内查找某一元素，是效率最高的查找方式，而其缺点必然是消耗额外的空间来实现哈希表。<br>最后，我们应该要熟练掌握<strong>插入排序、冒泡排序、归并排序和快速排序</strong>算法的实现并能比较算法之间的优劣，能够从<strong>空间复杂度、平均时间复杂度和最差时间复杂度</strong>等方面去比较它们的优缺点。  </p>
+<h1 id="题目-旋转数组"><a href="#题目-旋转数组" class="headerlink" title="题目(旋转数组)"></a>题目(旋转数组)</h1><p>题目：把一个数组最开始的<strong>若干个</strong>元素搬到数组的末尾，我们称之为数组的旋转。输入一个递增排序的数组的一个旋转，输出旋转数组的最小元素。例如，数组{3，4，5,1,2}为{1,2,3,4,5}的一个旋转，该数组的最小元素为1。  </p>
+<p>#算法思路 #<br>为了能够充分利用旋转数组的特性，我们肯定不能采用 O(n) 时间复杂度的方式去遍历数组得到最小的那个元素(顺序查找)，那么旋转数组的特性是什么？ 其一是旋转后的数组一般可以划分为两个递增有序的子数组，并且前一个子数组的元素都大于后面子数组的元素；其二是最小的元素刚好是这两个子数组的分界线。那么可以考虑利用二分查找来缩小查找的范围。具体如下：  </p>
+<ol>
+<li>情况一：当搬运的若干个元素为0时，意味这旋转数组仍为原排序数组，那么最小的元素肯定是第一个元素；  </li>
+<li>情况二：我们给排序数组两个指针，一个指向首元素，另一个指向尾元素，接着取中点，然后先判断首元素和中点元素以及尾元素是否相等，如果相等，那么我们此时我们无法知道两个子数组谁一定会比谁更大，因此我们只能采用顺序查找的方式来返回最小的元素；否则，我们判断中点元素的值是否比首元素大，如果大，那么说明前面的子数组必定大于后面的子数组，最小值肯定在后面的子数组中，那么此时将指向首元素的指针移动到中点元素，缩小查找的范围，然后继续二分查找；如果小，那么原理相反，只需要把指向尾元素的指针移动到中点元素，继续二分查找即可。  </li>
+<li>进入二分查找的条件：二分查找数组的首元素大于其尾元素。这样说明有大于0个的元素被搬到了后面。  </li>
+<li>二分查找的结束条件：当首指针和尾指针位置相邻的时候，尾指针指向的元素即为最小的元素，此时退出循环即可。  </li>
+</ol>
+<p>下图为首元素、中点元素和尾元素都相等的情况(阴影部分为其中一个子数组，这种特例对于二分查找失效)：<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpzgka8w6uj20gp03d3z4.jpg" alt="">  </p>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpzgr0mh3tj20va0jmabl.jpg" alt="">  </p>
+<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>当旋转数组仍为排序数组的之后，直接去第一个元素，时间复杂度O(1)；当旋转数组采用顺序查找的时候，时间复杂度为O(n)；当旋转数组采用二分查找的时候，时间复杂度为O(logn)，所以最好的时间复杂度为O(1)，最坏时间复杂度为O(n)。  </p>
+<h2 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h2><p>空间复杂度为O(1)。</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
 
       
@@ -435,7 +439,7 @@
     <strong>Post author: </strong>洪荣宣</li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="http://yoursite.com/2018/03/29/剑指offer2笔记之重建二叉树/" title="剑指offer2笔记之重建二叉树">http://yoursite.com/2018/03/29/剑指offer2笔记之重建二叉树/</a>
+    <a href="http://yoursite.com/2018/04/09/剑指offer2之旋转数组/" title="剑指offer2之旋转数组">http://yoursite.com/2018/04/09/剑指offer2之旋转数组/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>All articles in this blog are licensed under 本文由 rongxuanhong 原创，采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">保留署名-非商业性使用-禁止演绎 4.0-国际许可协议</a></br>转载请保留以上声明信息! unless stating additionally.</li>
@@ -461,8 +465,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/28/剑指offer2笔记之替换空格/" rel="next" title="剑指offer2笔记之替换空格">
-                <i class="fa fa-chevron-left"></i> 剑指offer2笔记之替换空格
+              <a href="/2018/04/03/剑指offer2之按年龄排序/" rel="next" title="剑指offer2之按年龄排序">
+                <i class="fa fa-chevron-left"></i> 剑指offer2之按年龄排序
               </a>
             
           </div>
@@ -470,10 +474,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/31/剑指offer2笔记之从尾到头打印链表/" rel="prev" title="剑指offer2笔记之从尾到头打印链表">
-                剑指offer2笔记之从尾到头打印链表 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -649,7 +649,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目描述-重建二叉树"><span class="nav-number">2.</span> <span class="nav-text">题目描述(重建二叉树)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解题思路"><span class="nav-number">3.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现"><span class="nav-number">4.</span> <span class="nav-text">算法实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#建立树的数据结构"><span class="nav-number">4.1.</span> <span class="nav-text">建立树的数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重建二叉树"><span class="nav-number">4.2.</span> <span class="nav-text">重建二叉树</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂度分析"><span class="nav-number">5.</span> <span class="nav-text">复杂度分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#时间复杂度"><span class="nav-number">5.1.</span> <span class="nav-text">时间复杂度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#空间复杂度"><span class="nav-number">5.2.</span> <span class="nav-text">空间复杂度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目-旋转数组"><span class="nav-number">2.</span> <span class="nav-text">题目(旋转数组)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现"><span class="nav-number">3.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂度分析"><span class="nav-number">4.</span> <span class="nav-text">复杂度分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#时间复杂度"><span class="nav-number">4.1.</span> <span class="nav-text">时间复杂度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#空间复杂度"><span class="nav-number">4.2.</span> <span class="nav-text">空间复杂度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
