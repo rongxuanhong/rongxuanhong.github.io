@@ -99,27 +99,27 @@
 
 
 
-  <meta name="description" content="前言k-近邻学习(kNN)是一种监督学习的方法。它采用测量不同特征值之间的距离方法(如欧式距离)来进行分类。它也是懒惰学习(lazy learning)的著名代表，即它不在训练阶段学习，而是在测试阶段计算后连同给出分类结果。 算法原理我们都知道，kNN 的训练样本都是有分类标签的。那么，当给定一个测试样本时，我们可以根据某种衡量距离的计算方法来比较测试样本对应的特征向量与每个训练样本对应的特征向量">
-<meta name="keywords" content="机器学习">
+  <meta name="description" content="前言回溯法可以看成蛮力法的升级版。它会搜遍问题的解空间，试图找到一个符合约束条件的解决方案。回溯法非常适合由多个步骤组成的问题，并且每个步骤都有多个选项。当我们在某一步选择了一中一个选项时，就进入下一步，然后有面临新的选项。我们就这样重复选择，直至到达最终的状态。 而这样的选择过程非常适合用树结构来表示。在某一步有 n 个可能的选项，那么把该步骤看出树状结构中的一个节点，每个选项就看出树中节点连接">
+<meta name="keywords" content="剑指offer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="k-近邻学习的简要理论及其python实现">
-<meta property="og:url" content="http://yoursite.com/2018/03/21/k-近邻学习的简要理论及其python实现/index.html">
+<meta property="og:title" content="剑指offer2之回溯法(矩阵中的路径)">
+<meta property="og:url" content="http://yoursite.com/2018/04/11/剑指offer2之回溯法-矩阵中的路径/index.html">
 <meta property="og:site_name" content="Rongxuanhong&#39;s Blog">
-<meta property="og:description" content="前言k-近邻学习(kNN)是一种监督学习的方法。它采用测量不同特征值之间的距离方法(如欧式距离)来进行分类。它也是懒惰学习(lazy learning)的著名代表，即它不在训练阶段学习，而是在测试阶段计算后连同给出分类结果。 算法原理我们都知道，kNN 的训练样本都是有分类标签的。那么，当给定一个测试样本时，我们可以根据某种衡量距离的计算方法来比较测试样本对应的特征向量与每个训练样本对应的特征向量">
+<meta property="og:description" content="前言回溯法可以看成蛮力法的升级版。它会搜遍问题的解空间，试图找到一个符合约束条件的解决方案。回溯法非常适合由多个步骤组成的问题，并且每个步骤都有多个选项。当我们在某一步选择了一中一个选项时，就进入下一步，然后有面临新的选项。我们就这样重复选择，直至到达最终的状态。 而这样的选择过程非常适合用树结构来表示。在某一步有 n 个可能的选项，那么把该步骤看出树状结构中的一个节点，每个选项就看出树中节点连接">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpjjcgtcg9j20wq0dxdgy.jpg">
-<meta property="og:updated_time" content="2018-03-21T14:00:42.559Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fq6b0g2zb4j20v70laabw.jpg">
+<meta property="og:updated_time" content="2018-04-11T06:49:33.121Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="k-近邻学习的简要理论及其python实现">
-<meta name="twitter:description" content="前言k-近邻学习(kNN)是一种监督学习的方法。它采用测量不同特征值之间的距离方法(如欧式距离)来进行分类。它也是懒惰学习(lazy learning)的著名代表，即它不在训练阶段学习，而是在测试阶段计算后连同给出分类结果。 算法原理我们都知道，kNN 的训练样本都是有分类标签的。那么，当给定一个测试样本时，我们可以根据某种衡量距离的计算方法来比较测试样本对应的特征向量与每个训练样本对应的特征向量">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpjjcgtcg9j20wq0dxdgy.jpg">
+<meta name="twitter:title" content="剑指offer2之回溯法(矩阵中的路径)">
+<meta name="twitter:description" content="前言回溯法可以看成蛮力法的升级版。它会搜遍问题的解空间，试图找到一个符合约束条件的解决方案。回溯法非常适合由多个步骤组成的问题，并且每个步骤都有多个选项。当我们在某一步选择了一中一个选项时，就进入下一步，然后有面临新的选项。我们就这样重复选择，直至到达最终的状态。 而这样的选择过程非常适合用树结构来表示。在某一步有 n 个可能的选项，那么把该步骤看出树状结构中的一个节点，每个选项就看出树中节点连接">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fq6b0g2zb4j20v70laabw.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/21/k-近邻学习的简要理论及其python实现/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/11/剑指offer2之回溯法-矩阵中的路径/"/>
 
 
 
@@ -129,7 +129,7 @@
   };
 </script>
 
-  <title>k-近邻学习的简要理论及其python实现 | Rongxuanhong's Blog</title>
+  <title>剑指offer2之回溯法(矩阵中的路径) | Rongxuanhong's Blog</title>
   
 
 
@@ -307,7 +307,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/21/k-近邻学习的简要理论及其python实现/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/11/剑指offer2之回溯法-矩阵中的路径/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="洪荣宣">
@@ -324,7 +324,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">k-近邻学习的简要理论及其python实现</h1>
+          <h1 class="post-title" itemprop="name headline">剑指offer2之回溯法(矩阵中的路径)</h1>
         
 
         <div class="post-meta">
@@ -336,7 +336,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-21T22:00:08+08:00">2018-03-21</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-11T14:49:00+08:00">2018-04-11</time>
             
 
             
@@ -354,8 +354,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/03/21/k-近邻学习的简要理论及其python实现/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/03/21/k-近邻学习的简要理论及其python实现/" itemprop="commentCount"></span>
+                <a href="/2018/04/11/剑指offer2之回溯法-矩阵中的路径/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/11/剑指offer2之回溯法-矩阵中的路径/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -391,19 +391,17 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>k-近邻学习(kNN)是一种监督学习的方法。它采用测量不同特征值之间的距离方法(如欧式距离)来进行分类。它也是懒惰学习(lazy learning)的著名代表，即它不在训练阶段学习，而是在测试阶段计算后连同给出分类结果。</p>
-<h1 id="算法原理"><a href="#算法原理" class="headerlink" title="算法原理"></a>算法原理</h1><p>我们都知道，kNN 的训练样本都是有分类标签的。那么，当给定一个测试样本时，我们可以根据某种衡量距离的计算方法来比较测试样本对应的特征向量与每个训练样本对应的特征向量之间的距离。但是，一般我们只取 <strong>k</strong> 个 与测试样本距离最近的训练样本来比较(一般 <strong>k</strong> 是不大于20的整数)。</p>
-<p>在分类问题中，测试样本的分类结果取决于这 <strong>k</strong>个训练样本中出现最多的那个标签。而在回归问题中，测试的分类结果可取决于这 <strong>k</strong> 个训练样本的标签值的平均值。另外，还可以根据距离的远近进行加权平均或加权投票。  </p>
-<blockquote>
-<p>算法名称中 <strong>k</strong> 表示我们只选取与测试样本最相似的 <strong>k</strong> 个训练样本。</p>
-</blockquote>
-<p>接下来，我以 kNN 分类器为例，利用 python 实现其算法思想。</p>
-<h1 id="python实现"><a href="#python实现" class="headerlink" title="python实现"></a>python实现</h1><p>首先，若选择欧式距离衡量两个向量点xA和xB之间的距离,则其公式如下:<br>$$ \cdot \<br>d=\sqrt {\left( xA_{0}-xB_{0}\right) ^{2}+\left( xA_{1}-xB_{1}\right) ^{2}} $$  </p>
-<p>接下来，定义函数 <code>classify0()</code>传入相应参数即可完成 kNN 分类。<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpjjcgtcg9j20wq0dxdgy.jpg" alt=""></p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
-<li>&lt;&lt;机器学习&gt;&gt;周志华  </li>
-<li>&lt;&lt;机器学习实战&gt;&gt;</li>
-</ul>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>回溯法可以看成蛮力法的升级版。它会搜遍问题的解空间，试图找到一个符合约束条件的解决方案。回溯法非常适合由多个步骤组成的问题，并且每个步骤都有多个选项。当我们在某一步选择了一中一个选项时，就进入下一步，然后有面临新的选项。我们就这样重复选择，直至到达最终的状态。</p>
+<p>而这样的选择过程非常适合用树结构来表示。在某一步有 n 个可能的选项，那么把该步骤看出树状结构中的一个节点，每个选项就看出树中节点连接线，经过这些连接线到达该节点的 n 个子节点，再选定符合的子节点到达下一步骤。树的叶节点对应着终结状态。如果叶节点的状态满足题目的约束条件，那么我们找到了一个可行的解决方案。</p>
+<p>如果在叶节点的状态不满足约束条件，那么需要回溯到上一节点再尝试其他的选项。如果上一节点所有可能的选项都已经尝试过，仍满足不了题目的约束条件，则再次回溯到上一节点。如果所有选项都已经尝试过仍然不能到达满足约束条件的终结状态，则该问题无解。</p>
+<h1 id="题目-矩阵中的路径）"><a href="#题目-矩阵中的路径）" class="headerlink" title="题目(矩阵中的路径）"></a>题目(矩阵中的路径）</h1><p>题目：请设计一个函数，用来判断在一个矩阵中是否存在一条包含某字符串所有字符的路径。路径可以从矩阵中的任意一个格子开始，每一步可以在矩阵中向左，向右，向上，向下移动一个格子。如果一条路径经过了矩阵中的某一个格子，则该路径不能再进入该格子。 例如 a b c e s f c s a d e e 矩阵中包含一条字符串”bcced”的路径，但是矩阵中不包含”abcb”路径，因为字符串的第一个字符b占据了矩阵中的第一行第二个格子之后，路径不能再次进入该格子。</p>
+<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>首先，由于可以在矩阵中任意选择一个格子作为路径的起点，因此首先应该遍历矩阵的每个位置作为可能的起点。然后，假设矩阵中的某个格子上的字符为ch，并且字符串的第 i 个位置也为字符 ch，那么就到相邻的格子寻找字符串中第 i+1 位置上的字符。如果该格子上的字符与字符串的第i个路径上的字符不同，则跳过该格子。重复以上过程，直至字符串中的字符都在矩阵中相应位置出现。另外，需要定义 bool 矩阵标识路径是否已经进过每个格子。   </p>
+<p>当矩阵中坐标为(row,col)的格子和路径字符串中下标为pathLength的字符一样时，从4个相邻的格子(row,col-1),(row-1,col),(row,col+1)和(row+1,col)中去定位字符串中下标为pathLength+1的字符。<br>如果都没有匹配到，则需要回到前一个字符(pathLength-1)，重新定位。</p>
+<p>重复这个过程，直到遇到’\0’。</p>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fq6b0g2zb4j20v70laabw.jpg" alt=""></p>
+<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>首先hasPath中有两层循环，耗时O(rowsxcols),接着每个格子最多需要判断周围 4 个格子是否为路径的下一个字符，时间复杂度O(4xrowsxcols)。因此最后的时间复杂度为O(rows^2xcols^2)。可能分析的不是很对，请指教。</p>
+<h2 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h2><p>建立了一个辅助空间布尔矩阵，空间复杂度为O(rowsxcols)。假设字符长度为n，则递归栈需要O(n)的空间，但最大的复杂度还是O(rowsxcols)。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
 
       
     </div>
@@ -436,7 +434,7 @@
     <strong>Post author: </strong>洪荣宣</li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="http://yoursite.com/2018/03/21/k-近邻学习的简要理论及其python实现/" title="k-近邻学习的简要理论及其python实现">http://yoursite.com/2018/03/21/k-近邻学习的简要理论及其python实现/</a>
+    <a href="http://yoursite.com/2018/04/11/剑指offer2之回溯法-矩阵中的路径/" title="剑指offer2之回溯法(矩阵中的路径)">http://yoursite.com/2018/04/11/剑指offer2之回溯法-矩阵中的路径/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>All articles in this blog are licensed under 本文由 rongxuanhong 原创，采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">保留署名-非商业性使用-禁止演绎 4.0-国际许可协议</a></br>转载请保留以上声明信息! unless stating additionally.</li>
@@ -449,7 +447,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/机器学习/" rel="tag"><i class="fa fa-tag"></i> 机器学习</a>
+            <a href="/tags/剑指offer/" rel="tag"><i class="fa fa-tag"></i> 剑指offer</a>
           
         </div>
       
@@ -462,8 +460,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/20/剑指offer2笔记之赋值运算符函数/" rel="next" title="剑指offer2笔记之赋值运算符函数">
-                <i class="fa fa-chevron-left"></i> 剑指offer2笔记之赋值运算符函数
+              <a href="/2018/04/09/剑指offer2之旋转数组/" rel="next" title="剑指offer2之旋转数组">
+                <i class="fa fa-chevron-left"></i> 剑指offer2之旋转数组
               </a>
             
           </div>
@@ -471,10 +469,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/23/剑指offer2笔记之数组/" rel="prev" title="剑指offer2笔记之数组">
-                剑指offer2笔记之数组 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -650,7 +644,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法原理"><span class="nav-number">2.</span> <span class="nav-text">算法原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#python实现"><span class="nav-number">3.</span> <span class="nav-text">python实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目-矩阵中的路径）"><span class="nav-number">2.</span> <span class="nav-text">题目(矩阵中的路径）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解题思路"><span class="nav-number">3.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现"><span class="nav-number">4.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂度分析"><span class="nav-number">5.</span> <span class="nav-text">复杂度分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#时间复杂度"><span class="nav-number">5.1.</span> <span class="nav-text">时间复杂度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#空间复杂度"><span class="nav-number">5.2.</span> <span class="nav-text">空间复杂度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
