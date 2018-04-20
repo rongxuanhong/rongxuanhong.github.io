@@ -99,28 +99,28 @@
 
 
 
-  <meta name="description" content="前言查找和排序是在程序设计中经常用到的算法。查找相对而言不外乎顺序查找、二分查找、哈希表查找和二叉排序树查找，因此只要我们掌握了这些查找技巧，然后在面对不同问题的时候就可以选择合适的查找方法解决。最重要的是，二分查找是面试时候的重点，也是面试官最喜欢考查的查找方式。   哈希表和二叉排序树查找的重点在于构建对应的数据结构而不是算法本身。哈希表主要的优点是可以在 O(1) 的时间内查找某一元素，是效">
+  <meta name="description" content="前言如果面试题是关于 n 为的整数并且没有限定 n 的取值范围，或者输入任意大小的整数，那么可能需要考虑大数问题。而字符串是一种简单、有效地表示大数的方法。 题目(打印从 1 到最大的 n 位数)题目:输入数字 n，按顺序打印出从 1 到最大的 n 位十进制数。比如输入 3，则打印出 1、2、3 一直到最大的3 位数即 999。 算法思路本题没有给定 n 的范围，因此需要考虑大数问题。 算法思路一">
 <meta name="keywords" content="剑指offer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="剑指offer2之旋转数组">
-<meta property="og:url" content="http://yoursite.com/2018/04/09/剑指offer2之旋转数组/index.html">
+<meta property="og:title" content="剑指offer2之打印从1到最大的n位数">
+<meta property="og:url" content="http://yoursite.com/2018/04/20/剑指offer2之打印从1到最大的n位数/index.html">
 <meta property="og:site_name" content="Rongxuanhong&#39;s Blog">
-<meta property="og:description" content="前言查找和排序是在程序设计中经常用到的算法。查找相对而言不外乎顺序查找、二分查找、哈希表查找和二叉排序树查找，因此只要我们掌握了这些查找技巧，然后在面对不同问题的时候就可以选择合适的查找方法解决。最重要的是，二分查找是面试时候的重点，也是面试官最喜欢考查的查找方式。   哈希表和二叉排序树查找的重点在于构建对应的数据结构而不是算法本身。哈希表主要的优点是可以在 O(1) 的时间内查找某一元素，是效">
+<meta property="og:description" content="前言如果面试题是关于 n 为的整数并且没有限定 n 的取值范围，或者输入任意大小的整数，那么可能需要考虑大数问题。而字符串是一种简单、有效地表示大数的方法。 题目(打印从 1 到最大的 n 位数)题目:输入数字 n，按顺序打印出从 1 到最大的 n 位十进制数。比如输入 3，则打印出 1、2、3 一直到最大的3 位数即 999。 算法思路本题没有给定 n 的范围，因此需要考虑大数问题。 算法思路一">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpzgka8w6uj20gp03d3z4.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpzgr0mh3tj20va0jmabl.jpg">
-<meta property="og:updated_time" content="2018-04-09T05:17:34.278Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqfl5hcjg2j20uy0rdjs9.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqflaty90rj20v90ksmxs.jpg">
+<meta property="og:updated_time" content="2018-04-20T05:04:05.013Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="剑指offer2之旋转数组">
-<meta name="twitter:description" content="前言查找和排序是在程序设计中经常用到的算法。查找相对而言不外乎顺序查找、二分查找、哈希表查找和二叉排序树查找，因此只要我们掌握了这些查找技巧，然后在面对不同问题的时候就可以选择合适的查找方法解决。最重要的是，二分查找是面试时候的重点，也是面试官最喜欢考查的查找方式。   哈希表和二叉排序树查找的重点在于构建对应的数据结构而不是算法本身。哈希表主要的优点是可以在 O(1) 的时间内查找某一元素，是效">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpzgka8w6uj20gp03d3z4.jpg">
+<meta name="twitter:title" content="剑指offer2之打印从1到最大的n位数">
+<meta name="twitter:description" content="前言如果面试题是关于 n 为的整数并且没有限定 n 的取值范围，或者输入任意大小的整数，那么可能需要考虑大数问题。而字符串是一种简单、有效地表示大数的方法。 题目(打印从 1 到最大的 n 位数)题目:输入数字 n，按顺序打印出从 1 到最大的 n 位十进制数。比如输入 3，则打印出 1、2、3 一直到最大的3 位数即 999。 算法思路本题没有给定 n 的范围，因此需要考虑大数问题。 算法思路一">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqfl5hcjg2j20uy0rdjs9.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/09/剑指offer2之旋转数组/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/20/剑指offer2之打印从1到最大的n位数/"/>
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>剑指offer2之旋转数组 | Rongxuanhong's Blog</title>
+  <title>剑指offer2之打印从1到最大的n位数 | Rongxuanhong's Blog</title>
   
 
 
@@ -308,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/09/剑指offer2之旋转数组/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/20/剑指offer2之打印从1到最大的n位数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="洪荣宣">
@@ -325,7 +325,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">剑指offer2之旋转数组</h1>
+          <h1 class="post-title" itemprop="name headline">剑指offer2之打印从1到最大的n位数</h1>
         
 
         <div class="post-meta">
@@ -337,7 +337,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-09T13:17:10+08:00">2018-04-09</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-20T13:03:23+08:00">2018-04-20</time>
             
 
             
@@ -355,8 +355,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/04/09/剑指offer2之旋转数组/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/09/剑指offer2之旋转数组/" itemprop="commentCount"></span>
+                <a href="/2018/04/20/剑指offer2之打印从1到最大的n位数/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/20/剑指offer2之打印从1到最大的n位数/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -392,20 +392,15 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>查找和排序是在程序设计中经常用到的算法。查找相对而言不外乎<strong>顺序查找、二分查找、哈希表查找和二叉排序树查找</strong>，因此只要我们掌握了这些查找技巧，然后在面对不同问题的时候就可以选择合适的查找方法解决。最重要的是，<strong>二分查找</strong>是面试时候的重点，也是面试官最喜欢考查的查找方式。  </p>
-<p>哈希表和二叉排序树查找的重点在于构建对应的数据结构而不是算法本身。哈希表主要的优点是可以在 O(1) 的时间内查找某一元素，是效率最高的查找方式，而其缺点必然是消耗额外的空间来实现哈希表。<br>最后，我们应该要熟练掌握<strong>插入排序、冒泡排序、归并排序和快速排序</strong>算法的实现并能比较算法之间的优劣，能够从<strong>空间复杂度、平均时间复杂度和最差时间复杂度</strong>等方面去比较它们的优缺点。  </p>
-<h1 id="题目-旋转数组"><a href="#题目-旋转数组" class="headerlink" title="题目(旋转数组)"></a>题目(旋转数组)</h1><p>题目：把一个数组最开始的<strong>若干个</strong>元素搬到数组的末尾，我们称之为数组的旋转。输入一个递增排序的数组的一个旋转，输出旋转数组的最小元素。例如，数组{3，4，5,1,2}为{1,2,3,4,5}的一个旋转，该数组的最小元素为1。  </p>
-<p>#算法思路 #<br>为了能够充分利用旋转数组的特性，我们肯定不能采用 O(n) 时间复杂度的方式去遍历数组得到最小的那个元素(顺序查找)，那么旋转数组的特性是什么？ 其一是旋转后的数组一般可以划分为两个递增有序的子数组，并且前一个子数组的元素都大于后面子数组的元素；其二是最小的元素刚好是这两个子数组的分界线。那么可以考虑利用二分查找来缩小查找的范围。具体如下：  </p>
-<ol>
-<li>情况一：当搬运的若干个元素为0时，意味这旋转数组仍为原排序数组，那么最小的元素肯定是第一个元素；  </li>
-<li>情况二：我们给排序数组两个指针，一个指向首元素，另一个指向尾元素，接着取中点，然后先判断首元素和中点元素以及尾元素是否相等，如果相等，那么我们此时我们无法知道两个子数组谁一定会比谁更大，因此我们只能采用顺序查找的方式来返回最小的元素；否则，我们判断中点元素的值是否比首元素大，如果大，那么说明前面的子数组必定大于后面的子数组，最小值肯定在后面的子数组中，那么此时将指向首元素的指针移动到中点元素，缩小查找的范围，然后继续二分查找；如果小，那么原理相反，只需要把指向尾元素的指针移动到中点元素，继续二分查找即可。  </li>
-<li>进入二分查找的条件：二分查找数组的首元素大于其尾元素。这样说明有大于0个的元素被搬到了后面。  </li>
-<li>二分查找的结束条件：当首指针和尾指针位置相邻的时候，尾指针指向的元素即为最小的元素，此时退出循环即可。  </li>
-</ol>
-<p>下图为首元素、中点元素和尾元素都相等的情况(阴影部分为其中一个子数组，这种特例对于二分查找失效)：<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpzgka8w6uj20gp03d3z4.jpg" alt="">  </p>
-<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpzgr0mh3tj20va0jmabl.jpg" alt="">  </p>
-<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>当旋转数组仍为排序数组的之后，直接去第一个元素，时间复杂度O(1)；当旋转数组采用顺序查找的时候，时间复杂度为O(n)；当旋转数组采用二分查找的时候，时间复杂度为O(logn)，所以最好的时间复杂度为O(1)，最坏时间复杂度为O(n)。  </p>
-<h2 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h2><p>空间复杂度为O(1)。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>如果面试题是关于 n 为的整数并且没有限定 n 的取值范围，或者输入任意大小的整数，那么可能需要考虑大数问题。而字符串是一种简单、有效地表示大数的方法。</p>
+<h1 id="题目-打印从-1-到最大的-n-位数"><a href="#题目-打印从-1-到最大的-n-位数" class="headerlink" title="题目(打印从 1 到最大的 n 位数)"></a>题目(打印从 1 到最大的 n 位数)</h1><p>题目:输入数字 n，按顺序打印出从 1 到最大的 n 位十进制数。比如输入 3，则打印出 1、2、3 一直到最大的3 位数即 999。</p>
+<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>本题没有给定 n 的范围，因此需要考虑大数问题。</p>
+<h2 id="算法思路一-字符串模拟"><a href="#算法思路一-字符串模拟" class="headerlink" title="算法思路一(字符串模拟)"></a>算法思路一(字符串模拟)</h2><p>用字符串表示数字的时候，最直观的方法就是字符串里每个字符都是 ‘0’-‘9’ 之间的某一个字符，用来表示数字中的任一位。因为数字最大是 n 位的，因此我们需要一个长度为 n+1 的字符串(<strong>字符串中最后一位是结束符号 ‘\0’</strong>)。并且将字符串的每一位初始化为 ‘0’，但要注意的是，最后打印的时候，前半部分的 0 需要过滤掉。</p>
+<p>接下来，我们就对字符串的最后一位一直加 1 ，然后再判断是否需要进位，如果需要进位，那么就需要把字符串最后一位变为 ‘0’，而前一位的字符也要跟着加 1，然后继续判断是否需要继续进位，一直到直接加 1，不需要进位，或者遇到了最大的 n 位数退出外层循环。</p>
+<h2 id="算法思路二-递归法"><a href="#算法思路二-递归法" class="headerlink" title="算法思路二(递归法)"></a>算法思路二(递归法)</h2><p>将问题转换成按数字排列，也就是所对于字符串的每一位都可以有 10 种选择—‘0’-‘9’。也就是说，我们把数字的每一位都从 0 到 9 依次排列一遍，就得到所有的十进制数。最后打印的时候只要从第一个非 0 的字符开始打印即可。</p>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><h2 id="字符串模拟"><a href="#字符串模拟" class="headerlink" title="字符串模拟"></a>字符串模拟</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfl5hcjg2j20uy0rdjs9.jpg" alt=""></p>
+<h2 id="递归法"><a href="#递归法" class="headerlink" title="递归法"></a>递归法</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqflaty90rj20v90ksmxs.jpg" alt=""></p>
+<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>算法一的时间消耗主要在 while 循环上，由于需要打印出从 1 到最大的 n 位数，因此若设这些数共有 m 个，那么时间复杂度为 O(m)；而算法二采用递归思想，时间复杂度也为 O(m)，差不多共有 10^n 个组合。空间复杂度都为 O(n)。</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
 
       
@@ -439,7 +434,7 @@
     <strong>Post author: </strong>洪荣宣</li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="http://yoursite.com/2018/04/09/剑指offer2之旋转数组/" title="剑指offer2之旋转数组">http://yoursite.com/2018/04/09/剑指offer2之旋转数组/</a>
+    <a href="http://yoursite.com/2018/04/20/剑指offer2之打印从1到最大的n位数/" title="剑指offer2之打印从1到最大的n位数">http://yoursite.com/2018/04/20/剑指offer2之打印从1到最大的n位数/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>All articles in this blog are licensed under 本文由 rongxuanhong 原创，采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">保留署名-非商业性使用-禁止演绎 4.0-国际许可协议</a></br>转载请保留以上声明信息! unless stating additionally.</li>
@@ -465,8 +460,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/03/剑指offer2之按年龄排序/" rel="next" title="剑指offer2之按年龄排序">
-                <i class="fa fa-chevron-left"></i> 剑指offer2之按年龄排序
+              <a href="/2018/04/18/SVM系列之初识SVM(一)/" rel="next" title="SVM系列之初识SVM(一)">
+                <i class="fa fa-chevron-left"></i> SVM系列之初识SVM(一)
               </a>
             
           </div>
@@ -474,10 +469,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/11/剑指offer2之回溯法-矩阵中的路径/" rel="prev" title="剑指offer2之回溯法(矩阵中的路径)">
-                剑指offer2之回溯法(矩阵中的路径) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -655,7 +646,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目-旋转数组"><span class="nav-number">2.</span> <span class="nav-text">题目(旋转数组)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现"><span class="nav-number">3.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂度分析"><span class="nav-number">4.</span> <span class="nav-text">复杂度分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#时间复杂度"><span class="nav-number">4.1.</span> <span class="nav-text">时间复杂度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#空间复杂度"><span class="nav-number">4.2.</span> <span class="nav-text">空间复杂度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目-打印从-1-到最大的-n-位数"><span class="nav-number">2.</span> <span class="nav-text">题目(打印从 1 到最大的 n 位数)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法思路"><span class="nav-number">3.</span> <span class="nav-text">算法思路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法思路一-字符串模拟"><span class="nav-number">3.1.</span> <span class="nav-text">算法思路一(字符串模拟)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法思路二-递归法"><span class="nav-number">3.2.</span> <span class="nav-text">算法思路二(递归法)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现"><span class="nav-number">4.</span> <span class="nav-text">算法实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串模拟"><span class="nav-number">4.1.</span> <span class="nav-text">字符串模拟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#递归法"><span class="nav-number">4.2.</span> <span class="nav-text">递归法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂度分析"><span class="nav-number">5.</span> <span class="nav-text">复杂度分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
