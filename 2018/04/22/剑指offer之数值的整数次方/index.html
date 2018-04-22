@@ -99,31 +99,27 @@
 
 
 
-  <meta name="description" content="版权声明：本文为博主原创文章，未经博主允许不得转载 前言Disqus 是一个支持向各个网络平台提供留言服务的公司，属于美国本土的公司。但由于国内目前不支持访问，故 Disqus 评论框的显示必须翻墙方可显示，这也是其中的一个局限。    注册 Disqus注册方式有多种，支持 google 帐号、facebook、twitter 等第三方帐号登录，选择一种即可。   添加 disqus 到 网址">
-<meta name="keywords" content="Hexo">
+  <meta name="description" content="前言在面试编程的时候，代码的规范性和完整性非常重要，可能成为能否拿到 offer 的关键因素。那么代码的规范性如何体现呢？比如清晰的书写、代码布局清晰(如缩进，括号对齐)、变量和函数的命名易懂。而代码的完整性体现在代码基本功能实现的正确性以及在边界值、错误处理等方面的全面考虑。 那么完整的代码需要从功能测试、边界测试以及负面测试来提高鲁棒性。例如，在功能测试中，除了完成基本功能，还需要考虑数值的表">
+<meta name="keywords" content="剑指offer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo与Disqus引入的故事">
-<meta property="og:url" content="http://yoursite.com/2017/05/13/Hexo与Disqus引入的故事/index.html">
+<meta property="og:title" content="剑指offer之数值的整数次方">
+<meta property="og:url" content="http://yoursite.com/2018/04/22/剑指offer之数值的整数次方/index.html">
 <meta property="og:site_name" content="Rongxuanhong&#39;s Blog">
-<meta property="og:description" content="版权声明：本文为博主原创文章，未经博主允许不得转载 前言Disqus 是一个支持向各个网络平台提供留言服务的公司，属于美国本土的公司。但由于国内目前不支持访问，故 Disqus 评论框的显示必须翻墙方可显示，这也是其中的一个局限。    注册 Disqus注册方式有多种，支持 google 帐号、facebook、twitter 等第三方帐号登录，选择一种即可。   添加 disqus 到 网址">
+<meta property="og:description" content="前言在面试编程的时候，代码的规范性和完整性非常重要，可能成为能否拿到 offer 的关键因素。那么代码的规范性如何体现呢？比如清晰的书写、代码布局清晰(如缩进，括号对齐)、变量和函数的命名易懂。而代码的完整性体现在代码基本功能实现的正确性以及在边界值、错误处理等方面的全面考虑。 那么完整的代码需要从功能测试、边界测试以及负面测试来提高鲁棒性。例如，在功能测试中，除了完成基本功能，还需要考虑数值的表">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1ffjsfbpxs7j204s08omx3.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1ffjsi1qfukj20ao06tq2x.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1ffjskuswudj20hl0hb0tc.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1ffjsuls2svj207z089weg.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1ffjszk07q3j20l90eut91.jpg">
-<meta property="og:updated_time" content="2017-06-08T13:19:08.000Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqeg3s6edkj20v10iywfl.jpg">
+<meta property="og:updated_time" content="2018-04-22T12:41:17.968Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo与Disqus引入的故事">
-<meta name="twitter:description" content="版权声明：本文为博主原创文章，未经博主允许不得转载 前言Disqus 是一个支持向各个网络平台提供留言服务的公司，属于美国本土的公司。但由于国内目前不支持访问，故 Disqus 评论框的显示必须翻墙方可显示，这也是其中的一个局限。    注册 Disqus注册方式有多种，支持 google 帐号、facebook、twitter 等第三方帐号登录，选择一种即可。   添加 disqus 到 网址">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1ffjsfbpxs7j204s08omx3.jpg">
+<meta name="twitter:title" content="剑指offer之数值的整数次方">
+<meta name="twitter:description" content="前言在面试编程的时候，代码的规范性和完整性非常重要，可能成为能否拿到 offer 的关键因素。那么代码的规范性如何体现呢？比如清晰的书写、代码布局清晰(如缩进，括号对齐)、变量和函数的命名易懂。而代码的完整性体现在代码基本功能实现的正确性以及在边界值、错误处理等方面的全面考虑。 那么完整的代码需要从功能测试、边界测试以及负面测试来提高鲁棒性。例如，在功能测试中，除了完成基本功能，还需要考虑数值的表">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqeg3s6edkj20v10iywfl.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/05/13/Hexo与Disqus引入的故事/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/22/剑指offer之数值的整数次方/"/>
 
 
 
@@ -133,7 +129,7 @@
   };
 </script>
 
-  <title>Hexo与Disqus引入的故事 | Rongxuanhong's Blog</title>
+  <title>剑指offer之数值的整数次方 | Rongxuanhong's Blog</title>
   
 
 
@@ -311,7 +307,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/13/Hexo与Disqus引入的故事/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/22/剑指offer之数值的整数次方/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="洪荣宣">
@@ -328,7 +324,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hexo与Disqus引入的故事</h1>
+          <h1 class="post-title" itemprop="name headline">剑指offer之数值的整数次方</h1>
         
 
         <div class="post-meta">
@@ -340,7 +336,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-13T16:37:35+08:00">2017-05-13</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-22T20:41:01+08:00">2018-04-22</time>
             
 
             
@@ -358,8 +354,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/05/13/Hexo与Disqus引入的故事/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/05/13/Hexo与Disqus引入的故事/" itemprop="commentCount"></span>
+                <a href="/2018/04/22/剑指offer之数值的整数次方/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/22/剑指offer之数值的整数次方/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -395,21 +391,21 @@
       
 
       
-        <p><strong>版权声明：本文为博主原创文章，未经博主允许不得转载</strong></p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><a href="https://disqus.com/" target="_blank" rel="noopener">Disqus</a> 是一个支持向各个网络平台提供留言服务的公司，属于美国本土的公司。但由于国内目前不支持访问，故 Disqus 评论框的显示必须翻墙方可显示，这也是其中的一个局限。  </p>
-<hr>
-<h1 id="注册-Disqus"><a href="#注册-Disqus" class="headerlink" title="注册 Disqus"></a>注册 Disqus</h1><p>注册方式有多种，支持 google 帐号、facebook、twitter 等第三方帐号登录，选择一种即可。  </p>
-<h1 id="添加-disqus-到-网址"><a href="#添加-disqus-到-网址" class="headerlink" title="添加 disqus 到 网址"></a>添加 disqus 到 网址</h1><ol>
-<li>首先，前往个人中心选择 add disqus to site<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ffjsfbpxs7j204s08omx3.jpg" alt="">  </li>
-<li>其次，进入新页面下滑至底部，点击 GET STARTED<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ffjsi1qfukj20ao06tq2x.jpg" alt="">  </li>
-<li>然后，选择 I want to install Disqus on my site  </li>
-<li>到了创建阶段，填好你的 website name（<strong>很重要，后面有用,可以取名字缩写</strong>），选好其他选项，点击 create site<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ffjskuswudj20hl0hb0tc.jpg" alt="">  <h1 id="最后-Disqus-的配置"><a href="#最后-Disqus-的配置" class="headerlink" title="最后 Disqus 的配置"></a>最后 Disqus 的配置</h1>可直接跳到第二步选择支持平台或者其他平台按操作添加相关代码。但如果你的网站是Hexo 平台(已集成 Disqus),则无需选择平台了,可直接调到第三步完成配置。</li>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在面试编程的时候，代码的规范性和完整性非常重要，可能成为能否拿到 offer 的关键因素。那么代码的规范性如何体现呢？比如清晰的书写、代码布局清晰(如缩进，括号对齐)、变量和函数的命名易懂。而代码的完整性体现在代码基本功能实现的正确性以及在边界值、错误处理等方面的全面考虑。</p>
+<p>那么完整的代码需要从功能测试、边界测试以及负面测试来提高鲁棒性。例如，在功能测试中，除了完成基本功能，还需要考虑数值的表示范围；在边界测试中，需要考虑循环条件和递归终止条件的正确性；在负面测试中，需要考虑边界值和特殊值的输入，以解决一些不合法的情况。</p>
+<p>那么对于错误处理的方式主要有三种，分别是函数用返回值来告知API调用者是否出错，如返回 0 表示出错；当错误发生时设置一个全局变量来记录；对错误情况，采用抛异常的处理方式。</p>
+<h1 id="题目-数值的整数次方"><a href="#题目-数值的整数次方" class="headerlink" title="题目(数值的整数次方)"></a>题目(数值的整数次方)</h1><p>题目：实现函数 double Power(double base,int exponent)，求 base 的 exponent 次方。不得使用库函数，同时不需要考虑大数范围。</p>
+<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>首先我们应该对输入参数的各种情况进行讨论。</p>
+<ol>
+<li>如果基 base 是 0 而且 指数 exponent 是负数，那么情况判为不合法输入；</li>
+<li>注意基 base 是 0 而且 指数 exponent 也是 0 ，这种情况在数学上是无意义的。</li>
+<li>无论指数 exponent 是正还是负都统一先转成无符号的整形类型，方便统一计算整数次方。然后，对于 exponent 为负的情况，只需将结果变为倒数即可。</li>
 </ol>
-<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ffjsuls2svj207z089weg.jpg" alt=""><br>第三步配置 disqus,仅需把你要添加评论的网址填入 Website URL 即可，最后完成创建，完毕。<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ffjszk07q3j20l90eut91.jpg" alt="">  </p>
-<h1 id="Hexo里的配置"><a href="#Hexo里的配置" class="headerlink" title="Hexo里的配置"></a>Hexo里的配置</h1><ul>
-<li>以 next 主题为例，首先到 Hexo 下的 theme 中找到主题配置文件:<strong>_config.yml</strong>,再定位至 <strong>disqus</strong> 字段，开启 enable，并填入你之前在 Disqus 官网填入的 Website Name 到 disqus 字段下的<strong>shortname</strong> 处。  </li>
-<li>执行<strong>hexo clean,hexo g,hexo d</strong>，更新部署新的样式到远程。至此故事结束。  </li>
-</ul>
+<p>优化多次乘方的思路：<br>如果输入的指数 exponent 为 32，那么需要进行 31 次乘法操作。那么，如果我们能先算出数字的 16 次方，然后再平方一次即可；那么假如知道了数字的 16 次方，那么只需要在数字的 16 次方的基础上平方一次即可得到结果，那如果知道了数字的 8 次方，那么就可以在数字的 8 次方基础上平方一次得到数字的 16 次方的结果；那么如果知道数字的 4 次方，就可以在数字 4 此方的基础上平方一次得到数字的 8 次方；一次类推，直到知道了数字的 1 次方。  </p>
+<p>那么可用如下公式表示 a 的 n 次方:<br>$$a^{n}=\begin{cases}a^{n/2}\cdot a^{n/2}\qquad n为偶数 \<br>a^{\left( n-1\right) /2}\cdot a^{\left( n-1\right) /2}\qquad n为奇数\end{cases}$$</p>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqeg3s6edkj20v10iywfl.jpg" alt=""></p>
+<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>时间主要消耗在求解乘法运算结果上面，而使用递归方法(二分原问题)进行乘法求解的时间复杂度为 O(logn)，空间复杂度为 O(1)。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
 
       
     </div>
@@ -442,7 +438,7 @@
     <strong>Post author: </strong>洪荣宣</li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="http://yoursite.com/2017/05/13/Hexo与Disqus引入的故事/" title="Hexo与Disqus引入的故事">http://yoursite.com/2017/05/13/Hexo与Disqus引入的故事/</a>
+    <a href="http://yoursite.com/2018/04/22/剑指offer之数值的整数次方/" title="剑指offer之数值的整数次方">http://yoursite.com/2018/04/22/剑指offer之数值的整数次方/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>All articles in this blog are licensed under 本文由 rongxuanhong 原创，采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">保留署名-非商业性使用-禁止演绎 4.0-国际许可协议</a></br>转载请保留以上声明信息! unless stating additionally.</li>
@@ -455,7 +451,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Hexo/" rel="tag"><i class="fa fa-tag"></i> Hexo</a>
+            <a href="/tags/剑指offer/" rel="tag"><i class="fa fa-tag"></i> 剑指offer</a>
           
         </div>
       
@@ -468,8 +464,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/01/巧用设计模式实现Recyclerview各种复杂Item类型/" rel="next" title="巧用设计模式实现Recyclerview各种复杂Item类型">
-                <i class="fa fa-chevron-left"></i> 巧用设计模式实现Recyclerview各种复杂Item类型
+              <a href="/2018/04/20/剑指offer2之打印从1到最大的n位数/" rel="next" title="剑指offer2之打印从1到最大的n位数">
+                <i class="fa fa-chevron-left"></i> 剑指offer2之打印从1到最大的n位数
               </a>
             
           </div>
@@ -478,8 +474,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/05/15/Java代理模式与Android的情结/" rel="prev" title="Java代理模式与Android的情结">
-                Java代理模式与Android的情结 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/04/22/SVM系列之核函数与KKT条件(二)/" rel="prev" title="SVM系列之核函数与KKT条件(二)">
+                SVM系列之核函数与KKT条件(二) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -658,7 +654,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注册-Disqus"><span class="nav-number">2.</span> <span class="nav-text">注册 Disqus</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加-disqus-到-网址"><span class="nav-number">3.</span> <span class="nav-text">添加 disqus 到 网址</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最后-Disqus-的配置"><span class="nav-number">4.</span> <span class="nav-text">最后 Disqus 的配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hexo里的配置"><span class="nav-number">5.</span> <span class="nav-text">Hexo里的配置</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目-数值的整数次方"><span class="nav-number">2.</span> <span class="nav-text">题目(数值的整数次方)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法思路"><span class="nav-number">3.</span> <span class="nav-text">算法思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现"><span class="nav-number">4.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂度分析"><span class="nav-number">5.</span> <span class="nav-text">复杂度分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>

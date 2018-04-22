@@ -302,6 +302,350 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/26/决策树的简要理论及其部分python实现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/26/决策树的简要理论及其部分python实现/" itemprop="url">决策树的简要理论及其部分python实现</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-26T11:19:41+08:00">2018-03-26</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/26/决策树的简要理论及其部分python实现/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/03/26/决策树的简要理论及其部分python实现/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>决策树是机器学习中非常重要的一类监督学习方法。它可以对数据进行分类和回归学习。我们来看一下一个简单的决策树模型，如下图所示。</p>
+<blockquote>
+<p>注意：本文 python 实现都是基于标签值位于样本的最后一列进行计算。  </p>
+</blockquote>
+<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpnonwvpkjj20fu07jq3f.jpg" alt=""><br>在进行垃圾邮件分类的时候，首先从根节点开始判断，如果发送的邮件域名为:myEmployer.com，那么将其分类为”无聊时需要阅读的邮件”，否则进一步判断是否为包含单词”曲棍”的邮件，如果是则被列入”需要及时处理的朋友邮件”，否则被归入”无需阅读的垃圾邮件”。总之，像这样一步步缩小判断范围，至到找到目标分类的过程就是决策树不断作出决策的机制。  </p>
+<h1 id="决策树的构造"><a href="#决策树的构造" class="headerlink" title="决策树的构造"></a>决策树的构造</h1><h2 id="决策树的优缺点"><a href="#决策树的优缺点" class="headerlink" title="决策树的优缺点"></a>决策树的优缺点</h2><ol>
+<li>优点：计算复杂度不高，输出结果易于理解，对中间值的缺失不敏感，可以处理不相关特征数据。</li>
+<li>缺点：可能会产生过拟合的问题。</li>
+<li>适用数据类型：数值型(回归分析)和标称型(分类任务)</li>
+</ol>
+<h2 id="决策树的一般流程"><a href="#决策树的一般流程" class="headerlink" title="决策树的一般流程"></a>决策树的一般流程</h2><ol>
+<li>收集数据:可以使用任何方法;</li>
+<li>准备数据:树的构造算法只适用于标称型数据，因此数值型的数据需要离散化；</li>
+<li>分析数据：可以使用任何方法，构造树完成之后，需要检查决策树是符合预期；</li>
+<li>训练算法：构造树的数据结构；</li>
+<li>测试算法：使用经验树计算错误率；</li>
+<li>使用算法：使用决策树可以更好地理解数据的内在含义。</li>
+</ol>
+<h2 id="熵的概念及其公式"><a href="#熵的概念及其公式" class="headerlink" title="熵的概念及其公式"></a>熵的概念及其公式</h2><p>熵，也称信息熵，它是度量样本集合纯度的一种指标。也就说，样本集合中越不纯，那么表示信息越杂乱无序(如集合中类别越多,表示这个集合信息越杂乱)，则其含有的信息量就越大。而比较官方的定义是，熵是对不确定性的度量，即越不确定,信息量越大。<br>在衡量样本集合的熵时，单个类别的信息量我们可以定义为<br>$$ h\left( x_{i}\right) =-\log p\left( x_{i}\right) $$<br>其中p(x)是类别占比(该类别的数目占总类别数目的概率)<br>而熵是信息(或单个类别所含信息)的期望值,因此最终(香农)熵的公式为:<br>$$ H=-\sum ^{N}_{i=1}P\left( x_{i}\right) \log P\left( x_{i}\right) $$   </p>
+<h2 id="计算给定数据的香农熵"><a href="#计算给定数据的香农熵" class="headerlink" title="计算给定数据的香农熵"></a>计算给定数据的香农熵</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fppa1di77qj20wk0dlwf4.jpg" alt=""><br>其实就是把每个类别在样本集合中的占比计算出来,即p(xi),再利用上述公式计算即可。  </p>
+<h2 id="划分数据集"><a href="#划分数据集" class="headerlink" title="划分数据集"></a>划分数据集</h2><p>决策的时候其实也是划分数据集的过程，你需要一个依据来将数据集划分开，一步一步地缩小可选的范围。所以我们此时需要一个依据，也就是能让我们作出最好决策的一个依据。然后根据这个依据将数据集划分开。<br>在决策树算法中，常用的依据主要有三种算法：ID3、C4.5和CART。  </p>
+<h3 id="基于信息增益-ID3"><a href="#基于信息增益-ID3" class="headerlink" title="基于信息增益(ID3)"></a>基于信息增益(ID3)</h3><p>信息增益主要是利用集合的香农熵来计算的。信息增益衡量的是集合划分前的香农熵与划分后各子集香农熵的期望之差。<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fppampx7anj20dj06oaa3.jpg" alt="简单决策树"><br>我们以上图为例。假设样本集合为 D，年龄为每个样本具备的其中一个特征，记作 a，它共有三个属性值(青年、中年、老年)，设 v 为属性值的个数,D^v 为属性值为v的样本集合(被划分为青年的人数)。记 Ent(D) 表示样本集合 D 对应的熵,那么信息增益的计算公式为:<br>$$ Gain\left( D,a\right) =Ent\left( D\right) -\sum ^{3}_{v=1}\dfrac {\left| D^{v}\right| }{\left| D\right| }Ent\left( D^{v}\right) $$<br>我们用  Gain(D,a) 表示样本集合 D 依据属性 a 进行划分时的信息增益。那么，在实际中，属性 a 可以有多个，即划分方式有多种，但是我们只取信息增益最大的那个划分方式来划分数据集。  </p>
+<h3 id="基于信息增益率-C4-5"><a href="#基于信息增益率-C4-5" class="headerlink" title="基于信息增益率(C4.5)"></a>基于信息增益率(C4.5)</h3><p>信息增益率为信息增益的改进版本。由于信息增益对可取值数目较多的属性有所偏好，为减少这种偏好所带来的不利影响，信息增益率应运而生。增益率定义为:<br>$$ IV\left( a\right) =-\sum ^{V}_{v=1}\dfrac {\left| D^{v}\right| }{\left| D\right| }\log _{2}\dfrac {\left| D^{v}\right| }{\left| D\right| }   $$<br>$$ Gain\_ ratio\left( D,a\right) =\dfrac {Gain\left( D,a\right) }{IV\left( a\right) } $$  </p>
+<p>这其实比之前的版本多除了一个分母，IV(a)其实表示就是属性 a 的各个属性值对应的香农熵总和。  </p>
+<p>需要注意的是，增益率对可取值数目较少的属性也有所偏好，所以 C4.5 算法并不是取增益率最大的那个最为最佳划分方式，而是先从候选属性中找出信息增益高于平均水平的属性(ID3 算法)，再从中计算出信息增益率最高的那个属性。</p>
+<h3 id="基于基尼指数-CART"><a href="#基于基尼指数-CART" class="headerlink" title="基于基尼指数(CART)"></a>基于基尼指数(CART)</h3><p>在前面介绍的 ID3 和 C4.5 算法其实都是采用熵模型进行计算，并且涉及到大量的对数运算。计算相对复杂。<br>那么，基尼指数呢。它可以也用来衡量数据集的纯度，但是它与前面二者相反，基尼指数越小，数据集的纯度反而是越高的。对于数据集 D 的纯度可用基尼值来衡量(在分类问题中，假设有 k 个类别，第 k 个类别的占比为pk):<br>$$ Gini\left( D\right) =\sum ^{K}_{k=1}p_{k}\left( 1-p_{k}\right) \ =1-\sum ^{K}_{k=1}P^{2}_{k} $$    </p>
+<p>对于属性a，我们给出它的基尼系数定义为:<br>$$ Gini\_ index\left( D,a\right)=\sum ^{V}_{v=1}\dfrac {\left| D^{v}\right| }{\left| D\right| }Gini\left( D\right) $$  </p>
+<p>最后我们选择基尼指数最小的属性作为最优划分属性。特别注意的是，利用基尼指数来划分数据集只会对数据集二分，不多分。怎样理解?，对于多分类问题，可以利用整体思想，把数据集分成两大类，常见的有一对多，多对多,即一边是正例，一边是反例，因此使用基尼指数进行最优属性划分后得到的树是一颗优雅的二叉树。  </p>
+<h2 id="基于ID3的python代码实现"><a href="#基于ID3的python代码实现" class="headerlink" title="基于ID3的python代码实现"></a>基于ID3的python代码实现</h2><h3 id="根据指定特征的属性值返回数据集的子集"><a href="#根据指定特征的属性值返回数据集的子集" class="headerlink" title="根据指定特征的属性值返回数据集的子集"></a>根据指定特征的属性值返回数据集的子集</h3><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fppz8qd2gvj20wl0b33z0.jpg" alt="">  </p>
+<blockquote>
+<p>注意 extend与append 的用法区别,前者为抽取元素加入列表，后者可能会将整个列表作为元素加入列表中。</p>
+</blockquote>
+<h3 id="选择最好的数据集划分"><a href="#选择最好的数据集划分" class="headerlink" title="选择最好的数据集划分"></a>选择最好的数据集划分</h3><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fppze09xvnj212t0ilwg3.jpg" alt="">  </p>
+<pre><code>其实大致步骤可以概括为：  
+1. 遍历每个属性；  
+2. 得到每个属性的属性值集合，并遍历；  
+3. 对每个属性值进行划分，计算各个子集的信息熵期望；  
+4. 计算信息增益；  
+5. 比较不同属性划分下的信息增益，取最大的信息增益对应的特征索引返回。
+</code></pre><h3 id="创建决策树"><a href="#创建决策树" class="headerlink" title="创建决策树"></a>创建决策树</h3><h4 id="根据标签列表”投票”选出最多标签的"><a href="#根据标签列表”投票”选出最多标签的" class="headerlink" title="根据标签列表”投票”选出最多标签的"></a>根据标签列表”投票”选出最多标签的</h4><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fppzm3upfcj212z06ydg6.jpg" alt="">   </p>
+<p>主要使用字典记录类别的个数，然后再按递减排序即可。</p>
+<h4 id="决策树具体算法"><a href="#决策树具体算法" class="headerlink" title="决策树具体算法"></a>决策树具体算法</h4><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpq0f4x6m9j212t0j3t9y.jpg" alt="">  </p>
+<h3 id="使用决策树分类"><a href="#使用决策树分类" class="headerlink" title="使用决策树分类"></a>使用决策树分类</h3><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpq0xt6dk3j212v0cwab6.jpg" alt="">  </p>
+<p>使用决策树分类，就是从根节点开始递归寻找待分类样本所能到达的分类节点位置,然后确定最终的分类。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>决策树分类器就像带有终止块的流程图，终止块表示分类结果。开始处理数据集时，我们需要先衡量数据集中数据的不一致性，即熵，然后寻找最佳特征确定划分方式、分割数据集，直到数据集中的所有数据属于同一分类，或者已无可划分的特征了就停止。其实上述详细介绍的 ID3    算法局限性也比较大，它只能处理标称型的数据，对于连续值、缺失值无法处理，因而后面改进的 C4.5和CART 算法都改进了此点，我们下次再详细介绍，就这样了。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;机器学习实战&gt;&gt;<br>&lt;&lt;机器学习&gt;&gt;周志华<br><a href="http://www.cnblogs.com/pinard/p/6050306.html" target="_blank" rel="noopener">决策树算法原理</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/23/剑指offer2笔记之数组/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/23/剑指offer2笔记之数组/" itemprop="url">剑指offer2笔记之数组</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-23T11:15:10+08:00">2018-03-23</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/23/剑指offer2笔记之数组/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/03/23/剑指offer2笔记之数组/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>数组是一种最基本的数据结构，它占据一块连续的内存，并按照顺序存储的方式存储数据。<br>为了解决数组空间效率不高的问题，动态数组出现了，典型的代表是 <code>vector</code>。思想是先为动态数组预先分配一块内存空间，等到数组容量不足时重新开辟一块内存空间，并复制原数组到新空间，最后释放旧内存空间。对于<code>Vector</code> 来说，每次扩容为之前的 2 倍。由于该操作对时间性能影响较大，因此使用动态数组应该尽量避免改变数组容量大小的次数。</p>
+<h1 id="数组和指针的区别"><a href="#数组和指针的区别" class="headerlink" title="数组和指针的区别"></a>数组和指针的区别</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpg06dz0tlj20v608ujrq.jpg" alt="数组和指针的区别"> </p>
+<ul>
+<li>使用指针访问数组中的元素时，需要确保不越界；</li>
+<li>对数组求 <code>sizeof</code> ，还需要考虑元素所占的字节，比如在 32 位的机器上，每个整数占4字节，那么例子中 <code>data1</code> 就是 5*4=20；</li>
+<li>在 32 位系统上，对任意类型的指针求 <code>sizeof</code> 得到的结果都是 4；</li>
+<li>当数组作为函数的参数进行传递时，自动退化为指针，因此求 <code>sizeof</code> 结果同上条。</li>
+</ul>
+<h1 id="题目描述-数组中重复的数字"><a href="#题目描述-数组中重复的数字" class="headerlink" title="题目描述(数组中重复的数字)"></a>题目描述(数组中重复的数字)</h1><h2 id="题目一-找出数组中重复的数字"><a href="#题目一-找出数组中重复的数字" class="headerlink" title="题目一(找出数组中重复的数字)"></a>题目一(找出数组中重复的数字)</h2><p>在一个长度 n 的数组里的所有数字都在 0-n-1 的范围内。数组中的某些数字是重复的，但不知道有几个数字重复了，也不知道每个数组重复了几次。请找出数组中任意一个重复的数字。例如，如果输入长度为 7 的数组｛2，3，1，0，2，5，3｝，那么对应的输出是重复的数字 2 或者 3。</p>
+<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><ol>
+<li>排序。对数组排序后，依次比较前后元素是否重复即可。但时间复杂度为O(nlogn),空间复杂度为 O(1)。</li>
+<li>利用哈希表。利用键值对映射，可以将数组中的元素依次插入插入哈希表中，但是插入之前需要判断是否已存在该值，如果存在则说明该位置的元素重复了，算法的缺点是空间复杂度为 O(n)。</li>
+<li>下标定位法。</li>
+</ol>
+<p>接下来详细介绍下下标定位法。<br>注意到题目中数字的范围都在 0-n-1 范围内，假如不存在重复的元素，那么对数组进行重新排序后，数组的索引 i 一定可以对应到单个数字i,否则数字i存在多个。</p>
+<p>我们先依次遍历数组中的每个元素，当扫描到索引为 i 的数字 m 时，先比较数字 m 是否等于 i，如果等于则接着扫描下一个数组元素；如果不等，则将数字 m 和数组中索引为 m 的数字 n 进行比较，如果重复(m=n)，则找到了一个重复的数字；如果不重复(m!=n)，那么交换 m 与 n。交换后，此时索引 i 上的数字 m 再和索引 i 进行下一轮的比较，重复上面的步骤，直至数字 m 与索引 i 相同。那么我们就在这个比较交换的过程中寻找重复的元素。</p>
+<h3 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h3><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpg04orfkcj20v90fx74y.jpg" alt="算法实现"></p>
+<h3 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><p>代码中虽有两次循环，但每个数字最多只要交换两次就能找到属于它子集的位置，因此总的时间复杂度为 O(n)。另外，所有操作都在原数组上进行，所以空间复杂度为 O(1)。</p>
+<h2 id="题目二-不修改数组找出重复的元素"><a href="#题目二-不修改数组找出重复的元素" class="headerlink" title="题目二 (不修改数组找出重复的元素)"></a>题目二 (不修改数组找出重复的元素)</h2><p>在一个长度为 n+1 的数组里的所有数字都在 1-n 的范围内，所以数组中至少有一个数字是重复的。请找出数组中任意一个重复的数字，但不能修改输入的数组。例如，如果输入长度为 8 的数组 {2,3,5,4,3,2,6,7},<br>那么对应的输出是重复的数字 2 或者 3。</p>
+<h3 id="解题思路-1"><a href="#解题思路-1" class="headerlink" title="解题思路"></a>解题思路</h3><ol>
+<li>辅助数组法。依然是按一个下标对应一个数字的思路，先构建一个长度为 n+1 的数组，然后将原数组中的元素依次插入到辅助数组中相应的下标位置上。这样就能发现那个数字重复了。方法的缺点就是空间复杂度为 O(n)。</li>
+<li>二分查找法。若 1-n 的范围里只有 n 个数字则一定不会重复，否则必定存在重复的元素。那现在我们把 1-n 的数字从中间的数字 m 分为两部分，那么前一半为 1-m，后一半为 m+1-n，假如前半部分中介于 1-m 中的数字个数超过了 m，那么这一半的区间必定存在重复的元素。接下来可以继续在这一半空间的二分查找，直至找到重复的元素。</li>
+</ol>
+<h3 id="算法实现-1"><a href="#算法实现-1" class="headerlink" title="算法实现"></a>算法实现</h3><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpg0rzit2fj20vb0ktwfa.jpg" alt="算法实现"></p>
+<h3 id="复杂度分析-1"><a href="#复杂度分析-1" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><p>算法中使用二分查找的思想，复杂度 O(logn),在计数的时候使用了一个循环复杂度为 O(n),因此，总的时间复杂度为 O(nlogn),操作在原数组上进行，时间复杂度为 O(1)。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer第二版&gt;&gt;</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/21/k-近邻学习的简要理论及其python实现/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -751,967 +1095,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/27/View源码解析之测量Measure/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="洪荣宣">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rongxuanhong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/27/View源码解析之测量Measure/" itemprop="url">View源码解析之测量Measure</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-27T22:46:55+08:00">2017-08-27</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/08/27/View源码解析之测量Measure/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/08/27/View源码解析之测量Measure/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><hr>
-<p>自定义 <code>View</code> 知识作为 <code>Android</code> 的一大基础，重要性不言而喻。而对 <code>View</code> 的测量则是第一步，因此我们必须掌握好它。而且,也只有理解了 <code>View</code> 的测量规则，然后我们才能更好地编写测量自定义控件的逻辑。</p>
-<blockquote>
-<p>注：本源码基于SDK25  </p>
-</blockquote>
-<p><strong>我们先来看看 <code>View</code>中的测量相关代码</strong>。</p>
-<h1 id="MeasureSpec解析"><a href="#MeasureSpec解析" class="headerlink" title="MeasureSpec解析"></a>MeasureSpec解析</h1><hr>
-<p><code>MeasureSpec</code> 封装了父 <code>ViewGroup</code> 传递给子 <code>View</code> 的一些布局必要条件。其代表了宽度和高度信息。而这宽度或者高度的信息都是由测量尺寸 <code>size</code>  和测量模式 <code>mode</code> 组成。那么，有了父<code>ViewGroup</code>要求的测量信息 <code>MeasureSpec</code> ，子 <code>View</code> 就能够知悉自己应该能有多大，测出的结果才能符合 <code>ViewGroup</code>对自身的约束。总之，该类在父 <code>ViewGroup</code>  和子 <code>view</code> 之间进行信息传递。</p>
-<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><pre><code>public static class MeasureSpec {
-    private static final int MODE_SHIFT = 30;
-    //移位的掩码，掩码的作用是屏蔽一部分二进制位，获取另一部分二进制位信息
-    //此处将0x3(11)左移30位后得到 32位二进制 1100 0000 0000 0000 0000...(共30个0)正数左移低位补0
-    private static final int MODE_MASK  = 0x3 &lt;&lt; MODE_SHIFT;
-
-    /** @hide */
-    @IntDef({UNSPECIFIED, EXACTLY, AT_MOST})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface MeasureSpecMode {}
-
-    /**
-     * 测量模式其一，parent对子view没有约束信息，子view想多大就多大,
-     * 此时view就不需要考虑parent给的size了。
-     * 左移后32位二进制 0000 0000 0000 0000 0000...(共30个0)
-     */
-
-    public static final int UNSPECIFIED = 0 &lt;&lt; MODE_SHIFT;
-
-    /**
-     * 测量模式其二，parent已经为子view确定了精确的尺寸信息，子view必须按照parent的约束
-     * 进行测量。其中精确的尺寸信息包括宽高为xxxdp和match_parent两种布局参数。
-     * 比如parent确定size为100dp给子view，那么子view就只能是100dp或者自己确定的尺寸(&gt;0dp)。
-     * 左移后32位二进制 0100 0000 0000 0000 0000...(共30个0)
-     */
-    public static final int EXACTLY     = 1 &lt;&lt; MODE_SHIFT;
-
-    /**
-     * 测量模式其三，子view能够尽可能的大，但不能超过parent约束的尺寸。
-     * 左移后32位二进制 1000 0000 0000 0000 0000...(共30个0)
-     */
-    public static final int AT_MOST     = 2 &lt;&lt; MODE_SHIFT;
-
-    /**
-     * 此方法为基于给定的测量尺寸size和测量模式mode重新生成新的测量规格信息.
-     */
-    public static int makeMeasureSpec(@IntRange(from = 0, to = (1 &lt;&lt; MeasureSpec.MODE_SHIFT) - 1) int size,
-                                      @MeasureSpecMode int mode) {
-        if (sUseBrokenMakeMeasureSpec) {
-            //此处考虑兼容API17及以下,不再深究
-            return size + mode;
-        } else {
-            //利用掩码分别取出size信息(低30位)，以及高2位mode信息，再进行位与操作，得到新的测量规格信息
-            return (size &amp; ~MODE_MASK) | (mode &amp; MODE_MASK);
-        }
-    }
-
-    /**
-     **考虑兼容的方法，不深究，
-     */
-    public static int makeSafeMeasureSpec(int size, int mode) {
-        if (sUseZeroUnspecifiedMeasureSpec &amp;&amp; mode == UNSPECIFIED) {
-            return 0;
-        }
-        return makeMeasureSpec(size, mode);
-    }
-
-    /**
-     * 利用掩码取出测量规格的高2位信息得到测量模式并返回。
-     */
-    @MeasureSpecMode
-    public static int getMode(int measureSpec) {
-        //noinspection ResourceType
-        return (measureSpec &amp; MODE_MASK);
-    }
-
-    /**
-     * 利用掩码取出测量尺寸的低30位信息得到测量模式并返回。返回的尺寸单位为px
-     */
-    public static int getSize(int measureSpec) {
-        return (measureSpec &amp; ~MODE_MASK);
-    }
-    /**
-    *根据偏差值对测量规格进行调整，重新生成调整后的测量规格并返回
-    */
-    static int adjust(int measureSpec, int delta) {
-        final int mode = getMode(measureSpec);
-        int size = getSize(measureSpec);
-        if (mode == UNSPECIFIED) {//此模式下不需要调整测量规格直接返回。
-
-            return makeMeasureSpec(size, UNSPECIFIED);
-        }
-        size += delta;
-        if (size &lt; 0) {
-            Log.e(VIEW_LOG_TAG, &quot;MeasureSpec.adjust: new size would be negative! (&quot; + size +
-                    &quot;) spec: &quot; + toString(measureSpec) + &quot; delta: &quot; + delta);
-            size = 0;
-        }
-        return makeMeasureSpec(size, mode);
-    }  
-</code></pre><h1 id="measure-源码解析"><a href="#measure-源码解析" class="headerlink" title="measure()源码解析"></a>measure()源码解析</h1><p>此方法作用是根据 <code>parent</code>提供的宽高测量规格参数，来搞清view究竟有多大。但真正测量的方法是调用 <code>onMeasure()</code>，measure()帮我们做了一些逻辑处理，包括测量结果缓存等等，因此我们只要重写<code>onMeasure()</code> 方法即可，接下来我们来具体看下源码，分析分析流程。  </p>
-<pre><code>public final void measure(int widthMeasureSpec, int heightMeasureSpec) {
-    //指定Parent的layoutMode为optical bound 时额外的判断，以修正测量规格。但此特性很少用，略过
-    boolean optical = isLayoutModeOptical(this);
-    if (optical != isLayoutModeOptical(mParent)) {
-        Insets insets = getOpticalInsets();
-        int oWidth = insets.left + insets.right;
-        int oHeight = insets.top + insets.bottom;
-        widthMeasureSpec = MeasureSpec.adjust(widthMeasureSpec, optical ? -oWidth : oWidth);
-        heightMeasureSpec = MeasureSpec.adjust(heightMeasureSpec, optical ? -oHeight : oHeight);
-    }
-
-    //1.将int型widthMeasureSpec强转为64位的long型并左移32位，此时宽度信息处于高32位
-    //2.再将int型heightMeasureSpec强转为64位的long型并和0xffffffffL进行位与，屏蔽高32为，得到了低32位的高度信息
-    //3.最后两者位或后组成了一个64位的long型变量。里面存储了宽度和高度的规格信息。
-    long key = (long) widthMeasureSpec &lt;&lt; 32 | (long) heightMeasureSpec &amp; 0xffffffffL;
-
-    //定义缓存的集合
-    if (mMeasureCache == null) mMeasureCache = new LongSparseLongArray(2);
-
-    //1.mPrivateFlags是一个包含view的各种状态信息的变量，一般都是通过和相应状态的掩码位与，来检查是否具备相应的状态信息。
-    //2.此处就是检测view是否有强制布局的标记
-    final boolean forceLayout = (mPrivateFlags &amp; PFLAG_FORCE_LAYOUT) == PFLAG_FORCE_LAYOUT;
-
-
-    //1.检测测量规格是否有变化
-    //2.检测测量模式是否为MeasureSpec.EXACTLY
-    //3.检测当前控件的大小是否匹配parent的测量尺寸
-    //4.根据1、2、3判断是否需要布局,其中sAlwaysRemeasureExactly为一个兼容API23及以下的变量,表示都需要重新布局
-    final boolean specChanged = widthMeasureSpec != mOldWidthMeasureSpec
-            || heightMeasureSpec != mOldHeightMeasureSpec;
-    final boolean isSpecExactly = MeasureSpec.getMode(widthMeasureSpec) == MeasureSpec.EXACTLY
-            &amp;&amp; MeasureSpec.getMode(heightMeasureSpec) == MeasureSpec.EXACTLY;
-    final boolean matchesSpecSize = getMeasuredWidth() == MeasureSpec.getSize(widthMeasureSpec)
-            &amp;&amp; getMeasuredHeight() == MeasureSpec.getSize(heightMeasureSpec);
-    final boolean needsLayout = specChanged
-            &amp;&amp; (sAlwaysRemeasureExactly || !isSpecExactly || !matchesSpecSize);
-
-    if (forceLayout || needsLayout) {//强制布局或者需要布局时都进入
-        //先去除view中测量尺寸已设置的标记
-        mPrivateFlags &amp;= ~PFLAG_MEASURED_DIMENSION_SET;
-
-        //rtl相关略过，感兴趣了解即可
-        resolveRtlPropertiesIfNeeded();
-
-        //接下来主要判断是从缓存中获取测量信息呢，还是执行测量工作呢
-        //1.若view标记了强制布局，那么进入第一个条件,调用onMeasure()，开始真正的测量工作，并且必须设置测量尺寸返回
-        //接下来去除布局之前需要测量的标记，以便layout()过程中知道view已经完成测量了。
-        //2.根据key从缓存集合中取出含有宽高测量规格信息的64为long值value.
-        //首先，对value右移32位，高位补0，再向下强转得到32位int型的mMeasuredWidth，
-        // 其次，直接对value进行向下强转得到原64位value的低32位信息，即mMeasuredHeight，
-        //最后，调用setMeasuredDimensionRaw()设置view的测量尺寸,并加入布局之前需要测量标记
-        int cacheIndex = forceLayout ? -1 : mMeasureCache.indexOfKey(key);
-        if (cacheIndex &lt; 0 || sIgnoreMeasureCache) {
-            // measure ourselves, this should set the measured dimension flag back
-            onMeasure(widthMeasureSpec, heightMeasureSpec);
-            mPrivateFlags3 &amp;= ~PFLAG3_MEASURE_NEEDED_BEFORE_LAYOUT;
-        } else {
-            long value = mMeasureCache.valueAt(cacheIndex);
-            // Casting a long to int drops the high 32 bits, no mask needed
-            setMeasuredDimensionRaw((int) (value &gt;&gt; 32), (int) value);
-            mPrivateFlags3 |= PFLAG3_MEASURE_NEEDED_BEFORE_LAYOUT;
-        }
-
-        //检查上述流程是否都有调用设置view尺寸的方法setMeasuredDimension(),否则报错
-        if ((mPrivateFlags &amp; PFLAG_MEASURED_DIMENSION_SET) != PFLAG_MEASURED_DIMENSION_SET) {
-            throw new IllegalStateException(&quot;View with id &quot; + getId() + &quot;: &quot;
-                    + getClass().getName() + &quot;#onMeasure() did not set the&quot;
-                    + &quot; measured dimension by calling&quot;
-                    + &quot; setMeasuredDimension()&quot;);
-        }
-        //加入需要布局的标记
-        mPrivateFlags |= PFLAG_LAYOUT_REQUIRED;
-    }
-    //记录宽度和高度的测量规格
-    mOldWidthMeasureSpec = widthMeasureSpec;
-    mOldHeightMeasureSpec = heightMeasureSpec;
-    //以键值对形式，mMeasuredWidth信息存long型高32位，mMeasuredHeight信息存long型低32位，并位与为一个64位值，缓存到集合中
-    mMeasureCache.put(key, ((long) mMeasuredWidth) &lt;&lt; 32 |
-            (long) mMeasuredHeight &amp; 0xffffffffL); 
-}  
-</code></pre><p>#onMeasure源码分析#<br>此方法的作用是测量 <code>view</code>及其内容，以确定测量宽度以及测量高度。并且必须调用 <code>setMeasuredDimension(int, int)</code> 以保存测量宽高信息。  </p>
-<pre><code>protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-    //根据默认的view的宽高大小和对应的parent的测量规格,设置测量尺寸并保存宽高信息
-    setMeasuredDimension(getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec),
-            getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec));
-}
-
-protected int getSuggestedMinimumWidth() {
-    //判断view的背景是否为空，若是返回xml设置的minWidth，否则返回背景的最小宽度
-    return (mBackground == null) ? mMinWidth : max(mMinWidth, mBackground.getMinimumWidth());
-}
-//getSuggestedMinimumHeight() 同理
-
-public static int getDefaultSize(int size, int measureSpec) {
-    int result = size;
-    int specMode = MeasureSpec.getMode(measureSpec);
-    int specSize = MeasureSpec.getSize(measureSpec);
-     //根据size和测量规格中的测量尺寸和测量模式分情况设置结果尺寸
-    switch (specMode) {
-        //parent未指定约束信息，直接取size
-        case MeasureSpec.UNSPECIFIED:
-            result = size;
-            break;
-            //parent的约束信息为如下两种时，直接设置测量尺寸作为结果尺寸
-        case MeasureSpec.AT_MOST:
-        case MeasureSpec.EXACTLY:
-            result = specSize;
-            break;
-    }
-    return result;
-}
-
-protected final void setMeasuredDimension(int measuredWidth, int measuredHeight) {
-    //指定layoutMode为optical bound 时额外的判断，以修正测量规格。但此特性很少用，略过
-    boolean optical = isLayoutModeOptical(this);
-    if (optical != isLayoutModeOptical(mParent)) {
-        Insets insets = getOpticalInsets();
-        int opticalWidth = insets.left + insets.right;
-        int opticalHeight = insets.top + insets.bottom;
-
-        measuredWidth += optical ? opticalWidth : -opticalWidth;
-        measuredHeight += optical ? opticalHeight : -opticalHeight;
-    }
-    //真正设置view尺寸的方法
-    setMeasuredDimensionRaw(measuredWidth, measuredHeight);
-}
-
-private void setMeasuredDimensionRaw(int measuredWidth, int measuredHeight) {
-    //保存当前view的测量宽度和高度
-    mMeasuredWidth = measuredWidth;
-    mMeasuredHeight = measuredHeight;
-    //设置view的测量尺寸已设置标记(此标记若不设置，则会导致measure()方法中报错)
-    mPrivateFlags |= PFLAG_MEASURED_DIMENSION_SET;
-}  
-</code></pre><h1 id="resolveSize源码解析"><a href="#resolveSize源码解析" class="headerlink" title="resolveSize源码解析"></a>resolveSize源码解析</h1><p>此方法是能够使你期望的大小和状态与 <code>MeasureSpec</code> 追加的约束信息一致的工具方法，也就是说仍是基于当前传入的约束信息去计算最终的大小。除非约束的测量尺寸不同于你所期望的，否则将会默认以你期望的尺寸返回。</p>
-<pre><code> public static int resolveSizeAndState(int size, int measureSpec, int childMeasuredState) {
-    //获取传入的测量模式、测量尺寸
-    final int specMode = MeasureSpec.getMode(measureSpec);
-    final int specSize = MeasureSpec.getSize(measureSpec);
-    final int result;
-
-    switch (specMode) {
-        case MeasureSpec.AT_MOST://parent约束的测量模式AT_MOST，specSize为view的最大尺寸
-            if (specSize &lt; size) {//取specSize为结果尺寸，并加入MEASURED_STATE_TOO_SMALL标记
-                result = specSize | MEASURED_STATE_TOO_SMALL;
-            } else {//否则返回期望的结果尺寸
-                result = size;
-            }
-            break;
-        case MeasureSpec.EXACTLY://parent约束了尺寸，以该测量尺寸返回
-            result = specSize;
-            break;
-        case MeasureSpec.UNSPECIFIED:  //此模式下同默认返回的情况
-        default:
-            result = size;
-    }
-    return result | (childMeasuredState &amp; MEASURED_STATE_MASK);//返回高8为状态位信息的结果尺寸
-}  
-</code></pre><blockquote>
-<p>注意:上述方法中涉及到两张尺寸，不要搞混。一个是<code>parent</code>约束<code>child</code>的测量尺寸，而另一个是你自己计算后或者你期望 <code>child</code> 多大传入的尺寸,最终计算结果需要综合两者，进而得到一个最符合的尺寸。  </p>
-</blockquote>
-<p><strong>接下来我们再来看看 <code>ViewGroup</code> 中有关测量的源码</strong>。  </p>
-<h1 id="measureXXX"><a href="#measureXXX" class="headerlink" title="measureXXX()"></a>measureXXX()</h1><p>我们先看看几个以 <code>measure</code> 开头的方法及一些涉及到的常用方法。  </p>
-<h2 id="measureChildren"><a href="#measureChildren" class="headerlink" title="measureChildren()"></a>measureChildren()</h2><p>此方法为 <code>ViewGroup</code> 测量 <code>children</code> 的方法。主要就是遍历每个 <code>child</code> 进行测量。</p>
-<pre><code>protected void measureChildren(int widthMeasureSpec, int heightMeasureSpec) {
-    //获取child的个数 我们会常利用getChildCount()来返回child的个数
-    final int size = mChildrenCount;
-    //ViewGroup中children的集合
-    final View[] children = mChildren;
-    //遍历每个child
-    for (int i = 0; i &lt; size; ++i) {
-        final View child = children[i];
-        //如果child的可见性不是GONE，则开始测量child
-        if ((child.mViewFlags &amp; VISIBILITY_MASK) != GONE) {
-            measureChild(child, widthMeasureSpec, heightMeasureSpec);
-        }
-    }
-}
-</code></pre><h2 id="measureChild"><a href="#measureChild" class="headerlink" title="measureChild()"></a>measureChild()</h2><p>该方法结合 <code>ViewGroup</code> 对 <code>child</code> 的宽高约束信息，测量自己。</p>
-<pre><code> protected void measureChild(View child, int parentWidthMeasureSpec,
-        int parentHeightMeasureSpec) {
-    //获取child的布局参数
-    final LayoutParams lp = child.getLayoutParams();
-    //调用getChildMeasureSpec()重新确定child的宽高约束信息，此处考虑了parent的padding对测量child的影响
-    final int childWidthMeasureSpec = getChildMeasureSpec(parentWidthMeasureSpec,
-            mPaddingLeft + mPaddingRight, lp.width);
-    final int childHeightMeasureSpec = getChildMeasureSpec(parentHeightMeasureSpec,
-            mPaddingTop + mPaddingBottom, lp.height);
-    //child根据约束信息开始测量自身
-    child.measure(childWidthMeasureSpec, childHeightMeasureSpec);
-}
-</code></pre><h2 id="measureChildWithMargins"><a href="#measureChildWithMargins" class="headerlink" title="measureChildWithMargins()"></a>measureChildWithMargins()</h2><p>此方法考虑了 <code>ViewGroup</code> 的 <code>padding</code> 以及 <code>children</code> 的 <code>margin</code> 等因素，以便对<code>children</code> 更加精确的测量，大体流程无异于 <code>measureChild()</code> ，后者其实亦包含了前者。</p>
-<pre><code>protected void measureChildWithMargins(View child,
-        int parentWidthMeasureSpec, int widthUsed,
-        int parentHeightMeasureSpec, int heightUsed) {
-    //为了获取margin我们需要拿到child的MarginLayoutParams实例
-    final MarginLayoutParams lp = (MarginLayoutParams) child.getLayoutParams();
-    //重新生成对child的测量约束信息。比前者多了margin，以及Parent中已使用的空间。
-    final int childWidthMeasureSpec = getChildMeasureSpec(parentWidthMeasureSpec,
-            mPaddingLeft + mPaddingRight + lp.leftMargin + lp.rightMargin
-                    + widthUsed, lp.width);
-    final int childHeightMeasureSpec = getChildMeasureSpec(parentHeightMeasureSpec,
-            mPaddingTop + mPaddingBottom + lp.topMargin + lp.bottomMargin
-                    + heightUsed, lp.height);
-    //child根据约束信息开始测量自身
-    child.measure(childWidthMeasureSpec, childHeightMeasureSpec);
-} 
-</code></pre><h2 id="getChildMeasureSpec"><a href="#getChildMeasureSpec" class="headerlink" title="getChildMeasureSpec()"></a>getChildMeasureSpec()</h2><p>此方法返回了对 <code>child</code>的一个最佳的测量规格。因为它不仅结合了 <code>ViewGroup</code> 对 <code>child</code> 的约束信息，也结合了自身 <code>LayoutParams</code>的信息，最终计算得到了一个 <code>child</code> 最佳的尺寸和模式，也即<code>child</code> 的最佳测量规格，我们先来看看源码：  </p>
-<pre><code>public static int getChildMeasureSpec(int spec, int padding, int childDimension) {
-    获取ViewGroup对children的测量模式和测量尺寸约束信息
-    int specMode = MeasureSpec.getMode(spec);
-    int specSize = MeasureSpec.getSize(spec);
-
-    //考虑了ViewGroup padding属性额外占据的空间，我们先去掉，得到一个children有效的测量尺寸
-    int size = Math.max(0, specSize - padding);
-
-    //记录child的最终测量尺寸和测量模式的变量
-    int resultSize = 0;
-    int resultMode = 0;
-    //根据ViewGroup的测量模式，讨论children最终的约束信息
-    switch (specMode) {
-    //若是MeasureSpec.EXACTLY，ViewGroup的layoutParams可以是xxxdp或者MATCH_PARENT
-    case MeasureSpec.EXACTLY:
-        if (childDimension &gt;= 0) {
-            //child的宽度或高度值为具体的xxxdp时，即child确定需要多大了，那么直接给它分配。
-            resultSize = childDimension;
-            resultMode = MeasureSpec.EXACTLY;
-        } else if (childDimension == LayoutParams.MATCH_PARENT) {
-            //child的宽度或高度值为LayoutParams.MATCH_PARENT时，表示child想要和ViewGroup一样大，那就满足它。
-            resultSize = size;
-            resultMode = MeasureSpec.EXACTLY;
-        } else if (childDimension == LayoutParams.WRAP_CONTENT) {
-            //child的宽度或高度值为LayoutParams.WRAP_CONTENT，表示child决定自己的大小，有多少内容就占用多大，但是你不能超过ViewGroup
-            给你约束的尺寸。
-            resultSize = size;//分配最大的尺寸给child，不能再多了
-            resultMode = MeasureSpec.AT_MOST;
-        }
-        break;
-
-    //ViewGroup的layoutParams只能是WRAP_CONTENT，它对child约束了一个最大容纳尺寸
-    case MeasureSpec.AT_MOST:
-        if (childDimension &gt;= 0) {//此处同上,
-            resultSize = childDimension;
-            resultMode = MeasureSpec.EXACTLY;
-        } else if (childDimension == LayoutParams.MATCH_PARENT) {
-          //此处大致同上，唯一的区别在于测量模式。虽然child的LayoutParams是MATCH_PARENT,我们可能会认为测量模式应该是MeasureSpec.EXACTLY，
-          但是你想啊ViewGroup的测量模式是MeasureSpec.AT_MOST，意味者ViewGroup的大小是由自身内容实际占用的大小决定，而这并不是精确的尺寸，
-          那么它的child就更不可能是精确模式了，即MeasureSpec.EXACTLY,至多只能和ViewGroup测量模式一样咯。
-            resultSize = size;
-            resultMode = MeasureSpec.AT_MOST;
-        } else if (childDimension == LayoutParams.WRAP_CONTENT) {
-            //此处同上
-            resultSize = size;
-            resultMode = MeasureSpec.AT_MOST;
-        }
-        break;
-
-    // ViewGroup对child不施加约束信息，意味着child要多大都可以。
-    //除非child具体指定大小，否则都是给child设置resultSize为0，其模式为 MeasureSpec.UNSPECIFIED，表示child想多大就多大，ViewGroup不控制。
-    而此处的sUseZeroUnspecifiedMeasureSpec为兼容性处理变量，再SDK_INT&lt;M，始终是true，而高于此则为false，可能在高版本上有更好的解决方案吧。
-    我们暂且考虑resultSize为0的情况吧
-    case MeasureSpec.UNSPECIFIED:
-        if (childDimension &gt;= 0) {
-            //此处同上
-            resultSize = childDimension;
-            resultMode = MeasureSpec.EXACTLY;
-        } else if (childDimension == LayoutParams.MATCH_PARENT) {
-            resultSize = View.sUseZeroUnspecifiedMeasureSpec ? 0 : size;
-            resultMode = MeasureSpec.UNSPECIFIED;
-        } else if (childDimension == LayoutParams.WRAP_CONTENT) {
-            resultSize = View.sUseZeroUnspecifiedMeasureSpec ? 0 : size;
-            resultMode = MeasureSpec.UNSPECIFIED;
-        }
-        break;
-    }
-    //最后返回child新的测量规格
-    return MeasureSpec.makeMeasureSpec(resultSize, resultMode);
-}  
-</code></pre><p>其实以上方法的流程，我们可以总结为这样一张表格，可以显得更加直观。  </p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th style="text-align:center">EXACTLY</th>
-<th style="text-align:center">AT_MOST</th>
-<th style="text-align:right">UNSPECIFIED</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>具体大小(100dp)</td>
-<td style="text-align:center">childDimension+EXACTLY</td>
-<td style="text-align:center">childDimension+EXACTLY</td>
-<td style="text-align:right">childDimension+EXACTLY</td>
-</tr>
-<tr>
-<td>MATCH_PARENT</td>
-<td style="text-align:center">size+ EXACTLY</td>
-<td style="text-align:center">size+AT_MOST</td>
-<td style="text-align:right">size(0)+UNSPECIFIED</td>
-</tr>
-<tr>
-<td>WRAP_CONTENT</td>
-<td style="text-align:center">size+AT_MOST</td>
-<td style="text-align:center">size+AT_MOST</td>
-<td style="text-align:right">size(0)+UNSPECIFIED</td>
-</tr>
-</tbody>
-</table>
-<p>表格的第一行为 <code>ViewGroup</code> 对 <code>children</code> 对测量模式，第一列为 <code>children</code> 具体的 <code>LayoutParams</code> ，结果为 <code>children</code> 最终的测量尺寸和测量模式。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>在第一部分，首先，我们从 <code>MeasureSpec</code>这个类切入，详细解析了三大测量模式的含义，以及指定新测量规格的方法等；其次，分析了 <code>measure()</code> ，知道了 <code>View</code> 中其实是有缓存测量过的信息的，否则 <code>view</code> 才会重新测量,也知道了真正的测量工作其实是在 <code>onMeasure ()</code> 方法中进行，因此我们可以重写该方法，重新定义 <code>view</code>的测量逻辑；再来，我们通过调用 <code>setMeasureDimension()</code>为 <code>view</code>重新定义了新的宽度和高度；最后，我们又解析了方法 <code>resolveSize()</code>的作用，它作为一个工具方法能够辅助你进行测量工作。  </p>
-<p>在第二部分，首先我们研究了 <code>ViewGroup</code>中测量 <code>children</code> 的方法 <code>measureChildren()</code> ，知道其实它是通过遍历每个child进行测量的，然后进一步研究了测量单个 <code>child</code> 的方法 <code>measureChild()</code> 以及 <code>measureChildWithMargins()</code> ，而两者内部其实关键在于 <code>getChildMeasureSpec()</code> 的调用，该方法对于 <code>ViewGroup</code> 与 <code>Children</code> 之间可能存在的各种布局关系进行了分类讨论，以至于能够得到一个最佳的 <code>child</code> 测量规格。</p>
-<h1 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h1><p><a href="http://blog.csdn.net/iispring/article/details/49403315" target="_blank" rel="noopener">源码解析Android中View的measure量算过程</a><br>感谢您看到这里，期望留下您的印迹。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-	<div>
-
-</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/17/DialogFragment源码解析与应用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="洪荣宣">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rongxuanhong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/17/DialogFragment源码解析与应用/" itemprop="url">DialogFragment源码解析与应用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-17T21:57:23+08:00">2017-08-17</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/08/17/DialogFragment源码解析与应用/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/08/17/DialogFragment源码解析与应用/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong>版权声明：本文为博主原创文章，未经博主允许不得转载</strong></p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><hr>
-<p><code>DialogFragment</code> 是继承于 <code>Fragment</code> 的子类，因而其具备了 <code>Fragment</code> 的特性，如生命周期。而其内部实际控制了一个 <code>Dialog</code> 对象，并通过当前 <code>DialogFragment</code>所依附的 <code>Activity</code> 的 <code>FragmentManager</code> 来对其进行管理与控制，也即将其当做一个普通的 <code>Fragment</code> 那样来管理。</p>
-<blockquote>
-<p>注:<code>dialog</code> 拥有自己的窗体 <code>window</code>,意味着它可以自己接收输入事件，处理事件，并且决定自己何时消失。</p>
-</blockquote>
-<h1 id="浅谈生命周期"><a href="#浅谈生命周期" class="headerlink" title="浅谈生命周期"></a>浅谈生命周期</h1><hr>
-<p><code>DialogFragment</code> 与 <code>Dialog</code> 同生同死,因为 <code>DialogFragment</code> 需要监听 <code>Dialog</code>的显示与关闭,并做出反映。而这两个操作关联到了 <code>DialogFragment</code> 加入到 <code>FragmentManager</code> 中和从其中移除。这样一来 <code>Dialog</code>的创建与销毁也随着 <code>DialogFragment</code> 的生命周期而走了。</p>
-<h1 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h1><pre><code>public void setStyle(@DialogStyle int style, @StyleRes int theme) {
-    mStyle = style;
-    if (mStyle == STYLE_NO_FRAME || mStyle == STYLE_NO_INPUT) {
-        mTheme = android.R.style.Theme_Panel;
-    }
-    if (theme != 0) {
-        mTheme = theme;
-    }
-} 
-</code></pre><p>此方法为对话框设置样式与主题。其中样式有 <strong>4</strong> 个可选，一般用得比较多的是<code>STYLE_NO_TITLE</code>(指定对话框无标题模式),而主题默认的话可填0，若是自定义主题，可在<code>style</code>文件下新增一个样式，然后继承<code>Theme.Dialog</code>修改你期望的主题即可。</p>
-<blockquote>
-<p>注意: 此方法若要生效一定要在对话框未创建之前设置，否则失效。下面我们还会谈到。</p>
-</blockquote>
-<pre><code> public void show(FragmentManager manager, String tag) {
-    mDismissed = false;
-    mShownByMe = true;
-    FragmentTransaction ft = manager.beginTransaction();
-    ft.add(this, tag);
-    ft.commit();
-}
-</code></pre><p>此方法就是控制对话框的显示，调用即可。其实就是类似普通的 <code>Fragment</code>的显示操作逻辑,获取<code>FragmentManager</code>来管理当前的对话框。是不是似曾相识？ </p>
-<pre><code> public void dismiss() {
-    dismissInternal(false);
-}
-void dismissInternal(boolean allowStateLoss) {
-    if (mDismissed) {
-        return;
-    }
-    mDismissed = true;
-    mShownByMe = false;
-    if (mDialog != null) {
-        mDialog.dismiss();
-        mDialog = null;
-    }
-    mViewDestroyed = true;
-    if (mBackStackId &gt;= 0) {
-        getFragmentManager().popBackStack(mBackStackId,
-                FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        mBackStackId = -1;
-    } else {
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.remove(this);
-        if (allowStateLoss) {
-            ft.commitAllowingStateLoss();
-        } else {
-            ft.commit();
-        }
-    } 
-</code></pre><p>此方法控制<code>DialogFragment</code>的关闭。我们看到在<code>void dismissInternal()</code>方法内会判断当前的<code>Dialog</code>对象 <code>mDialog</code>是否为空，否则就调用<code>Dialog</code> 的 <code>dismiss()</code> 关闭对话框。而剩下的代码都是<code>DialogFragment</code>为了管理自己的后续操作。比如退栈操作,移除 <code>Fragment</code>。</p>
-<pre><code> public Dialog getDialog() {
-    return mDialog;
-}
-</code></pre><p>此方法用于获取 <code>DialogFragment</code> 内的 <code>Dialog</code> 对象。我们之后要对对话框的尺寸改变、去除标题、设置背景、都需要获取该实例。</p>
-<pre><code> public void setCancelable(boolean cancelable) {
-    mCancelable = cancelable;
-    if (mDialog != null) mDialog.setCancelable(cancelable);
-}
-</code></pre><p>望名知义，就是设置对话框是否可以取消。内部还是调用 <code>Dialog</code>的方法  </p>
-<pre><code> public void setShowsDialog(boolean showsDialog) {
-    mShowsDialog = showsDialog;
-}  
-</code></pre><p>此方法控制当前 <code>DialogFragment</code>是否作为对话框而存在，否则视作普通的 <code>Fragment</code>来使用。而如果你把它当前普通的 <code>Fragment</code>加入到关联的 <code>Activity</code>中，那么<code>mShowsDialog</code> 会被初始化为 <strong>true</strong>。 </p>
-<pre><code> @Override
-public void onAttach(Context context) {
-    super.onAttach(context);
-    if (!mShownByMe) {
-        mDismissed = false;
-    }
-}
-
-@Override
-public void onDetach() {
-    super.onDetach();
-    if (!mShownByMe &amp;&amp; !mDismissed) {
-        mDismissed = true;
-    }
-}
-
-@Override
-public void onCreate(@Nullable Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-
-    mShowsDialog = mContainerId == 0;
-
-    if (savedInstanceState != null) {
-        mStyle = savedInstanceState.getInt(SAVED_STYLE, STYLE_NORMAL);
-        mTheme = savedInstanceState.getInt(SAVED_THEME, 0);
-        mCancelable = savedInstanceState.getBoolean(SAVED_CANCELABLE, true);
-        mShowsDialog = savedInstanceState.getBoolean(SAVED_SHOWS_DIALOG, mShowsDialog);
-        mBackStackId = savedInstanceState.getInt(SAVED_BACK_STACK_ID, -1);
-    }
-}  
-</code></pre><p>以上的三个方法都是 重写 <code>Fragment</code> 中的生命周期方法。前两个主要是设置相应的标志位。<br>而在 <code>onCreate()</code> 中主要是从保存的实例状态中获取相应信息（之前在 <code>onSaveInstanceState()</code> 中设置的）。  </p>
-<pre><code>/** @hide */
-@RestrictTo(LIBRARY_GROUP)
-@Override
-public LayoutInflater getLayoutInflater(Bundle savedInstanceState) {
-    if (!mShowsDialog) {
-        return super.getLayoutInflater(savedInstanceState);
-    }
-
-    mDialog = onCreateDialog(savedInstanceState);
-
-    if (mDialog != null) {
-        setupDialog(mDialog, mStyle);
-
-        return (LayoutInflater) mDialog.getContext().getSystemService(
-                Context.LAYOUT_INFLATER_SERVICE);
-    }
-    return (LayoutInflater) mHost.getContext().getSystemService(
-            Context.LAYOUT_INFLATER_SERVICE);
-}
-
-/** @hide */
-@RestrictTo(LIBRARY_GROUP)
-public void setupDialog(Dialog dialog, int style) {
-    switch (style) {
-        case STYLE_NO_INPUT:
-            dialog.getWindow().addFlags(
-                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE |
-                            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-            // fall through...
-        case STYLE_NO_FRAME:
-        case STYLE_NO_TITLE:
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-    }
-}  
-public Dialog onCreateDialog(Bundle savedInstanceState) {
-    return new Dialog(getActivity(), getTheme());
-}
-</code></pre><p>最上两个方法是被隐藏的。<code>getLayoutInflater()</code> 中首先判断是否显示为一个对话框，若是才来到下面的逻辑。在这里我们发现，方法内调用了<code>onCreateDialog()</code>来获得一个对话框实例。如果实例存在，那么才开始配置对话框<strong>(注意：我们发现此处获取前述的 <code>setStyle()</code>传进来的值，因而该方法的调用必须早于此，也就是说你至少可以在 <code>onCreateDialog()</code>中进行设置)</strong>，此时，方法返回与对话框上下文关联的布局加载器。<br>接下来我们看<code>setupDialog()</code>。方法内根据存入的样式，对对话框实例进行一系列的设置，比如禁止获取焦点、不可触摸、设置无标题。<br>另外，在 <code>onCreateDialog()</code> 返回了一个新的对话框实例。在此，我们注意到，如果你想实现一些Dialog子类的对话框,比如 <code>AlertDialog</code>，那么你就可以重写该方法，返回你要创建的<code>Dialog</code> 子类实例。  </p>
-<pre><code>@Override
-public void onActivityCreated(Bundle savedInstanceState) {
-    super.onActivityCreated(savedInstanceState);
-
-    if (!mShowsDialog) {
-        return;
-    }
-
-    View view = getView();
-    if (view != null) {
-        if (view.getParent() != null) {
-            throw new IllegalStateException(
-                    &quot;DialogFragment can not be attached to a container view&quot;);
-        }
-        mDialog.setContentView(view);
-    }
-    final Activity activity = getActivity();
-    if (activity != null) {
-        mDialog.setOwnerActivity(activity);
-    }
-    mDialog.setCancelable(mCancelable);
-    mDialog.setOnCancelListener(this);
-    mDialog.setOnDismissListener(this);
-    if (savedInstanceState != null) {
-        Bundle dialogState = savedInstanceState.getBundle(SAVED_DIALOG_STATE_TAG);
-        if (dialogState != null) {
-            mDialog.onRestoreInstanceState(dialogState);
-        }
-    }
-}  
-</code></pre><p>当<code>Activity</code>创建完成后回调。若<code>mShowsDialog</code>为<strong>false</strong>，那么以下逻辑不再执行。<br>否则获取当前 <code>DialogFragment</code> 的根布局实例 <code>view</code>,并将其作为对话框的内容，加入其中。接下来把对话框与 <code>Activity</code> 进行绑定。接下来就是对话框的配置，包括注册取消监听，关闭监听。最后保存相关状态到 <code>savedInstanceState</code>,以便重建时利用。</p>
-<pre><code> @Override
-public void onStart() {
-    super.onStart();
-
-    if (mDialog != null) {
-        mViewDestroyed = false;
-        mDialog.show();
-    }
-}  
-</code></pre><p>此方法很重要。对话框真正显示就在此后。内容调用了 <code>mDialog</code> 的<code>show()</code>方法，将对话框显示出来(依附于 <code>Fragment</code>)</p>
-<pre><code>     @Nullable
-public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-        @Nullable Bundle savedInstanceState) {
-    return null;
-}
-</code></pre><p>此方法为 <code>Fragment</code> 中的方法，为空实现，它交给子类去加载一个 <strong>contentView</strong>,再由<code>Fragment</code> 来处理。而我们对话框的内容布局就是在此处进行加载，以便返回一个对话框的布局给 <code>Fragment</code> 去处理。</p>
-<blockquote>
-<p>注意：<code>onCreateDialog()</code>比 <code>onCreateView()</code> 先一步执行。因为在 <code>Fragment</code>中调用<code>onCreateView()</code> 时需要拿到一个布局加载器<code>LayoutInflater</code>,而<code>DialogFragmet</code>中是通过上述的一个方法–<code>getLayoutInflater()</code>来返回一个与对话框有关的上下文布局加载器,<code>onCreateDialog()</code>就在其中被调用，因而我们很容易就可以知道两者的执行次序。  </p>
-</blockquote>
-<h1 id="几类常见应用"><a href="#几类常见应用" class="headerlink" title="几类常见应用"></a>几类常见应用</h1><h2 id="普通对话框"><a href="#普通对话框" class="headerlink" title="普通对话框"></a>普通对话框</h2><pre><code>public class CommonDialogFragment extends DialogFragment {
-
-private static final String TAG = &quot;CommonDialogFragment&quot;;
-
-
-@Nullable
-@Override
-public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-     Dialog dialog = getDialog();
-    DisplayMetrics dm = DensityUtil.getDisplayMetrics(getActivity());
-    int width = dm.widthPixels;
-    if (dialog != null) {
-        dialog.getWindow().setLayout(width * 2 / 3, width / 2);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));//去除多余的padding
-    }
-    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-    View view = inflater.inflate(R.layout.time, container, false);
-    ListView mListView = (ListView) view.findViewById(R.id.listview);
-    mListView.setAdapter(new MyAdapter(getActivity()));
-    return view;
-    }
-}
-</code></pre><p>这类很简单，一般只要重写 <code>onCreateView()</code>，和<code>Fragment</code>中的做法一样。只是需要额外配置对话框的一些设置，我们下面再统一叙述。  </p>
-<h2 id="警告对话框"><a href="#警告对话框" class="headerlink" title="警告对话框"></a>警告对话框</h2><pre><code>public class MyAlerDialog extends DialogFragment {
-
-private static final String TAG = &quot;RoundCornerDialog&quot;;
-
-@Override
-public Dialog onCreateDialog(Bundle savedInstanceState) {
-    return new AlertDialog.Builder(getActivity()).setMessage(&quot;我是对话框&quot;).setTitle(&quot;警告&quot;).setIcon(R.mipmap.ic_launcher).create();
-}
-
-@Nullable
-@Override
-public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-    Dialog dialog = getDialog();
-    DisplayMetrics dm = DensityUtil.getDisplayMetrics(getActivity());
-    int width = dm.widthPixels;
-    if (dialog != null) {
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));//去除多余的padding
-        dialog.getWindow().setLayout(width * 2 / 3, width / 2);
-    }
-    return super.onCreateView(inflater, container, savedInstanceState);
-}
-</code></pre><p>}</p>
-<h2 id="圆角对话框"><a href="#圆角对话框" class="headerlink" title="圆角对话框"></a>圆角对话框</h2><p>圆角对话框与上述两张对话框创建流程无异，只需对布局额外加上一层drawable绘制的圆角背景层即可</p>
-<blockquote>
-<p>注意: 若加了圆角背景层仍没有圆角化，那么你需要对圆角背景层再 加上padding属性即可解决。</p>
-</blockquote>
-<h1 id="对话框的配置"><a href="#对话框的配置" class="headerlink" title="对话框的配置"></a>对话框的配置</h1><h2 id="去标题化"><a href="#去标题化" class="headerlink" title="去标题化"></a>去标题化</h2><ol>
-<li>调用<code>setStyle()</code>传入<code>STYLE_NO_TITLE</code>,必须在<code>Dialog</code>创建之前调用方可生效。</li>
-<li>定义自己的主题，设置 <code>windowNoTitle</code>属性为<strong>true</strong></li>
-</ol>
-<h2 id="背景透明化"><a href="#背景透明化" class="headerlink" title="背景透明化"></a>背景透明化</h2><pre><code>getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT)。
-</code></pre><p>我们一般都会加上，没有设置有可能出现多余的padding，它可让整个<code>Window</code>透明化。</p>
-<h2 id="设置Dialog的尺寸"><a href="#设置Dialog的尺寸" class="headerlink" title="设置Dialog的尺寸"></a>设置Dialog的尺寸</h2><p>由于 <code>Dialog</code> 属于 <code>Window</code> 级别，属于独立窗体，因而要改变 <code>Dialog</code> 的尺寸实际上就上改变窗体 <code>Window</code> 的尺寸，而如果你对布局修改尺寸是毫无效果的。<br>我们通过<code>getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)</code>来设置对话框具体宽高或全屏就够了。</p>
-<h2 id="设置对话框方位"><a href="#设置对话框方位" class="headerlink" title="设置对话框方位"></a>设置对话框方位</h2><p>实际还是控制<code>window</code>这个对象，调用它的方法<code>setGravity()</code>即可。  </p>
-<blockquote>
-<p>注意： 但凡涉及到获取对话框所在的<code>window</code>对象时，都必须在对话框已经创建了之后调用。</p>
-</blockquote>
-<h2 id="配置style样式定制主题"><a href="#配置style样式定制主题" class="headerlink" title="配置style样式定制主题"></a>配置style样式定制主题</h2><p>我们查看源码可知道对话框的默认主题基础自<code>Theme.Dialog</code>，那么我们便可以继承整个主题，修改默认主题中的属性值来达到我们想要的效果，下面贴出对话框默认的主题。</p>
-<pre><code>&lt;style name=&quot;Theme.Dialog&quot;&gt;
-&lt;!--配置window有无边框--&gt;
-&lt;item name=&quot;windowFrame&quot;&gt;@null&lt;/item&gt;
-&lt;!--配置window标题样式--&gt;
-&lt;item name=&quot;windowTitleStyle&quot;&gt;@style/DialogWindowTitle&lt;/item&gt;
-&lt;!--配置window背景层--&gt;常用
-&lt;item name=&quot;windowBackground&quot;&gt;@drawable/panel_background&lt;/item&gt;
-&lt;!--配置window是否浮在上面--&gt;
-&lt;item name=&quot;windowIsFloating&quot;&gt;true&lt;/item&gt;
-&lt;!--配置window是否浮在上面--&gt;
-&lt;!--配置window有无标题 --&gt; 常用
-&lt;item name=&quot;windowNoTitle&quot;&gt;true&lt;/item&gt;
-&lt;!--配置window进入退出动画 --&gt; 常用
-&lt;item name=&quot;windowAnimationStyle&quot;&gt;@style/Animation.Dialog&lt;/item&gt;
-&lt;!--配置window外部是否可触摸--&gt;
-&lt;item name=&quot;windowCloseOnTouchOutside&quot;&gt;@bool/config_closeDialogWhenTouchOutside&lt;/item&gt;
-....此处省略部分属性
-&lt;/style&gt;
-</code></pre><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>首先，介绍了使用<code>DialogFragment</code> 的缘由以及好处，再来谈到了它的生命周期，这也是之所以使用这种方式来呈现对话框的关键所在。再接下来，我们从源码的角度，详细剖析了各个方法的作用、联系，以及调用的时机以及注意事项。再来介绍了<code>DialogFragment</code>的几种常见的应用，也可以说是常用的代码模版了。最后，介绍了配置对话框的一些常用的手段以及注意事项。</p>
-<h1 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h1><p>感谢您看到这里，期望留下您的印迹。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-	<div>
-
-</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1758,7 +1146,7 @@ public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">25</span>
+                    <span class="site-state-item-count">27</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
