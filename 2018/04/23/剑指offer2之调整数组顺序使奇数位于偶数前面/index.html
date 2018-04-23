@@ -99,29 +99,29 @@
 
 
 
-  <meta name="description" content="前言数组是一种最基本的数据结构，它占据一块连续的内存，并按照顺序存储的方式存储数据。为了解决数组空间效率不高的问题，动态数组出现了，典型的代表是 vector。思想是先为动态数组预先分配一块内存空间，等到数组容量不足时重新开辟一块内存空间，并复制原数组到新空间，最后释放旧内存空间。对于Vector 来说，每次扩容为之前的 2 倍。由于该操作对时间性能影响较大，因此使用动态数组应该尽量避免改变数组容">
-<meta name="keywords" content="剑指offer">
+  <meta name="description" content="前言书上的题目相对简单，没有要求相对位置不改变，而在牛客网上的题目有要求。以牛客网的为准。 题目(调整数组顺序使奇数位于偶数前面)输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，所有的偶数位于位于数组的后半部分，并保证奇数和奇数，偶数和偶数之间的相对位置不变。 算法思路算法思路一利用冒泡排序的思想，此时我们比较的是只要遇到奇数和偶数，那么就交换元素。 算法">
+<meta name="keywords" content="剑指offer2">
 <meta property="og:type" content="article">
-<meta property="og:title" content="剑指offer2笔记之数组">
-<meta property="og:url" content="http://yoursite.com/2018/03/23/剑指offer2笔记之数组/index.html">
+<meta property="og:title" content="剑指offer2之调整数组顺序使奇数位于偶数前面">
+<meta property="og:url" content="http://yoursite.com/2018/04/23/剑指offer2之调整数组顺序使奇数位于偶数前面/index.html">
 <meta property="og:site_name" content="Rongxuanhong&#39;s Blog">
-<meta property="og:description" content="前言数组是一种最基本的数据结构，它占据一块连续的内存，并按照顺序存储的方式存储数据。为了解决数组空间效率不高的问题，动态数组出现了，典型的代表是 vector。思想是先为动态数组预先分配一块内存空间，等到数组容量不足时重新开辟一块内存空间，并复制原数组到新空间，最后释放旧内存空间。对于Vector 来说，每次扩容为之前的 2 倍。由于该操作对时间性能影响较大，因此使用动态数组应该尽量避免改变数组容">
+<meta property="og:description" content="前言书上的题目相对简单，没有要求相对位置不改变，而在牛客网上的题目有要求。以牛客网的为准。 题目(调整数组顺序使奇数位于偶数前面)输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，所有的偶数位于位于数组的后半部分，并保证奇数和奇数，偶数和偶数之间的相对位置不变。 算法思路算法思路一利用冒泡排序的思想，此时我们比较的是只要遇到奇数和偶数，那么就交换元素。 算法">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpg06dz0tlj20v608ujrq.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpg04orfkcj20v90fx74y.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpg0rzit2fj20vb0ktwfa.jpg">
-<meta property="og:updated_time" content="2018-03-23T04:24:48.912Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqj0ws71c2j20v70783yj.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqj0wyelasj20v30an74e.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqj0x20xjdj20v708p3yp.jpg">
+<meta property="og:updated_time" content="2018-04-23T13:42:03.140Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="剑指offer2笔记之数组">
-<meta name="twitter:description" content="前言数组是一种最基本的数据结构，它占据一块连续的内存，并按照顺序存储的方式存储数据。为了解决数组空间效率不高的问题，动态数组出现了，典型的代表是 vector。思想是先为动态数组预先分配一块内存空间，等到数组容量不足时重新开辟一块内存空间，并复制原数组到新空间，最后释放旧内存空间。对于Vector 来说，每次扩容为之前的 2 倍。由于该操作对时间性能影响较大，因此使用动态数组应该尽量避免改变数组容">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpg06dz0tlj20v608ujrq.jpg">
+<meta name="twitter:title" content="剑指offer2之调整数组顺序使奇数位于偶数前面">
+<meta name="twitter:description" content="前言书上的题目相对简单，没有要求相对位置不改变，而在牛客网上的题目有要求。以牛客网的为准。 题目(调整数组顺序使奇数位于偶数前面)输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，所有的偶数位于位于数组的后半部分，并保证奇数和奇数，偶数和偶数之间的相对位置不变。 算法思路算法思路一利用冒泡排序的思想，此时我们比较的是只要遇到奇数和偶数，那么就交换元素。 算法">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqj0ws71c2j20v70783yj.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/23/剑指offer2笔记之数组/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/23/剑指offer2之调整数组顺序使奇数位于偶数前面/"/>
 
 
 
@@ -131,7 +131,7 @@
   };
 </script>
 
-  <title>剑指offer2笔记之数组 | Rongxuanhong's Blog</title>
+  <title>剑指offer2之调整数组顺序使奇数位于偶数前面 | Rongxuanhong's Blog</title>
   
 
 
@@ -309,7 +309,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/23/剑指offer2笔记之数组/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/23/剑指offer2之调整数组顺序使奇数位于偶数前面/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="洪荣宣">
@@ -326,7 +326,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">剑指offer2笔记之数组</h1>
+          <h1 class="post-title" itemprop="name headline">剑指offer2之调整数组顺序使奇数位于偶数前面</h1>
         
 
         <div class="post-meta">
@@ -338,7 +338,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-23T11:15:10+08:00">2018-03-23</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-23T21:41:04+08:00">2018-04-23</time>
             
 
             
@@ -356,8 +356,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/03/23/剑指offer2笔记之数组/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/03/23/剑指offer2笔记之数组/" itemprop="commentCount"></span>
+                <a href="/2018/04/23/剑指offer2之调整数组顺序使奇数位于偶数前面/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/23/剑指offer2之调整数组顺序使奇数位于偶数前面/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -393,32 +393,16 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>数组是一种最基本的数据结构，它占据一块连续的内存，并按照顺序存储的方式存储数据。<br>为了解决数组空间效率不高的问题，动态数组出现了，典型的代表是 <code>vector</code>。思想是先为动态数组预先分配一块内存空间，等到数组容量不足时重新开辟一块内存空间，并复制原数组到新空间，最后释放旧内存空间。对于<code>Vector</code> 来说，每次扩容为之前的 2 倍。由于该操作对时间性能影响较大，因此使用动态数组应该尽量避免改变数组容量大小的次数。</p>
-<h1 id="数组和指针的区别"><a href="#数组和指针的区别" class="headerlink" title="数组和指针的区别"></a>数组和指针的区别</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpg06dz0tlj20v608ujrq.jpg" alt="数组和指针的区别"> </p>
-<ul>
-<li>使用指针访问数组中的元素时，需要确保不越界；</li>
-<li>对数组求 <code>sizeof</code> ，还需要考虑元素所占的字节，比如在 32 位的机器上，每个整数占4字节，那么例子中 <code>data1</code> 就是 5*4=20；</li>
-<li>在 32 位系统上，对任意类型的指针求 <code>sizeof</code> 得到的结果都是 4；</li>
-<li>当数组作为函数的参数进行传递时，自动退化为指针，因此求 <code>sizeof</code> 结果同上条。</li>
-</ul>
-<h1 id="题目描述-数组中重复的数字"><a href="#题目描述-数组中重复的数字" class="headerlink" title="题目描述(数组中重复的数字)"></a>题目描述(数组中重复的数字)</h1><h2 id="题目一-找出数组中重复的数字"><a href="#题目一-找出数组中重复的数字" class="headerlink" title="题目一(找出数组中重复的数字)"></a>题目一(找出数组中重复的数字)</h2><p>在一个长度 n 的数组里的所有数字都在 0-n-1 的范围内。数组中的某些数字是重复的，但不知道有几个数字重复了，也不知道每个数组重复了几次。请找出数组中任意一个重复的数字。例如，如果输入长度为 7 的数组｛2，3，1，0，2，5，3｝，那么对应的输出是重复的数字 2 或者 3。</p>
-<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><ol>
-<li>排序。对数组排序后，依次比较前后元素是否重复即可。但时间复杂度为O(nlogn),空间复杂度为 O(1)。</li>
-<li>利用哈希表。利用键值对映射，可以将数组中的元素依次插入插入哈希表中，但是插入之前需要判断是否已存在该值，如果存在则说明该位置的元素重复了，算法的缺点是空间复杂度为 O(n)。</li>
-<li>下标定位法。</li>
-</ol>
-<p>接下来详细介绍下下标定位法。<br>注意到题目中数字的范围都在 0-n-1 范围内，假如不存在重复的元素，那么对数组进行重新排序后，数组的索引 i 一定可以对应到单个数字i,否则数字i存在多个。</p>
-<p>我们先依次遍历数组中的每个元素，当扫描到索引为 i 的数字 m 时，先比较数字 m 是否等于 i，如果等于则接着扫描下一个数组元素；如果不等，则将数字 m 和数组中索引为 m 的数字 n 进行比较，如果重复(m=n)，则找到了一个重复的数字；如果不重复(m!=n)，那么交换 m 与 n。交换后，此时索引 i 上的数字 m 再和索引 i 进行下一轮的比较，重复上面的步骤，直至数字 m 与索引 i 相同。那么我们就在这个比较交换的过程中寻找重复的元素。</p>
-<h3 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h3><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpg04orfkcj20v90fx74y.jpg" alt="算法实现"></p>
-<h3 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><p>代码中虽有两次循环，但每个数字最多只要交换两次就能找到属于它子集的位置，因此总的时间复杂度为 O(n)。另外，所有操作都在原数组上进行，所以空间复杂度为 O(1)。</p>
-<h2 id="题目二-不修改数组找出重复的元素"><a href="#题目二-不修改数组找出重复的元素" class="headerlink" title="题目二 (不修改数组找出重复的元素)"></a>题目二 (不修改数组找出重复的元素)</h2><p>在一个长度为 n+1 的数组里的所有数字都在 1-n 的范围内，所以数组中至少有一个数字是重复的。请找出数组中任意一个重复的数字，但不能修改输入的数组。例如，如果输入长度为 8 的数组 {2,3,5,4,3,2,6,7},<br>那么对应的输出是重复的数字 2 或者 3。</p>
-<h3 id="解题思路-1"><a href="#解题思路-1" class="headerlink" title="解题思路"></a>解题思路</h3><ol>
-<li>辅助数组法。依然是按一个下标对应一个数字的思路，先构建一个长度为 n+1 的数组，然后将原数组中的元素依次插入到辅助数组中相应的下标位置上。这样就能发现那个数字重复了。方法的缺点就是空间复杂度为 O(n)。</li>
-<li>二分查找法。若 1-n 的范围里只有 n 个数字则一定不会重复，否则必定存在重复的元素。那现在我们把 1-n 的数字从中间的数字 m 分为两部分，那么前一半为 1-m，后一半为 m+1-n，假如前半部分中介于 1-m 中的数字个数超过了 m，那么这一半的区间必定存在重复的元素。接下来可以继续在这一半空间的二分查找，直至找到重复的元素。</li>
-</ol>
-<h3 id="算法实现-1"><a href="#算法实现-1" class="headerlink" title="算法实现"></a>算法实现</h3><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpg0rzit2fj20vb0ktwfa.jpg" alt="算法实现"></p>
-<h3 id="复杂度分析-1"><a href="#复杂度分析-1" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><p>算法中使用二分查找的思想，复杂度 O(logn),在计数的时候使用了一个循环复杂度为 O(n),因此，总的时间复杂度为 O(nlogn),操作在原数组上进行，时间复杂度为 O(1)。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer第二版&gt;&gt;</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>书上的题目相对简单，没有要求相对位置不改变，而在牛客网上的题目有要求。以牛客网的为准。</p>
+<h1 id="题目-调整数组顺序使奇数位于偶数前面"><a href="#题目-调整数组顺序使奇数位于偶数前面" class="headerlink" title="题目(调整数组顺序使奇数位于偶数前面)"></a>题目(<a href="https://www.nowcoder.com/questionTerminal/beb5aa231adc45b2a5dcc5b62c93f593" target="_blank" rel="noopener">调整数组顺序使奇数位于偶数前面</a>)</h1><p>输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，所有的偶数位于位于数组的后半部分，并保证奇数和奇数，偶数和偶数之间的相对位置不变。</p>
+<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><h2 id="算法思路一"><a href="#算法思路一" class="headerlink" title="算法思路一"></a>算法思路一</h2><p>利用冒泡排序的思想，此时我们比较的是只要遇到奇数和偶数，那么就交换元素。</p>
+<h2 id="算法思路二"><a href="#算法思路二" class="headerlink" title="算法思路二"></a>算法思路二</h2><p>借助辅助数组。我们从前往后扫描数组将奇数放入数组中，再扫描一遍将偶数放入数组中，最后对数组赋值辅助数组。</p>
+<h2 id="算法思路三"><a href="#算法思路三" class="headerlink" title="算法思路三"></a>算法思路三</h2><p>利用双向队列的特性，即可以高效的在头尾两段插入和删除元素，我们可以从后往前扫描数组，将奇数依次往前插到队列，然后从后往前扫描数组，将偶数往后插入队列中，在保证顺序不变的同时得到所求。</p>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><h2 id="算法实现一"><a href="#算法实现一" class="headerlink" title="算法实现一"></a>算法实现一</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqj0ws71c2j20v70783yj.jpg" alt=""></p>
+<h2 id="算法实现二"><a href="#算法实现二" class="headerlink" title="算法实现二"></a>算法实现二</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqj0wyelasj20v30an74e.jpg" alt=""></p>
+<h2 id="算法实现三"><a href="#算法实现三" class="headerlink" title="算法实现三"></a>算法实现三</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqj0x20xjdj20v708p3yp.jpg" alt=""></p>
+<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>算法一中，使用的过程类似冒泡排序，时间复杂度为 O(n^2)，空间复杂度为 O(1)；算法二中，对数组只有遍历，所以时间复杂度为 O(n)，另外使用了辅助数组，所以空间复杂度为 O(n)；算法三也是遍历一遍数组，时间复杂度为 O(n)，另外使用了双端队列，空间复杂度为 O(n)。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;  </p>
 
       
     </div>
@@ -451,7 +435,7 @@
     <strong>Post author: </strong>洪荣宣</li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="http://yoursite.com/2018/03/23/剑指offer2笔记之数组/" title="剑指offer2笔记之数组">http://yoursite.com/2018/03/23/剑指offer2笔记之数组/</a>
+    <a href="http://yoursite.com/2018/04/23/剑指offer2之调整数组顺序使奇数位于偶数前面/" title="剑指offer2之调整数组顺序使奇数位于偶数前面">http://yoursite.com/2018/04/23/剑指offer2之调整数组顺序使奇数位于偶数前面/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>All articles in this blog are licensed under 本文由 rongxuanhong 原创，采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">保留署名-非商业性使用-禁止演绎 4.0-国际许可协议</a></br>转载请保留以上声明信息! unless stating additionally.</li>
@@ -464,7 +448,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/剑指offer/" rel="tag"><i class="fa fa-tag"></i> 剑指offer</a>
+            <a href="/tags/剑指offer2/" rel="tag"><i class="fa fa-tag"></i> 剑指offer2</a>
           
         </div>
       
@@ -477,8 +461,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/21/k-近邻学习的简要理论及其python实现/" rel="next" title="k-近邻学习的简要理论及其python实现">
-                <i class="fa fa-chevron-left"></i> k-近邻学习的简要理论及其python实现
+              <a href="/2018/04/22/SVM系列之核函数与KKT条件(二)/" rel="next" title="SVM系列之核函数与KKT条件(二)">
+                <i class="fa fa-chevron-left"></i> SVM系列之核函数与KKT条件(二)
               </a>
             
           </div>
@@ -486,10 +470,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/26/决策树的简要理论及其部分python实现/" rel="prev" title="决策树的简要理论及其部分python实现">
-                决策树的简要理论及其部分python实现 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -667,7 +647,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组和指针的区别"><span class="nav-number">2.</span> <span class="nav-text">数组和指针的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目描述-数组中重复的数字"><span class="nav-number">3.</span> <span class="nav-text">题目描述(数组中重复的数字)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目一-找出数组中重复的数字"><span class="nav-number">3.1.</span> <span class="nav-text">题目一(找出数组中重复的数字)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路"><span class="nav-number">3.1.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法实现"><span class="nav-number">3.1.2.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复杂度分析"><span class="nav-number">3.1.3.</span> <span class="nav-text">复杂度分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目二-不修改数组找出重复的元素"><span class="nav-number">3.2.</span> <span class="nav-text">题目二 (不修改数组找出重复的元素)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路-1"><span class="nav-number">3.2.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法实现-1"><span class="nav-number">3.2.2.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复杂度分析-1"><span class="nav-number">3.2.3.</span> <span class="nav-text">复杂度分析</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目-调整数组顺序使奇数位于偶数前面"><span class="nav-number">2.</span> <span class="nav-text">题目(调整数组顺序使奇数位于偶数前面)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法思路"><span class="nav-number">3.</span> <span class="nav-text">算法思路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法思路一"><span class="nav-number">3.1.</span> <span class="nav-text">算法思路一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法思路二"><span class="nav-number">3.2.</span> <span class="nav-text">算法思路二</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法思路三"><span class="nav-number">3.3.</span> <span class="nav-text">算法思路三</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现"><span class="nav-number">4.</span> <span class="nav-text">算法实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法实现一"><span class="nav-number">4.1.</span> <span class="nav-text">算法实现一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法实现二"><span class="nav-number">4.2.</span> <span class="nav-text">算法实现二</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法实现三"><span class="nav-number">4.3.</span> <span class="nav-text">算法实现三</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂度分析"><span class="nav-number">5.</span> <span class="nav-text">复杂度分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>

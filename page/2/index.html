@@ -302,6 +302,162 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/18/剑指offer2之二进制中的1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/18/剑指offer2之二进制中的1/" itemprop="url">剑指offer2之二进制中的1</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-18T16:40:12+08:00">2018-04-18</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/18/剑指offer2之二进制中的1/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/18/剑指offer2之二进制中的1/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>位运算是把数字用二进制表示之后，对每一位上 0 或 1 的运算。二进制及其位运算非常重要，在很多底层技术中频繁出现。那么面试题更不例外了。</p>
+<p>位运算总共有 5 种运算，与、或、异或、左移和右移。关于与 (&amp;)、或 (|)和异或 (\(\oplus\)) 的规律可总结为:</p>
+<ol>
+<li>与：只要有  0就是 0，否则为 1；</li>
+<li>或：只要有 1 就是 1，否则为 0；</li>
+<li>异或：两个二进制位不同为 1，相同为 0。</li>
+</ol>
+<p>左移运算符 m&lt;<n 表示把="" m="" 左移="" n="" 位。若为正数，则低位补="" 0，否则低位补="" 1。右移运算符="">&gt;n，表示把 m 右移 n 位。若为负数，则高位补 0，否则高位补 1。</n></p>
+<h1 id="题目-二进制中1的个数"><a href="#题目-二进制中1的个数" class="headerlink" title="题目(二进制中1的个数)"></a>题目(二进制中1的个数)</h1><p>题目：请实现一个函数，输入一个整数，输出该数二进制表示中 1 的个数。例如把 9 表示成二进制 1001，有 2 位是 1 。因此，如果输入 9，则该函数输出 2。</p>
+<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><h2 id="算法思路一"><a href="#算法思路一" class="headerlink" title="算法思路一"></a>算法思路一</h2><p>我们把输入的二进制数的最后一位与 1 进行位与运算，如果是 1，就计数；然后将二进制数右移一位，再进行同样的操作，直到整数为 0 退出循环。此思路只能针对输入的整数是正整数，否则会陷入死循环。</p>
+<h2 id="算法思路二"><a href="#算法思路二" class="headerlink" title="算法思路二"></a>算法思路二</h2><p>由于正数和负数的二进制数 n 移位规律不同，因此采用右移来计数较为麻烦。那现在我们就不移动输入整数的二进制表示，而是利用一个无符号的数 1，然后先和 n 的最低位相与，判断最低位是否为 1；然后接着把 1 左移一位，再和 n 做与运算，就能判断 n 的次低位是不是1，这样一直操作，直到循环 n 的二进制位数次。</p>
+<h2 id="算法思路三"><a href="#算法思路三" class="headerlink" title="算法思路三"></a>算法思路三</h2><p>我们发现将 n 减去 1 再和 n 位与可以去掉 n 中最右的 1，那么 n 中有几个这样的 1 ，就需要去掉几次。</p>
+<blockquote>
+<p>注：把一个整数减去 1 之后再和原来的整数做位与运算，得到的结果相当于把整数的二进制表示中最右边的 1 变成 0。很多二进制的问题都可以用这种思路解决。</p>
+</blockquote>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><h2 id="算法实现一"><a href="#算法实现一" class="headerlink" title="算法实现一"></a>算法实现一</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqasm4ejtfj20va07xt8q.jpg" alt="">  </p>
+<h2 id="算法实现二"><a href="#算法实现二" class="headerlink" title="算法实现二"></a>算法实现二</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqasn2htksj20v408ft8w.jpg" alt=""></p>
+<h2 id="算法实现三"><a href="#算法实现三" class="headerlink" title="算法实现三"></a>算法实现三</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqaso4kg5qj20v306u0st.jpg" alt=""></p>
+<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>算法一的时间主要消耗在对二进制的移位上，时间复杂度为 O(logn)；算法二需要进行循环 n 次(输入的二进制有 n 位)，因此时间复杂度为 O(n);若输入数的二进制表示中 1 的个数为 n，那么算法三仅需循环 n 次，时间复杂度最好达到 O(1)，最坏达到 O(n)。另外空间复杂度均为 O(1)。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/16/剑指offer2之剪绳子/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -882,147 +1038,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/03/剑指offer2之按年龄排序/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="洪荣宣">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rongxuanhong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/03/剑指offer2之按年龄排序/" itemprop="url">剑指offer2之按年龄排序</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-03T15:12:25+08:00">2018-04-03</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/04/03/剑指offer2之按年龄排序/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/03/剑指offer2之按年龄排序/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>不同排序算法适用的场合也不尽相同。例如，对于数组有序的情况，使用快速排序算法将达到最坏的时间复杂度O(n^2)，那么此种场合下，快速排序算法就不是最优的选择。因此，选择一个排序算法，应当考虑到排序应用的环境、哪些约束条件(比如数据的范围)，最后综合考虑后选择相应的排序算法解决。</p>
-<h1 id="题目-年龄排序"><a href="#题目-年龄排序" class="headerlink" title="题目(年龄排序)"></a>题目(年龄排序)</h1><p>请实现一个按年龄排序的算法，其中最大年龄为99岁，要求时间效率为 O(n)(<strong>可以使用不超过O(n)的辅助内存</strong>)</p>
-<h1 id="算法思路-排序对象有范围限制"><a href="#算法思路-排序对象有范围限制" class="headerlink" title="算法思路 (排序对象有范围限制)"></a>算法思路 (排序对象有范围限制)</h1><p>我们看到题目要求的排序时间复杂度要达到 O(n),而那些常见排序算法的最坏时间复杂度基本都达不到 O(n)。我们注意到排序的对象是年龄，它是有约束的，即年龄只能在0-99岁之间。那么，我们可以利用辅助数组来记录每个年龄有多少人次(数组的下标即年龄)，那么我们对年龄进行排序的时候，只需要遍历所有年龄，得到相应的人次，然后给年龄数组重新赋值即可。  </p>
-<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpy4rnfjbmj20v60c9aam.jpg" alt="">  </p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-	<div>
-
-</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1074,7 +1089,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">27</span>
+                    <span class="site-state-item-count">28</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
