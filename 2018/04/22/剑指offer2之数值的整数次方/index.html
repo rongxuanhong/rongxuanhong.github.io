@@ -99,29 +99,27 @@
 
 
 
-  <meta name="description" content="前言书上的题目相对简单，没有要求相对位置不改变，而在牛客网上的题目有要求。以牛客网的为准。 题目(调整数组顺序使奇数位于偶数前面)输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，所有的偶数位于位于数组的后半部分，并保证奇数和奇数，偶数和偶数之间的相对位置不变。 算法思路算法思路一利用冒泡排序的思想，此时我们比较的是只要遇到奇数和偶数，那么就交换元素。 算法">
-<meta name="keywords" content="剑指offer2">
+  <meta name="description" content="前言在面试编程的时候，代码的规范性和完整性非常重要，可能成为能否拿到 offer 的关键因素。那么代码的规范性如何体现呢？比如清晰的书写、代码布局清晰(如缩进，括号对齐)、变量和函数的命名易懂。而代码的完整性体现在代码基本功能实现的正确性以及在边界值、错误处理等方面的全面考虑。 那么完整的代码需要从功能测试、边界测试以及负面测试来提高鲁棒性。例如，在功能测试中，除了完成基本功能，还需要考虑数值的表">
+<meta name="keywords" content="剑指offer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="剑指offer2之调整数组顺序使奇数位于偶数前面">
-<meta property="og:url" content="http://yoursite.com/2018/04/23/剑指offer2之调整数组顺序使奇数位于偶数前面/index.html">
+<meta property="og:title" content="剑指offer2之数值的整数次方">
+<meta property="og:url" content="http://yoursite.com/2018/04/22/剑指offer2之数值的整数次方/index.html">
 <meta property="og:site_name" content="Rongxuanhong&#39;s Blog">
-<meta property="og:description" content="前言书上的题目相对简单，没有要求相对位置不改变，而在牛客网上的题目有要求。以牛客网的为准。 题目(调整数组顺序使奇数位于偶数前面)输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，所有的偶数位于位于数组的后半部分，并保证奇数和奇数，偶数和偶数之间的相对位置不变。 算法思路算法思路一利用冒泡排序的思想，此时我们比较的是只要遇到奇数和偶数，那么就交换元素。 算法">
+<meta property="og:description" content="前言在面试编程的时候，代码的规范性和完整性非常重要，可能成为能否拿到 offer 的关键因素。那么代码的规范性如何体现呢？比如清晰的书写、代码布局清晰(如缩进，括号对齐)、变量和函数的命名易懂。而代码的完整性体现在代码基本功能实现的正确性以及在边界值、错误处理等方面的全面考虑。 那么完整的代码需要从功能测试、边界测试以及负面测试来提高鲁棒性。例如，在功能测试中，除了完成基本功能，还需要考虑数值的表">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqj0ws71c2j20v70783yj.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqj0wyelasj20v30an74e.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqj0x20xjdj20v708p3yp.jpg">
-<meta property="og:updated_time" content="2018-04-23T13:42:03.140Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqeg3s6edkj20v10iywfl.jpg">
+<meta property="og:updated_time" content="2018-04-27T13:14:30.352Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="剑指offer2之调整数组顺序使奇数位于偶数前面">
-<meta name="twitter:description" content="前言书上的题目相对简单，没有要求相对位置不改变，而在牛客网上的题目有要求。以牛客网的为准。 题目(调整数组顺序使奇数位于偶数前面)输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，所有的偶数位于位于数组的后半部分，并保证奇数和奇数，偶数和偶数之间的相对位置不变。 算法思路算法思路一利用冒泡排序的思想，此时我们比较的是只要遇到奇数和偶数，那么就交换元素。 算法">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqj0ws71c2j20v70783yj.jpg">
+<meta name="twitter:title" content="剑指offer2之数值的整数次方">
+<meta name="twitter:description" content="前言在面试编程的时候，代码的规范性和完整性非常重要，可能成为能否拿到 offer 的关键因素。那么代码的规范性如何体现呢？比如清晰的书写、代码布局清晰(如缩进，括号对齐)、变量和函数的命名易懂。而代码的完整性体现在代码基本功能实现的正确性以及在边界值、错误处理等方面的全面考虑。 那么完整的代码需要从功能测试、边界测试以及负面测试来提高鲁棒性。例如，在功能测试中，除了完成基本功能，还需要考虑数值的表">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqeg3s6edkj20v10iywfl.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/23/剑指offer2之调整数组顺序使奇数位于偶数前面/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/22/剑指offer2之数值的整数次方/"/>
 
 
 
@@ -131,7 +129,7 @@
   };
 </script>
 
-  <title>剑指offer2之调整数组顺序使奇数位于偶数前面 | Rongxuanhong's Blog</title>
+  <title>剑指offer2之数值的整数次方 | Rongxuanhong's Blog</title>
   
 
 
@@ -309,7 +307,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/23/剑指offer2之调整数组顺序使奇数位于偶数前面/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/22/剑指offer2之数值的整数次方/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="洪荣宣">
@@ -326,7 +324,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">剑指offer2之调整数组顺序使奇数位于偶数前面</h1>
+          <h1 class="post-title" itemprop="name headline">剑指offer2之数值的整数次方</h1>
         
 
         <div class="post-meta">
@@ -338,7 +336,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-23T21:41:04+08:00">2018-04-23</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-22T20:41:01+08:00">2018-04-22</time>
             
 
             
@@ -356,8 +354,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/04/23/剑指offer2之调整数组顺序使奇数位于偶数前面/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/23/剑指offer2之调整数组顺序使奇数位于偶数前面/" itemprop="commentCount"></span>
+                <a href="/2018/04/22/剑指offer2之数值的整数次方/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/22/剑指offer2之数值的整数次方/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -393,16 +391,22 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>书上的题目相对简单，没有要求相对位置不改变，而在牛客网上的题目有要求。以牛客网的为准。</p>
-<h1 id="题目-调整数组顺序使奇数位于偶数前面"><a href="#题目-调整数组顺序使奇数位于偶数前面" class="headerlink" title="题目(调整数组顺序使奇数位于偶数前面)"></a>题目(<a href="https://www.nowcoder.com/questionTerminal/beb5aa231adc45b2a5dcc5b62c93f593" target="_blank" rel="noopener">调整数组顺序使奇数位于偶数前面</a>)</h1><p>输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，所有的偶数位于位于数组的后半部分，并保证奇数和奇数，偶数和偶数之间的相对位置不变。</p>
-<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><h2 id="算法思路一"><a href="#算法思路一" class="headerlink" title="算法思路一"></a>算法思路一</h2><p>利用冒泡排序的思想，此时我们比较的是只要遇到奇数和偶数，那么就交换元素。</p>
-<h2 id="算法思路二"><a href="#算法思路二" class="headerlink" title="算法思路二"></a>算法思路二</h2><p>借助辅助数组。我们从前往后扫描数组将奇数放入数组中，再扫描一遍将偶数放入数组中，最后对数组赋值辅助数组。</p>
-<h2 id="算法思路三"><a href="#算法思路三" class="headerlink" title="算法思路三"></a>算法思路三</h2><p>利用双向队列的特性，即可以高效的在头尾两段插入和删除元素，我们可以从后往前扫描数组，将奇数依次往前插到队列，然后从后往前扫描数组，将偶数往后插入队列中，在保证顺序不变的同时得到所求。</p>
-<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><h2 id="算法实现一"><a href="#算法实现一" class="headerlink" title="算法实现一"></a>算法实现一</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqj0ws71c2j20v70783yj.jpg" alt=""></p>
-<h2 id="算法实现二"><a href="#算法实现二" class="headerlink" title="算法实现二"></a>算法实现二</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqj0wyelasj20v30an74e.jpg" alt=""></p>
-<h2 id="算法实现三"><a href="#算法实现三" class="headerlink" title="算法实现三"></a>算法实现三</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqj0x20xjdj20v708p3yp.jpg" alt=""></p>
-<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>算法一中，使用的过程类似冒泡排序，时间复杂度为 O(n^2)，空间复杂度为 O(1)；算法二中，对数组只有遍历，所以时间复杂度为 O(n)，另外使用了辅助数组，所以空间复杂度为 O(n)；算法三也是遍历一遍数组，时间复杂度为 O(n)，另外使用了双端队列，空间复杂度为 O(n)。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;  </p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在面试编程的时候，代码的规范性和完整性非常重要，可能成为能否拿到 offer 的关键因素。那么代码的规范性如何体现呢？比如清晰的书写、代码布局清晰(如缩进，括号对齐)、变量和函数的命名易懂。而代码的完整性体现在代码基本功能实现的正确性以及在边界值、错误处理等方面的全面考虑。</p>
+<p>那么完整的代码需要从功能测试、边界测试以及负面测试来提高鲁棒性。例如，在功能测试中，除了完成基本功能，还需要考虑数值的表示范围；在边界测试中，需要考虑循环条件和递归终止条件的正确性；在负面测试中，需要考虑边界值和特殊值的输入，以解决一些不合法的情况。</p>
+<p>那么对于错误处理的方式主要有三种，分别是函数用返回值来告知API调用者是否出错，如返回 0 表示出错；当错误发生时设置一个全局变量来记录；对错误情况，采用抛异常的处理方式。</p>
+<h1 id="题目-数值的整数次方"><a href="#题目-数值的整数次方" class="headerlink" title="题目(数值的整数次方)"></a>题目(数值的整数次方)</h1><p>题目：实现函数 double Power(double base,int exponent)，求 base 的 exponent 次方。不得使用库函数，同时不需要考虑大数范围。</p>
+<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>首先我们应该对输入参数的各种情况进行讨论。</p>
+<ol>
+<li>如果基 base 是 0 而且 指数 exponent 是负数，那么情况判为不合法输入；</li>
+<li>注意基 base 是 0 而且 指数 exponent 也是 0 ，这种情况在数学上是无意义的。</li>
+<li>无论指数 exponent 是正还是负都统一先转成无符号的整形类型，方便统一计算整数次方。然后，对于 exponent 为负的情况，只需将结果变为倒数即可。</li>
+</ol>
+<p>优化多次乘方的思路：<br>如果输入的指数 exponent 为 32，那么需要进行 31 次乘法操作。那么，如果我们能先算出数字的 16 次方，然后再平方一次即可；那么假如知道了数字的 16 次方，那么只需要在数字的 16 次方的基础上平方一次即可得到结果，那如果知道了数字的 8 次方，那么就可以在数字的 8 次方基础上平方一次得到数字的 16 次方的结果；那么如果知道数字的 4 次方，就可以在数字 4 此方的基础上平方一次得到数字的 8 次方；一次类推，直到知道了数字的 1 次方。  </p>
+<p>那么可用如下公式表示 a 的 n 次方:</p>
+<script type="math/tex; mode=display">a^{n}=\begin{cases}a^{n/2}\cdot a^{n/2}\qquad n为偶数 \\
+a^{\left( n-1\right) /2}\cdot a^{\left( n-1\right) /2}\qquad n为奇数\end{cases}</script><h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqeg3s6edkj20v10iywfl.jpg" alt=""></p>
+<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>时间主要消耗在求解乘法运算结果上面，而使用递归方法(二分原问题)进行乘法求解的时间复杂度为 O(logn)，空间复杂度为 O(1)。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
 
       
     </div>
@@ -435,7 +439,7 @@
     <strong>Post author: </strong>洪荣宣</li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="http://yoursite.com/2018/04/23/剑指offer2之调整数组顺序使奇数位于偶数前面/" title="剑指offer2之调整数组顺序使奇数位于偶数前面">http://yoursite.com/2018/04/23/剑指offer2之调整数组顺序使奇数位于偶数前面/</a>
+    <a href="http://yoursite.com/2018/04/22/剑指offer2之数值的整数次方/" title="剑指offer2之数值的整数次方">http://yoursite.com/2018/04/22/剑指offer2之数值的整数次方/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>All articles in this blog are licensed under 本文由 rongxuanhong 原创，采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">保留署名-非商业性使用-禁止演绎 4.0-国际许可协议</a></br>转载请保留以上声明信息! unless stating additionally.</li>
@@ -448,7 +452,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/剑指offer2/" rel="tag"><i class="fa fa-tag"></i> 剑指offer2</a>
+            <a href="/tags/剑指offer/" rel="tag"><i class="fa fa-tag"></i> 剑指offer</a>
           
         </div>
       
@@ -461,8 +465,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/22/SVM系列之核函数与KKT条件(二)/" rel="next" title="SVM系列之核函数与KKT条件(二)">
-                <i class="fa fa-chevron-left"></i> SVM系列之核函数与KKT条件(二)
+              <a href="/2018/04/20/剑指offer2之打印从1到最大的n位数/" rel="next" title="剑指offer2之打印从1到最大的n位数">
+                <i class="fa fa-chevron-left"></i> 剑指offer2之打印从1到最大的n位数
               </a>
             
           </div>
@@ -471,8 +475,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/04/24/剑指offer2之删除链表结点/" rel="prev" title="剑指offer2之删除链表结点">
-                剑指offer2之删除链表结点 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/04/22/SVM系列之核函数与KKT条件(二)/" rel="prev" title="SVM系列之核函数与KKT条件(二)">
+                SVM系列之核函数与KKT条件(二) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -651,7 +655,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目-调整数组顺序使奇数位于偶数前面"><span class="nav-number">2.</span> <span class="nav-text">题目(调整数组顺序使奇数位于偶数前面)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法思路"><span class="nav-number">3.</span> <span class="nav-text">算法思路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法思路一"><span class="nav-number">3.1.</span> <span class="nav-text">算法思路一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法思路二"><span class="nav-number">3.2.</span> <span class="nav-text">算法思路二</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法思路三"><span class="nav-number">3.3.</span> <span class="nav-text">算法思路三</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现"><span class="nav-number">4.</span> <span class="nav-text">算法实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法实现一"><span class="nav-number">4.1.</span> <span class="nav-text">算法实现一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法实现二"><span class="nav-number">4.2.</span> <span class="nav-text">算法实现二</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法实现三"><span class="nav-number">4.3.</span> <span class="nav-text">算法实现三</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂度分析"><span class="nav-number">5.</span> <span class="nav-text">复杂度分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目-数值的整数次方"><span class="nav-number">2.</span> <span class="nav-text">题目(数值的整数次方)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法思路"><span class="nav-number">3.</span> <span class="nav-text">算法思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现"><span class="nav-number">4.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂度分析"><span class="nav-number">5.</span> <span class="nav-text">复杂度分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>

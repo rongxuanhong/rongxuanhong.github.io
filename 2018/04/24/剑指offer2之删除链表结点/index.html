@@ -99,29 +99,28 @@
 
 
 
-  <meta name="description" content="前言书上的题目相对简单，没有要求相对位置不改变，而在牛客网上的题目有要求。以牛客网的为准。 题目(调整数组顺序使奇数位于偶数前面)输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，所有的偶数位于位于数组的后半部分，并保证奇数和奇数，偶数和偶数之间的相对位置不变。 算法思路算法思路一利用冒泡排序的思想，此时我们比较的是只要遇到奇数和偶数，那么就交换元素。 算法">
-<meta name="keywords" content="剑指offer2">
+  <meta name="description" content="前言在单链表中删除一个节点，一般都是从链表的头节点开始顺序遍历，然后在链表中删除。但是这样的时候复杂度为 O(n)，那么能不能在 O(1) 时间内删除元素呢？ 题目一(删除链表的结点)给定单向链表的头指针和一个节点指针，定义一个函数在 O(1) 时间删除该节点。链表结点与函数的定义如下： struct ListNode{   int val;   ListNode* next; }  void D">
+<meta name="keywords" content="剑指offer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="剑指offer2之调整数组顺序使奇数位于偶数前面">
-<meta property="og:url" content="http://yoursite.com/2018/04/23/剑指offer2之调整数组顺序使奇数位于偶数前面/index.html">
+<meta property="og:title" content="剑指offer2之删除链表结点">
+<meta property="og:url" content="http://yoursite.com/2018/04/24/剑指offer2之删除链表结点/index.html">
 <meta property="og:site_name" content="Rongxuanhong&#39;s Blog">
-<meta property="og:description" content="前言书上的题目相对简单，没有要求相对位置不改变，而在牛客网上的题目有要求。以牛客网的为准。 题目(调整数组顺序使奇数位于偶数前面)输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，所有的偶数位于位于数组的后半部分，并保证奇数和奇数，偶数和偶数之间的相对位置不变。 算法思路算法思路一利用冒泡排序的思想，此时我们比较的是只要遇到奇数和偶数，那么就交换元素。 算法">
+<meta property="og:description" content="前言在单链表中删除一个节点，一般都是从链表的头节点开始顺序遍历，然后在链表中删除。但是这样的时候复杂度为 O(n)，那么能不能在 O(1) 时间内删除元素呢？ 题目一(删除链表的结点)给定单向链表的头指针和一个节点指针，定义一个函数在 O(1) 时间删除该节点。链表结点与函数的定义如下： struct ListNode{   int val;   ListNode* next; }  void D">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqj0ws71c2j20v70783yj.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqj0wyelasj20v30an74e.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqj0x20xjdj20v708p3yp.jpg">
-<meta property="og:updated_time" content="2018-04-23T13:42:03.140Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqgwcz7n97j20v70grt96.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqgw4ry29hj20v70hswes.jpg">
+<meta property="og:updated_time" content="2018-04-27T13:14:09.085Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="剑指offer2之调整数组顺序使奇数位于偶数前面">
-<meta name="twitter:description" content="前言书上的题目相对简单，没有要求相对位置不改变，而在牛客网上的题目有要求。以牛客网的为准。 题目(调整数组顺序使奇数位于偶数前面)输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，所有的偶数位于位于数组的后半部分，并保证奇数和奇数，偶数和偶数之间的相对位置不变。 算法思路算法思路一利用冒泡排序的思想，此时我们比较的是只要遇到奇数和偶数，那么就交换元素。 算法">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqj0ws71c2j20v70783yj.jpg">
+<meta name="twitter:title" content="剑指offer2之删除链表结点">
+<meta name="twitter:description" content="前言在单链表中删除一个节点，一般都是从链表的头节点开始顺序遍历，然后在链表中删除。但是这样的时候复杂度为 O(n)，那么能不能在 O(1) 时间内删除元素呢？ 题目一(删除链表的结点)给定单向链表的头指针和一个节点指针，定义一个函数在 O(1) 时间删除该节点。链表结点与函数的定义如下： struct ListNode{   int val;   ListNode* next; }  void D">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqgwcz7n97j20v70grt96.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/23/剑指offer2之调整数组顺序使奇数位于偶数前面/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/24/剑指offer2之删除链表结点/"/>
 
 
 
@@ -131,7 +130,7 @@
   };
 </script>
 
-  <title>剑指offer2之调整数组顺序使奇数位于偶数前面 | Rongxuanhong's Blog</title>
+  <title>剑指offer2之删除链表结点 | Rongxuanhong's Blog</title>
   
 
 
@@ -309,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/23/剑指offer2之调整数组顺序使奇数位于偶数前面/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/24/剑指offer2之删除链表结点/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="洪荣宣">
@@ -326,7 +325,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">剑指offer2之调整数组顺序使奇数位于偶数前面</h1>
+          <h1 class="post-title" itemprop="name headline">剑指offer2之删除链表结点</h1>
         
 
         <div class="post-meta">
@@ -338,7 +337,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-23T21:41:04+08:00">2018-04-23</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-24T20:05:36+08:00">2018-04-24</time>
             
 
             
@@ -356,8 +355,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/04/23/剑指offer2之调整数组顺序使奇数位于偶数前面/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/23/剑指offer2之调整数组顺序使奇数位于偶数前面/" itemprop="commentCount"></span>
+                <a href="/2018/04/24/剑指offer2之删除链表结点/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/24/剑指offer2之删除链表结点/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -393,16 +392,22 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>书上的题目相对简单，没有要求相对位置不改变，而在牛客网上的题目有要求。以牛客网的为准。</p>
-<h1 id="题目-调整数组顺序使奇数位于偶数前面"><a href="#题目-调整数组顺序使奇数位于偶数前面" class="headerlink" title="题目(调整数组顺序使奇数位于偶数前面)"></a>题目(<a href="https://www.nowcoder.com/questionTerminal/beb5aa231adc45b2a5dcc5b62c93f593" target="_blank" rel="noopener">调整数组顺序使奇数位于偶数前面</a>)</h1><p>输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，所有的偶数位于位于数组的后半部分，并保证奇数和奇数，偶数和偶数之间的相对位置不变。</p>
-<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><h2 id="算法思路一"><a href="#算法思路一" class="headerlink" title="算法思路一"></a>算法思路一</h2><p>利用冒泡排序的思想，此时我们比较的是只要遇到奇数和偶数，那么就交换元素。</p>
-<h2 id="算法思路二"><a href="#算法思路二" class="headerlink" title="算法思路二"></a>算法思路二</h2><p>借助辅助数组。我们从前往后扫描数组将奇数放入数组中，再扫描一遍将偶数放入数组中，最后对数组赋值辅助数组。</p>
-<h2 id="算法思路三"><a href="#算法思路三" class="headerlink" title="算法思路三"></a>算法思路三</h2><p>利用双向队列的特性，即可以高效的在头尾两段插入和删除元素，我们可以从后往前扫描数组，将奇数依次往前插到队列，然后从后往前扫描数组，将偶数往后插入队列中，在保证顺序不变的同时得到所求。</p>
-<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><h2 id="算法实现一"><a href="#算法实现一" class="headerlink" title="算法实现一"></a>算法实现一</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqj0ws71c2j20v70783yj.jpg" alt=""></p>
-<h2 id="算法实现二"><a href="#算法实现二" class="headerlink" title="算法实现二"></a>算法实现二</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqj0wyelasj20v30an74e.jpg" alt=""></p>
-<h2 id="算法实现三"><a href="#算法实现三" class="headerlink" title="算法实现三"></a>算法实现三</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqj0x20xjdj20v708p3yp.jpg" alt=""></p>
-<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>算法一中，使用的过程类似冒泡排序，时间复杂度为 O(n^2)，空间复杂度为 O(1)；算法二中，对数组只有遍历，所以时间复杂度为 O(n)，另外使用了辅助数组，所以空间复杂度为 O(n)；算法三也是遍历一遍数组，时间复杂度为 O(n)，另外使用了双端队列，空间复杂度为 O(n)。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;  </p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在单链表中删除一个节点，一般都是从链表的头节点开始顺序遍历，然后在链表中删除。但是这样的时候复杂度为 O(n)，那么能不能在 O(1) 时间内删除元素呢？</p>
+<h1 id="题目一-删除链表的结点"><a href="#题目一-删除链表的结点" class="headerlink" title="题目一(删除链表的结点)"></a>题目一(删除链表的结点)</h1><p>给定单向链表的头指针和一个节点指针，定义一个函数在 O(1) 时间删除该节点。链表结点与函数的定义如下：</p>
+<pre><code>struct ListNode{
+  int val;
+  ListNode* next;
+}
+
+void DeleteNode(ListNode** head, ListNode* pToBeDeleted);
+</code></pre><h2 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h2><p>首先，我们应该先考虑删除位置的情况。所以需要讨论删除位置在头节点、链表中以及链表尾部。然后，要实现在 O(1) 中删除节点，我们可以将待删除节点的下一节点的信息赋值给前一节点，那么现在只需要删除原待删除节点的下一节点即可，因为已经知道了新的待删除节点的前一节点的指针了，所以操作便只需耗时 O(1)。</p>
+<h2 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqgwcz7n97j20v70grt96.jpg" alt=""></p>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><p>时间复杂度为 O(1)</p>
+<h1 id="题目二-删除链表中重复的结点"><a href="#题目二-删除链表中重复的结点" class="headerlink" title="题目二(删除链表中重复的结点)"></a>题目二(删除链表中重复的结点)</h1><p>题目：在一个排序的链表中，如何删除重复的节点。(无头节点)</p>
+<h2 id="算法思路-1"><a href="#算法思路-1" class="headerlink" title="算法思路"></a>算法思路</h2><p>首先，为了更方便地操作链表，<strong>我们需要给链表加一个头结点</strong>。然后，我们需要两个指针 p 和 pre，分别表示指向当前节点和指向当前节点的前一节点。接着，需要判断当前节点和其下一节点是否存在重复节点，如果不存在则指针依次前移，继续遍历；否则从重复的第一个节点开始，循环跳过重复的节点并删除重复节点，最后 p 指针指向了第一个不重复的节点，然后只需把 pre 指针指向的节点和这个第一个不重复的节点连接即可,之后继续遍历。</p>
+<h2 id="算法实现-1"><a href="#算法实现-1" class="headerlink" title="算法实现"></a>算法实现</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqgw4ry29hj20v70hswes.jpg" alt=""></p>
+<h2 id="复杂度分析-1"><a href="#复杂度分析-1" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><p>需要遍历整个链表，所以时间复杂度为 O(n)。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
 
       
     </div>
@@ -435,7 +440,7 @@
     <strong>Post author: </strong>洪荣宣</li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="http://yoursite.com/2018/04/23/剑指offer2之调整数组顺序使奇数位于偶数前面/" title="剑指offer2之调整数组顺序使奇数位于偶数前面">http://yoursite.com/2018/04/23/剑指offer2之调整数组顺序使奇数位于偶数前面/</a>
+    <a href="http://yoursite.com/2018/04/24/剑指offer2之删除链表结点/" title="剑指offer2之删除链表结点">http://yoursite.com/2018/04/24/剑指offer2之删除链表结点/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>All articles in this blog are licensed under 本文由 rongxuanhong 原创，采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">保留署名-非商业性使用-禁止演绎 4.0-国际许可协议</a></br>转载请保留以上声明信息! unless stating additionally.</li>
@@ -448,7 +453,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/剑指offer2/" rel="tag"><i class="fa fa-tag"></i> 剑指offer2</a>
+            <a href="/tags/剑指offer/" rel="tag"><i class="fa fa-tag"></i> 剑指offer</a>
           
         </div>
       
@@ -461,8 +466,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/22/SVM系列之核函数与KKT条件(二)/" rel="next" title="SVM系列之核函数与KKT条件(二)">
-                <i class="fa fa-chevron-left"></i> SVM系列之核函数与KKT条件(二)
+              <a href="/2018/04/23/剑指offer2之调整数组顺序使奇数位于偶数前面/" rel="next" title="剑指offer2之调整数组顺序使奇数位于偶数前面">
+                <i class="fa fa-chevron-left"></i> 剑指offer2之调整数组顺序使奇数位于偶数前面
               </a>
             
           </div>
@@ -471,8 +476,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/04/24/剑指offer2之删除链表结点/" rel="prev" title="剑指offer2之删除链表结点">
-                剑指offer2之删除链表结点 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/04/27/剑指offer2之表示数值的字符串/" rel="prev" title="剑指offer2之表示数值的字符串">
+                剑指offer2之表示数值的字符串 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -651,7 +656,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目-调整数组顺序使奇数位于偶数前面"><span class="nav-number">2.</span> <span class="nav-text">题目(调整数组顺序使奇数位于偶数前面)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法思路"><span class="nav-number">3.</span> <span class="nav-text">算法思路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法思路一"><span class="nav-number">3.1.</span> <span class="nav-text">算法思路一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法思路二"><span class="nav-number">3.2.</span> <span class="nav-text">算法思路二</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法思路三"><span class="nav-number">3.3.</span> <span class="nav-text">算法思路三</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现"><span class="nav-number">4.</span> <span class="nav-text">算法实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法实现一"><span class="nav-number">4.1.</span> <span class="nav-text">算法实现一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法实现二"><span class="nav-number">4.2.</span> <span class="nav-text">算法实现二</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法实现三"><span class="nav-number">4.3.</span> <span class="nav-text">算法实现三</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂度分析"><span class="nav-number">5.</span> <span class="nav-text">复杂度分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目一-删除链表的结点"><span class="nav-number">2.</span> <span class="nav-text">题目一(删除链表的结点)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法思路"><span class="nav-number">2.1.</span> <span class="nav-text">算法思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法实现"><span class="nav-number">2.2.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复杂度分析"><span class="nav-number">2.3.</span> <span class="nav-text">复杂度分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目二-删除链表中重复的结点"><span class="nav-number">3.</span> <span class="nav-text">题目二(删除链表中重复的结点)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法思路-1"><span class="nav-number">3.1.</span> <span class="nav-text">算法思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法实现-1"><span class="nav-number">3.2.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复杂度分析-1"><span class="nav-number">3.3.</span> <span class="nav-text">复杂度分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
