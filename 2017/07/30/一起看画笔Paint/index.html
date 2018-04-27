@@ -99,13 +99,13 @@
 
 
 
-  <meta name="description" content="前言Paint 可以决定你所画的几何图形、文本、位图的样式和颜色变化。 mPaint.measureXXmPaint.MeasureText 方法1：  float measureText (char[] text, int index, int count)  作用：测量文字绘制时所占用的宽度。对参数的解释:    text 待测试的字符数组 index 从第几个index开始测量 count">
+  <meta name="description" content="前言Paint 可以决定你所画的几何图形、文本、位图的样式和颜色变化。 mPaint.measureXXmPaint.MeasureText 方法1：   float measureText (char[] text, int index, int count)  作用：测量文字绘制时所占用的宽度。对参数的解释:    text 待测试的字符数组 index 从第几个index开始测量 count">
 <meta name="keywords" content="绘制基础">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一起看画笔Paint">
 <meta property="og:url" content="http://yoursite.com/2017/07/30/一起看画笔Paint/index.html">
 <meta property="og:site_name" content="Rongxuanhong&#39;s Blog">
-<meta property="og:description" content="前言Paint 可以决定你所画的几何图形、文本、位图的样式和颜色变化。 mPaint.measureXXmPaint.MeasureText 方法1：  float measureText (char[] text, int index, int count)  作用：测量文字绘制时所占用的宽度。对参数的解释:    text 待测试的字符数组 index 从第几个index开始测量 count">
+<meta property="og:description" content="前言Paint 可以决定你所画的几何图形、文本、位图的样式和颜色变化。 mPaint.measureXXmPaint.MeasureText 方法1：   float measureText (char[] text, int index, int count)  作用：测量文字绘制时所占用的宽度。对参数的解释:    text 待测试的字符数组 index 从第几个index开始测量 count">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fhn77x6w5xj20hm02zdfs.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fhn800mll5j20bc0j7gt9.jpg">
@@ -136,7 +136,7 @@
 <meta property="og:updated_time" content="2017-08-13T05:28:14.687Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一起看画笔Paint">
-<meta name="twitter:description" content="前言Paint 可以决定你所画的几何图形、文本、位图的样式和颜色变化。 mPaint.measureXXmPaint.MeasureText 方法1：  float measureText (char[] text, int index, int count)  作用：测量文字绘制时所占用的宽度。对参数的解释:    text 待测试的字符数组 index 从第几个index开始测量 count">
+<meta name="twitter:description" content="前言Paint 可以决定你所画的几何图形、文本、位图的样式和颜色变化。 mPaint.measureXXmPaint.MeasureText 方法1：   float measureText (char[] text, int index, int count)  作用：测量文字绘制时所占用的宽度。对参数的解释:    text 待测试的字符数组 index 从第几个index开始测量 count">
 <meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fhn77x6w5xj20hm02zdfs.jpg">
 
 
@@ -419,7 +419,7 @@
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><strong>Paint</strong> 可以决定你所画的几何图形、文本、位图的样式和颜色变化。</p>
 <h1 id="mPaint-measureXX"><a href="#mPaint-measureXX" class="headerlink" title="mPaint.measureXX"></a>mPaint.measureXX</h1><h2 id="mPaint-MeasureText"><a href="#mPaint-MeasureText" class="headerlink" title="mPaint.MeasureText"></a>mPaint.MeasureText</h2><ol>
 <li><p>方法1： </p>
-<pre><code>float measureText (char[] text, int index, int count) 
+<pre><code> float measureText (char[] text, int index, int count) 
 </code></pre><p>作用：测量文字绘制时所占用的宽度。<br>对参数的解释:  </p>
 <ul>
 <li>text 待测试的字符数组</li>
@@ -428,7 +428,7 @@
 </ul>
 </li>
 <li><p>方法2:</p>
-<pre><code>float measureText (CharSequence text, int start, int end) 
+<pre><code> float measureText (CharSequence text, int start, int end) 
 </code></pre><p>对参数的解释：  </p>
 <ul>
 <li>text 待测试字符串</li>
@@ -437,30 +437,30 @@
 </ul>
 </li>
 <li><p>方法3：</p>
-<pre><code>float measureText (String text, int start, int end)
+<pre><code> float measureText (String text, int start, int end)
 </code></pre></li>
 <li><p>例子:  </p>
-<pre><code>char[] str=&quot;学习Paint&quot;.toCharArray();
-String string=&quot;学习Paint&quot;;
-float v1 = mPaint.measureText(string);
-Log.i(TAG,&quot;方法1=&quot;+v1);//测量&quot;学习Paint&quot;
-float v2 = mPaint.measureText(str,0,str.length-1);//只测量&quot;学习Pain&quot;
-Log.i(TAG,&quot;方法2=&quot;+v2);
-float v3=mPaint.measureText(string,1,string.length());//只测量&quot;习Paint&quot;
-Log.i(TAG,&quot;方法3=&quot;+v3);  
+<pre><code> char[] str=&quot;学习Paint&quot;.toCharArray();
+ String string=&quot;学习Paint&quot;;
+ float v1 = mPaint.measureText(string);
+ Log.i(TAG,&quot;方法1=&quot;+v1);//测量&quot;学习Paint&quot;
+ float v2 = mPaint.measureText(str,0,str.length-1);//只测量&quot;学习Pain&quot;
+ Log.i(TAG,&quot;方法2=&quot;+v2);
+ float v3=mPaint.measureText(string,1,string.length());//只测量&quot;习Paint&quot;
+ Log.i(TAG,&quot;方法3=&quot;+v3);  
 </code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhn77x6w5xj20hm02zdfs.jpg" alt=""><br>另外：<strong>mPaint.getTextWidths(String text, float[] widths)</strong>用于获取 <strong>text</strong> 中每个字符的宽度并返回到 <strong>widths</strong> 数组中，用到了<code>MeasureText</code> 方法  </p>
 </li>
 </ol>
 <h1 id="mPaint-breakXXX"><a href="#mPaint-breakXXX" class="headerlink" title="mPaint.breakXXX"></a>mPaint.breakXXX</h1><h2 id="mPaint-breakText"><a href="#mPaint-breakText" class="headerlink" title="mPaint.breakText"></a>mPaint.breakText</h2><p>作用:测量指定宽度的文本宽度，超过指定宽度后截断。  </p>
 <ol>
 <li><p>方法1:  </p>
-<pre><code>breakText(String text, boolean measureForwards, float maxWidth, float[] measuredWidth)  
+<pre><code> breakText(String text, boolean measureForwards, float maxWidth, float[] measuredWidth)  
 </code></pre></li>
 <li><p>方法2:  </p>
-<pre><code>breakText(char[] text, int index, int count, float maxWidth, float[] measuredWidth)  
+<pre><code> breakText(char[] text, int index, int count, float maxWidth, float[] measuredWidth)  
 </code></pre></li>
 <li><p>方法3:  </p>
-<pre><code>breakText(CharSequence text, int start, int end, boolean measureForwards, float maxWidth, float[] measuredWidth)  
+<pre><code> breakText(CharSequence text, int start, int end, boolean measureForwards, float maxWidth, float[] measuredWidth)  
 </code></pre></li>
 <li>关键参数详解：  </li>
 </ol>
@@ -495,22 +495,22 @@ Log.i(TAG,&quot;方法3=&quot;+v3);
 <pre><code>mul: 色彩倍增值,16进制的色彩值0xAARRGGBB。
 add: 色彩增加值,16进制的色彩值0xAARRGGBB。  
 </code></pre><p>计算公式:  </p>
-<pre><code>R&apos; = R * colorMultiply.R + colorAdd.R
-G&apos; = G * colorMultiply.G + colorAdd.G
-B&apos; = B * colorMultiply.B + colorAdd.B  
+<pre><code>     R&#39; = R * colorMultiply.R + colorAdd.R
+     G&#39; = G * colorMultiply.G + colorAdd.G
+     B&#39; = B * colorMultiply.B + colorAdd.B  
 </code></pre><p>由16进制的与运算我们知道，任意的 <strong>0xAARRGGBB*0xFFFFFFFF=0xAARRGGBB</strong>,而再加上<strong>0x00000000</strong>，结果仍不变。故我们知道当 <strong>mul=0xFFFFFFFF,add=0x00000000</strong>,该过滤器并不会改变原图的色调。如果我们要增加绿色的值，我们就可以修改 <strong>add</strong> 的值为 <strong>0x0000XX00</strong>(其中 <strong>xx</strong> 介于 <strong>00-FF</strong> 之间);如果我们要去掉绿色的值,我们就可以修改 <strong>mul</strong> 中 <strong>xx</strong> 的值。总之，去掉某个颜色修改 <strong>mul</strong> 值，增加某个颜色值修改 <strong>add</strong>。<br>例子:  </p>
-<pre><code>LightingColorFilter filter1=new LightingColorFilter(0xFFFFFFFF,0x00000000);
-LightingColorFilter filter2=new LightingColorFilter(0xFFFF00FF,0x00000000);
-LightingColorFilter filter3=new LightingColorFilter(0xFFFFFFFF,0x0000FF00);
-Bitmap panda= BitmapFactory.decodeResource(getResources(), R.drawable.images);
-mPaint.setColorFilter(filter1);
-canvas.drawBitmap(panda,20,20,mPaint);
-mPaint.reset();
-mPaint.setColorFilter(filter2);
-canvas.drawBitmap(panda,20,25+panda.getHeight(),mPaint);
-mPaint.reset();
-mPaint.setColorFilter(filter3);
-canvas.drawBitmap(panda,20,30+panda.getHeight()*2,mPaint);  
+<pre><code>    LightingColorFilter filter1=new LightingColorFilter(0xFFFFFFFF,0x00000000);
+    LightingColorFilter filter2=new LightingColorFilter(0xFFFF00FF,0x00000000);
+    LightingColorFilter filter3=new LightingColorFilter(0xFFFFFFFF,0x0000FF00);
+    Bitmap panda= BitmapFactory.decodeResource(getResources(), R.drawable.images);
+    mPaint.setColorFilter(filter1);
+    canvas.drawBitmap(panda,20,20,mPaint);
+    mPaint.reset();
+    mPaint.setColorFilter(filter2);
+    canvas.drawBitmap(panda,20,25+panda.getHeight(),mPaint);
+    mPaint.reset();
+    mPaint.setColorFilter(filter3);
+    canvas.drawBitmap(panda,20,30+panda.getHeight()*2,mPaint);  
 </code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhn800mll5j20bc0j7gt9.jpg" alt="">  </p>
 <ol>
 <li><strong>ColorMatrixColorFilter</strong><br>作用：通过 <strong>4*5</strong> 颜色矩阵来改善中像素的饱满度  </li>
@@ -520,34 +520,34 @@ canvas.drawBitmap(panda,20,30+panda.getHeight()*2,mPaint);
 </code></pre><p><strong>ColorMatrix</strong> 可改变 <strong>bitmap</strong> 上的颜色和透明度（变换 <strong>RGBA</strong> 的值，达到改变的目的）,可以以一组 <strong>4*5</strong> 的数组构建该对象<br>构造方法2:</p>
 <pre><code>ColorMatrixColorFilter (float[] array)  
 </code></pre><p>假设颜色矩阵为  </p>
-<pre><code>[ a, b, c, d, e,  
-f, g, h, i, j,  
-k, l, m, n, o,  
-p, q, r, s, t ]   
+<pre><code>    [ a, b, c, d, e,  
+    f, g, h, i, j,  
+    k, l, m, n, o,  
+    p, q, r, s, t ]   
 </code></pre><p>则计算公式为:  </p>
-<pre><code>R’ = a*R + b*G + c*B + d*A + e;  
-G’ = f*R + g*G + h*B + i*A + j;  
-B’ = k*R + l*G + m*B + n*A + o;  
-A’ = p*R + q*G + r*B + s*A + t;   
+<pre><code>   R’ = a*R + b*G + c*B + d*A + e;  
+   G’ = f*R + g*G + h*B + i*A + j;  
+   B’ = k*R + l*G + m*B + n*A + o;  
+   A’ = p*R + q*G + r*B + s*A + t;   
 </code></pre><p>由矩阵相乘的原理可知，任何一个矩阵与单位矩阵相乘仍为本身(不懂去补矩阵基础知识)。那么现在类比 <strong>LightingColorFilter</strong> 的计算公式，你是否发现了点什么？没错，颜色矩阵的前 <strong>4</strong> 列(<strong>必须按顺序</strong>)采用的值产生效果与颜色倍增一致，而最后一列与颜色增加的效果一致, 接下来我们修改颜色矩阵，使之和上图中的效果一致。<br>例子：  </p>
-<pre><code>ColorMatrixColorFilter filter1 = new ColorMatrixColorFilter(new float[]{
-        1, 0, 0, 0, 0,
-        0, 1, 0, 0, 0,
-        0, 0, 1, 0, 0,
-        0, 0, 0, 1, 0
-});
-ColorMatrixColorFilter filter2 = new ColorMatrixColorFilter(new float[]{
-        1, 0, 0, 0, 0,
-        0, 0, 0, 0, 0,
-        0, 0, 1, 0, 0,
-        0, 0, 0, 1, 0
-});
-ColorMatrixColorFilter filter3 = new ColorMatrixColorFilter(new float[]{
-        1, 0, 0, 0, 0,
-        0, 1, 0, 0, 255,
-        0, 0, 1, 0, 0,
-        0, 0, 0, 1, 0
-});  
+<pre><code>    ColorMatrixColorFilter filter1 = new ColorMatrixColorFilter(new float[]{
+            1, 0, 0, 0, 0,
+            0, 1, 0, 0, 0,
+            0, 0, 1, 0, 0,
+            0, 0, 0, 1, 0
+    });
+    ColorMatrixColorFilter filter2 = new ColorMatrixColorFilter(new float[]{
+            1, 0, 0, 0, 0,
+            0, 0, 0, 0, 0,
+            0, 0, 1, 0, 0,
+            0, 0, 0, 1, 0
+    });
+    ColorMatrixColorFilter filter3 = new ColorMatrixColorFilter(new float[]{
+            1, 0, 0, 0, 0,
+            0, 1, 0, 0, 255,
+            0, 0, 1, 0, 0,
+            0, 0, 0, 1, 0
+    });  
 </code></pre><ol>
 <li><p><strong>PorterDuffColorFilter</strong><br>作用：通过使用单颜色或 <strong>Porter-Duff</strong> 组合模式来为源像素着色<br>实例：  </p>
 <p> setColorFilter(Color.parseColor(“#99000000”), PorterDuff.Mode.DARKEN);<br> 可设置ImageView的前景色为透明黑<br>构造方法:</p>
@@ -559,22 +559,22 @@ ColorMatrixColorFilter filter3 = new ColorMatrixColorFilter(new float[]{
 <li><strong>mode</strong>:指定的 <strong>PorterDuff.Mode</strong>(<strong>这里主要是图像色彩混和</strong>)。共有 <strong>5</strong> 种，分别是<strong>Darken(变暗)、Lighten(变亮)、Multiply(正片叠底)、Overlay(重叠)、Screen(滤色)</strong>，预知各种模式详解请耐心继续往下看。  </li>
 </ul>
 <p>例子:  </p>
-<pre><code>PorterDuffColorFilter filter1=new PorterDuffColorFilter(0xFFFF0000, PorterDuff.Mode.DARKEN);
-PorterDuffColorFilter filter2=new PorterDuffColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
-PorterDuffColorFilter filter3=new PorterDuffColorFilter(0xFFFF0000, PorterDuff.Mode.SCREEN);
-PorterDuffColorFilter filter4=new PorterDuffColorFilter(0xFFFF0000, PorterDuff.Mode.LIGHTEN);
-PorterDuffColorFilter filter5=new PorterDuffColorFilter(0xFFFF0000, PorterDuff.Mode.OVERLAY);
-Bitmap panda= BitmapFactory.decodeResource(getResources(), R.drawable.images);
-mPaint.setColorFilter(filter1);
-canvas.drawBitmap(panda,20,10,mPaint);
-mPaint.setColorFilter(filter2);
-canvas.drawBitmap(panda,20,15+panda.getHeight(),mPaint);
-mPaint.setColorFilter(filter3);
-canvas.drawBitmap(panda,20,20+panda.getHeight()*2,mPaint);
-mPaint.setColorFilter(filter4);
-canvas.drawBitmap(panda,20,25+panda.getHeight()*3,mPaint);
-mPaint.setColorFilter(filter5);
-canvas.drawBitmap(panda,20,30+panda.getHeight()*4,mPaint);  
+<pre><code>    PorterDuffColorFilter filter1=new PorterDuffColorFilter(0xFFFF0000, PorterDuff.Mode.DARKEN);
+    PorterDuffColorFilter filter2=new PorterDuffColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
+    PorterDuffColorFilter filter3=new PorterDuffColorFilter(0xFFFF0000, PorterDuff.Mode.SCREEN);
+    PorterDuffColorFilter filter4=new PorterDuffColorFilter(0xFFFF0000, PorterDuff.Mode.LIGHTEN);
+    PorterDuffColorFilter filter5=new PorterDuffColorFilter(0xFFFF0000, PorterDuff.Mode.OVERLAY);
+    Bitmap panda= BitmapFactory.decodeResource(getResources(), R.drawable.images);
+    mPaint.setColorFilter(filter1);
+    canvas.drawBitmap(panda,20,10,mPaint);
+    mPaint.setColorFilter(filter2);
+    canvas.drawBitmap(panda,20,15+panda.getHeight(),mPaint);
+    mPaint.setColorFilter(filter3);
+    canvas.drawBitmap(panda,20,20+panda.getHeight()*2,mPaint);
+    mPaint.setColorFilter(filter4);
+    canvas.drawBitmap(panda,20,25+panda.getHeight()*3,mPaint);
+    mPaint.setColorFilter(filter5);
+    canvas.drawBitmap(panda,20,30+panda.getHeight()*4,mPaint);  
 </code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25ly1fhn9esio0sj20ay0qjn5v.jpg" alt=""></p>
 <h2 id="mPaint-setDither"><a href="#mPaint-setDither" class="headerlink" title="mPaint.setDither"></a>mPaint.setDither</h2><p>方法：</p>
 <pre><code>void setDither (boolean dither)  
@@ -596,11 +596,11 @@ canvas.drawBitmap(panda,20,30+panda.getHeight()*4,mPaint);
 </code></pre><p>设置文本为线性排列  </p>
 <h2 id="mPaint-setMaskFilter"><a href="#mPaint-setMaskFilter" class="headerlink" title="mPaint.setMaskFilter"></a>mPaint.setMaskFilter</h2><ol>
 <li><p>方法: </p>
-<pre><code>MaskFilter setMaskFilter (MaskFilter maskfilter)   
+<pre><code> MaskFilter setMaskFilter (MaskFilter maskfilter)   
 </code></pre><p>设置或清除滤镜效果,传入 <strong>null</strong> 可清除之前的滤镜效果,<strong>maskfilter</strong> 由两个子类  <strong>BlurMaskFilter</strong>、<strong>EmbossMaskFilter</strong>所构造.</p>
 </li>
 <li><p><strong>BlurMaskFilter</strong> 模糊滤镜<br>构造方法:</p>
-<pre><code>BlurMaskFilter(float radius, BlurMaskFilter.Blur style)    
+<pre><code> BlurMaskFilter(float radius, BlurMaskFilter.Blur style)    
 </code></pre><p>对参数的解释:  </p>
 <ul>
 <li><strong>radius</strong>:设置显示的阴影半径,必须大于<strong>0</strong>  </li>
@@ -622,8 +622,8 @@ canvas.drawBitmap(panda,20,30+panda.getHeight()*4,mPaint);
 </ul>
 </li>
 <li><p>例子:  </p>
-<pre><code>mPaint.setMaskFilter(new BlurMaskFilter(5, BlurMaskFilter.Blur.NORMAL));
-mPaint.setMaskFilter(new EmbossMaskFilter(new float[]{1,1,1},0.5f,8f,3f));  
+<pre><code> mPaint.setMaskFilter(new BlurMaskFilter(5, BlurMaskFilter.Blur.NORMAL));
+ mPaint.setMaskFilter(new EmbossMaskFilter(new float[]{1,1,1},0.5f,8f,3f));  
 </code></pre></li>
 </ol>
 <ul>
@@ -635,11 +635,11 @@ mPaint.setMaskFilter(new EmbossMaskFilter(new float[]{1,1,1},0.5f,8f,3f));
 </ul>
 <h2 id="mPaint-setPathEffect"><a href="#mPaint-setPathEffect" class="headerlink" title="mPaint.setPathEffect"></a>mPaint.setPathEffect</h2><ol>
 <li><p>方法:</p>
-<pre><code>PathEffect setPathEffect (PathEffect effect)  
+<pre><code> PathEffect setPathEffect (PathEffect effect)  
 </code></pre><p>设置或清除路径效果，传入 <strong>null</strong>清除效果<br><strong>PathEffect</strong> 共有 <strong>6</strong> 个子类可用于构造对象，然后作为方法参数传入  </p>
 </li>
 <li><p><strong>CornerPathEffect</strong><br>构造方法:</p>
-<pre><code>CornerPathEffect (float radius)
+<pre><code> CornerPathEffect (float radius)
 </code></pre><p>改变线段之间的圆滑度，而不是带锐角的折线形式<br>对参数的解释:  </p>
 <ul>
 <li><strong>radius</strong>:线段之间的圆滑程度    </li>
@@ -655,7 +655,7 @@ mPaint.setMaskFilter(new EmbossMaskFilter(new float[]{1,1,1},0.5f,8f,3f));
 <p>此类妙用:  当虚实线的长度为整个 <strong>path</strong> 的长度时，即 <strong>intervals</strong> 数组中仅有两个相等的元素且均为 <strong>path</strong> 长度时,虚实线的间距为 <strong>0</strong>,绘制出来的效果就是一条完整的实线。而虚实线的间距如果为 <strong>0</strong>到 <strong>path</strong> 长度之间动态变化（可借助值动画动态得到<strong>【0，1】</strong>之间变化的比例），那么就会出现类似沿着路径绘制的动画效果。</p>
 </li>
 <li><p><strong>DiscretePathEffect</strong><br>构造方法：</p>
-<pre><code>DiscretePathEffect (float segmentLength, float deviation)  
+<pre><code> DiscretePathEffect (float segmentLength, float deviation)  
 </code></pre><p>设置离散的路径效果<br>对参数的解释:  </p>
 <ul>
 <li><strong>segmentLength</strong> :离散片段的长度</li>
@@ -663,7 +663,7 @@ mPaint.setMaskFilter(new EmbossMaskFilter(new float[]{1,1,1},0.5f,8f,3f));
 </ul>
 </li>
 <li><p><strong>PathDashPathEffect</strong><br>构造方法:</p>
-<pre><code>PathDashPathEffect (Path shape, float advance, float phase, PathDashPathEffect.Style style)  
+<pre><code> PathDashPathEffect (Path shape, float advance, float phase, PathDashPathEffect.Style style)  
 </code></pre><p>用指定的路径形状对所画的路径进行虚线化标记,<strong>与顺序有关</strong>。<br>对参数的理解:  </p>
 <ul>
 <li><strong>shape</strong>:虚线段的路径形状  </li>
@@ -673,7 +673,7 @@ mPaint.setMaskFilter(new EmbossMaskFilter(new float[]{1,1,1},0.5f,8f,3f));
 </ul>
 </li>
 <li><p><strong>SumPathEffect</strong><br>构造方法：</p>
-<pre><code>SumPathEffect(PathEffect first, PathEffect second)  
+<pre><code> SumPathEffect(PathEffect first, PathEffect second)  
 </code></pre><p>逐一组合路径效果，<strong>与顺序无关</strong>。<br>对参数的理解:  </p>
 <ul>
 <li><strong>first</strong>:第一个路径效果  </li>
@@ -681,70 +681,70 @@ mPaint.setMaskFilter(new EmbossMaskFilter(new float[]{1,1,1},0.5f,8f,3f));
 </ul>
 </li>
 <li><p><strong>ComposePathEffect</strong><br>构造方法:</p>
-<pre><code>ComposePathEffect (PathEffect outerpe, PathEffect innerpe)  
+<pre><code> ComposePathEffect (PathEffect outerpe, PathEffect innerpe)  
 </code></pre><p>先指定一个内部路径效果，再指定一个外部路径效果，再将二者组合形成新的路径效果。  </p>
 </li>
 <li><p>例子:  </p>
-<pre><code>public class DrawPractice extends View {
-private Paint mPaint = new Paint();
-public static final String TAG = &quot;DrawPractice&quot;;
-private PathEffect[] mPathEffects = new PathEffect[9];
-private  Path path;
+<pre><code> public class DrawPractice extends View {
+ private Paint mPaint = new Paint();
+ public static final String TAG = &quot;DrawPractice&quot;;
+ private PathEffect[] mPathEffects = new PathEffect[9];
+ private  Path path;
 
-//省略构造函数
-private void init() {
-    mPaint.setColor(Color.BLUE);
-    mPaint.setAntiAlias(true);
-    mPaint.setStyle(Paint.Style.STROKE);
-    mPaint.setStrokeWidth(5);
-    initPath();
-}
+ //省略构造函数
+ private void init() {
+     mPaint.setColor(Color.BLUE);
+     mPaint.setAntiAlias(true);
+     mPaint.setStyle(Paint.Style.STROKE);
+     mPaint.setStrokeWidth(5);
+     initPath();
+ }
 
-private void initPath() {
-path = new Path();
-path.moveTo(20, 50);//路线起点
+ private void initPath() {
+ path = new Path();
+ path.moveTo(20, 50);//路线起点
 
-for (int i = 0; i &lt;= 30; i++) {//随机生成折线
-    path.lineTo(i * 35, (float) (Math.random() * 100));
-}
-    mPathEffects[0]=null;
-    mPathEffects[1]=new CornerPathEffect(5);
-    mPathEffects[2]=new DashPathEffect(new float[]{20,10,5,1},5);
-    mPathEffects[3]=new DiscretePathEffect(10,5);
-    Path mPath=new Path();
-    mPath.addRect(0,0,10,10, Path.Direction.CCW);
-    mPathEffects[4]=new PathDashPathEffect(mPath,20,5f,PathDashPathEffect.Style.ROTATE);
-     //注意5，6的区别 详细看图
-    mPathEffects[5]=new ComposePathEffect(mPathEffects[1],mPathEffects[4]);
-    mPathEffects[6]=new ComposePathEffect(mPathEffects[4],mPathEffects[1]);
-    //7,8其实没区别  详细看图
-    mPathEffects[7]=new SumPathEffect(mPathEffects[1],mPathEffects[4]);
-    mPathEffects[8]=new SumPathEffect(mPathEffects[4],mPathEffects[1]);
-}
+ for (int i = 0; i &lt;= 30; i++) {//随机生成折线
+     path.lineTo(i * 35, (float) (Math.random() * 100));
+ }
+     mPathEffects[0]=null;
+     mPathEffects[1]=new CornerPathEffect(5);
+     mPathEffects[2]=new DashPathEffect(new float[]{20,10,5,1},5);
+     mPathEffects[3]=new DiscretePathEffect(10,5);
+     Path mPath=new Path();
+     mPath.addRect(0,0,10,10, Path.Direction.CCW);
+     mPathEffects[4]=new PathDashPathEffect(mPath,20,5f,PathDashPathEffect.Style.ROTATE);
+      //注意5，6的区别 详细看图
+     mPathEffects[5]=new ComposePathEffect(mPathEffects[1],mPathEffects[4]);
+     mPathEffects[6]=new ComposePathEffect(mPathEffects[4],mPathEffects[1]);
+     //7,8其实没区别  详细看图
+     mPathEffects[7]=new SumPathEffect(mPathEffects[1],mPathEffects[4]);
+     mPathEffects[8]=new SumPathEffect(mPathEffects[4],mPathEffects[1]);
+ }
 
-@Override
-protected void onDraw(Canvas canvas) {
-    super.onDraw(canvas);
-for (int i = 0; i &lt;mPathEffects.length ; i++) {
-    mPaint.setPathEffect(mPathEffects[i]);
-    canvas.drawPath(path,mPaint);
-    canvas.translate(0,100);
-    }
-}
-}  
+ @Override
+ protected void onDraw(Canvas canvas) {
+     super.onDraw(canvas);
+ for (int i = 0; i &lt;mPathEffects.length ; i++) {
+     mPaint.setPathEffect(mPathEffects[i]);
+     canvas.drawPath(path,mPaint);
+     canvas.translate(0,100);
+     }
+ }
+ }  
 </code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhogedferpj20fe0gr0ul.jpg" alt="">  </p>
 </li>
 </ol>
 <h2 id="mPaint-setShader"><a href="#mPaint-setShader" class="headerlink" title="mPaint.setShader"></a>mPaint.setShader</h2><ol>
 <li><p>方法:</p>
-<pre><code>Shader setShader (Shader shader)    
+<pre><code> Shader setShader (Shader shader)    
 </code></pre><p>设置着色器,传入<strong>null</strong>清除<br>对参数的解释:  </p>
 <ul>
 <li><strong>shader</strong>:由 <strong>Shader</strong> 的五个子类构造传入,下面介绍。  </li>
 </ul>
 </li>
 <li><p><strong>BitmapShader</strong><br>构造方法:</p>
-<pre><code>BitmapShader(Bitmap bitmap, Shader.TileMode tileX, Shader.TileMode tileY)    
+<pre><code>     BitmapShader(Bitmap bitmap, Shader.TileMode tileX, Shader.TileMode tileY)    
 </code></pre><p>作用:渲染位图<br>对参数的解释:  </p>
 <ul>
 <li><strong>bitmap</strong>: 位图  </li>
@@ -753,121 +753,121 @@ for (int i = 0; i &lt;mPathEffects.length ; i++) {
 <li><strong>Shader.TileMode.CLAMP</strong>:重复水平或者竖直方向上位图的边缘颜色  </li>
 <li><strong>Shader.TileMode.MIRROR</strong>:水平或者竖直方向上重复图片的镜像，并且连接处看似无缝对接  </li>
 <li><p><strong>Shader.TileMode.REPEAT</strong>:水平或者竖直方向上重复图片<br>例子:  </p>
-<pre><code>mPaint.setAntiAlias(true);
-Bitmap panda = BitmapFactory.decodeResource(getResources(), R.drawable.images);
-mPaint.setShader(new BitmapShader(panda, Shader.TileMode.CLAMP, Shader.TileMode.REPEAT));
-canvas.drawCircle(300,300,300,mPaint);
-mPaint.setShader(new BitmapShader(panda, Shader.TileMode.MIRROR, Shader.TileMode.REPEAT));
-canvas.drawCircle(300,900,300,mPaint);  
+<pre><code>  mPaint.setAntiAlias(true);
+  Bitmap panda = BitmapFactory.decodeResource(getResources(), R.drawable.images);
+  mPaint.setShader(new BitmapShader(panda, Shader.TileMode.CLAMP, Shader.TileMode.REPEAT));
+  canvas.drawCircle(300,300,300,mPaint);
+  mPaint.setShader(new BitmapShader(panda, Shader.TileMode.MIRROR, Shader.TileMode.REPEAT));
+  canvas.drawCircle(300,900,300,mPaint);  
 </code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhqm0vzgfsj20eh0qfk6r.jpg" alt="">  </p>
 </li>
 </ul>
 </li>
 <li><p><strong>LinearGradient</strong><br>作用:设置一个沿着直线的线性渐变效果<br>构造方法1:</p>
-<pre><code>LinearGradient (float x0, 
-        float y0, 
-        float x1, 
-        float y1, 
-        int[] colors, 
-        float[] positions, 
-        Shader.TileMode tile)    
+<pre><code>     LinearGradient (float x0, 
+             float y0, 
+             float x1, 
+             float y1, 
+             int[] colors, 
+             float[] positions, 
+             Shader.TileMode tile)    
 </code></pre><p>对参数的解释:    </p>
 <ul>
 <li><strong>x0,y0,x1,y1</strong>:渐变直线的起点和终点  </li>
 <li><strong>colors</strong>:用于产生渐变效果的颜色组,非空 ，至少两种颜色</li>
 <li><strong>positions</strong>:可为空,控制颜色数组不均匀的渐变，取值[0..1] </li>
-<li><strong>tile</strong>:仍旧有三种模式可设置见上<br>构造方法2：<pre><code>LinearGradient(float x0, float y0, float x1, float y1, int color0, int color1, Shader.TileMode tile)  
+<li><strong>tile</strong>:仍旧有三种模式可设置见上<br>构造方法2：<pre><code>  LinearGradient(float x0, float y0, float x1, float y1, int color0, int color1, Shader.TileMode tile)  
 </code></pre>对参数的解释:  </li>
 <li><strong>color0</strong>:渐变的起始颜色</li>
 <li><p><strong>color1</strong>:渐变的终止颜色<br>例子:  </p>
-<pre><code>mPaint.setAntiAlias(true);
-mPaint.setStyle(Paint.Style.STROKE);
-mPaint.setStrokeWidth(10);
-mPaint.setShader(new LinearGradient(0,0,500,500, 
-                new int[]{R.color.colorPrimaryDark, Color.BLUE},null,Shader.TileMode.CLAMP));
-canvas.drawRect(new RectF(20,20,200,200),mPaint);  
+<pre><code>  mPaint.setAntiAlias(true);
+  mPaint.setStyle(Paint.Style.STROKE);
+  mPaint.setStrokeWidth(10);
+  mPaint.setShader(new LinearGradient(0,0,500,500, 
+                  new int[]{R.color.colorPrimaryDark, Color.BLUE},null,Shader.TileMode.CLAMP));
+  canvas.drawRect(new RectF(20,20,200,200),mPaint);  
 </code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhqmatix89j208409cq2s.jpg" alt="">  </p>
 </li>
 </ul>
 </li>
 <li><p><strong>RadialGradient</strong><br>作用:产生辐射状的渐变效果<br>构造方法1: </p>
-<pre><code>RadialGradient (float centerX, 
-        float centerY, 
-        float radius, 
-        int[] colors, 
-        float[] stops, 
-        Shader.TileMode tileMode)    
+<pre><code>     RadialGradient (float centerX, 
+             float centerY, 
+             float radius, 
+             int[] colors, 
+             float[] stops, 
+             Shader.TileMode tileMode)    
 </code></pre><p>对参数的解释：  </p>
 <ul>
 <li><strong>centerX,centerY</strong>:辐射的中心坐标</li>
 <li><strong>radius</strong>:辐射半径</li>
 <li><strong>colors</strong>:渐变颜色数组，至少两种颜色</li>
-<li><strong>stops</strong>:可为空,控制颜色数组不均匀的渐变，取值[0..1]<br>构造方法2:  <pre><code>RadialGradient (float centerX, 
-        float centerY, 
-        float radius, 
-        int centerColor, 
-        int edgeColor, 
-        Shader.TileMode tileMode)    
+<li><strong>stops</strong>:可为空,控制颜色数组不均匀的渐变，取值[0..1]<br>构造方法2:  <pre><code>  RadialGradient (float centerX, 
+          float centerY, 
+          float radius, 
+          int centerColor, 
+          int edgeColor, 
+          Shader.TileMode tileMode)    
 </code></pre>对参数的解释:  </li>
 <li><strong>centerColor</strong>: 辐射中心的颜色  </li>
 <li><p><strong>edgeColor</strong>:辐射边缘的颜色<br>例子:  </p>
-<pre><code>mPaint.setAntiAlias(true);
-mPaint.setShader(new RadialGradient(300,300,300, Color.RED, Color.BLUE,Shader.TileMode.CLAMP));
-canvas.drawCircle(200,300,200,mPaint);  
+<pre><code>  mPaint.setAntiAlias(true);
+  mPaint.setShader(new RadialGradient(300,300,300, Color.RED, Color.BLUE,Shader.TileMode.CLAMP));
+  canvas.drawCircle(200,300,200,mPaint);  
 </code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhqmf8oa30j20ac0d8myi.jpg" alt="">  </p>
 </li>
 </ul>
 </li>
 <li><p><strong>SweepGradient</strong><br>作用:绕中心顺时针旋转360度渐变<br>构造方法1: </p>
-<pre><code>SweepGradient (float cx, 
-        float cy, 
-        int[] colors, 
-        float[] positions)    
+<pre><code>     SweepGradient (float cx, 
+             float cy, 
+             int[] colors, 
+             float[] positions)    
 </code></pre><p>对参数的解释：  </p>
 <ul>
 <li><strong>cx,cy</strong>: 旋转中心坐标</li>
 <li><strong>colors</strong>:渐变颜色数组，至少两种颜色</li>
-<li><strong>positions</strong>:可为空,控制颜色数组不均匀的渐变，取值[0..1]<br>构造方法2:  <pre><code>SweepGradient (float cx, 
-        float cy, 
-        int color0, 
-        int color1)    
+<li><strong>positions</strong>:可为空,控制颜色数组不均匀的渐变，取值[0..1]<br>构造方法2:  <pre><code>  SweepGradient (float cx, 
+          float cy, 
+          int color0, 
+          int color1)    
 </code></pre>对参数的解释:  </li>
 <li><strong>color0</strong>: 渐变的起始颜色 </li>
 <li><p><strong>color1</strong>:渐变的终止颜色<br>例子:  </p>
-<pre><code>mPaint.setAntiAlias(true);
-mPaint.setShader(new SweepGradient(300,300 ,Color.RED, Color.BLUE));
-canvas.drawCircle(200,300,200,mPaint);  
+<pre><code>  mPaint.setAntiAlias(true);
+  mPaint.setShader(new SweepGradient(300,300 ,Color.RED, Color.BLUE));
+  canvas.drawCircle(200,300,200,mPaint);  
 </code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhqmgoged8j20al0dg0tz.jpg" alt="">  </p>
 </li>
 </ul>
 </li>
 <li><p><strong>ComposeShader</strong><br>作用:用指定的模式组合两个渐变效果<br>构造方法1: </p>
-<pre><code>ComposeShader (Shader shaderA, 
-        Shader shaderB, 
-        Xfermode mode)    
+<pre><code>     ComposeShader (Shader shaderA, 
+             Shader shaderB, 
+             Xfermode mode)    
 </code></pre><p>对参数的解释：  </p>
 <ul>
 <li><strong>shaderA,shaderB</strong>: 要组合的两个渐变 <strong>shader</strong>  </li>
-<li><strong>Xfermode mode</strong>:设置两张图片相交时的混合模式，与<strong>mPaint.setXfermode()</strong>一样<br>构造方法2:  <pre><code>ComposeShader (Shader shaderA, 
-    Shader shaderB, 
-    PorterDuff.Mode mode)  
+<li><strong>Xfermode mode</strong>:设置两张图片相交时的混合模式，与<strong>mPaint.setXfermode()</strong>一样<br>构造方法2:  <pre><code>      ComposeShader (Shader shaderA, 
+          Shader shaderB, 
+          PorterDuff.Mode mode)  
 </code></pre>对参数的解释:  </li>
 <li><p><strong>PorterDuff.Mode mode</strong>:设置两张图片相交时的混合规则<br>例子：  </p>
-<pre><code>BitmapShader shader = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.images), Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
-BitmapShader shader1 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher), Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
-mPaint.setShader(new ComposeShader(shader, shader1, PorterDuff.Mode.SRC_OVER));
-canvas.drawCircle(50, 50, 50, mPaint);    
+<pre><code>  BitmapShader shader = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.images), Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+  BitmapShader shader1 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher), Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+  mPaint.setShader(new ComposeShader(shader, shader1, PorterDuff.Mode.SRC_OVER));
+  canvas.drawCircle(50, 50, 50, mPaint);    
 </code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhrvcznt4oj207y07vgln.jpg" alt="">    </p>
 </li>
 </ul>
 </li>
 </ol>
 <p><strong>PorterDuffXfermode</strong>(<strong>XferMode</strong> 子类)<br>构造方法: </p>
-<pre><code>PorterDuffXfermode(PorterDuff.Mode mode)  
+<pre><code>    PorterDuffXfermode(PorterDuff.Mode mode)  
 </code></pre><p>作用：指定一个 <strong>PorterDuff</strong>规则创建Xfermode实例<br><a href="http://www.jianshu.com/p/d11892bbe055" target="_blank" rel="noopener">PorterDuff.Mode使用详解看这</a></p>
 <h2 id="mPaint-setShaderLayer"><a href="#mPaint-setShaderLayer" class="headerlink" title="mPaint.setShaderLayer"></a>mPaint.setShaderLayer</h2><ol>
 <li><p>方法:  </p>
-<pre><code>void setShadowLayer (float radius, float dx, float dy, int shadowColor)
+<pre><code> void setShadowLayer (float radius, float dx, float dy, int shadowColor)
 </code></pre><p>作用:在主图层下添加阴影效果<br>对参数的解释:  </p>
 <ul>
 <li><strong>radius</strong>:设置显示阴影的半径</li>
@@ -876,74 +876,74 @@ canvas.drawCircle(50, 50, 50, mPaint);
 </ul>
 </li>
 <li><p>例子：  </p>
-<pre><code>mPaint.setColor(Color.BLUE);
-mPaint.setTextSize(20);
-mPaint.setShadowLayer(50,50,50, Color.RED);
-canvas.drawText(&quot;看主图层下面的阴影效果&quot;,50,50,mPaint);  
+<pre><code> mPaint.setColor(Color.BLUE);
+ mPaint.setTextSize(20);
+ mPaint.setShadowLayer(50,50,50, Color.RED);
+ canvas.drawText(&quot;看主图层下面的阴影效果&quot;,50,50,mPaint);  
 </code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25ly1fhrvkk5fmzj209907ua9z.jpg" alt="">  </p>
 </li>
 </ol>
 <h2 id="mPaint-setStrikeThruText"><a href="#mPaint-setStrikeThruText" class="headerlink" title="mPaint.setStrikeThruText"></a>mPaint.setStrikeThruText</h2><ol>
 <li><p>方法:  </p>
-<pre><code>void setStrikeThruText (boolean strikeThruText)
+<pre><code> void setStrikeThruText (boolean strikeThruText)
 </code></pre></li>
 <li>作用:设置删除线,与 <strong>setFlag(STRIKE_THRU_TEXT_FLAG)</strong>同等效果<br><img src="http://ww1.sinaimg.cn/large/8992ce25ly1fhruzmonnjj206t06xa9y.jpg" alt="">  </li>
 </ol>
 <h2 id="mPaint-setStrokeCap"><a href="#mPaint-setStrokeCap" class="headerlink" title="mPaint.setStrokeCap"></a>mPaint.setStrokeCap</h2><ol>
 <li><p>方法:  </p>
-<pre><code>void setStrokeCap (Paint.Cap cap)  
+<pre><code> void setStrokeCap (Paint.Cap cap)  
 </code></pre></li>
 <li>作用：当画笔的样式是 <strong>Stroke</strong> 或者 <strong>StrokeAndFill</strong>，可改变画笔的笔头样式，比如圆形的笔头(<strong>Cap.ROUND</strong>)、方形的笔头(<strong>Cap.SQUARE</strong>)  </li>
 <li>例子:<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhqrwi1ljlj208r0a0dfn.jpg" alt=""><br>从左到右分别为 <strong>BUTT(默认)、ROUND、SQUARE</strong>。其中后两条线前后均会超出上下的基线，并且形状各异，很像戴了个帽子(<strong>Cap</strong>)。</li>
 </ol>
 <h2 id="mPaint-setStrokeJoin"><a href="#mPaint-setStrokeJoin" class="headerlink" title="mPaint.setStrokeJoin"></a>mPaint.setStrokeJoin</h2><ol>
 <li><p>方法:  </p>
-<pre><code>void setStrokeJoin (Paint.Join join)  
+<pre><code> void setStrokeJoin (Paint.Join join)  
 </code></pre><p>作用:当画笔的样式是 <strong>Stroke</strong> 或者 <strong>StrokeAndFill</strong>,可改变画笔在转弯时候的样式,锐角、斜切、圆角处理。 </p>
 </li>
 <li>例子:<br><a href="http://blog.csdn.net/hnulwt/article/details/42705895" target="_blank" rel="noopener">Cap 与 Join 详解</a><br>从左到右分别是 <strong>MITER,BEVEL,ROUND;</strong><br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhqrk7lvhxj20de088glf.jpg" alt="">  </li>
 </ol>
 <h2 id="mPaint-setStrokeMiter"><a href="#mPaint-setStrokeMiter" class="headerlink" title="mPaint.setStrokeMiter"></a>mPaint.setStrokeMiter</h2><ol>
 <li><p>方法:  </p>
-<pre><code>void setStrokeMiter (float miter)  
+<pre><code> void setStrokeMiter (float miter)  
 </code></pre></li>
 <li>作用：当画笔的样式是 <strong>Stroke</strong> 或者 <strong>StrokeAndFill</strong>,控制斜接连接处的角度，值必须大于等于 <strong>0</strong>，即控制Paint.Join.Miter的效果</li>
 </ol>
 <h2 id="mPaint-setStrokeWidth"><a href="#mPaint-setStrokeWidth" class="headerlink" title="mPaint.setStrokeWidth"></a>mPaint.setStrokeWidth</h2><ol>
 <li><p>方法:  </p>
-<pre><code>void setStrokeWidth (float width)  
+<pre><code> void setStrokeWidth (float width)  
 </code></pre></li>
 <li>作用:设置画笔的粗细程度    </li>
 </ol>
 <h2 id="mPaint-setStyle"><a href="#mPaint-setStyle" class="headerlink" title="mPaint.setStyle"></a>mPaint.setStyle</h2><ol>
 <li><p>方法:  </p>
-<pre><code>void setStyle (Paint.Style style)  
+<pre><code> void setStyle (Paint.Style style)  
 </code></pre></li>
 <li>作用:控制画笔的样式模式,有仅填充(<strong>Paint.Style.Fill</strong>),描边且填充(<strong>Paint.Style.FILL_AND_STROKE</strong>),仅描边(<strong>Paint.Style.STROKE</strong>),简单地说，就是空心还是实心。  </li>
 </ol>
 <h2 id="mPaint-setSubpixelText"><a href="#mPaint-setSubpixelText" class="headerlink" title="mPaint.setSubpixelText"></a>mPaint.setSubpixelText</h2><ol>
 <li><p>方法:  </p>
-<pre><code>void setSubpixelText (boolean subpixelText)  
+<pre><code> void setSubpixelText (boolean subpixelText)  
 </code></pre></li>
 <li>作用:有助于文本在LCD屏幕上的显示效果.但由于当今手机密度高,此方法已无用武之地,略过。  </li>
 </ol>
 <h2 id="mPaint-setTextAlign"><a href="#mPaint-setTextAlign" class="headerlink" title="mPaint.setTextAlign"></a>mPaint.setTextAlign</h2><ol>
 <li><p>方法:  </p>
-<pre><code>void setTextAlign (Paint.Align align)  
+<pre><code> void setTextAlign (Paint.Align align)  
 </code></pre><p>作用：设置文本的对齐方式,以有文本第一个字为基准靠左(<strong>Paint.Align.LEFT</strong>),居中(<strong>Paint.Align.CENTER</strong>),以文本最后一个字为基准靠右(<strong>Paint.Align.RIGHT</strong>)。  </p>
 </li>
 <li>例子:  </li>
 </ol>
 <h2 id="mPaint-setTextLocale"><a href="#mPaint-setTextLocale" class="headerlink" title="mPaint.setTextLocale"></a>mPaint.setTextLocale</h2><ol>
 <li><p>方法：  </p>
-<pre><code>void setTextLocale (Locale locale)  
+<pre><code> void setTextLocale (Locale locale)  
 </code></pre></li>
 <li><p>作用：指定字体所使用的语言,例如<strong>Local.CHINA</strong>  </p>
 </li>
 </ol>
 <h2 id="mPaint-setTextScaleX"><a href="#mPaint-setTextScaleX" class="headerlink" title="mPaint.setTextScaleX"></a>mPaint.setTextScaleX</h2><ol>
 <li><p>方法：  </p>
-<pre><code>void setTextScaleX (float scaleX)  
+<pre><code> void setTextScaleX (float scaleX)  
 </code></pre></li>
 <li>作用:设置文本的缩放比，默认为 <strong>1</strong>.值大于 <strong>1</strong>文本变宽，值小于 <strong>1</strong> 值变窄   </li>
 <li>例子:  </li>
@@ -951,82 +951,81 @@ canvas.drawText(&quot;看主图层下面的阴影效果&quot;,50,50,mPaint);
 <p><img src="http://ww1.sinaimg.cn/large/8992ce25ly1fhruojcqu2j20a308yt8u.jpg" alt=""></p>
 <h2 id="mPaint-setTextSize"><a href="#mPaint-setTextSize" class="headerlink" title="mPaint.setTextSize"></a>mPaint.setTextSize</h2><ol>
 <li><p>方法:  </p>
-<pre><code>void setTextSize (float textSize)  
+<pre><code> void setTextSize (float textSize)  
 </code></pre></li>
 <li>作用:设置文本的字体大小  </li>
 </ol>
 <h2 id="mPaint-setTextSkewX"><a href="#mPaint-setTextSkewX" class="headerlink" title="mPaint.setTextSkewX"></a>mPaint.setTextSkewX</h2><ol>
 <li><p>方法：  </p>
-<pre><code>void setTextSkewX (float skewX)  
+<pre><code> void setTextSkewX (float skewX)  
 </code></pre></li>
 <li>作用:设置文本的斜切比(也叫文字的倾斜度),默认为 <strong>0</strong>，若要使用合适的倾斜文本，推荐使用 <strong>-0.25</strong><br><img src="http://ww1.sinaimg.cn/large/8992ce25ly1fhrurhu6t3j207w08fmx6.jpg" alt="">  </li>
 </ol>
 <h2 id="mPaint-setTypeface"><a href="#mPaint-setTypeface" class="headerlink" title="mPaint.setTypeface"></a>mPaint.setTypeface</h2><ol>
 <li><p>方法:  </p>
-<pre><code>Typeface setTypeface (Typeface typeface)  
+<pre><code> Typeface setTypeface (Typeface typeface)  
 </code></pre></li>
 <li>作用:设置文本的字体，传入 <strong>null</strong> 清除字体。<strong>Typeface</strong> 包含了字体的类型，粗细，还有倾斜、颜色等。    </li>
 </ol>
 <h2 id="mPaint-setUnderlineText"><a href="#mPaint-setUnderlineText" class="headerlink" title="mPaint.setUnderlineText"></a>mPaint.setUnderlineText</h2><ol>
 <li><p>方法：  </p>
-<pre><code>void setUnderlineText (boolean underlineText)  
+<pre><code> void setUnderlineText (boolean underlineText)  
 </code></pre></li>
 <li>作用:设置下划线<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhrutchzj3j207k08a746.jpg" alt="">  </li>
 </ol>
 <h1 id="getxx及其他方法"><a href="#getxx及其他方法" class="headerlink" title="getxx及其他方法"></a>getxx及其他方法</h1><h2 id="mpaint-getFontSpace"><a href="#mpaint-getFontSpace" class="headerlink" title="mpaint.getFontSpace"></a>mpaint.getFontSpace</h2><ol>
 <li><p>方法:  </p>
-<pre><code>float getFontSpacing () 
+<pre><code> float getFontSpacing () 
 </code></pre><p>作用：返回基于当前文字大小和字体所推荐的一个行间距。在绘制多行文本的时候可以通过此方法更改文字的下一基线位置,使得两行文本之间的间距达到一个合适的值。  </p>
 </li>
 <li><p>例子:  </p>
-<pre><code>String text = &quot;使用 drawText() 来绘制文字&quot;;
-canvas.drawText(text, 50, 100, paint);
-canvas.drawText(text, 50, 100 + paint.getFontSpacing(), paint);  
+<pre><code> String text = &quot;使用 drawText() 来绘制文字&quot;;
+ canvas.drawText(text, 50, 100, paint);
+ canvas.drawText(text, 50, 100 + paint.getFontSpacing(), paint);  
 </code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fi1xf7fkm2j20bv084dg3.jpg" alt="">  </p>
 </li>
 </ol>
 <h2 id="mpaint-getFontMetric"><a href="#mpaint-getFontMetric" class="headerlink" title="mpaint.getFontMetric"></a>mpaint.getFontMetric</h2><ol>
 <li><p>方法1:  </p>
-<pre><code>Paint.FontMetrics getFontMetrics ()  
+<pre><code> Paint.FontMetrics getFontMetrics ()  
 </code></pre></li>
 <li><p>方法2：  </p>
-<pre><code>float getFontMetrics (Paint.FontMetrics metrics)  
+<pre><code> float getFontMetrics (Paint.FontMetrics metrics)  
 </code></pre></li>
 <li>详解:<strong>FontMetricsInt</strong>共有 <strong>5</strong> 个值，分别是 <strong>top、bottom、ascent、descent、leading</strong><br><strong>top</strong> 与 <strong>bottom</strong> 限制了文字绘制的最大和最小的范围。<strong>ascent</strong> 和 <strong>descent</strong> 限制了字形的所有顶部与底部的范围（不同的字形有高低，有的顶高一些，有的底低一些),<strong>leading</strong> 表示两行文字各自的基线之间的间距<br><img src="http://ww1.sinaimg.cn/large/8992ce25ly1fi21sj2fd2j20oe06jwg6.jpg" alt=""><br>此图来源于扔物线大佬的杰作。<br>由图中按顺序，分别时 <strong>top、ascent、baseline、 descent、bottom</strong> 所在的直线。<br>并且以 <strong>baseline</strong> 为轴，在其上的线所在位置为负数距离，在其下的线所在的位置为正数距离。<br>例如:<code>fontMetric.bottom-fonMetric.top</code>即表示文字上下区域的一个最大高度。<br>另外，如果需要多次调用方法 <strong>1</strong>，那么可以选择使用方法 <strong>2</strong> 以提高性能。<br>注意:如果要使绘制的多个文本 <strong>baseline</strong> 对齐，可以使用<strong>int middle = (top + bottom) / 2;</strong><br>计算法来控制文本同在一条基线上。  </li>
 </ol>
 <h2 id="paint-getTextBound"><a href="#paint-getTextBound" class="headerlink" title="paint.getTextBound"></a>paint.getTextBound</h2><ol>
 <li><p>方法1:  </p>
-<pre><code>void getTextBounds (String text, int start, int end, Rect bounds)  
+<pre><code> void getTextBounds (String text, int start, int end, Rect bounds)  
 </code></pre></li>
 <li><p>方法2:  </p>
-<pre><code>void getTextBounds (char[] text,  int index, int count, Rect bounds)  
+<pre><code> void getTextBounds (char[] text,  int index, int count, Rect bounds)  
 </code></pre></li>
 <li>作用：返回文字四周的显示范围 </li>
 <li>参数 <strong>bound</strong> 为一个矩形对象。当方法完成测量后会将值返回给该对象，进而得到一个矩形范围。如果矩形的四个坐标再加上一定偏移值则刚好可以将文字包围住。  </li>
 <li><p>例子:  </p>
-<pre><code>String text = &quot;绘制文字&quot;;
-paint.setStyle(Paint.Style.FILL);
-int offsetX = 50, offsetY = 100;
-canvas.drawText(text, offsetX, offsetY, paint);
-Rect bounds = new Rect();
-paint.getTextBounds(text, 0, text.length(), bounds);
-bounds.left += offsetX;
-bounds.top += offsetY;
-bounds.right += offsetX;
-bounds.bottom += offsetY;
-paint.setStyle(Paint.Style.STROKE);
-canvas.drawRect(bounds, paint);  
+<pre><code> String text = &quot;绘制文字&quot;;
+ paint.setStyle(Paint.Style.FILL);
+ int offsetX = 50, offsetY = 100;
+ canvas.drawText(text, offsetX, offsetY, paint);
+ Rect bounds = new Rect();
+ paint.getTextBounds(text, 0, text.length(), bounds);
+ bounds.left += offsetX;
+ bounds.top += offsetY;
+ bounds.right += offsetX;
+ bounds.bottom += offsetY;
+ paint.setStyle(Paint.Style.STROKE);
+ canvas.drawRect(bounds, paint);  
 </code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fi1yr1tk1gj208b059glg.jpg" alt=""><br><strong>注意</strong>：此方法测量出来的值会比 <strong>measureText()</strong> 更少一些，原因在于 <strong>measuresText</strong> 方法测量的是文字所占用的宽度，而者宽度还包括类文字两边默认的一个间隙。</p>
 </li>
 </ol>
 <h2 id="mPaint-setXfermode"><a href="#mPaint-setXfermode" class="headerlink" title="mPaint.setXfermode"></a>mPaint.setXfermode</h2><ol>
 <li><p>方法:  </p>
-<pre><code>Xfermode setXfermode (Xfermode xfermode)  
+<pre><code> Xfermode setXfermode (Xfermode xfermode)  
 </code></pre><p>作用：设置图像混合模式，其实是使用 <strong>Xfermode</strong>的子类 <strong>PorterDuffXfermode</strong>,而整个子类又是由 <strong>PorterDuff.Mode</strong>来决定的。</p>
 </li>
 </ol>
-<p>##PorterDuff.Mode的详解##</p>
-<ol>
+<h2 id="PorterDuff-Mode的详解"><a href="#PorterDuff-Mode的详解" class="headerlink" title="PorterDuff.Mode的详解"></a>PorterDuff.Mode的详解</h2><ol>
 <li>名称由来：该种图像组合模式时由分别叫 <strong>Porter</strong> 和 <strong>Duff</strong> 两人提出的，因此为了表示对他们的敬意，便以二人的名称合体来命名这种模式。其实他们仅提出了12种<a href="https://en.wikipedia.org/wiki/Alpha_compositing" target="_blank" rel="noopener">Alpha合成模式</a>，后来为了方便便将图像混合的模式也加入到该类中。  </li>
 <li>作用:用于图形合成时图像的饱和度、颜色值等的图像表现。</li>
 <li>关键的两个图像:原图像(<strong>Source image</strong>)和目标图像(<strong>Destination image</strong>)  </li>
@@ -1284,7 +1283,7 @@ canvas.drawRect(bounds, paint);
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mPaint-measureXX"><span class="nav-number">2.</span> <span class="nav-text">mPaint.measureXX</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-MeasureText"><span class="nav-number">2.1.</span> <span class="nav-text">mPaint.MeasureText</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mPaint-breakXXX"><span class="nav-number">3.</span> <span class="nav-text">mPaint.breakXXX</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-breakText"><span class="nav-number">3.1.</span> <span class="nav-text">mPaint.breakText</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mPaint-setXXX"><span class="nav-number">4.</span> <span class="nav-text">mPaint.setXXX</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-set"><span class="nav-number">4.1.</span> <span class="nav-text">mPaint.set</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setAlpha"><span class="nav-number">4.2.</span> <span class="nav-text">mPaint.setAlpha</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setARGB"><span class="nav-number">4.3.</span> <span class="nav-text">mPaint.setARGB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setAntiAlias"><span class="nav-number">4.4.</span> <span class="nav-text">mPaint.setAntiAlias</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setColor"><span class="nav-number">4.5.</span> <span class="nav-text">mPaint.setColor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setColorFilter"><span class="nav-number">4.6.</span> <span class="nav-text">mPaint.setColorFilter</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ColorFilter"><span class="nav-number">4.6.1.</span> <span class="nav-text">ColorFilter</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setDither"><span class="nav-number">4.7.</span> <span class="nav-text">mPaint.setDither</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setFakeBoldText"><span class="nav-number">4.8.</span> <span class="nav-text">mPaint.setFakeBoldText</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setFilterBitmap"><span class="nav-number">4.9.</span> <span class="nav-text">mPaint.setFilterBitmap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setHinting"><span class="nav-number">4.10.</span> <span class="nav-text">mPaint.setHinting</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setLetterSpacing"><span class="nav-number">4.11.</span> <span class="nav-text">mPaint.setLetterSpacing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setLinearText"><span class="nav-number">4.12.</span> <span class="nav-text">mPaint.setLinearText</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setMaskFilter"><span class="nav-number">4.13.</span> <span class="nav-text">mPaint.setMaskFilter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setPathEffect"><span class="nav-number">4.14.</span> <span class="nav-text">mPaint.setPathEffect</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setShader"><span class="nav-number">4.15.</span> <span class="nav-text">mPaint.setShader</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setShaderLayer"><span class="nav-number">4.16.</span> <span class="nav-text">mPaint.setShaderLayer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setStrikeThruText"><span class="nav-number">4.17.</span> <span class="nav-text">mPaint.setStrikeThruText</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setStrokeCap"><span class="nav-number">4.18.</span> <span class="nav-text">mPaint.setStrokeCap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setStrokeJoin"><span class="nav-number">4.19.</span> <span class="nav-text">mPaint.setStrokeJoin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setStrokeMiter"><span class="nav-number">4.20.</span> <span class="nav-text">mPaint.setStrokeMiter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setStrokeWidth"><span class="nav-number">4.21.</span> <span class="nav-text">mPaint.setStrokeWidth</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setStyle"><span class="nav-number">4.22.</span> <span class="nav-text">mPaint.setStyle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setSubpixelText"><span class="nav-number">4.23.</span> <span class="nav-text">mPaint.setSubpixelText</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setTextAlign"><span class="nav-number">4.24.</span> <span class="nav-text">mPaint.setTextAlign</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setTextLocale"><span class="nav-number">4.25.</span> <span class="nav-text">mPaint.setTextLocale</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setTextScaleX"><span class="nav-number">4.26.</span> <span class="nav-text">mPaint.setTextScaleX</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setTextSize"><span class="nav-number">4.27.</span> <span class="nav-text">mPaint.setTextSize</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setTextSkewX"><span class="nav-number">4.28.</span> <span class="nav-text">mPaint.setTextSkewX</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setTypeface"><span class="nav-number">4.29.</span> <span class="nav-text">mPaint.setTypeface</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setUnderlineText"><span class="nav-number">4.30.</span> <span class="nav-text">mPaint.setUnderlineText</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#getxx及其他方法"><span class="nav-number">5.</span> <span class="nav-text">getxx及其他方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mpaint-getFontSpace"><span class="nav-number">5.1.</span> <span class="nav-text">mpaint.getFontSpace</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mpaint-getFontMetric"><span class="nav-number">5.2.</span> <span class="nav-text">mpaint.getFontMetric</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#paint-getTextBound"><span class="nav-number">5.3.</span> <span class="nav-text">paint.getTextBound</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setXfermode"><span class="nav-number">5.4.</span> <span class="nav-text">mPaint.setXfermode</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mPaint-measureXX"><span class="nav-number">2.</span> <span class="nav-text">mPaint.measureXX</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-MeasureText"><span class="nav-number">2.1.</span> <span class="nav-text">mPaint.MeasureText</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mPaint-breakXXX"><span class="nav-number">3.</span> <span class="nav-text">mPaint.breakXXX</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-breakText"><span class="nav-number">3.1.</span> <span class="nav-text">mPaint.breakText</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mPaint-setXXX"><span class="nav-number">4.</span> <span class="nav-text">mPaint.setXXX</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-set"><span class="nav-number">4.1.</span> <span class="nav-text">mPaint.set</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setAlpha"><span class="nav-number">4.2.</span> <span class="nav-text">mPaint.setAlpha</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setARGB"><span class="nav-number">4.3.</span> <span class="nav-text">mPaint.setARGB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setAntiAlias"><span class="nav-number">4.4.</span> <span class="nav-text">mPaint.setAntiAlias</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setColor"><span class="nav-number">4.5.</span> <span class="nav-text">mPaint.setColor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setColorFilter"><span class="nav-number">4.6.</span> <span class="nav-text">mPaint.setColorFilter</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ColorFilter"><span class="nav-number">4.6.1.</span> <span class="nav-text">ColorFilter</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setDither"><span class="nav-number">4.7.</span> <span class="nav-text">mPaint.setDither</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setFakeBoldText"><span class="nav-number">4.8.</span> <span class="nav-text">mPaint.setFakeBoldText</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setFilterBitmap"><span class="nav-number">4.9.</span> <span class="nav-text">mPaint.setFilterBitmap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setHinting"><span class="nav-number">4.10.</span> <span class="nav-text">mPaint.setHinting</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setLetterSpacing"><span class="nav-number">4.11.</span> <span class="nav-text">mPaint.setLetterSpacing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setLinearText"><span class="nav-number">4.12.</span> <span class="nav-text">mPaint.setLinearText</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setMaskFilter"><span class="nav-number">4.13.</span> <span class="nav-text">mPaint.setMaskFilter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setPathEffect"><span class="nav-number">4.14.</span> <span class="nav-text">mPaint.setPathEffect</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setShader"><span class="nav-number">4.15.</span> <span class="nav-text">mPaint.setShader</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setShaderLayer"><span class="nav-number">4.16.</span> <span class="nav-text">mPaint.setShaderLayer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setStrikeThruText"><span class="nav-number">4.17.</span> <span class="nav-text">mPaint.setStrikeThruText</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setStrokeCap"><span class="nav-number">4.18.</span> <span class="nav-text">mPaint.setStrokeCap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setStrokeJoin"><span class="nav-number">4.19.</span> <span class="nav-text">mPaint.setStrokeJoin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setStrokeMiter"><span class="nav-number">4.20.</span> <span class="nav-text">mPaint.setStrokeMiter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setStrokeWidth"><span class="nav-number">4.21.</span> <span class="nav-text">mPaint.setStrokeWidth</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setStyle"><span class="nav-number">4.22.</span> <span class="nav-text">mPaint.setStyle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setSubpixelText"><span class="nav-number">4.23.</span> <span class="nav-text">mPaint.setSubpixelText</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setTextAlign"><span class="nav-number">4.24.</span> <span class="nav-text">mPaint.setTextAlign</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setTextLocale"><span class="nav-number">4.25.</span> <span class="nav-text">mPaint.setTextLocale</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setTextScaleX"><span class="nav-number">4.26.</span> <span class="nav-text">mPaint.setTextScaleX</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setTextSize"><span class="nav-number">4.27.</span> <span class="nav-text">mPaint.setTextSize</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setTextSkewX"><span class="nav-number">4.28.</span> <span class="nav-text">mPaint.setTextSkewX</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setTypeface"><span class="nav-number">4.29.</span> <span class="nav-text">mPaint.setTypeface</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setUnderlineText"><span class="nav-number">4.30.</span> <span class="nav-text">mPaint.setUnderlineText</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#getxx及其他方法"><span class="nav-number">5.</span> <span class="nav-text">getxx及其他方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mpaint-getFontSpace"><span class="nav-number">5.1.</span> <span class="nav-text">mpaint.getFontSpace</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mpaint-getFontMetric"><span class="nav-number">5.2.</span> <span class="nav-text">mpaint.getFontMetric</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#paint-getTextBound"><span class="nav-number">5.3.</span> <span class="nav-text">paint.getTextBound</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mPaint-setXfermode"><span class="nav-number">5.4.</span> <span class="nav-text">mPaint.setXfermode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PorterDuff-Mode的详解"><span class="nav-number">5.5.</span> <span class="nav-text">PorterDuff.Mode的详解</span></a></li></ol></li></ol></div>
             
 
           </div>

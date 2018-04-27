@@ -551,8 +551,9 @@
 <p>算法名称中 <strong>k</strong> 表示我们只选取与测试样本最相似的 <strong>k</strong> 个训练样本。</p>
 </blockquote>
 <p>接下来，我以 kNN 分类器为例，利用 python 实现其算法思想。</p>
-<h1 id="python实现"><a href="#python实现" class="headerlink" title="python实现"></a>python实现</h1><p>首先，若选择欧式距离衡量两个向量点xA和xB之间的距离,则其公式如下:<br>$$ \cdot \<br>d=\sqrt {\left( xA_{0}-xB_{0}\right) ^{2}+\left( xA_{1}-xB_{1}\right) ^{2}} $$  </p>
-<p>接下来，定义函数 <code>classify0()</code>传入相应参数即可完成 kNN 分类。<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpjjcgtcg9j20wq0dxdgy.jpg" alt=""></p>
+<h1 id="python实现"><a href="#python实现" class="headerlink" title="python实现"></a>python实现</h1><p>首先，若选择欧式距离衡量两个向量点xA和xB之间的距离,则其公式如下:  </p>
+<script type="math/tex; mode=display">\cdot \\
+d=\sqrt {\left( xA\_{0}-xB\_{0}\right) ^{2}+\left( xA\_{1}-xB\_{1}\right) ^{2}}</script><p>接下来，定义函数 <code>classify0()</code>传入相应参数即可完成 kNN 分类。<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpjjcgtcg9j20wq0dxdgy.jpg" alt=""></p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
 <li>&lt;&lt;机器学习&gt;&gt;周志华  </li>
 <li>&lt;&lt;机器学习实战&gt;&gt;</li>
@@ -1187,7 +1188,7 @@
     mMeasureCache.put(key, ((long) mMeasuredWidth) &lt;&lt; 32 |
             (long) mMeasuredHeight &amp; 0xffffffffL); 
 }  
-</code></pre><p>#onMeasure源码分析#<br>此方法的作用是测量 <code>view</code>及其内容，以确定测量宽度以及测量高度。并且必须调用 <code>setMeasuredDimension(int, int)</code> 以保存测量宽高信息。  </p>
+</code></pre><h1 id="onMeasure源码分析"><a href="#onMeasure源码分析" class="headerlink" title="onMeasure源码分析"></a>onMeasure源码分析</h1><p>此方法的作用是测量 <code>view</code>及其内容，以确定测量宽度以及测量高度。并且必须调用 <code>setMeasuredDimension(int, int)</code> 以保存测量宽高信息。  </p>
 <pre><code>protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
     //根据默认的view的宽高大小和对应的parent的测量规格,设置测量尺寸并保存宽高信息
     setMeasuredDimension(getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec),
@@ -1386,6 +1387,7 @@ private void setMeasuredDimensionRaw(int measuredWidth, int measuredHeight) {
     return MeasureSpec.makeMeasureSpec(resultSize, resultMode);
 }  
 </code></pre><p>其实以上方法的流程，我们可以总结为这样一张表格，可以显得更加直观。  </p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1416,6 +1418,7 @@ private void setMeasuredDimensionRaw(int measuredWidth, int measuredHeight) {
 </tr>
 </tbody>
 </table>
+</div>
 <p>表格的第一行为 <code>ViewGroup</code> 对 <code>children</code> 对测量模式，第一列为 <code>children</code> 具体的 <code>LayoutParams</code> ，结果为 <code>children</code> 最终的测量尺寸和测量模式。</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>在第一部分，首先，我们从 <code>MeasureSpec</code>这个类切入，详细解析了三大测量模式的含义，以及指定新测量规格的方法等；其次，分析了 <code>measure()</code> ，知道了 <code>View</code> 中其实是有缓存测量过的信息的，否则 <code>view</code> 才会重新测量,也知道了真正的测量工作其实是在 <code>onMeasure ()</code> 方法中进行，因此我们可以重写该方法，重新定义 <code>view</code>的测量逻辑；再来，我们通过调用 <code>setMeasureDimension()</code>为 <code>view</code>重新定义了新的宽度和高度；最后，我们又解析了方法 <code>resolveSize()</code>的作用，它作为一个工具方法能够辅助你进行测量工作。  </p>
 <p>在第二部分，首先我们研究了 <code>ViewGroup</code>中测量 <code>children</code> 的方法 <code>measureChildren()</code> ，知道其实它是通过遍历每个child进行测量的，然后进一步研究了测量单个 <code>child</code> 的方法 <code>measureChild()</code> 以及 <code>measureChildWithMargins()</code> ，而两者内部其实关键在于 <code>getChildMeasureSpec()</code> 的调用，该方法对于 <code>ViewGroup</code> 与 <code>Children</code> 之间可能存在的各种布局关系进行了分类讨论，以至于能够得到一个最佳的 <code>child</code> 测量规格。</p>

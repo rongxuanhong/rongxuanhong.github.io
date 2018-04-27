@@ -407,12 +407,12 @@
 <h2 id="算法思路三"><a href="#算法思路三" class="headerlink" title="算法思路三"></a>算法思路三</h2><p>我们发现将 n 减去 1 再和 n 位与可以去掉 n 中最右的 1，那么 n 中有几个这样的 1 ，就需要去掉几次。</p>
 <blockquote>
 <p>注：把一个整数减去 1 之后再和原来的整数做位与运算，得到的结果相当于把整数的二进制表示中最右边的 1 变成 0。很多二进制的问题都可以用这种思路解决。</p>
-</blockquote>
 <h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><h2 id="算法实现一"><a href="#算法实现一" class="headerlink" title="算法实现一"></a>算法实现一</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqasm4ejtfj20va07xt8q.jpg" alt="">  </p>
 <h2 id="算法实现二"><a href="#算法实现二" class="headerlink" title="算法实现二"></a>算法实现二</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqasn2htksj20v408ft8w.jpg" alt=""></p>
 <h2 id="算法实现三"><a href="#算法实现三" class="headerlink" title="算法实现三"></a>算法实现三</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqaso4kg5qj20v306u0st.jpg" alt=""></p>
 <h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>算法一的时间主要消耗在对二进制的移位上，时间复杂度为 O(logn)；算法二需要进行循环 n 次(输入的二进制有 n 位)，因此时间复杂度为 O(n);若输入数的二进制表示中 1 的个数为 n，那么算法三仅需循环 n 次，时间复杂度最好达到 O(1)，最坏达到 O(n)。另外空间复杂度均为 O(1)。</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
+</blockquote>
 
       
     </div>

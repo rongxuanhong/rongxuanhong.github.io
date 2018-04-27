@@ -424,7 +424,7 @@
 </li>
 </ol>
 <p><strong>UML解读</strong>  </p>
-<p>   首先在创建器 <code>Creator</code> 中定义一个工厂方法用于生产未指定具体类型的产品，其次，子类–具体创建器 <code>ConcreteCreator</code> 实现父类工厂方法，给出创建具体产品类型的实现，最后，客户端只需调用具体创建者中的方法即可得到所需的产品。  </p>
+<p>   首先在创建器 <code>Creator</code> 中定义一个工厂方法用于生产未指定具体类型的产品，其次，子类—具体创建器 <code>ConcreteCreator</code> 实现父类工厂方法，给出创建具体产品类型的实现，最后，客户端只需调用具体创建者中的方法即可得到所需的产品。  </p>
 <blockquote>
 <p>具体例子详见推荐博客<a href="http://blog.csdn.net/zhengzhb/article/details/7348707" target="_blank" rel="noopener">工厂方法模式</a></p>
 </blockquote>
@@ -453,8 +453,7 @@ public BaseViewHolder(View itemView) {
     return (T) view;
 }
 </code></pre><p><code>BaseViewHolder</code> 继承至 <code>RecyclerView.ViewHolder</code> ，可作为 <code>Recyclerview</code> 适配器中通用的 <code>ViewHolder</code> 来使用，因此你无需在每个适配器里面再定义内部类 <code>MyViewHolder</code>。<code>BaseViewHolder</code> 可以在构造器中获取到每个 <code>item</code> 的 <code>itemView</code>，然后就可以定义一个快速获取 <code>itemView</code> 上各个子控件的方法 <code>getView</code>,以后在适配器中获取 <code>item</code> 子控件能够随时调用此方法.  </p>
-<p>#BetterViewHolder</p>
-<pre><code>public abstract class BetterViewHolder&lt;T&gt; extends BaseViewHolder {
+<h1 id="BetterViewHolder"><a href="#BetterViewHolder" class="headerlink" title="BetterViewHolder"></a>BetterViewHolder</h1><pre><code>public abstract class BetterViewHolder&lt;T&gt; extends BaseViewHolder {
 public BetterViewHolder(View itemView) {
     super(itemView);
 }
@@ -475,160 +474,160 @@ public abstract void bindDataToItem(T t,int position);
 <ul>
 <li>定义访问者 <code>TypeFactory</code>   </li>
 </ul>
-<pre><code>public abstract class TypeFactory {  
+<pre><code>    public abstract class TypeFactory {  
 
-public abstract int type(Banner banner);
+    public abstract int type(Banner banner);
 
-public abstract int type(Category category);
+    public abstract int type(Category category);
 
-public abstract int type(Item item);
+    public abstract int type(Item item);
 
-public abstract int type(Footer footer);
-//工厂方法模式应用 
-public  abstract BetterViewHolder onCreateViewHolder(View itemView,int  type);
-}
+    public abstract int type(Footer footer);
+    //工厂方法模式应用 
+    public  abstract BetterViewHolder onCreateViewHolder(View itemView,int  type);
+    }
 </code></pre><ul>
 <li>定义被访问者 <code>Visitable</code></li>
 </ul>
-<pre><code>/*
-*定义抽象的被访问者 type方法，用来接收/引用一个抽象访问者对象,以便利用这个对象进行操作;
-*/
-public abstract class Visitable {
-public abstract int type(TypeFactory factory);
-}  
+<pre><code>    /*
+    *定义抽象的被访问者 type方法，用来接收/引用一个抽象访问者对象,以便利用这个对象进行操作;
+    */
+    public abstract class Visitable {
+    public abstract int type(TypeFactory factory);
+    }  
 </code></pre><ul>
 <li><p>定义四个实体类并继承<code>Visitable</code>  </p>
-<pre><code>/**
-  * Created by hrx on 2017/4/30.
- * 具体的被访问者
-  * 实现type抽象方法，通过传入的具体访问者参数、
-  * 调用具体访问者对该对象的访问操作方法实现访问逻辑;
- * 比如这就是利用抽象访问者 TypeFactory 引用来调用操作方法获取对应该 Banner 关联的布局  id
- */
+<pre><code>  /**
+    * Created by hrx on 2017/4/30.
+   * 具体的被访问者
+    * 实现type抽象方法，通过传入的具体访问者参数、
+    * 调用具体访问者对该对象的访问操作方法实现访问逻辑;
+   * 比如这就是利用抽象访问者 TypeFactory 引用来调用操作方法获取对应该 Banner 关联的布局  id
+   */
 
-public class Banner extends Visitable{
-     @Override
-    public int type(TypeFactory factory) {
-     return factory.type(this);
-    }
- }  
+  public class Banner extends Visitable{
+       @Override
+      public int type(TypeFactory factory) {
+       return factory.type(this);
+      }
+   }  
 
-public class Category extends Visitable {
-  @Override
-  public int type(TypeFactory factory) {
-     return factory.type(this);
-  }
-}  
-public class Item extends Visitable {
-    private int position;
+  public class Category extends Visitable {
     @Override
     public int type(TypeFactory factory) {
-        return factory.type(this);
+       return factory.type(this);
     }
-
-    public int getPosition() {
-        return position;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
-    }
-}
-public class Footer extends Visitable {
-  @Override
-   public int type(TypeFactory factory) {
-      return factory.type(this);
+  }  
+  public class Item extends Visitable {
+      private int position;
+      @Override
+      public int type(TypeFactory factory) {
+          return factory.type(this);
       }
- }  
+
+      public int getPosition() {
+          return position;
+      }
+
+      public void setPosition(int position) {
+          this.position = position;
+      }
+  }
+  public class Footer extends Visitable {
+    @Override
+     public int type(TypeFactory factory) {
+        return factory.type(this);
+        }
+   }  
 </code></pre></li>
 <li><p>具体访问者 <code>TypeFactoryList</code>   </p>
-<pre><code>/*
- * 具体的访问者实现了抽象访问者的方法
-* 同时 onCreateViewHolder 也是利用工厂方法模式创建了各个 item 的 viewholder 实例
-*/
+<pre><code>  /*
+   * 具体的访问者实现了抽象访问者的方法
+  * 同时 onCreateViewHolder 也是利用工厂方法模式创建了各个 item 的 viewholder 实例
+  */
 
-public class TypeFactoryList extends TypeFactory {
-//声明每个item的布局id
-public static final int BANNER = R.layout.banner;
-public static final int CATEGORY = R.layout.category;
-public static final int ITEM = R.layout.item;
-public static final int FOOTER = R.layout.footer;
+  public class TypeFactoryList extends TypeFactory {
+  //声明每个item的布局id
+  public static final int BANNER = R.layout.banner;
+  public static final int CATEGORY = R.layout.category;
+  public static final int ITEM = R.layout.item;
+  public static final int FOOTER = R.layout.footer;
 
-@Override
-public int type(Banner banner) {
-    return BANNER;
-}
+  @Override
+  public int type(Banner banner) {
+      return BANNER;
+  }
 
-@Override
-public int type(Category category) {
-    return CATEGORY;
-}
+  @Override
+  public int type(Category category) {
+      return CATEGORY;
+  }
 
-@Override
-public int type(Item item) {
-    return ITEM;
-}
+  @Override
+  public int type(Item item) {
+      return ITEM;
+  }
 
-@Override
-public int type(Footer footer) {
-    return FOOTER;
-}
+  @Override
+  public int type(Footer footer) {
+      return FOOTER;
+  }
 
-@Override
-public BetterViewHolder onCreateViewHolder(View itemView, int type) {
-    BetterViewHolder viewHolder = null;
-    switch (type) {
-        case BANNER:
-            viewHolder = new BannerViewHolder(itemView);
-            break;
-        case CATEGORY:
-            viewHolder = new CategoryViewHolder(itemView);
-            break;
-        case ITEM:
-            viewHolder = new ItemViewHolder(itemView);
-            break;
-        case FOOTER:
-            viewHolder = new FooterViewHolder(itemView);
-            break;
-        default:
-            break;
-    }
-    return viewHolder;
- }
-}  
+  @Override
+  public BetterViewHolder onCreateViewHolder(View itemView, int type) {
+      BetterViewHolder viewHolder = null;
+      switch (type) {
+          case BANNER:
+              viewHolder = new BannerViewHolder(itemView);
+              break;
+          case CATEGORY:
+              viewHolder = new CategoryViewHolder(itemView);
+              break;
+          case ITEM:
+              viewHolder = new ItemViewHolder(itemView);
+              break;
+          case FOOTER:
+              viewHolder = new FooterViewHolder(itemView);
+              break;
+          default:
+              break;
+      }
+      return viewHolder;
+   }
+  }  
 </code></pre></li>
 <li><p>定义适配器   </p>
-<pre><code>public class MainActivityAdapter extends RecyclerView.Adapter&lt;BetterViewHolder&gt; {
-private List&lt;Visitable&gt; mVisitables;
-private TypeFactory factory;
+<pre><code>  public class MainActivityAdapter extends RecyclerView.Adapter&lt;BetterViewHolder&gt; {
+  private List&lt;Visitable&gt; mVisitables;
+  private TypeFactory factory;
 
-public MainActivityAdapter(List&lt;Visitable&gt; mVisitables) {
-    this.mVisitables = mVisitables;
-    factory = new TypeFactoryList();
-}
-//此 ViewHolder 的创建细节已经抽象到 TypeFactoryList 中去实现了 此处等同与获取工厂生产的产品
-@Override
-public BetterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    View itemView = View.inflate(parent.getContext(), viewType, null);
-    return factory.onCreateViewHolder(itemView, viewType);
-}
+  public MainActivityAdapter(List&lt;Visitable&gt; mVisitables) {
+      this.mVisitables = mVisitables;
+      factory = new TypeFactoryList();
+  }
+  //此 ViewHolder 的创建细节已经抽象到 TypeFactoryList 中去实现了 此处等同与获取工厂生产的产品
+  @Override
+  public BetterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+      View itemView = View.inflate(parent.getContext(), viewType, null);
+      return factory.onCreateViewHolder(itemView, viewType);
+  }
 
-//此处的实现交由 BetterViewHolder 的各个子类去实现，故此处 Java 会根据相应的子类去获取其下实现的 bindDataToItem（）,利用JAVA动态分派而无需进行类型检查
-@Override
-public void onBindViewHolder(BetterViewHolder holder, int position) {
-    holder.bindDataToItem(mVisitables.get(position),position);
-}
+  //此处的实现交由 BetterViewHolder 的各个子类去实现，故此处 Java 会根据相应的子类去获取其下实现的 bindDataToItem（）,利用JAVA动态分派而无需进行类型检查
+  @Override
+  public void onBindViewHolder(BetterViewHolder holder, int position) {
+      holder.bindDataToItem(mVisitables.get(position),position);
+  }
 
-//此处即代表访问者模式中的客户端调用被访问者的 type()，进行访问操作获取其布局 id
-@Override
-public int getItemViewType(int position) {
-    return mVisitables.get(position).type(factory);
-}
-@Override
-public int getItemCount() {
-    return mVisitables.size();
-}
-}  
+  //此处即代表访问者模式中的客户端调用被访问者的 type()，进行访问操作获取其布局 id
+  @Override
+  public int getItemViewType(int position) {
+      return mVisitables.get(position).type(factory);
+  }
+  @Override
+  public int getItemCount() {
+      return mVisitables.size();
+  }
+  }  
 </code></pre><p>该适配器的数据就是得到访问者模式中的对象结构 <code>Object Structure</code> 中存储的被访问者集合，对应到例子中就是 <code>mVisitables</code> 集合。同时需要一个访问者引用,以便该适配器(客户端)能够利用这个引用获取每个被访问者关联到的布局Id(利用该引用执行某些操作)，如<code>mVisitables.ge(position).type(factory)</code>可以获取到每个被访问者关联到的布局 <code>id</code>。  </p>
 </li>
 <li><p>四个 <code>BetterViewHolder</code> 的子类  </p>
@@ -937,7 +936,7 @@ public int getItemCount() {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#必备知识"><span class="nav-number">2.</span> <span class="nav-text">必备知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#访问者模式"><span class="nav-number">3.</span> <span class="nav-text">访问者模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#工厂方法模式"><span class="nav-number">4.</span> <span class="nav-text">工厂方法模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BaseViewHolder的封装"><span class="nav-number">5.</span> <span class="nav-text">BaseViewHolder的封装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实例解析"><span class="nav-number">6.</span> <span class="nav-text">实例解析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#感谢"><span class="nav-number">8.</span> <span class="nav-text">感谢</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#必备知识"><span class="nav-number">2.</span> <span class="nav-text">必备知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#访问者模式"><span class="nav-number">3.</span> <span class="nav-text">访问者模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#工厂方法模式"><span class="nav-number">4.</span> <span class="nav-text">工厂方法模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BaseViewHolder的封装"><span class="nav-number">5.</span> <span class="nav-text">BaseViewHolder的封装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BetterViewHolder"><span class="nav-number">6.</span> <span class="nav-text">BetterViewHolder</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实例解析"><span class="nav-number">7.</span> <span class="nav-text">实例解析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#感谢"><span class="nav-number">9.</span> <span class="nav-text">感谢</span></a></li></ol></div>
             
 
           </div>

@@ -393,8 +393,9 @@
 <li>无论指数 exponent 是正还是负都统一先转成无符号的整形类型，方便统一计算整数次方。然后，对于 exponent 为负的情况，只需将结果变为倒数即可。</li>
 </ol>
 <p>优化多次乘方的思路：<br>如果输入的指数 exponent 为 32，那么需要进行 31 次乘法操作。那么，如果我们能先算出数字的 16 次方，然后再平方一次即可；那么假如知道了数字的 16 次方，那么只需要在数字的 16 次方的基础上平方一次即可得到结果，那如果知道了数字的 8 次方，那么就可以在数字的 8 次方基础上平方一次得到数字的 16 次方的结果；那么如果知道数字的 4 次方，就可以在数字 4 此方的基础上平方一次得到数字的 8 次方；一次类推，直到知道了数字的 1 次方。  </p>
-<p>那么可用如下公式表示 a 的 n 次方:<br>$$a^{n}=\begin{cases}a^{n/2}\cdot a^{n/2}\qquad n为偶数 \<br>a^{\left( n-1\right) /2}\cdot a^{\left( n-1\right) /2}\qquad n为奇数\end{cases}$$</p>
-<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqeg3s6edkj20v10iywfl.jpg" alt=""></p>
+<p>那么可用如下公式表示 a 的 n 次方:</p>
+<script type="math/tex; mode=display">a^{n}=\begin{cases}a^{n/2}\cdot a^{n/2}\qquad n为偶数 \\
+a^{\left( n-1\right) /2}\cdot a^{\left( n-1\right) /2}\qquad n为奇数\end{cases}</script><h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqeg3s6edkj20v10iywfl.jpg" alt=""></p>
 <h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>时间主要消耗在求解乘法运算结果上面，而使用递归方法(二分原问题)进行乘法求解的时间复杂度为 O(logn)，空间复杂度为 O(1)。</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
 
@@ -538,7 +539,7 @@
 <h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>本题没有给定 n 的范围，因此需要考虑大数问题。</p>
 <h2 id="算法思路一-字符串模拟"><a href="#算法思路一-字符串模拟" class="headerlink" title="算法思路一(字符串模拟)"></a>算法思路一(字符串模拟)</h2><p>用字符串表示数字的时候，最直观的方法就是字符串里每个字符都是 ‘0’-‘9’ 之间的某一个字符，用来表示数字中的任一位。因为数字最大是 n 位的，因此我们需要一个长度为 n+1 的字符串(<strong>字符串中最后一位是结束符号 ‘\0’</strong>)。并且将字符串的每一位初始化为 ‘0’，但要注意的是，最后打印的时候，前半部分的 0 需要过滤掉。</p>
 <p>接下来，我们就对字符串的最后一位一直加 1 ，然后再判断是否需要进位，如果需要进位，那么就需要把字符串最后一位变为 ‘0’，而前一位的字符也要跟着加 1，然后继续判断是否需要继续进位，一直到直接加 1，不需要进位，或者遇到了最大的 n 位数退出外层循环。</p>
-<h2 id="算法思路二-递归法"><a href="#算法思路二-递归法" class="headerlink" title="算法思路二(递归法)"></a>算法思路二(递归法)</h2><p>将问题转换成按数字排列，也就是所对于字符串的每一位都可以有 10 种选择—‘0’-‘9’。也就是说，我们把数字的每一位都从 0 到 9 依次排列一遍，就得到所有的十进制数。最后打印的时候只要从第一个非 0 的字符开始打印即可。</p>
+<h2 id="算法思路二-递归法"><a href="#算法思路二-递归法" class="headerlink" title="算法思路二(递归法)"></a>算法思路二(递归法)</h2><p>将问题转换成按数字排列，也就是所对于字符串的每一位都可以有 10 种选择—-‘0’-‘9’。也就是说，我们把数字的每一位都从 0 到 9 依次排列一遍，就得到所有的十进制数。最后打印的时候只要从第一个非 0 的字符开始打印即可。</p>
 <h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><h2 id="字符串模拟"><a href="#字符串模拟" class="headerlink" title="字符串模拟"></a>字符串模拟</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfl5hcjg2j20uy0rdjs9.jpg" alt=""></p>
 <h2 id="递归法"><a href="#递归法" class="headerlink" title="递归法"></a>递归法</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqflaty90rj20v90ksmxs.jpg" alt=""></p>
 <h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>算法一的时间消耗主要在 while 循环上，由于需要打印出从 1 到最大的 n 位数，因此若设这些数共有 m 个，那么时间复杂度为 O(m)；而算法二采用递归思想，时间复杂度也为 O(m)，差不多共有 10^n 个组合。空间复杂度都为 O(n)。</p>
@@ -682,30 +683,42 @@
             <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>支持向量机 SVM 是一种可以进行二分类、多分类以及回归分析的强大工具，并且 SVM 可以称得上表现较出色的监督学习算法，因此，我们一定得好好分析其原理，为啥它能够表现出色呢?  </p>
 <h1 id="可视化的二分类问题"><a href="#可视化的二分类问题" class="headerlink" title="可视化的二分类问题"></a>可视化的二分类问题</h1><p>我们来看看下面这张图：<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpxh9a9gh3j20ca089glx.jpg" alt=""><br>假设红色的圈表示样本正例，绿色的圈表示样本反例。此时我们需要找到一条直线将这两类样本划分开(先忽略新样本点)。从图中可以看出我们可以有很多条直线可以划分样本。但是，究竟要选择哪一条呢，依据的标准是什么？<br>嗯，可以肯定地说红色的那条线会是最好的那条。我们注意到图中有两条黑色的线恰好分别将样本隔住，而假设这条红色的线就处在两条直线的正中间，那么，你可能会想黑色的线也能隔住，为啥选红色的线？其实选择红色的线有点考虑到要去适应新来的样本分类了。假如来了一个新样本点恰好落在图中所示的位置，那么对于蓝色的线来说，它已经将新样本错误分类了，但是对于红色的线来说并没有任何影响。也就说，红色的线它相比于其他任何线对于新样本的分类准确率更高。(专业一点就说泛化能力更强一些，对数据的容忍度较好)，因此我们没有任何理由不选红色的这个线来划分数据集。所以呢，我们要对样本进行分类就是要找这样的线，在三维中，要找的是划分的平面，而在大于三维的时候，由于维数太高超出了人的想象空间，此时我们要找的那个面都称为超平面。<strong>但在讨论的时候，无论在低维还是在高维找划分的面，我们都直接称超平面</strong>。</p>
 <h1 id="间隔与支持向量"><a href="#间隔与支持向量" class="headerlink" title="间隔与支持向量"></a>间隔与支持向量</h1><p>你可能发现了上图中有个挺大(挺胖)的间隔，它由两条黑色的线围成。没错，这个就是我们现在要介绍的间隔。在介绍之前，我们来对此类问题建立数学模型，以数学公式的形式来进行分析。  </p>
-<p>假设给定训练集 <strong>D={(x1,y1),(x2,y2),…,(xm,ym)}</strong>，样本标签 \(y_{i}\in \left\{ +1,-1\right\}\) (以 +1 表示正例样本，-1 表示反例样本)。在样本空间中，划分超平面由线性方程:\(w^{T}x+b=0\) 确定,其中 <strong>w={w1;w2;…;wd}</strong> 为法向量，决定了超平面的方向，b为位移项(也就是超平面的偏移)  </p>
+<p>假设给定训练集 <strong>D={(x1,y1),(x2,y2),…,(xm,ym)}</strong>，样本标签 \(y_{i}\in \left\\{ +1,-1\right\\}\) (以 +1 表示正例样本，-1 表示反例样本)。在样本空间中，划分超平面由线性方程:\(w^{T}x+b=0\) 确定,其中 <strong>w={w1;w2;…;wd}</strong> 为法向量，决定了超平面的方向，b为位移项(也就是超平面的偏移)  </p>
 <p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fq5j5ay7uxj20dc09p3yw.jpg" alt="">  </p>
 <p>对于 SVM 分类问题，我们要寻找的其实就是一个分类函数 \(f\left(x\right)\)，它能够根据输入输出分类结果，那么当 \(f\left( x\right) =sign\left(w^{T}x+b\right) \),如果结果大于 0，则被归为 +1 类，如果结果小于 0，则被归为 -1 类(其中 sign() 为符号函数)。然后，我们还需要两个超平面来形成上述这个间隔，其中这两个超平面(由两个方程\(w^{T}x+b=1\)) 和 \(w^{T}x+b=-1\)给出) 到划分超平面的距离是相等的,而这个距离仅考虑的是离划分超平面最近的那些点到划分超平面的距离。那么这时候我们引入支持向量的定义：那些点就是支持向量(support vector)。如上图所示，这个距离为\(\dfrac {1}{\left| w\right| }\)，怎么计算呢？如果是两条直线:ax+by=c1 与 ax+by=c2,那么其距离就是\(\dfrac {\left| c_{1}-c_{1}\right| }{\sqrt {a^{2}+b^{2}}}\)，这里是二维的情况。而对于向量 w={w1;w2}来说，假如有 \(w_{1}x_{1}+w_{2}x_{2}=1\) 和 \(w_{1}x_{1}+w_{2}x_{2}=0\) 两个方程，那么他们之间的距离就是 \(\dfrac {1}{\sqrt {w^{2}_{1}+w^{2}_{2}}}\)，而分母实际上是向量 \(w\) 的模长||w||，所以随后的距离就是 \(\dfrac {1}{\left| w\right| }\)，那么推广到 <strong>w={w1;w2;w3,..,wd}</strong> 的情况也是成立的。所以可以算出我们要寻找的这个间隔的距离为 \(\dfrac {2}{\left| w\right| }\)。  </p>
 <p>那么，我们就得到了间隔的距离函数。为了寻找最大间隔，即这个距离要最长，问题首先转化为最小化 ||w|| 这个问题。另外，这里还有个约束就是：如果要将训练样本划分正确，也就是不落在间隔内，对于正例样本来说，必须满足 \(w^{T}x_{i}+b\geq 1\)；对于反例样本来说，必须满足 \(w^{T}x_{i}+b\leq -1\) ,总之就是我们既要间隔最大，又要让样本能够分类正确，所以必须得有这样的约束。  </p>
-<p>那么，由于\(y_{i}\in \left\{ +1,-1\right\}\)，我们可以将上述约束合并在一起：<br>$$ y_{i}\left( w^{T}x_{i}+b\right) \geq 1,i=1,2,\ldots ,m$$<br>所以 SVM 分类最终的问题就是优化下述问题：<br>$$ \min _{w,b}\dfrac {1}{2}\left| w\right| ^{2}\quad s.t. y_{i}\left( w^{T}x_{i}+b\right) \geq 1,i=1,2,\ldots ,m$$<br>那么这个公式就是支持向量机的基本型了。  </p>
+<p>那么，由于\(y_{i}\in \left\\{ +1,-1\right\\}\)，我们可以将上述约束合并在一起：  </p>
+<script type="math/tex; mode=display">y\_{i}\left( w^{T}x\_{i}+b\right) \geq 1,i=1,2,\ldots ,m</script><p>所以 SVM 分类最终的问题就是优化下述问题：  </p>
+<script type="math/tex; mode=display">\min \_{w,b}\dfrac {1}{2}\left\| w\right\| ^{2}\quad s.t. y\_{i}\left( w^{T}x\_{i}+b\right) \geq 1,i=1,2,\ldots ,m</script><p>那么这个公式就是支持向量机的基本型了。  </p>
 <p>上述问题其实是一个凸二次规划问题，属于凸优化的一个特例。那什么是凸优化？它必要条件是什么？凸优化解决的是凸集中凸函数的最优化问题，且凸优化中局部最优值必定是全局最优值。而它的必要条件要求目标函数是凸函数，并且变量的约束函数是凸函数（不等式约束时），或者是仿射函数（等式约束时）。而对于凸二次规划问题，目标函数为二次函数，目前可以通过 QP(Quadratic Programming) 工具来进行求解。但是由于其求解效率的低效，因此我们寻求利用对偶问题来进行转化求解。即将原问题通过拉格朗日乘子法转化为对偶问题(c此时为线性分类下的SVM分类问题的对偶问题)，再利用对偶问题来求解原问题的最优解。毋庸置疑，后者一般会比直接使用 QP 工具来得高效。那么使用的对偶问题能带来哪些好处？其一，是对偶问题往往更容易求解；其二是可以方便地引入核函数，进而推广到非线性的 SVM 分类问题。  </p>
 <p>那什么是对偶问题？</p>
 <blockquote>
 <p>注：为了更好优化||w||，我们对式子进行变形以方便计算，但不会影响最后的优化结果。  </p>
 </blockquote>
-<h1 id="对偶问题"><a href="#对偶问题" class="headerlink" title="对偶问题"></a>对偶问题</h1><p>首先我们将上述支持向量机的基本型中的每个约束条件加上拉格朗日乘子 \(\alpha _{i}\),且 \(\alpha _{i}\geq 0\) ，那么我们得到的拉格朗日函数可写为:<br>$$ L\left(w,b, \alpha \right) =\dfrac {1}{2}\left| w\right| ^{2}+\sum ^{m}_{i=1}\alpha _{i}\left( 1-y_{i}\left( w^{T}x_{i}+b\right) \right)  $$其中\(\alpha =\left( \alpha _{1};\alpha _{2};\ldots ;\alpha _{m}\right) \)。此时令目标函数 \(L\) 对 \(w\)和 \(b\) 的偏导均为零可得:  </p>
-<p>\(w=\sum ^{m}_{i=1}\alpha _{i}y_{i}x_{i}\quad,\)        \(\quad0=\sum ^{m}_{i=1}\alpha _{i}y_{i}\)<br>接下来带入 \(0=\sum ^{m}_{i=1}\alpha _{i}y_{i}\)，消去 b 后得:<br>$$ L\left(w,\alpha \right) =\dfrac {1}{2}\left| w\right| ^{2}+\sum ^{m}_{i=1}\alpha _{i}\left( 1-y_{i}w^{T}x_{i}\right) $$<br>再带入\(w=\sum ^{m}_{i=1}\alpha _{i}y_{i}x_{i}\)，消去 w，即：<br>$$\begin{aligned}L\left( \alpha \right) =\dfrac {1}{2}\left| w\right| ^{2}+\sum ^{m}_{i=1}\alpha _{i}-\sum ^{m}_{i=1}w^{T}\alpha _{i}y_{i}x_{i}\<br>=\dfrac {1}{2}w^{T}w+\sum ^{m}_{i=1}\alpha _{i}-w^{T}w\<br>=\sum ^{m}_{i=1}\alpha _{i}-\dfrac {1}{2}w^{T}w\end{aligned}$$  </p>
-<p>再来，先取一个固定的 \(\alpha ‘\quad \alpha ‘_{i}\geq 0\)，由于 \(\max L\left(w,b, \alpha \right) \geq L\left(w,b, \alpha ‘\right) \)，即函数 \(L\) 的最大值一定会大于等于其任意函数值,那么如果先对 \(w\) 和 \(b\) 最小化时，即等式两边分别加上 \(\min _{w,b}\)，则有：<br>$$ \min _{w,b}\left( \max_{\alpha} L\left( w,b,\alpha \right) \right) \geq \min _{w,b}L\left( w,b,\alpha ‘\right) \quad \alpha _{i}\geq 0$$<br>接着对于上述不等式，我们只需要比右边的最大值大就行，因此得到：<br>$$ \min _{w,b}\left( \max_{\alpha} L\left( w,b,\alpha \right) \right) \geq \max_{\alpha ‘}\left(\min _{w,b}L\left( w,b,\alpha ‘\right)\right) \quad \alpha _{i}\geq 0$$<br>这个式子的左侧和右侧刚好是最大化和最小化互换，我们把右边这个式子称为左边问题的对偶问题。那么只要我们只要把对偶问题解决了，也就得到了<strong>左侧式子即原问题</strong>的下限。<br>当我们通过对 \(w\) 和 \(b\) 求导并消去 \(L\) 中的 \(w\) 和 \(b\) 时，可以进一步简化上式，得到:<br>$$ \min _{w,b}\left( \max_{\alpha} L\left( w,b,\alpha \right) \right) \geq \max_{\alpha ‘}L\left( \alpha ‘\right) $$<br>那么我们便可以很轻松地推出，此时我们只需求出上述不等式右边的这个最大化问题就可以了。<strong>其中这个最大化问题就是原问题(primal problem)的对偶问题(dual problem)</strong><br>最终带入 \(w\) 等式后我们得到对偶问题的公式为:<br>$$\max _{\alpha }\sum ^{m}_{i=1}\alpha _{i}-\dfrac {1}{2}\sum ^{m}_{i=1}\sum ^{m}_{j=1}\alpha _{i}\alpha _{j}y_{i}y_{j}x_{i}^{T}x_{j}\quad \alpha _{i}\geq 0$$  </p>
-<p>解出 \(\alpha\) 后，求出\(w\)和\(b\)即可得到模型<br>$$ f\left( x\right) =w^{T}x+b=\sum ^{m}_{i=1}\alpha _{i}y_{i}x_{i}^{T}x+b$$  </p>
-<p>事实上，上述模型我们是建立在训练样本都能够正确分类，且是线性可分的前提之上。那么，如果训练样本中有部分样本不能够正确分类时，又应该怎么做？那么我们便引入了松弛向量和软间隔。</p>
+<h1 id="对偶问题"><a href="#对偶问题" class="headerlink" title="对偶问题"></a>对偶问题</h1><p>首先我们将上述支持向量机的基本型中的每个约束条件加上拉格朗日乘子 \(\alpha _{i}\),且 \(\alpha _{i}\geq 0\) ，那么我们得到的拉格朗日函数可写为:  </p>
+<script type="math/tex; mode=display">L\left(w,b, \alpha \right) =\dfrac {1}{2}\left\| w\right\| ^{2}+\sum ^{m}\_{i=1}\alpha \_{i}\left( 1-y\_{i}\left( w^{T}x\_{i}+b\right) \right)  $$其中\\(\alpha =\left( \alpha \_{1};\alpha \_{2};\ldots ;\alpha \_{m}\right) \\)。此时令目标函数 \\(L\\) 对 \\(w\\)和 \\(b\\) 的偏导均为零可得:  
+
+\\(w=\sum ^{m}\_{i=1}\alpha \_{i}y\_{i}x\_{i}\quad,\\)        \\(\quad0=\sum ^{m}\_{i=1}\alpha \_{i}y\_{i}\\)    
+接下来带入 \\(0=\sum ^{m}\_{i=1}\alpha \_{i}y\_{i}\\)，消去 b 后得:  
+$$ L\left(w,\alpha \right) =\dfrac {1}{2}\left\| w\right\| ^{2}+\sum ^{m}\_{i=1}\alpha \_{i}\left( 1-y\_{i}w^{T}x\_{i}\right)</script><p>再带入\(w=\sum ^{m}_{i=1}\alpha _{i}y_{i}x_{i}\)，消去 w，即：</p>
+<script type="math/tex; mode=display">\begin{aligned}L\left( \alpha \right) =\dfrac {1}{2}\left\| w\right\| ^{2}+\sum ^{m}\_{i=1}\alpha \_{i}-\sum ^{m}\_{i=1}w^{T}\alpha \_{i}y\_{i}x\_{i}\\
+=\dfrac {1}{2}w^{T}w+\sum ^{m}\_{i=1}\alpha \_{i}-w^{T}w\\
+=\sum ^{m}\_{i=1}\alpha \_{i}-\dfrac {1}{2}w^{T}w\end{aligned}</script><p>再来，先取一个固定的 \(\alpha ‘\quad \alpha ‘_{i}\geq 0\)，由于 \(\max L\left(w,b, \alpha \right) \geq L\left(w,b, \alpha ‘\right) \)，即函数 \(L\) 的最大值一定会大于等于其任意函数值,那么如果先对 \(w\) 和 \(b\) 最小化时，即等式两边分别加上 \(\min _{w,b}\)，则有：  </p>
+<script type="math/tex; mode=display">\min \_{w,b}\left( \max\_{\alpha} L\left( w,b,\alpha \right) \right) \geq \min \_{w,b}L\left( w,b,\alpha '\right) \quad \alpha \_{i}\geq 0</script><p>接着对于上述不等式，我们只需要比右边的最大值大就行，因此得到：</p>
+<script type="math/tex; mode=display">\min \_{w,b}\left( \max\_{\alpha} L\left( w,b,\alpha \right) \right) \geq \max\_{\alpha '}\left(\min \_{w,b}L\left( w,b,\alpha '\right)\right) \quad \alpha \_{i}\geq 0</script><p>这个式子的左侧和右侧刚好是最大化和最小化互换，我们把右边这个式子称为左边问题的对偶问题。那么只要我们只要把对偶问题解决了，也就得到了<strong>左侧式子即原问题</strong>的下限。<br>当我们通过对 \(w\) 和 \(b\) 求导并消去 \(L\) 中的 \(w\) 和 \(b\) 时，可以进一步简化上式，得到:  </p>
+<script type="math/tex; mode=display">\min \_{w,b}\left( \max\_{\alpha} L\left( w,b,\alpha \right) \right) \geq \max\_{\alpha '}L\left( \alpha '\right)</script><p>那么我们便可以很轻松地推出，此时我们只需求出上述不等式右边的这个最大化问题就可以了。<strong>其中这个最大化问题就是原问题(primal problem)的对偶问题(dual problem)</strong><br>最终带入 \(w\) 等式后我们得到对偶问题的公式为:</p>
+<script type="math/tex; mode=display">\max \_{\alpha }\sum ^{m}\_{i=1}\alpha \_{i}-\dfrac {1}{2}\sum ^{m}\_{i=1}\sum ^{m}\_{j=1}\alpha \_{i}\alpha \_{j}y\_{i}y\_{j}x\_{i}^{T}x\_{j}\quad \alpha \_{i}\geq 0</script><p>解出 \(\alpha\) 后，求出\(w\)和\(b\)即可得到模型  </p>
+<script type="math/tex; mode=display">f\left( x\right) =w^{T}x+b=\sum ^{m}\_{i=1}\alpha \_{i}y\_{i}x\_{i}^{T}x+b</script><p>事实上，上述模型我们是建立在训练样本都能够正确分类，且是线性可分的前提之上。那么，如果训练样本中有部分样本不能够正确分类时，又应该怎么做？那么我们便引入了松弛向量和软间隔。</p>
 <blockquote>
 <p>注：上述公式中的 w,x,\(\alpha\),\(\alpha ‘\) 均为向量。</p>
 </blockquote>
 <h1 id="松弛向量与软间隔最大化"><a href="#松弛向量与软间隔最大化" class="headerlink" title="松弛向量与软间隔最大化"></a>松弛向量与软间隔最大化</h1><p>如果我们遇到下图中的情况，存在离群点。其中蓝色的线是为了能够将训练样本正确分类而不得不变成非线性划分，而红色的线是我们上述情况中的线性可分的情况，那这两种分法哪个更好呢？我们训练模型的最终目标都是为了能够进行预测，也就要求了其泛化能力要好，如果选择了蓝色的线，那么对于训练样本来说确实划分得很正确，通俗地说就是模型学得太好了，但是对于预测样本来说，它们被误分类的概率将比使用红色的线进行划分来得更高。这是因为模型学得太好了，以至于适应不了某些特殊的预测样本(例如，离群点)。通常这种情况就称为过拟合。那么解决它的方法其实也很简单，我们需要允许某些离群点可以稍微偏移超平面，即允许这些离群点在间隔之内被误分类，那么它们到分类面的距离就可以小于1。为此，我们对每个训练样本 \(\left( x_{i},y_{i}\right) \) 引入了一个松弛变量 \(\xi_{i}\geq 0 \)<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fq5gpc8pa0j20ce08o0t3.jpg" alt=""> </p>
-<p>那么原线性可分情况下的 SVM 基本型就改为：<br>$$ \min _{w,b}\dfrac {1}{2}\left| w\right| ^{2}+C\sum ^{m}_{i=1}\xi _{i}\quad s.t.\quad y_{i}\left( w^{T}x_{i}+b\right) \geq 1-\xi _{i}\quad \xi _{i}\geq 0,i=1,2,\ldots ,m$$  </p>
-<p>首先，这个最小化目标函数使得 \(\dfrac {1}{2}\left| w\right| ^{2}\) 最小化即将间隔最大化，同时使得 \(\sum ^{m}_{i=1}\xi _{i}\) 控制误分类的样本点尽量少，而参数 C(C&gt;0) 用来平衡这二者的关系，使整体达到一个最好的结果，一般称之为惩罚参数，就好像模型犯错后就要给它一个 C 来惩罚似的。而当 C 越大的时候，表明离群点对目标函数的影响越大，也就是越不希望看到离群点。那么，为了分类它，间隔也会很小，但大部分样本点仍然遵守限制条件。另外，约束条件中的 \(1-\xi_{i}\) 时，其实放松了约束。因为当 \(\xi _{i}&lt;1\)，样本点也可以落在间隔之内了。  </p>
+<p>那么原线性可分情况下的 SVM 基本型就改为：</p>
+<script type="math/tex; mode=display">\min \_{w,b}\dfrac {1}{2}\left\| w\right\| ^{2}+C\sum ^{m}\_{i=1}\xi \_{i}\quad s.t.\quad y\_{i}\left( w^{T}x\_{i}+b\right) \geq 1-\xi \_{i}\quad \xi \_{i}\geq 0,i=1,2,\ldots ,m</script><p>首先，这个最小化目标函数使得 \(\dfrac {1}{2}\left| w\right| ^{2}\) 最小化即将间隔最大化，同时使得 \(\sum ^{m}_{i=1}\xi _{i}\) 控制误分类的样本点尽量少，而参数 C(C&gt;0) 用来平衡这二者的关系，使整体达到一个最好的结果，一般称之为惩罚参数，就好像模型犯错后就要给它一个 C 来惩罚似的。而当 C 越大的时候，表明离群点对目标函数的影响越大，也就是越不希望看到离群点。那么，为了分类它，间隔也会很小，但大部分样本点仍然遵守限制条件。另外，约束条件中的 \(1-\xi_{i}\) 时，其实放松了约束。因为当 \(\xi _{i}&lt;1\)，样本点也可以落在间隔之内了。  </p>
 <p>这就是软间隔支持向量机的基本型了，而前述的支持向量机亦称之为硬间隔支持向量机。  </p>
-<p>这时候，经过同样的推导，对偶问题最终变为：<br>$$ \max _{\alpha }\sum ^{m}_{i=1}\alpha _{i}-\dfrac {1}{2}\sum ^{m}_{i=1}\sum ^{m}_{j=1}\alpha _{i}\alpha _{j}y_{i}y_{j}x_{i}^{T}x_{j}\quad s.t.\quad \sum ^{m}_{i=1}\alpha _{i}y_{i}=0,0\leq \alpha _{i}\leq C,i=1,2,\ldots ,m$$</p>
-<p>那么我们得到的拉格朗日函数可写为:<br>$$ L\left(w,b, \alpha,\xi,\mu \right) =\dfrac {1}{2}\left| w\right| ^{2}+C\sum ^{m}_{i=1}\xi _{i}+\sum ^{m}_{i=1}\alpha _{i}\left( 1-\xi_{i}-y_{i}\left( w^{T}x_{i}+b\right) \right)-\sum ^{m}_{i=1}\mu_{i}\xi_{i}  \quad \alpha_{i}\geq 0,\mu_{i}\geq 0$$<br>注意到，硬间隔与软间隔的对偶问题差异就在于，前者是 \(0\leq \alpha_{i}\),后者是 \(0\leq \alpha _{i}\leq C\),且需要满足 \(C=\alpha_{i}+\mu_{i}\) 。另外需要注意的是，b 的求值公式也发生改变了。我们在之后的 SMO 算法详解中会进一步推导。</p>
+<p>这时候，经过同样的推导，对偶问题最终变为：</p>
+<script type="math/tex; mode=display">\max \_{\alpha }\sum ^{m}\_{i=1}\alpha \_{i}-\dfrac {1}{2}\sum ^{m}\_{i=1}\sum ^{m}\_{j=1}\alpha \_{i}\alpha \_{j}y\_{i}y\_{j}x\_{i}^{T}x\_{j}\quad s.t.\quad \sum ^{m}\_{i=1}\alpha \_{i}y\_{i}=0,0\leq \alpha \_{i}\leq C,i=1,2,\ldots ,m</script><p>那么我们得到的拉格朗日函数可写为:</p>
+<script type="math/tex; mode=display">L\left(w,b, \alpha,\xi,\mu \right) =\dfrac {1}{2}\left\| w\right\| ^{2}+C\sum ^{m}\_{i=1}\xi \_{i}+\sum ^{m}\_{i=1}\alpha \_{i}\left( 1-\xi\_{i}-y\_{i}\left( w^{T}x\_{i}+b\right) \right)-\sum ^{m}\_{i=1}\mu\_{i}\xi\_{i}  \quad \alpha\_{i}\geq 0,\mu\_{i}\geq 0</script><p>注意到，硬间隔与软间隔的对偶问题差异就在于，前者是 \(0\leq \alpha_{i}\),后者是 \(0\leq \alpha _{i}\leq C\),且需要满足 \(C=\alpha_{i}+\mu_{i}\) 。另外需要注意的是，b 的求值公式也发生改变了。我们在之后的 SMO 算法详解中会进一步推导。</p>
 <p>下一篇我们将深入了解核函数、对偶问题的求解及其原理。</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] &lt;&lt;机器学习&gt;&gt; by 周志华<br>[2] &lt;&lt;统计学习方法&gt;&gt; by 李航<br>[3] <a href="https://blog.csdn.net/zouxy09/article/details/17291543" target="_blank" rel="noopener">机器学习算法与Python实践之（三）支持向量机（SVM）初级</a></p>
 
@@ -858,12 +871,12 @@
 <h2 id="算法思路三"><a href="#算法思路三" class="headerlink" title="算法思路三"></a>算法思路三</h2><p>我们发现将 n 减去 1 再和 n 位与可以去掉 n 中最右的 1，那么 n 中有几个这样的 1 ，就需要去掉几次。</p>
 <blockquote>
 <p>注：把一个整数减去 1 之后再和原来的整数做位与运算，得到的结果相当于把整数的二进制表示中最右边的 1 变成 0。很多二进制的问题都可以用这种思路解决。</p>
-</blockquote>
 <h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><h2 id="算法实现一"><a href="#算法实现一" class="headerlink" title="算法实现一"></a>算法实现一</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqasm4ejtfj20va07xt8q.jpg" alt="">  </p>
 <h2 id="算法实现二"><a href="#算法实现二" class="headerlink" title="算法实现二"></a>算法实现二</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqasn2htksj20v408ft8w.jpg" alt=""></p>
 <h2 id="算法实现三"><a href="#算法实现三" class="headerlink" title="算法实现三"></a>算法实现三</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqaso4kg5qj20v306u0st.jpg" alt=""></p>
 <h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>算法一的时间主要消耗在对二进制的移位上，时间复杂度为 O(logn)；算法二需要进行循环 n 次(输入的二进制有 n 位)，因此时间复杂度为 O(n);若输入数的二进制表示中 1 的个数为 n，那么算法三仅需循环 n 次，时间复杂度最好达到 O(1)，最坏达到 O(n)。另外空间复杂度均为 O(1)。</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
+</blockquote>
 
           
         

@@ -576,7 +576,7 @@ public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
 }
 </code></pre><p>此方法为 <code>Fragment</code> 中的方法，为空实现，它交给子类去加载一个 <strong>contentView</strong>,再由<code>Fragment</code> 来处理。而我们对话框的内容布局就是在此处进行加载，以便返回一个对话框的布局给 <code>Fragment</code> 去处理。</p>
 <blockquote>
-<p>注意：<code>onCreateDialog()</code>比 <code>onCreateView()</code> 先一步执行。因为在 <code>Fragment</code>中调用<code>onCreateView()</code> 时需要拿到一个布局加载器<code>LayoutInflater</code>,而<code>DialogFragmet</code>中是通过上述的一个方法–<code>getLayoutInflater()</code>来返回一个与对话框有关的上下文布局加载器,<code>onCreateDialog()</code>就在其中被调用，因而我们很容易就可以知道两者的执行次序。  </p>
+<p>注意：<code>onCreateDialog()</code>比 <code>onCreateView()</code> 先一步执行。因为在 <code>Fragment</code>中调用<code>onCreateView()</code> 时需要拿到一个布局加载器<code>LayoutInflater</code>,而<code>DialogFragmet</code>中是通过上述的一个方法—<code>getLayoutInflater()</code>来返回一个与对话框有关的上下文布局加载器,<code>onCreateDialog()</code>就在其中被调用，因而我们很容易就可以知道两者的执行次序。  </p>
 </blockquote>
 <h1 id="几类常见应用"><a href="#几类常见应用" class="headerlink" title="几类常见应用"></a>几类常见应用</h1><h2 id="普通对话框"><a href="#普通对话框" class="headerlink" title="普通对话框"></a>普通对话框</h2><pre><code>public class CommonDialogFragment extends DialogFragment {
 
@@ -641,24 +641,24 @@ public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
 <p>注意： 但凡涉及到获取对话框所在的<code>window</code>对象时，都必须在对话框已经创建了之后调用。</p>
 </blockquote>
 <h2 id="配置style样式定制主题"><a href="#配置style样式定制主题" class="headerlink" title="配置style样式定制主题"></a>配置style样式定制主题</h2><p>我们查看源码可知道对话框的默认主题基础自<code>Theme.Dialog</code>，那么我们便可以继承整个主题，修改默认主题中的属性值来达到我们想要的效果，下面贴出对话框默认的主题。</p>
-<pre><code>&lt;style name=&quot;Theme.Dialog&quot;&gt;
-&lt;!--配置window有无边框--&gt;
-&lt;item name=&quot;windowFrame&quot;&gt;@null&lt;/item&gt;
-&lt;!--配置window标题样式--&gt;
-&lt;item name=&quot;windowTitleStyle&quot;&gt;@style/DialogWindowTitle&lt;/item&gt;
-&lt;!--配置window背景层--&gt;常用
-&lt;item name=&quot;windowBackground&quot;&gt;@drawable/panel_background&lt;/item&gt;
-&lt;!--配置window是否浮在上面--&gt;
-&lt;item name=&quot;windowIsFloating&quot;&gt;true&lt;/item&gt;
-&lt;!--配置window是否浮在上面--&gt;
-&lt;!--配置window有无标题 --&gt; 常用
-&lt;item name=&quot;windowNoTitle&quot;&gt;true&lt;/item&gt;
-&lt;!--配置window进入退出动画 --&gt; 常用
-&lt;item name=&quot;windowAnimationStyle&quot;&gt;@style/Animation.Dialog&lt;/item&gt;
-&lt;!--配置window外部是否可触摸--&gt;
-&lt;item name=&quot;windowCloseOnTouchOutside&quot;&gt;@bool/config_closeDialogWhenTouchOutside&lt;/item&gt;
-....此处省略部分属性
-&lt;/style&gt;
+<pre><code>    &lt;style name=&quot;Theme.Dialog&quot;&gt;
+    &lt;!--配置window有无边框--&gt;
+    &lt;item name=&quot;windowFrame&quot;&gt;@null&lt;/item&gt;
+    &lt;!--配置window标题样式--&gt;
+    &lt;item name=&quot;windowTitleStyle&quot;&gt;@style/DialogWindowTitle&lt;/item&gt;
+    &lt;!--配置window背景层--&gt;常用
+    &lt;item name=&quot;windowBackground&quot;&gt;@drawable/panel_background&lt;/item&gt;
+    &lt;!--配置window是否浮在上面--&gt;
+    &lt;item name=&quot;windowIsFloating&quot;&gt;true&lt;/item&gt;
+    &lt;!--配置window是否浮在上面--&gt;
+    &lt;!--配置window有无标题 --&gt; 常用
+    &lt;item name=&quot;windowNoTitle&quot;&gt;true&lt;/item&gt;
+    &lt;!--配置window进入退出动画 --&gt; 常用
+    &lt;item name=&quot;windowAnimationStyle&quot;&gt;@style/Animation.Dialog&lt;/item&gt;
+    &lt;!--配置window外部是否可触摸--&gt;
+    &lt;item name=&quot;windowCloseOnTouchOutside&quot;&gt;@bool/config_closeDialogWhenTouchOutside&lt;/item&gt;
+    ....此处省略部分属性
+    &lt;/style&gt;
 </code></pre><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>首先，介绍了使用<code>DialogFragment</code> 的缘由以及好处，再来谈到了它的生命周期，这也是之所以使用这种方式来呈现对话框的关键所在。再接下来，我们从源码的角度，详细剖析了各个方法的作用、联系，以及调用的时机以及注意事项。再来介绍了<code>DialogFragment</code>的几种常见的应用，也可以说是常用的代码模版了。最后，介绍了配置对话框的一些常用的手段以及注意事项。</p>
 <h1 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h1><p>感谢您看到这里，期望留下您的印迹。</p>
 
