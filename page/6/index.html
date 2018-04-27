@@ -302,6 +302,1170 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/17/DialogFragment源码解析与应用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/17/DialogFragment源码解析与应用/" itemprop="url">DialogFragment源码解析与应用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-17T21:57:23+08:00">2017-08-17</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/08/17/DialogFragment源码解析与应用/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/08/17/DialogFragment源码解析与应用/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>版权声明：本文为博主原创文章，未经博主允许不得转载</strong></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><hr>
+<p><code>DialogFragment</code> 是继承于 <code>Fragment</code> 的子类，因而其具备了 <code>Fragment</code> 的特性，如生命周期。而其内部实际控制了一个 <code>Dialog</code> 对象，并通过当前 <code>DialogFragment</code>所依附的 <code>Activity</code> 的 <code>FragmentManager</code> 来对其进行管理与控制，也即将其当做一个普通的 <code>Fragment</code> 那样来管理。</p>
+<blockquote>
+<p>注:<code>dialog</code> 拥有自己的窗体 <code>window</code>,意味着它可以自己接收输入事件，处理事件，并且决定自己何时消失。</p>
+</blockquote>
+<h1 id="浅谈生命周期"><a href="#浅谈生命周期" class="headerlink" title="浅谈生命周期"></a>浅谈生命周期</h1><hr>
+<p><code>DialogFragment</code> 与 <code>Dialog</code> 同生同死,因为 <code>DialogFragment</code> 需要监听 <code>Dialog</code>的显示与关闭,并做出反映。而这两个操作关联到了 <code>DialogFragment</code> 加入到 <code>FragmentManager</code> 中和从其中移除。这样一来 <code>Dialog</code>的创建与销毁也随着 <code>DialogFragment</code> 的生命周期而走了。</p>
+<h1 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h1><pre><code>public void setStyle(@DialogStyle int style, @StyleRes int theme) {
+    mStyle = style;
+    if (mStyle == STYLE_NO_FRAME || mStyle == STYLE_NO_INPUT) {
+        mTheme = android.R.style.Theme_Panel;
+    }
+    if (theme != 0) {
+        mTheme = theme;
+    }
+} 
+</code></pre><p>此方法为对话框设置样式与主题。其中样式有 <strong>4</strong> 个可选，一般用得比较多的是<code>STYLE_NO_TITLE</code>(指定对话框无标题模式),而主题默认的话可填0，若是自定义主题，可在<code>style</code>文件下新增一个样式，然后继承<code>Theme.Dialog</code>修改你期望的主题即可。</p>
+<blockquote>
+<p>注意: 此方法若要生效一定要在对话框未创建之前设置，否则失效。下面我们还会谈到。</p>
+</blockquote>
+<pre><code> public void show(FragmentManager manager, String tag) {
+    mDismissed = false;
+    mShownByMe = true;
+    FragmentTransaction ft = manager.beginTransaction();
+    ft.add(this, tag);
+    ft.commit();
+}
+</code></pre><p>此方法就是控制对话框的显示，调用即可。其实就是类似普通的 <code>Fragment</code>的显示操作逻辑,获取<code>FragmentManager</code>来管理当前的对话框。是不是似曾相识？ </p>
+<pre><code> public void dismiss() {
+    dismissInternal(false);
+}
+void dismissInternal(boolean allowStateLoss) {
+    if (mDismissed) {
+        return;
+    }
+    mDismissed = true;
+    mShownByMe = false;
+    if (mDialog != null) {
+        mDialog.dismiss();
+        mDialog = null;
+    }
+    mViewDestroyed = true;
+    if (mBackStackId &gt;= 0) {
+        getFragmentManager().popBackStack(mBackStackId,
+                FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        mBackStackId = -1;
+    } else {
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.remove(this);
+        if (allowStateLoss) {
+            ft.commitAllowingStateLoss();
+        } else {
+            ft.commit();
+        }
+    } 
+</code></pre><p>此方法控制<code>DialogFragment</code>的关闭。我们看到在<code>void dismissInternal()</code>方法内会判断当前的<code>Dialog</code>对象 <code>mDialog</code>是否为空，否则就调用<code>Dialog</code> 的 <code>dismiss()</code> 关闭对话框。而剩下的代码都是<code>DialogFragment</code>为了管理自己的后续操作。比如退栈操作,移除 <code>Fragment</code>。</p>
+<pre><code> public Dialog getDialog() {
+    return mDialog;
+}
+</code></pre><p>此方法用于获取 <code>DialogFragment</code> 内的 <code>Dialog</code> 对象。我们之后要对对话框的尺寸改变、去除标题、设置背景、都需要获取该实例。</p>
+<pre><code> public void setCancelable(boolean cancelable) {
+    mCancelable = cancelable;
+    if (mDialog != null) mDialog.setCancelable(cancelable);
+}
+</code></pre><p>望名知义，就是设置对话框是否可以取消。内部还是调用 <code>Dialog</code>的方法  </p>
+<pre><code> public void setShowsDialog(boolean showsDialog) {
+    mShowsDialog = showsDialog;
+}  
+</code></pre><p>此方法控制当前 <code>DialogFragment</code>是否作为对话框而存在，否则视作普通的 <code>Fragment</code>来使用。而如果你把它当前普通的 <code>Fragment</code>加入到关联的 <code>Activity</code>中，那么<code>mShowsDialog</code> 会被初始化为 <strong>true</strong>。 </p>
+<pre><code> @Override
+public void onAttach(Context context) {
+    super.onAttach(context);
+    if (!mShownByMe) {
+        mDismissed = false;
+    }
+}
+
+@Override
+public void onDetach() {
+    super.onDetach();
+    if (!mShownByMe &amp;&amp; !mDismissed) {
+        mDismissed = true;
+    }
+}
+
+@Override
+public void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+
+    mShowsDialog = mContainerId == 0;
+
+    if (savedInstanceState != null) {
+        mStyle = savedInstanceState.getInt(SAVED_STYLE, STYLE_NORMAL);
+        mTheme = savedInstanceState.getInt(SAVED_THEME, 0);
+        mCancelable = savedInstanceState.getBoolean(SAVED_CANCELABLE, true);
+        mShowsDialog = savedInstanceState.getBoolean(SAVED_SHOWS_DIALOG, mShowsDialog);
+        mBackStackId = savedInstanceState.getInt(SAVED_BACK_STACK_ID, -1);
+    }
+}  
+</code></pre><p>以上的三个方法都是 重写 <code>Fragment</code> 中的生命周期方法。前两个主要是设置相应的标志位。<br>而在 <code>onCreate()</code> 中主要是从保存的实例状态中获取相应信息（之前在 <code>onSaveInstanceState()</code> 中设置的）。  </p>
+<pre><code>/** @hide */
+@RestrictTo(LIBRARY_GROUP)
+@Override
+public LayoutInflater getLayoutInflater(Bundle savedInstanceState) {
+    if (!mShowsDialog) {
+        return super.getLayoutInflater(savedInstanceState);
+    }
+
+    mDialog = onCreateDialog(savedInstanceState);
+
+    if (mDialog != null) {
+        setupDialog(mDialog, mStyle);
+
+        return (LayoutInflater) mDialog.getContext().getSystemService(
+                Context.LAYOUT_INFLATER_SERVICE);
+    }
+    return (LayoutInflater) mHost.getContext().getSystemService(
+            Context.LAYOUT_INFLATER_SERVICE);
+}
+
+/** @hide */
+@RestrictTo(LIBRARY_GROUP)
+public void setupDialog(Dialog dialog, int style) {
+    switch (style) {
+        case STYLE_NO_INPUT:
+            dialog.getWindow().addFlags(
+                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE |
+                            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+            // fall through...
+        case STYLE_NO_FRAME:
+        case STYLE_NO_TITLE:
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+    }
+}  
+public Dialog onCreateDialog(Bundle savedInstanceState) {
+    return new Dialog(getActivity(), getTheme());
+}
+</code></pre><p>最上两个方法是被隐藏的。<code>getLayoutInflater()</code> 中首先判断是否显示为一个对话框，若是才来到下面的逻辑。在这里我们发现，方法内调用了<code>onCreateDialog()</code>来获得一个对话框实例。如果实例存在，那么才开始配置对话框<strong>(注意：我们发现此处获取前述的 <code>setStyle()</code>传进来的值，因而该方法的调用必须早于此，也就是说你至少可以在 <code>onCreateDialog()</code>中进行设置)</strong>，此时，方法返回与对话框上下文关联的布局加载器。<br>接下来我们看<code>setupDialog()</code>。方法内根据存入的样式，对对话框实例进行一系列的设置，比如禁止获取焦点、不可触摸、设置无标题。<br>另外，在 <code>onCreateDialog()</code> 返回了一个新的对话框实例。在此，我们注意到，如果你想实现一些Dialog子类的对话框,比如 <code>AlertDialog</code>，那么你就可以重写该方法，返回你要创建的<code>Dialog</code> 子类实例。  </p>
+<pre><code>@Override
+public void onActivityCreated(Bundle savedInstanceState) {
+    super.onActivityCreated(savedInstanceState);
+
+    if (!mShowsDialog) {
+        return;
+    }
+
+    View view = getView();
+    if (view != null) {
+        if (view.getParent() != null) {
+            throw new IllegalStateException(
+                    &quot;DialogFragment can not be attached to a container view&quot;);
+        }
+        mDialog.setContentView(view);
+    }
+    final Activity activity = getActivity();
+    if (activity != null) {
+        mDialog.setOwnerActivity(activity);
+    }
+    mDialog.setCancelable(mCancelable);
+    mDialog.setOnCancelListener(this);
+    mDialog.setOnDismissListener(this);
+    if (savedInstanceState != null) {
+        Bundle dialogState = savedInstanceState.getBundle(SAVED_DIALOG_STATE_TAG);
+        if (dialogState != null) {
+            mDialog.onRestoreInstanceState(dialogState);
+        }
+    }
+}  
+</code></pre><p>当<code>Activity</code>创建完成后回调。若<code>mShowsDialog</code>为<strong>false</strong>，那么以下逻辑不再执行。<br>否则获取当前 <code>DialogFragment</code> 的根布局实例 <code>view</code>,并将其作为对话框的内容，加入其中。接下来把对话框与 <code>Activity</code> 进行绑定。接下来就是对话框的配置，包括注册取消监听，关闭监听。最后保存相关状态到 <code>savedInstanceState</code>,以便重建时利用。</p>
+<pre><code> @Override
+public void onStart() {
+    super.onStart();
+
+    if (mDialog != null) {
+        mViewDestroyed = false;
+        mDialog.show();
+    }
+}  
+</code></pre><p>此方法很重要。对话框真正显示就在此后。内容调用了 <code>mDialog</code> 的<code>show()</code>方法，将对话框显示出来(依附于 <code>Fragment</code>)</p>
+<pre><code>     @Nullable
+public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+        @Nullable Bundle savedInstanceState) {
+    return null;
+}
+</code></pre><p>此方法为 <code>Fragment</code> 中的方法，为空实现，它交给子类去加载一个 <strong>contentView</strong>,再由<code>Fragment</code> 来处理。而我们对话框的内容布局就是在此处进行加载，以便返回一个对话框的布局给 <code>Fragment</code> 去处理。</p>
+<blockquote>
+<p>注意：<code>onCreateDialog()</code>比 <code>onCreateView()</code> 先一步执行。因为在 <code>Fragment</code>中调用<code>onCreateView()</code> 时需要拿到一个布局加载器<code>LayoutInflater</code>,而<code>DialogFragmet</code>中是通过上述的一个方法–<code>getLayoutInflater()</code>来返回一个与对话框有关的上下文布局加载器,<code>onCreateDialog()</code>就在其中被调用，因而我们很容易就可以知道两者的执行次序。  </p>
+</blockquote>
+<h1 id="几类常见应用"><a href="#几类常见应用" class="headerlink" title="几类常见应用"></a>几类常见应用</h1><h2 id="普通对话框"><a href="#普通对话框" class="headerlink" title="普通对话框"></a>普通对话框</h2><pre><code>public class CommonDialogFragment extends DialogFragment {
+
+private static final String TAG = &quot;CommonDialogFragment&quot;;
+
+
+@Nullable
+@Override
+public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+     Dialog dialog = getDialog();
+    DisplayMetrics dm = DensityUtil.getDisplayMetrics(getActivity());
+    int width = dm.widthPixels;
+    if (dialog != null) {
+        dialog.getWindow().setLayout(width * 2 / 3, width / 2);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));//去除多余的padding
+    }
+    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+    View view = inflater.inflate(R.layout.time, container, false);
+    ListView mListView = (ListView) view.findViewById(R.id.listview);
+    mListView.setAdapter(new MyAdapter(getActivity()));
+    return view;
+    }
+}
+</code></pre><p>这类很简单，一般只要重写 <code>onCreateView()</code>，和<code>Fragment</code>中的做法一样。只是需要额外配置对话框的一些设置，我们下面再统一叙述。  </p>
+<h2 id="警告对话框"><a href="#警告对话框" class="headerlink" title="警告对话框"></a>警告对话框</h2><pre><code>public class MyAlerDialog extends DialogFragment {
+
+private static final String TAG = &quot;RoundCornerDialog&quot;;
+
+@Override
+public Dialog onCreateDialog(Bundle savedInstanceState) {
+    return new AlertDialog.Builder(getActivity()).setMessage(&quot;我是对话框&quot;).setTitle(&quot;警告&quot;).setIcon(R.mipmap.ic_launcher).create();
+}
+
+@Nullable
+@Override
+public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    Dialog dialog = getDialog();
+    DisplayMetrics dm = DensityUtil.getDisplayMetrics(getActivity());
+    int width = dm.widthPixels;
+    if (dialog != null) {
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));//去除多余的padding
+        dialog.getWindow().setLayout(width * 2 / 3, width / 2);
+    }
+    return super.onCreateView(inflater, container, savedInstanceState);
+}
+</code></pre><p>}</p>
+<h2 id="圆角对话框"><a href="#圆角对话框" class="headerlink" title="圆角对话框"></a>圆角对话框</h2><p>圆角对话框与上述两张对话框创建流程无异，只需对布局额外加上一层drawable绘制的圆角背景层即可</p>
+<blockquote>
+<p>注意: 若加了圆角背景层仍没有圆角化，那么你需要对圆角背景层再 加上padding属性即可解决。</p>
+</blockquote>
+<h1 id="对话框的配置"><a href="#对话框的配置" class="headerlink" title="对话框的配置"></a>对话框的配置</h1><h2 id="去标题化"><a href="#去标题化" class="headerlink" title="去标题化"></a>去标题化</h2><ol>
+<li>调用<code>setStyle()</code>传入<code>STYLE_NO_TITLE</code>,必须在<code>Dialog</code>创建之前调用方可生效。</li>
+<li>定义自己的主题，设置 <code>windowNoTitle</code>属性为<strong>true</strong></li>
+</ol>
+<h2 id="背景透明化"><a href="#背景透明化" class="headerlink" title="背景透明化"></a>背景透明化</h2><pre><code>getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT)。
+</code></pre><p>我们一般都会加上，没有设置有可能出现多余的padding，它可让整个<code>Window</code>透明化。</p>
+<h2 id="设置Dialog的尺寸"><a href="#设置Dialog的尺寸" class="headerlink" title="设置Dialog的尺寸"></a>设置Dialog的尺寸</h2><p>由于 <code>Dialog</code> 属于 <code>Window</code> 级别，属于独立窗体，因而要改变 <code>Dialog</code> 的尺寸实际上就上改变窗体 <code>Window</code> 的尺寸，而如果你对布局修改尺寸是毫无效果的。<br>我们通过<code>getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)</code>来设置对话框具体宽高或全屏就够了。</p>
+<h2 id="设置对话框方位"><a href="#设置对话框方位" class="headerlink" title="设置对话框方位"></a>设置对话框方位</h2><p>实际还是控制<code>window</code>这个对象，调用它的方法<code>setGravity()</code>即可。  </p>
+<blockquote>
+<p>注意： 但凡涉及到获取对话框所在的<code>window</code>对象时，都必须在对话框已经创建了之后调用。</p>
+</blockquote>
+<h2 id="配置style样式定制主题"><a href="#配置style样式定制主题" class="headerlink" title="配置style样式定制主题"></a>配置style样式定制主题</h2><p>我们查看源码可知道对话框的默认主题基础自<code>Theme.Dialog</code>，那么我们便可以继承整个主题，修改默认主题中的属性值来达到我们想要的效果，下面贴出对话框默认的主题。</p>
+<pre><code>&lt;style name=&quot;Theme.Dialog&quot;&gt;
+&lt;!--配置window有无边框--&gt;
+&lt;item name=&quot;windowFrame&quot;&gt;@null&lt;/item&gt;
+&lt;!--配置window标题样式--&gt;
+&lt;item name=&quot;windowTitleStyle&quot;&gt;@style/DialogWindowTitle&lt;/item&gt;
+&lt;!--配置window背景层--&gt;常用
+&lt;item name=&quot;windowBackground&quot;&gt;@drawable/panel_background&lt;/item&gt;
+&lt;!--配置window是否浮在上面--&gt;
+&lt;item name=&quot;windowIsFloating&quot;&gt;true&lt;/item&gt;
+&lt;!--配置window是否浮在上面--&gt;
+&lt;!--配置window有无标题 --&gt; 常用
+&lt;item name=&quot;windowNoTitle&quot;&gt;true&lt;/item&gt;
+&lt;!--配置window进入退出动画 --&gt; 常用
+&lt;item name=&quot;windowAnimationStyle&quot;&gt;@style/Animation.Dialog&lt;/item&gt;
+&lt;!--配置window外部是否可触摸--&gt;
+&lt;item name=&quot;windowCloseOnTouchOutside&quot;&gt;@bool/config_closeDialogWhenTouchOutside&lt;/item&gt;
+....此处省略部分属性
+&lt;/style&gt;
+</code></pre><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>首先，介绍了使用<code>DialogFragment</code> 的缘由以及好处，再来谈到了它的生命周期，这也是之所以使用这种方式来呈现对话框的关键所在。再接下来，我们从源码的角度，详细剖析了各个方法的作用、联系，以及调用的时机以及注意事项。再来介绍了<code>DialogFragment</code>的几种常见的应用，也可以说是常用的代码模版了。最后，介绍了配置对话框的一些常用的手段以及注意事项。</p>
+<h1 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h1><p>感谢您看到这里，期望留下您的印迹。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/30/一起看画笔Paint/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/30/一起看画笔Paint/" itemprop="url">一起看画笔Paint</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-30T19:23:25+08:00">2017-07-30</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/07/30/一起看画笔Paint/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/07/30/一起看画笔Paint/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><strong>Paint</strong> 可以决定你所画的几何图形、文本、位图的样式和颜色变化。</p>
+<h1 id="mPaint-measureXX"><a href="#mPaint-measureXX" class="headerlink" title="mPaint.measureXX"></a>mPaint.measureXX</h1><h2 id="mPaint-MeasureText"><a href="#mPaint-MeasureText" class="headerlink" title="mPaint.MeasureText"></a>mPaint.MeasureText</h2><ol>
+<li><p>方法1： </p>
+<pre><code>float measureText (char[] text, int index, int count) 
+</code></pre><p>作用：测量文字绘制时所占用的宽度。<br>对参数的解释:  </p>
+<ul>
+<li>text 待测试的字符数组</li>
+<li>index 从第几个index开始测量</li>
+<li>count 共测量多少个字符  </li>
+</ul>
+</li>
+<li><p>方法2:</p>
+<pre><code>float measureText (CharSequence text, int start, int end) 
+</code></pre><p>对参数的解释：  </p>
+<ul>
+<li>text 待测试字符串</li>
+<li>start 从start位置开始测量字符串</li>
+<li>end  测量到字符串的end位置，但不包括.</li>
+</ul>
+</li>
+<li><p>方法3：</p>
+<pre><code>float measureText (String text, int start, int end)
+</code></pre></li>
+<li><p>例子:  </p>
+<pre><code>char[] str=&quot;学习Paint&quot;.toCharArray();
+String string=&quot;学习Paint&quot;;
+float v1 = mPaint.measureText(string);
+Log.i(TAG,&quot;方法1=&quot;+v1);//测量&quot;学习Paint&quot;
+float v2 = mPaint.measureText(str,0,str.length-1);//只测量&quot;学习Pain&quot;
+Log.i(TAG,&quot;方法2=&quot;+v2);
+float v3=mPaint.measureText(string,1,string.length());//只测量&quot;习Paint&quot;
+Log.i(TAG,&quot;方法3=&quot;+v3);  
+</code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhn77x6w5xj20hm02zdfs.jpg" alt=""><br>另外：<strong>mPaint.getTextWidths(String text, float[] widths)</strong>用于获取 <strong>text</strong> 中每个字符的宽度并返回到 <strong>widths</strong> 数组中，用到了<code>MeasureText</code> 方法  </p>
+</li>
+</ol>
+<h1 id="mPaint-breakXXX"><a href="#mPaint-breakXXX" class="headerlink" title="mPaint.breakXXX"></a>mPaint.breakXXX</h1><h2 id="mPaint-breakText"><a href="#mPaint-breakText" class="headerlink" title="mPaint.breakText"></a>mPaint.breakText</h2><p>作用:测量指定宽度的文本宽度，超过指定宽度后截断。  </p>
+<ol>
+<li><p>方法1:  </p>
+<pre><code>breakText(String text, boolean measureForwards, float maxWidth, float[] measuredWidth)  
+</code></pre></li>
+<li><p>方法2:  </p>
+<pre><code>breakText(char[] text, int index, int count, float maxWidth, float[] measuredWidth)  
+</code></pre></li>
+<li><p>方法3:  </p>
+<pre><code>breakText(CharSequence text, int start, int end, boolean measureForwards, float maxWidth, float[] measuredWidth)  
+</code></pre></li>
+<li>关键参数详解：  </li>
+</ol>
+<ul>
+<li><strong>measureForwards</strong>：表示文字测量的方法，<strong>true</strong> 表示从左向右开始测量.  </li>
+<li><strong>maxWidth</strong>:指定要测量的文本的最大宽度，也是是否截断文本的界限值.</li>
+<li><strong>measuredWidth</strong>:用于接受数据,并将结果赋值给 <strong>measuredWidth[0]</strong>  </li>
+</ul>
+<h1 id="mPaint-setXXX"><a href="#mPaint-setXXX" class="headerlink" title="mPaint.setXXX"></a>mPaint.setXXX</h1><h2 id="mPaint-set"><a href="#mPaint-set" class="headerlink" title="mPaint.set"></a>mPaint.set</h2><p>为当前画笔copy一支画笔  </p>
+<h2 id="mPaint-setAlpha"><a href="#mPaint-setAlpha" class="headerlink" title="mPaint.setAlpha"></a>mPaint.setAlpha</h2><p>方法: </p>
+<pre><code>void setAlpha (int a)  
+</code></pre><p>为设置透明值属性，a介于[0,255]之间</p>
+<h2 id="mPaint-setARGB"><a href="#mPaint-setARGB" class="headerlink" title="mPaint.setARGB"></a>mPaint.setARGB</h2><p>方法： </p>
+<pre><code>void setARGB (int a, int r, int g, int b) 
+</code></pre><p>设置透明值和三基色  </p>
+<h2 id="mPaint-setAntiAlias"><a href="#mPaint-setAntiAlias" class="headerlink" title="mPaint.setAntiAlias"></a>mPaint.setAntiAlias</h2><p>方法： </p>
+<pre><code>void setAntiAlias (boolean aa)  
+</code></pre><p>设置是否开启抗锯齿</p>
+<h2 id="mPaint-setColor"><a href="#mPaint-setColor" class="headerlink" title="mPaint.setColor"></a>mPaint.setColor</h2><p>方法: </p>
+<pre><code>void setColor (int color)  
+</code></pre><p>设置画笔的颜色</p>
+<h2 id="mPaint-setColorFilter"><a href="#mPaint-setColorFilter" class="headerlink" title="mPaint.setColorFilter"></a>mPaint.setColorFilter</h2><p>方法: </p>
+<pre><code>ColorFilter setColorFilter (ColorFilter filter)  
+</code></pre><p>设置或清除画笔的颜色过滤器,比如去掉图片的绿色  </p>
+<h3 id="ColorFilter"><a href="#ColorFilter" class="headerlink" title="ColorFilter"></a>ColorFilter</h3><p>有三个子类可供设置  </p>
+<ol>
+<li><p><strong>LightingColorFilter</strong><br>作用：常用于模拟灯光效果<br>构造方法：</p>
+<p> LightingColorFilter(int mul, int add) </p>
+</li>
+</ol>
+<p>对参数的解释：  </p>
+<pre><code>mul: 色彩倍增值,16进制的色彩值0xAARRGGBB。
+add: 色彩增加值,16进制的色彩值0xAARRGGBB。  
+</code></pre><p>计算公式:  </p>
+<pre><code>R&apos; = R * colorMultiply.R + colorAdd.R
+G&apos; = G * colorMultiply.G + colorAdd.G
+B&apos; = B * colorMultiply.B + colorAdd.B  
+</code></pre><p>由16进制的与运算我们知道，任意的 <strong>0xAARRGGBB*0xFFFFFFFF=0xAARRGGBB</strong>,而再加上<strong>0x00000000</strong>，结果仍不变。故我们知道当 <strong>mul=0xFFFFFFFF,add=0x00000000</strong>,该过滤器并不会改变原图的色调。如果我们要增加绿色的值，我们就可以修改 <strong>add</strong> 的值为 <strong>0x0000XX00</strong>(其中 <strong>xx</strong> 介于 <strong>00-FF</strong> 之间);如果我们要去掉绿色的值,我们就可以修改 <strong>mul</strong> 中 <strong>xx</strong> 的值。总之，去掉某个颜色修改 <strong>mul</strong> 值，增加某个颜色值修改 <strong>add</strong>。<br>例子:  </p>
+<pre><code>LightingColorFilter filter1=new LightingColorFilter(0xFFFFFFFF,0x00000000);
+LightingColorFilter filter2=new LightingColorFilter(0xFFFF00FF,0x00000000);
+LightingColorFilter filter3=new LightingColorFilter(0xFFFFFFFF,0x0000FF00);
+Bitmap panda= BitmapFactory.decodeResource(getResources(), R.drawable.images);
+mPaint.setColorFilter(filter1);
+canvas.drawBitmap(panda,20,20,mPaint);
+mPaint.reset();
+mPaint.setColorFilter(filter2);
+canvas.drawBitmap(panda,20,25+panda.getHeight(),mPaint);
+mPaint.reset();
+mPaint.setColorFilter(filter3);
+canvas.drawBitmap(panda,20,30+panda.getHeight()*2,mPaint);  
+</code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhn800mll5j20bc0j7gt9.jpg" alt="">  </p>
+<ol>
+<li><strong>ColorMatrixColorFilter</strong><br>作用：通过 <strong>4*5</strong> 颜色矩阵来改善中像素的饱满度  </li>
+</ol>
+<p>构造方法1:</p>
+<pre><code>ColorMatrixColorFilter(ColorMatrix matrix)
+</code></pre><p><strong>ColorMatrix</strong> 可改变 <strong>bitmap</strong> 上的颜色和透明度（变换 <strong>RGBA</strong> 的值，达到改变的目的）,可以以一组 <strong>4*5</strong> 的数组构建该对象<br>构造方法2:</p>
+<pre><code>ColorMatrixColorFilter (float[] array)  
+</code></pre><p>假设颜色矩阵为  </p>
+<pre><code>[ a, b, c, d, e,  
+f, g, h, i, j,  
+k, l, m, n, o,  
+p, q, r, s, t ]   
+</code></pre><p>则计算公式为:  </p>
+<pre><code>R’ = a*R + b*G + c*B + d*A + e;  
+G’ = f*R + g*G + h*B + i*A + j;  
+B’ = k*R + l*G + m*B + n*A + o;  
+A’ = p*R + q*G + r*B + s*A + t;   
+</code></pre><p>由矩阵相乘的原理可知，任何一个矩阵与单位矩阵相乘仍为本身(不懂去补矩阵基础知识)。那么现在类比 <strong>LightingColorFilter</strong> 的计算公式，你是否发现了点什么？没错，颜色矩阵的前 <strong>4</strong> 列(<strong>必须按顺序</strong>)采用的值产生效果与颜色倍增一致，而最后一列与颜色增加的效果一致, 接下来我们修改颜色矩阵，使之和上图中的效果一致。<br>例子：  </p>
+<pre><code>ColorMatrixColorFilter filter1 = new ColorMatrixColorFilter(new float[]{
+        1, 0, 0, 0, 0,
+        0, 1, 0, 0, 0,
+        0, 0, 1, 0, 0,
+        0, 0, 0, 1, 0
+});
+ColorMatrixColorFilter filter2 = new ColorMatrixColorFilter(new float[]{
+        1, 0, 0, 0, 0,
+        0, 0, 0, 0, 0,
+        0, 0, 1, 0, 0,
+        0, 0, 0, 1, 0
+});
+ColorMatrixColorFilter filter3 = new ColorMatrixColorFilter(new float[]{
+        1, 0, 0, 0, 0,
+        0, 1, 0, 0, 255,
+        0, 0, 1, 0, 0,
+        0, 0, 0, 1, 0
+});  
+</code></pre><ol>
+<li><p><strong>PorterDuffColorFilter</strong><br>作用：通过使用单颜色或 <strong>Porter-Duff</strong> 组合模式来为源像素着色<br>实例：  </p>
+<p> setColorFilter(Color.parseColor(“#99000000”), PorterDuff.Mode.DARKEN);<br> 可设置ImageView的前景色为透明黑<br>构造方法:</p>
+<p> PorterDuffColorFilter(int color, PorterDuff.Mode mode)<br>对参数的解释:  </p>
+</li>
+</ol>
+<ul>
+<li><strong>color</strong>:<strong>16</strong> 进制 <strong>ARGB</strong> 值</li>
+<li><strong>mode</strong>:指定的 <strong>PorterDuff.Mode</strong>(<strong>这里主要是图像色彩混和</strong>)。共有 <strong>5</strong> 种，分别是<strong>Darken(变暗)、Lighten(变亮)、Multiply(正片叠底)、Overlay(重叠)、Screen(滤色)</strong>，预知各种模式详解请耐心继续往下看。  </li>
+</ul>
+<p>例子:  </p>
+<pre><code>PorterDuffColorFilter filter1=new PorterDuffColorFilter(0xFFFF0000, PorterDuff.Mode.DARKEN);
+PorterDuffColorFilter filter2=new PorterDuffColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
+PorterDuffColorFilter filter3=new PorterDuffColorFilter(0xFFFF0000, PorterDuff.Mode.SCREEN);
+PorterDuffColorFilter filter4=new PorterDuffColorFilter(0xFFFF0000, PorterDuff.Mode.LIGHTEN);
+PorterDuffColorFilter filter5=new PorterDuffColorFilter(0xFFFF0000, PorterDuff.Mode.OVERLAY);
+Bitmap panda= BitmapFactory.decodeResource(getResources(), R.drawable.images);
+mPaint.setColorFilter(filter1);
+canvas.drawBitmap(panda,20,10,mPaint);
+mPaint.setColorFilter(filter2);
+canvas.drawBitmap(panda,20,15+panda.getHeight(),mPaint);
+mPaint.setColorFilter(filter3);
+canvas.drawBitmap(panda,20,20+panda.getHeight()*2,mPaint);
+mPaint.setColorFilter(filter4);
+canvas.drawBitmap(panda,20,25+panda.getHeight()*3,mPaint);
+mPaint.setColorFilter(filter5);
+canvas.drawBitmap(panda,20,30+panda.getHeight()*4,mPaint);  
+</code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25ly1fhn9esio0sj20ay0qjn5v.jpg" alt=""></p>
+<h2 id="mPaint-setDither"><a href="#mPaint-setDither" class="headerlink" title="mPaint.setDither"></a>mPaint.setDither</h2><p>方法：</p>
+<pre><code>void setDither (boolean dither)  
+</code></pre><p>作用：设定是否使用图像抖动处理，会使绘制出来的图片颜色更加平滑和饱满，图像更加清晰。其实当下智能手机也有运动防抖功能，只要你用过一定知道区别。</p>
+<h2 id="mPaint-setFakeBoldText"><a href="#mPaint-setFakeBoldText" class="headerlink" title="mPaint.setFakeBoldText"></a>mPaint.setFakeBoldText</h2><p>方法:</p>
+<pre><code>void setFakeBoldText (boolean fakeBoldText)     
+</code></pre><p>设置伪粗体文本,与设置 <strong>FAKE_BOLD_TEXT_FLAG</strong> 一样,只是一种文本显示效果而已，咱不深究。  </p>
+<h2 id="mPaint-setFilterBitmap"><a href="#mPaint-setFilterBitmap" class="headerlink" title="mPaint.setFilterBitmap"></a>mPaint.setFilterBitmap</h2><p>方法:</p>
+<pre><code>void setFilterBitmap (boolean filter)    
+</code></pre><p>设置位图进行<a href="https://baike.baidu.com/item/%E5%9B%BE%E5%83%8F%E6%BB%A4%E6%B3%A2" target="_blank" rel="noopener">滤波</a>(<strong>Filter</strong>)处理  </p>
+<h2 id="mPaint-setHinting"><a href="#mPaint-setHinting" class="headerlink" title="mPaint.setHinting"></a>mPaint.setHinting</h2><p>方法：</p>
+<pre><code>void setHinting (int mode)  
+</code></pre><p> 设置字体微调, 可以是 <strong>HINTING_OFF or HINTING_ON</strong>. 由于当今手机密度高，此方法已无用武之地，略过。</p>
+<h2 id="mPaint-setLetterSpacing"><a href="#mPaint-setLetterSpacing" class="headerlink" title="mPaint.setLetterSpacing"></a>mPaint.setLetterSpacing</h2><p>方法:</p>
+<pre><code>void setLetterSpacing (float letterSpacing)     
+</code></pre><p>设置文本的字符间距，默认值为0，负数值会缩紧文本。注意文字本身两侧默认有间隙  </p>
+<h2 id="mPaint-setLinearText"><a href="#mPaint-setLinearText" class="headerlink" title="mPaint.setLinearText"></a>mPaint.setLinearText</h2><p>方法:</p>
+<pre><code>void setLinearText (boolean linearText)  
+</code></pre><p>设置文本为线性排列  </p>
+<h2 id="mPaint-setMaskFilter"><a href="#mPaint-setMaskFilter" class="headerlink" title="mPaint.setMaskFilter"></a>mPaint.setMaskFilter</h2><ol>
+<li><p>方法: </p>
+<pre><code>MaskFilter setMaskFilter (MaskFilter maskfilter)   
+</code></pre><p>设置或清除滤镜效果,传入 <strong>null</strong> 可清除之前的滤镜效果,<strong>maskfilter</strong> 由两个子类  <strong>BlurMaskFilter</strong>、<strong>EmbossMaskFilter</strong>所构造.</p>
+</li>
+<li><p><strong>BlurMaskFilter</strong> 模糊滤镜<br>构造方法:</p>
+<pre><code>BlurMaskFilter(float radius, BlurMaskFilter.Blur style)    
+</code></pre><p>对参数的解释:  </p>
+<ul>
+<li><strong>radius</strong>:设置显示的阴影半径,必须大于<strong>0</strong>  </li>
+<li><strong>style</strong>:待应用的阴影模式  </li>
+<li><strong>INNER</strong>:绘制内阴影和图片内容本身，不绘制外阴影</li>
+<li><strong>NORMAL</strong>:正常阴影效果</li>
+<li><strong>OUTER</strong>:不绘制内部阴影及图片内容，只绘制外阴影</li>
+<li><strong>SOLID</strong>:只绘制外部阴影和图片内容，不绘制内阴影，与 <strong>INNER</strong> 相对  </li>
+</ul>
+</li>
+<li><p><strong>EmbossMaskFilter</strong> 浮雕滤镜<br>构造方法:</p>
+<pre><code>EmbossMaskFilter(float[] direction, float ambient, float specular, float blurRadius)    
+</code></pre><p>对参数的解释:  </p>
+<ul>
+<li><strong>direction</strong>:指定光源的方向，由3个量构成的[x,y,z]设置 </li>
+<li><strong>ambient</strong>:背景光的亮度，取值区间[0,1],决定背景的明暗程度</li>
+<li><strong>specular</strong>:高光系数,值越小反射越强,那么亮度也相对偏亮</li>
+<li><strong>blurRadius</strong>:阴影延伸半径  </li>
+</ul>
+</li>
+<li><p>例子:  </p>
+<pre><code>mPaint.setMaskFilter(new BlurMaskFilter(5, BlurMaskFilter.Blur.NORMAL));
+mPaint.setMaskFilter(new EmbossMaskFilter(new float[]{1,1,1},0.5f,8f,3f));  
+</code></pre></li>
+</ol>
+<ul>
+<li><strong>BlurMaskFilter.Blur.NORMAL</strong><br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhoe7ni5t5j20ax080q66.jpg" alt="">  </li>
+<li><strong>BlurMaskFilter.Blur.INNER</strong><br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhoeapo9rqj20ar08j0vy.jpg" alt="">  </li>
+<li><strong>BlurMaskFilter.Blur.OUTER</strong><br><img src="http://ww1.sinaimg.cn/large/8992ce25ly1fhoeby4g1gj20b708gadb.jpg" alt="">  </li>
+<li><strong>BlurMaskFilter.Blur.SOLID</strong><br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhoedtl4a3j20ba08iwhq.jpg" alt="">  </li>
+<li>浮雕滤镜效果(可自个手动调值，感受下效果差异)<br><img src="http://ww1.sinaimg.cn/large/8992ce25ly1fhoenuv7gdj20az08stby.jpg" alt=""></li>
+</ul>
+<h2 id="mPaint-setPathEffect"><a href="#mPaint-setPathEffect" class="headerlink" title="mPaint.setPathEffect"></a>mPaint.setPathEffect</h2><ol>
+<li><p>方法:</p>
+<pre><code>PathEffect setPathEffect (PathEffect effect)  
+</code></pre><p>设置或清除路径效果，传入 <strong>null</strong>清除效果<br><strong>PathEffect</strong> 共有 <strong>6</strong> 个子类可用于构造对象，然后作为方法参数传入  </p>
+</li>
+<li><p><strong>CornerPathEffect</strong><br>构造方法:</p>
+<pre><code>CornerPathEffect (float radius)
+</code></pre><p>改变线段之间的圆滑度，而不是带锐角的折线形式<br>对参数的解释:  </p>
+<ul>
+<li><strong>radius</strong>:线段之间的圆滑程度    </li>
+</ul>
+</li>
+<li><p><strong>DashPathEffect</strong><br>构造方法:</p>
+<pre><code>DashPathEffect (float[] intervals, float phase)   
+</code></pre><p>设置路径的虚线效果,<strong>setStroke</strong> 控制虚线的厚薄度<br>对参数的解释:  </p>
+<ul>
+<li><strong>interval</strong>:间隔数组，控制虚线的长度,其中第一个偶数指数即 <strong>0</strong> 所对应的值(至少为 <strong>2</strong> )表示第一条实线的长度，第一个奇数指数即 <strong>1</strong> 所对应的值表示第一条虚线的长度,第二个偶数对应实线，第二个奇数对应虚线…以此类推。数组不再由新元素，则开始从第一个数循环。  </li>
+<li><strong>phase</strong>: 虚实线间的间距。  </li>
+</ul>
+<p>此类妙用:  当虚实线的长度为整个 <strong>path</strong> 的长度时，即 <strong>intervals</strong> 数组中仅有两个相等的元素且均为 <strong>path</strong> 长度时,虚实线的间距为 <strong>0</strong>,绘制出来的效果就是一条完整的实线。而虚实线的间距如果为 <strong>0</strong>到 <strong>path</strong> 长度之间动态变化（可借助值动画动态得到<strong>【0，1】</strong>之间变化的比例），那么就会出现类似沿着路径绘制的动画效果。</p>
+</li>
+<li><p><strong>DiscretePathEffect</strong><br>构造方法：</p>
+<pre><code>DiscretePathEffect (float segmentLength, float deviation)  
+</code></pre><p>设置离散的路径效果<br>对参数的解释:  </p>
+<ul>
+<li><strong>segmentLength</strong> :离散片段的长度</li>
+<li><strong>deviation</strong>： 随机的偏移原路径的值    </li>
+</ul>
+</li>
+<li><p><strong>PathDashPathEffect</strong><br>构造方法:</p>
+<pre><code>PathDashPathEffect (Path shape, float advance, float phase, PathDashPathEffect.Style style)  
+</code></pre><p>用指定的路径形状对所画的路径进行虚线化标记,<strong>与顺序有关</strong>。<br>对参数的理解:  </p>
+<ul>
+<li><strong>shape</strong>:虚线段的路径形状  </li>
+<li><strong>advance</strong>:实线的间隔，即长度</li>
+<li><strong>phase</strong>:虚实线间的间距  </li>
+<li><strong>style</strong>:由 <strong>NOMAL,ROTATE,TRANSLATES</strong> 三种样式    </li>
+</ul>
+</li>
+<li><p><strong>SumPathEffect</strong><br>构造方法：</p>
+<pre><code>SumPathEffect(PathEffect first, PathEffect second)  
+</code></pre><p>逐一组合路径效果，<strong>与顺序无关</strong>。<br>对参数的理解:  </p>
+<ul>
+<li><strong>first</strong>:第一个路径效果  </li>
+<li><strong>second</strong>: 第二个路径效果  </li>
+</ul>
+</li>
+<li><p><strong>ComposePathEffect</strong><br>构造方法:</p>
+<pre><code>ComposePathEffect (PathEffect outerpe, PathEffect innerpe)  
+</code></pre><p>先指定一个内部路径效果，再指定一个外部路径效果，再将二者组合形成新的路径效果。  </p>
+</li>
+<li><p>例子:  </p>
+<pre><code>public class DrawPractice extends View {
+private Paint mPaint = new Paint();
+public static final String TAG = &quot;DrawPractice&quot;;
+private PathEffect[] mPathEffects = new PathEffect[9];
+private  Path path;
+
+//省略构造函数
+private void init() {
+    mPaint.setColor(Color.BLUE);
+    mPaint.setAntiAlias(true);
+    mPaint.setStyle(Paint.Style.STROKE);
+    mPaint.setStrokeWidth(5);
+    initPath();
+}
+
+private void initPath() {
+path = new Path();
+path.moveTo(20, 50);//路线起点
+
+for (int i = 0; i &lt;= 30; i++) {//随机生成折线
+    path.lineTo(i * 35, (float) (Math.random() * 100));
+}
+    mPathEffects[0]=null;
+    mPathEffects[1]=new CornerPathEffect(5);
+    mPathEffects[2]=new DashPathEffect(new float[]{20,10,5,1},5);
+    mPathEffects[3]=new DiscretePathEffect(10,5);
+    Path mPath=new Path();
+    mPath.addRect(0,0,10,10, Path.Direction.CCW);
+    mPathEffects[4]=new PathDashPathEffect(mPath,20,5f,PathDashPathEffect.Style.ROTATE);
+     //注意5，6的区别 详细看图
+    mPathEffects[5]=new ComposePathEffect(mPathEffects[1],mPathEffects[4]);
+    mPathEffects[6]=new ComposePathEffect(mPathEffects[4],mPathEffects[1]);
+    //7,8其实没区别  详细看图
+    mPathEffects[7]=new SumPathEffect(mPathEffects[1],mPathEffects[4]);
+    mPathEffects[8]=new SumPathEffect(mPathEffects[4],mPathEffects[1]);
+}
+
+@Override
+protected void onDraw(Canvas canvas) {
+    super.onDraw(canvas);
+for (int i = 0; i &lt;mPathEffects.length ; i++) {
+    mPaint.setPathEffect(mPathEffects[i]);
+    canvas.drawPath(path,mPaint);
+    canvas.translate(0,100);
+    }
+}
+}  
+</code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhogedferpj20fe0gr0ul.jpg" alt="">  </p>
+</li>
+</ol>
+<h2 id="mPaint-setShader"><a href="#mPaint-setShader" class="headerlink" title="mPaint.setShader"></a>mPaint.setShader</h2><ol>
+<li><p>方法:</p>
+<pre><code>Shader setShader (Shader shader)    
+</code></pre><p>设置着色器,传入<strong>null</strong>清除<br>对参数的解释:  </p>
+<ul>
+<li><strong>shader</strong>:由 <strong>Shader</strong> 的五个子类构造传入,下面介绍。  </li>
+</ul>
+</li>
+<li><p><strong>BitmapShader</strong><br>构造方法:</p>
+<pre><code>BitmapShader(Bitmap bitmap, Shader.TileMode tileX, Shader.TileMode tileY)    
+</code></pre><p>作用:渲染位图<br>对参数的解释:  </p>
+<ul>
+<li><strong>bitmap</strong>: 位图  </li>
+<li><strong>tileX</strong>:水平方向的一种模式</li>
+<li><strong>tileY</strong>:竖直方向的一种模式<br>三种模式:    </li>
+<li><strong>Shader.TileMode.CLAMP</strong>:重复水平或者竖直方向上位图的边缘颜色  </li>
+<li><strong>Shader.TileMode.MIRROR</strong>:水平或者竖直方向上重复图片的镜像，并且连接处看似无缝对接  </li>
+<li><p><strong>Shader.TileMode.REPEAT</strong>:水平或者竖直方向上重复图片<br>例子:  </p>
+<pre><code>mPaint.setAntiAlias(true);
+Bitmap panda = BitmapFactory.decodeResource(getResources(), R.drawable.images);
+mPaint.setShader(new BitmapShader(panda, Shader.TileMode.CLAMP, Shader.TileMode.REPEAT));
+canvas.drawCircle(300,300,300,mPaint);
+mPaint.setShader(new BitmapShader(panda, Shader.TileMode.MIRROR, Shader.TileMode.REPEAT));
+canvas.drawCircle(300,900,300,mPaint);  
+</code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhqm0vzgfsj20eh0qfk6r.jpg" alt="">  </p>
+</li>
+</ul>
+</li>
+<li><p><strong>LinearGradient</strong><br>作用:设置一个沿着直线的线性渐变效果<br>构造方法1:</p>
+<pre><code>LinearGradient (float x0, 
+        float y0, 
+        float x1, 
+        float y1, 
+        int[] colors, 
+        float[] positions, 
+        Shader.TileMode tile)    
+</code></pre><p>对参数的解释:    </p>
+<ul>
+<li><strong>x0,y0,x1,y1</strong>:渐变直线的起点和终点  </li>
+<li><strong>colors</strong>:用于产生渐变效果的颜色组,非空 ，至少两种颜色</li>
+<li><strong>positions</strong>:可为空,控制颜色数组不均匀的渐变，取值[0..1] </li>
+<li><strong>tile</strong>:仍旧有三种模式可设置见上<br>构造方法2：<pre><code>LinearGradient(float x0, float y0, float x1, float y1, int color0, int color1, Shader.TileMode tile)  
+</code></pre>对参数的解释:  </li>
+<li><strong>color0</strong>:渐变的起始颜色</li>
+<li><p><strong>color1</strong>:渐变的终止颜色<br>例子:  </p>
+<pre><code>mPaint.setAntiAlias(true);
+mPaint.setStyle(Paint.Style.STROKE);
+mPaint.setStrokeWidth(10);
+mPaint.setShader(new LinearGradient(0,0,500,500, 
+                new int[]{R.color.colorPrimaryDark, Color.BLUE},null,Shader.TileMode.CLAMP));
+canvas.drawRect(new RectF(20,20,200,200),mPaint);  
+</code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhqmatix89j208409cq2s.jpg" alt="">  </p>
+</li>
+</ul>
+</li>
+<li><p><strong>RadialGradient</strong><br>作用:产生辐射状的渐变效果<br>构造方法1: </p>
+<pre><code>RadialGradient (float centerX, 
+        float centerY, 
+        float radius, 
+        int[] colors, 
+        float[] stops, 
+        Shader.TileMode tileMode)    
+</code></pre><p>对参数的解释：  </p>
+<ul>
+<li><strong>centerX,centerY</strong>:辐射的中心坐标</li>
+<li><strong>radius</strong>:辐射半径</li>
+<li><strong>colors</strong>:渐变颜色数组，至少两种颜色</li>
+<li><strong>stops</strong>:可为空,控制颜色数组不均匀的渐变，取值[0..1]<br>构造方法2:  <pre><code>RadialGradient (float centerX, 
+        float centerY, 
+        float radius, 
+        int centerColor, 
+        int edgeColor, 
+        Shader.TileMode tileMode)    
+</code></pre>对参数的解释:  </li>
+<li><strong>centerColor</strong>: 辐射中心的颜色  </li>
+<li><p><strong>edgeColor</strong>:辐射边缘的颜色<br>例子:  </p>
+<pre><code>mPaint.setAntiAlias(true);
+mPaint.setShader(new RadialGradient(300,300,300, Color.RED, Color.BLUE,Shader.TileMode.CLAMP));
+canvas.drawCircle(200,300,200,mPaint);  
+</code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhqmf8oa30j20ac0d8myi.jpg" alt="">  </p>
+</li>
+</ul>
+</li>
+<li><p><strong>SweepGradient</strong><br>作用:绕中心顺时针旋转360度渐变<br>构造方法1: </p>
+<pre><code>SweepGradient (float cx, 
+        float cy, 
+        int[] colors, 
+        float[] positions)    
+</code></pre><p>对参数的解释：  </p>
+<ul>
+<li><strong>cx,cy</strong>: 旋转中心坐标</li>
+<li><strong>colors</strong>:渐变颜色数组，至少两种颜色</li>
+<li><strong>positions</strong>:可为空,控制颜色数组不均匀的渐变，取值[0..1]<br>构造方法2:  <pre><code>SweepGradient (float cx, 
+        float cy, 
+        int color0, 
+        int color1)    
+</code></pre>对参数的解释:  </li>
+<li><strong>color0</strong>: 渐变的起始颜色 </li>
+<li><p><strong>color1</strong>:渐变的终止颜色<br>例子:  </p>
+<pre><code>mPaint.setAntiAlias(true);
+mPaint.setShader(new SweepGradient(300,300 ,Color.RED, Color.BLUE));
+canvas.drawCircle(200,300,200,mPaint);  
+</code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhqmgoged8j20al0dg0tz.jpg" alt="">  </p>
+</li>
+</ul>
+</li>
+<li><p><strong>ComposeShader</strong><br>作用:用指定的模式组合两个渐变效果<br>构造方法1: </p>
+<pre><code>ComposeShader (Shader shaderA, 
+        Shader shaderB, 
+        Xfermode mode)    
+</code></pre><p>对参数的解释：  </p>
+<ul>
+<li><strong>shaderA,shaderB</strong>: 要组合的两个渐变 <strong>shader</strong>  </li>
+<li><strong>Xfermode mode</strong>:设置两张图片相交时的混合模式，与<strong>mPaint.setXfermode()</strong>一样<br>构造方法2:  <pre><code>ComposeShader (Shader shaderA, 
+    Shader shaderB, 
+    PorterDuff.Mode mode)  
+</code></pre>对参数的解释:  </li>
+<li><p><strong>PorterDuff.Mode mode</strong>:设置两张图片相交时的混合规则<br>例子：  </p>
+<pre><code>BitmapShader shader = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.images), Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+BitmapShader shader1 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher), Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+mPaint.setShader(new ComposeShader(shader, shader1, PorterDuff.Mode.SRC_OVER));
+canvas.drawCircle(50, 50, 50, mPaint);    
+</code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhrvcznt4oj207y07vgln.jpg" alt="">    </p>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>PorterDuffXfermode</strong>(<strong>XferMode</strong> 子类)<br>构造方法: </p>
+<pre><code>PorterDuffXfermode(PorterDuff.Mode mode)  
+</code></pre><p>作用：指定一个 <strong>PorterDuff</strong>规则创建Xfermode实例<br><a href="http://www.jianshu.com/p/d11892bbe055" target="_blank" rel="noopener">PorterDuff.Mode使用详解看这</a></p>
+<h2 id="mPaint-setShaderLayer"><a href="#mPaint-setShaderLayer" class="headerlink" title="mPaint.setShaderLayer"></a>mPaint.setShaderLayer</h2><ol>
+<li><p>方法:  </p>
+<pre><code>void setShadowLayer (float radius, float dx, float dy, int shadowColor)
+</code></pre><p>作用:在主图层下添加阴影效果<br>对参数的解释:  </p>
+<ul>
+<li><strong>radius</strong>:设置显示阴影的半径</li>
+<li><strong>dx,dy</strong>:基准点</li>
+<li><strong>shadowColor</strong>:用于生成阴影的颜色<br>注意点：为文字加阴影不需要关闭硬件加速，否则都需要开启，方可显示效果。</li>
+</ul>
+</li>
+<li><p>例子：  </p>
+<pre><code>mPaint.setColor(Color.BLUE);
+mPaint.setTextSize(20);
+mPaint.setShadowLayer(50,50,50, Color.RED);
+canvas.drawText(&quot;看主图层下面的阴影效果&quot;,50,50,mPaint);  
+</code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25ly1fhrvkk5fmzj209907ua9z.jpg" alt="">  </p>
+</li>
+</ol>
+<h2 id="mPaint-setStrikeThruText"><a href="#mPaint-setStrikeThruText" class="headerlink" title="mPaint.setStrikeThruText"></a>mPaint.setStrikeThruText</h2><ol>
+<li><p>方法:  </p>
+<pre><code>void setStrikeThruText (boolean strikeThruText)
+</code></pre></li>
+<li>作用:设置删除线,与 <strong>setFlag(STRIKE_THRU_TEXT_FLAG)</strong>同等效果<br><img src="http://ww1.sinaimg.cn/large/8992ce25ly1fhruzmonnjj206t06xa9y.jpg" alt="">  </li>
+</ol>
+<h2 id="mPaint-setStrokeCap"><a href="#mPaint-setStrokeCap" class="headerlink" title="mPaint.setStrokeCap"></a>mPaint.setStrokeCap</h2><ol>
+<li><p>方法:  </p>
+<pre><code>void setStrokeCap (Paint.Cap cap)  
+</code></pre></li>
+<li>作用：当画笔的样式是 <strong>Stroke</strong> 或者 <strong>StrokeAndFill</strong>，可改变画笔的笔头样式，比如圆形的笔头(<strong>Cap.ROUND</strong>)、方形的笔头(<strong>Cap.SQUARE</strong>)  </li>
+<li>例子:<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhqrwi1ljlj208r0a0dfn.jpg" alt=""><br>从左到右分别为 <strong>BUTT(默认)、ROUND、SQUARE</strong>。其中后两条线前后均会超出上下的基线，并且形状各异，很像戴了个帽子(<strong>Cap</strong>)。</li>
+</ol>
+<h2 id="mPaint-setStrokeJoin"><a href="#mPaint-setStrokeJoin" class="headerlink" title="mPaint.setStrokeJoin"></a>mPaint.setStrokeJoin</h2><ol>
+<li><p>方法:  </p>
+<pre><code>void setStrokeJoin (Paint.Join join)  
+</code></pre><p>作用:当画笔的样式是 <strong>Stroke</strong> 或者 <strong>StrokeAndFill</strong>,可改变画笔在转弯时候的样式,锐角、斜切、圆角处理。 </p>
+</li>
+<li>例子:<br><a href="http://blog.csdn.net/hnulwt/article/details/42705895" target="_blank" rel="noopener">Cap 与 Join 详解</a><br>从左到右分别是 <strong>MITER,BEVEL,ROUND;</strong><br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhqrk7lvhxj20de088glf.jpg" alt="">  </li>
+</ol>
+<h2 id="mPaint-setStrokeMiter"><a href="#mPaint-setStrokeMiter" class="headerlink" title="mPaint.setStrokeMiter"></a>mPaint.setStrokeMiter</h2><ol>
+<li><p>方法:  </p>
+<pre><code>void setStrokeMiter (float miter)  
+</code></pre></li>
+<li>作用：当画笔的样式是 <strong>Stroke</strong> 或者 <strong>StrokeAndFill</strong>,控制斜接连接处的角度，值必须大于等于 <strong>0</strong>，即控制Paint.Join.Miter的效果</li>
+</ol>
+<h2 id="mPaint-setStrokeWidth"><a href="#mPaint-setStrokeWidth" class="headerlink" title="mPaint.setStrokeWidth"></a>mPaint.setStrokeWidth</h2><ol>
+<li><p>方法:  </p>
+<pre><code>void setStrokeWidth (float width)  
+</code></pre></li>
+<li>作用:设置画笔的粗细程度    </li>
+</ol>
+<h2 id="mPaint-setStyle"><a href="#mPaint-setStyle" class="headerlink" title="mPaint.setStyle"></a>mPaint.setStyle</h2><ol>
+<li><p>方法:  </p>
+<pre><code>void setStyle (Paint.Style style)  
+</code></pre></li>
+<li>作用:控制画笔的样式模式,有仅填充(<strong>Paint.Style.Fill</strong>),描边且填充(<strong>Paint.Style.FILL_AND_STROKE</strong>),仅描边(<strong>Paint.Style.STROKE</strong>),简单地说，就是空心还是实心。  </li>
+</ol>
+<h2 id="mPaint-setSubpixelText"><a href="#mPaint-setSubpixelText" class="headerlink" title="mPaint.setSubpixelText"></a>mPaint.setSubpixelText</h2><ol>
+<li><p>方法:  </p>
+<pre><code>void setSubpixelText (boolean subpixelText)  
+</code></pre></li>
+<li>作用:有助于文本在LCD屏幕上的显示效果.但由于当今手机密度高,此方法已无用武之地,略过。  </li>
+</ol>
+<h2 id="mPaint-setTextAlign"><a href="#mPaint-setTextAlign" class="headerlink" title="mPaint.setTextAlign"></a>mPaint.setTextAlign</h2><ol>
+<li><p>方法:  </p>
+<pre><code>void setTextAlign (Paint.Align align)  
+</code></pre><p>作用：设置文本的对齐方式,以有文本第一个字为基准靠左(<strong>Paint.Align.LEFT</strong>),居中(<strong>Paint.Align.CENTER</strong>),以文本最后一个字为基准靠右(<strong>Paint.Align.RIGHT</strong>)。  </p>
+</li>
+<li>例子:  </li>
+</ol>
+<h2 id="mPaint-setTextLocale"><a href="#mPaint-setTextLocale" class="headerlink" title="mPaint.setTextLocale"></a>mPaint.setTextLocale</h2><ol>
+<li><p>方法：  </p>
+<pre><code>void setTextLocale (Locale locale)  
+</code></pre></li>
+<li><p>作用：指定字体所使用的语言,例如<strong>Local.CHINA</strong>  </p>
+</li>
+</ol>
+<h2 id="mPaint-setTextScaleX"><a href="#mPaint-setTextScaleX" class="headerlink" title="mPaint.setTextScaleX"></a>mPaint.setTextScaleX</h2><ol>
+<li><p>方法：  </p>
+<pre><code>void setTextScaleX (float scaleX)  
+</code></pre></li>
+<li>作用:设置文本的缩放比，默认为 <strong>1</strong>.值大于 <strong>1</strong>文本变宽，值小于 <strong>1</strong> 值变窄   </li>
+<li>例子:  </li>
+</ol>
+<p><img src="http://ww1.sinaimg.cn/large/8992ce25ly1fhruojcqu2j20a308yt8u.jpg" alt=""></p>
+<h2 id="mPaint-setTextSize"><a href="#mPaint-setTextSize" class="headerlink" title="mPaint.setTextSize"></a>mPaint.setTextSize</h2><ol>
+<li><p>方法:  </p>
+<pre><code>void setTextSize (float textSize)  
+</code></pre></li>
+<li>作用:设置文本的字体大小  </li>
+</ol>
+<h2 id="mPaint-setTextSkewX"><a href="#mPaint-setTextSkewX" class="headerlink" title="mPaint.setTextSkewX"></a>mPaint.setTextSkewX</h2><ol>
+<li><p>方法：  </p>
+<pre><code>void setTextSkewX (float skewX)  
+</code></pre></li>
+<li>作用:设置文本的斜切比(也叫文字的倾斜度),默认为 <strong>0</strong>，若要使用合适的倾斜文本，推荐使用 <strong>-0.25</strong><br><img src="http://ww1.sinaimg.cn/large/8992ce25ly1fhrurhu6t3j207w08fmx6.jpg" alt="">  </li>
+</ol>
+<h2 id="mPaint-setTypeface"><a href="#mPaint-setTypeface" class="headerlink" title="mPaint.setTypeface"></a>mPaint.setTypeface</h2><ol>
+<li><p>方法:  </p>
+<pre><code>Typeface setTypeface (Typeface typeface)  
+</code></pre></li>
+<li>作用:设置文本的字体，传入 <strong>null</strong> 清除字体。<strong>Typeface</strong> 包含了字体的类型，粗细，还有倾斜、颜色等。    </li>
+</ol>
+<h2 id="mPaint-setUnderlineText"><a href="#mPaint-setUnderlineText" class="headerlink" title="mPaint.setUnderlineText"></a>mPaint.setUnderlineText</h2><ol>
+<li><p>方法：  </p>
+<pre><code>void setUnderlineText (boolean underlineText)  
+</code></pre></li>
+<li>作用:设置下划线<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhrutchzj3j207k08a746.jpg" alt="">  </li>
+</ol>
+<h1 id="getxx及其他方法"><a href="#getxx及其他方法" class="headerlink" title="getxx及其他方法"></a>getxx及其他方法</h1><h2 id="mpaint-getFontSpace"><a href="#mpaint-getFontSpace" class="headerlink" title="mpaint.getFontSpace"></a>mpaint.getFontSpace</h2><ol>
+<li><p>方法:  </p>
+<pre><code>float getFontSpacing () 
+</code></pre><p>作用：返回基于当前文字大小和字体所推荐的一个行间距。在绘制多行文本的时候可以通过此方法更改文字的下一基线位置,使得两行文本之间的间距达到一个合适的值。  </p>
+</li>
+<li><p>例子:  </p>
+<pre><code>String text = &quot;使用 drawText() 来绘制文字&quot;;
+canvas.drawText(text, 50, 100, paint);
+canvas.drawText(text, 50, 100 + paint.getFontSpacing(), paint);  
+</code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fi1xf7fkm2j20bv084dg3.jpg" alt="">  </p>
+</li>
+</ol>
+<h2 id="mpaint-getFontMetric"><a href="#mpaint-getFontMetric" class="headerlink" title="mpaint.getFontMetric"></a>mpaint.getFontMetric</h2><ol>
+<li><p>方法1:  </p>
+<pre><code>Paint.FontMetrics getFontMetrics ()  
+</code></pre></li>
+<li><p>方法2：  </p>
+<pre><code>float getFontMetrics (Paint.FontMetrics metrics)  
+</code></pre></li>
+<li>详解:<strong>FontMetricsInt</strong>共有 <strong>5</strong> 个值，分别是 <strong>top、bottom、ascent、descent、leading</strong><br><strong>top</strong> 与 <strong>bottom</strong> 限制了文字绘制的最大和最小的范围。<strong>ascent</strong> 和 <strong>descent</strong> 限制了字形的所有顶部与底部的范围（不同的字形有高低，有的顶高一些，有的底低一些),<strong>leading</strong> 表示两行文字各自的基线之间的间距<br><img src="http://ww1.sinaimg.cn/large/8992ce25ly1fi21sj2fd2j20oe06jwg6.jpg" alt=""><br>此图来源于扔物线大佬的杰作。<br>由图中按顺序，分别时 <strong>top、ascent、baseline、 descent、bottom</strong> 所在的直线。<br>并且以 <strong>baseline</strong> 为轴，在其上的线所在位置为负数距离，在其下的线所在的位置为正数距离。<br>例如:<code>fontMetric.bottom-fonMetric.top</code>即表示文字上下区域的一个最大高度。<br>另外，如果需要多次调用方法 <strong>1</strong>，那么可以选择使用方法 <strong>2</strong> 以提高性能。<br>注意:如果要使绘制的多个文本 <strong>baseline</strong> 对齐，可以使用<strong>int middle = (top + bottom) / 2;</strong><br>计算法来控制文本同在一条基线上。  </li>
+</ol>
+<h2 id="paint-getTextBound"><a href="#paint-getTextBound" class="headerlink" title="paint.getTextBound"></a>paint.getTextBound</h2><ol>
+<li><p>方法1:  </p>
+<pre><code>void getTextBounds (String text, int start, int end, Rect bounds)  
+</code></pre></li>
+<li><p>方法2:  </p>
+<pre><code>void getTextBounds (char[] text,  int index, int count, Rect bounds)  
+</code></pre></li>
+<li>作用：返回文字四周的显示范围 </li>
+<li>参数 <strong>bound</strong> 为一个矩形对象。当方法完成测量后会将值返回给该对象，进而得到一个矩形范围。如果矩形的四个坐标再加上一定偏移值则刚好可以将文字包围住。  </li>
+<li><p>例子:  </p>
+<pre><code>String text = &quot;绘制文字&quot;;
+paint.setStyle(Paint.Style.FILL);
+int offsetX = 50, offsetY = 100;
+canvas.drawText(text, offsetX, offsetY, paint);
+Rect bounds = new Rect();
+paint.getTextBounds(text, 0, text.length(), bounds);
+bounds.left += offsetX;
+bounds.top += offsetY;
+bounds.right += offsetX;
+bounds.bottom += offsetY;
+paint.setStyle(Paint.Style.STROKE);
+canvas.drawRect(bounds, paint);  
+</code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fi1yr1tk1gj208b059glg.jpg" alt=""><br><strong>注意</strong>：此方法测量出来的值会比 <strong>measureText()</strong> 更少一些，原因在于 <strong>measuresText</strong> 方法测量的是文字所占用的宽度，而者宽度还包括类文字两边默认的一个间隙。</p>
+</li>
+</ol>
+<h2 id="mPaint-setXfermode"><a href="#mPaint-setXfermode" class="headerlink" title="mPaint.setXfermode"></a>mPaint.setXfermode</h2><ol>
+<li><p>方法:  </p>
+<pre><code>Xfermode setXfermode (Xfermode xfermode)  
+</code></pre><p>作用：设置图像混合模式，其实是使用 <strong>Xfermode</strong>的子类 <strong>PorterDuffXfermode</strong>,而整个子类又是由 <strong>PorterDuff.Mode</strong>来决定的。</p>
+</li>
+</ol>
+<p>##PorterDuff.Mode的详解##</p>
+<ol>
+<li>名称由来：该种图像组合模式时由分别叫 <strong>Porter</strong> 和 <strong>Duff</strong> 两人提出的，因此为了表示对他们的敬意，便以二人的名称合体来命名这种模式。其实他们仅提出了12种<a href="https://en.wikipedia.org/wiki/Alpha_compositing" target="_blank" rel="noopener">Alpha合成模式</a>，后来为了方便便将图像混合的模式也加入到该类中。  </li>
+<li>作用:用于图形合成时图像的饱和度、颜色值等的图像表现。</li>
+<li>关键的两个图像:原图像(<strong>Source image</strong>)和目标图像(<strong>Destination image</strong>)  </li>
+<li>两大模式:    </li>
+</ol>
+<ul>
+<li>图像混合模式<br><img src="http://ww1.sinaimg.cn/large/8992ce25ly1fhrw6t4vjwj20l50dzdg2.jpg" alt="">  </li>
+<li>Alpha合成模式<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhrw5o0q33j20le0homxm.jpg" alt=""> </li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/15/一起看画布Canvas/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1571,447 +2735,11 @@ static {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/巧用设计模式实现Recyclerview各种复杂Item类型/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="洪荣宣">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rongxuanhong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/01/巧用设计模式实现Recyclerview各种复杂Item类型/" itemprop="url">巧用设计模式实现Recyclerview各种复杂Item类型</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-01T21:05:50+08:00">2017-05-01</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/05/01/巧用设计模式实现Recyclerview各种复杂Item类型/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/05/01/巧用设计模式实现Recyclerview各种复杂Item类型/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong>版权声明：本文为博主原创文章，未经博主允许不得转载</strong></p>
-<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>  在实际项目的开发中，首页的布局基本上都是复杂的 UI，而我们的实现思路一般就是利用 <code>RecyclerView</code> 结合 <code>getItemType()</code>，并在适配器里根据不同的 <code>item</code> 类型去创建不同的 <code>ViewHolder</code>,最后在 <code>onBindViewHolder()</code> 中依然是根据 <code>item</code> 类型来绑定对应的数据。这种方法是最基本的方法，相信大家都懂。但是，其缺点也很明显，就是可扩展性太差。</p>
-<p> 接下来，我将介绍另一种更为巧妙的方法来实现，以期大大提高其扩展性。我们将以 <code>item</code> 的布局 <code>id</code> 作为区别<code>item</code>的唯一标志并结合两种设计模式,为大家呈现一种新颖，简洁的方式来实现此类复杂布局。其中如有纰漏，望请悉心指出。  </p>
-<h1 id="必备知识"><a href="#必备知识" class="headerlink" title="必备知识"></a>必备知识</h1><p>本实现方法主要用到了 <code>Java</code> 设计模式中的访问者模式和工厂方法模式，亦涉及到 <code>ViewHolder</code> 的封装技巧。  </p>
-<h1 id="访问者模式"><a href="#访问者模式" class="headerlink" title="访问者模式"></a>访问者模式</h1><ol>
-<li><p><strong>概念</strong><br><code>Java</code> 中的访问者模式属于一种行为型设计模式，核心主要由访问者与被访问者两部分组成。一般对于同一场景来说，被访问者都是由不同类的类型所表示，而不同的访问者可以对被访问者进行不同的访问操作。其中，被访问者常利用集合结构来存储(比如 <code>List</code> )，访问者通过遍历集合实现对其中存储的元素的逐个操作。  </p>
-</li>
-<li><p><strong>UML类图</strong></p>
-</li>
-</ol>
-<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ff5p96ef3lj20dw0e53yz.jpg" alt="访问者模式UML类图"> </p>
-<blockquote>
-<p>出处:<a href="https://zh.wikipedia.org/wiki/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95" target="_blank" rel="noopener">维基百科</a>  </p>
-</blockquote>
-<p><strong>UML解读</strong></p>
-<p>   该<code>UML</code>类图中有两个类：访问者(<code>Visitor</code>)和被访问者(<code>Element</code>),然后有多个具体访问者继承访问者 <code>Visitor</code>（eg: <code>ConcreateVisitor1</code> ），也有多个具体被访问者继承被访问者 <code>Element</code>（eg: <code>ConcreateElementA</code> ） 。首先，<code>Visitor</code> 中为每个具体被访问者定义了一个可访问具体被访问者操作的方法(通过注入具体被访问者的引用)；其次，<code>Element</code> 中定义了一个接受访问的方法 <code>accept</code>，并且依赖注入访问者 <code>visitor</code>，以便访问者可以访问被访问者；然后，<code>Object Structure</code> 对象结构主要用于存储被访问者。因此，对于每个被访问者都应先从该对象结构中取出来。最后，客户端 <code>Client</code> 定义集合对象收集被访问者数据，通过对集合的遍历完成访问者对每一个被访问元素的访问操作。  </p>
-<blockquote>
-<p>具体例子详见推荐博客 <a href="http://blog.csdn.net/janice0529/article/details/41151987" target="_blank" rel="noopener">Java设计模式之 访问者模式【Visitor Pattern】</a>  </p>
-</blockquote>
-<h1 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h1><ol>
-<li><p><strong>概念</strong>  </p>
-<p> 工厂方法模式是一种实现了“工厂”概念的面向对象设计模式 ,是处理在不指定对象具体类型的情况下创建对象的问题。工厂方法模式的实质是“定义一个创建对象的接口，但让实现这个接口的类来决定实例化哪个类。工厂方法让类的实例化推迟到子类中进行。”</p>
-</li>
-<li><p><strong>UML类图</strong></p>
-<p> <img src="http://ww1.sinaimg.cn/large/8992ce25gy1ff5uwck661j209p05qdfq.jpg" alt="工厂模式"></p>
-<blockquote>
-<p>出处:<a href="https://zh.wikipedia.org/wiki/%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F" target="_blank" rel="noopener">维基百科</a>  </p>
-</blockquote>
-</li>
-</ol>
-<p><strong>UML解读</strong>  </p>
-<p>   首先在创建器 <code>Creator</code> 中定义一个工厂方法用于生产未指定具体类型的产品，其次，子类–具体创建器 <code>ConcreteCreator</code> 实现父类工厂方法，给出创建具体产品类型的实现，最后，客户端只需调用具体创建者中的方法即可得到所需的产品。  </p>
-<blockquote>
-<p>具体例子详见推荐博客<a href="http://blog.csdn.net/zhengzhb/article/details/7348707" target="_blank" rel="noopener">工厂方法模式</a></p>
-</blockquote>
-<h1 id="BaseViewHolder的封装"><a href="#BaseViewHolder的封装" class="headerlink" title="BaseViewHolder的封装"></a>BaseViewHolder的封装</h1><pre><code>/**
- * 封装的 viewholder 用于获取各个 item 上的控件 采用集合存储取过的控件
- */
-
-public  class BaseViewHolder extends RecyclerView.ViewHolder {
-protected View itemView;//每个item的布局视图view
-protected SparseArray&lt;View&gt; list;//itemView上所有控件的集合
-
-public BaseViewHolder(View itemView) {
-    super(itemView);
-    this.itemView = itemView;
-    list=new SparseArray&lt;&gt;();
-}
-/**
-*获取 itemView 上控件
-*/
- public &lt;T&gt; T getView(int id) {
-    View view = list.get(id);
-    if (view == null) {
-        view = itemView.findViewById(id);
-        list.put(id, view);
-    }
-    return (T) view;
-}
-</code></pre><p><code>BaseViewHolder</code> 继承至 <code>RecyclerView.ViewHolder</code> ，可作为 <code>Recyclerview</code> 适配器中通用的 <code>ViewHolder</code> 来使用，因此你无需在每个适配器里面再定义内部类 <code>MyViewHolder</code>。<code>BaseViewHolder</code> 可以在构造器中获取到每个 <code>item</code> 的 <code>itemView</code>，然后就可以定义一个快速获取 <code>itemView</code> 上各个子控件的方法 <code>getView</code>,以后在适配器中获取 <code>item</code> 子控件能够随时调用此方法.  </p>
-<p>#BetterViewHolder</p>
-<pre><code>public abstract class BetterViewHolder&lt;T&gt; extends BaseViewHolder {
-public BetterViewHolder(View itemView) {
-    super(itemView);
-}
-
-/**
- * 绑定 item 的数据
- * @param t 每个item的实体引用
- */
-public abstract void bindDataToItem(T t,int position);
-}  
-</code></pre><p><code>BetterViewHolder</code> 声明为抽象类型，在 <code>BaseViewHolder</code> 基础上再次封装了一层。主要定义了一个抽象方法用于实现适配器中 <code>onBindViewHolder（T t，int position)</code> 的功能。但由于子类的实体类型不可确定，故需要借助泛型技巧,定义T来表示子类的泛型。因此，子类只需继承该类，并指定子类所需的实体类型即可。  </p>
-<h1 id="实例解析"><a href="#实例解析" class="headerlink" title="实例解析"></a>实例解析</h1><ul>
-<li><p>本例中定义了四种 <code>item</code> 布局类型,如下图所示  </p>
-<p>  <img src="http://ww1.sinaimg.cn/large/8992ce25gy1fjdetu2ltuj20fd0i7gmf.jpg" alt=""></p>
-</li>
-</ul>
-<p><strong>布局代码见底部源码</strong>  </p>
-<ul>
-<li>定义访问者 <code>TypeFactory</code>   </li>
-</ul>
-<pre><code>public abstract class TypeFactory {  
-
-public abstract int type(Banner banner);
-
-public abstract int type(Category category);
-
-public abstract int type(Item item);
-
-public abstract int type(Footer footer);
-//工厂方法模式应用 
-public  abstract BetterViewHolder onCreateViewHolder(View itemView,int  type);
-}
-</code></pre><ul>
-<li>定义被访问者 <code>Visitable</code></li>
-</ul>
-<pre><code>/*
-*定义抽象的被访问者 type方法，用来接收/引用一个抽象访问者对象,以便利用这个对象进行操作;
-*/
-public abstract class Visitable {
-public abstract int type(TypeFactory factory);
-}  
-</code></pre><ul>
-<li><p>定义四个实体类并继承<code>Visitable</code>  </p>
-<pre><code>/**
-  * Created by hrx on 2017/4/30.
- * 具体的被访问者
-  * 实现type抽象方法，通过传入的具体访问者参数、
-  * 调用具体访问者对该对象的访问操作方法实现访问逻辑;
- * 比如这就是利用抽象访问者 TypeFactory 引用来调用操作方法获取对应该 Banner 关联的布局  id
- */
-
-public class Banner extends Visitable{
-     @Override
-    public int type(TypeFactory factory) {
-     return factory.type(this);
-    }
- }  
-
-public class Category extends Visitable {
-  @Override
-  public int type(TypeFactory factory) {
-     return factory.type(this);
-  }
-}  
-public class Item extends Visitable {
-    private int position;
-    @Override
-    public int type(TypeFactory factory) {
-        return factory.type(this);
-    }
-
-    public int getPosition() {
-        return position;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
-    }
-}
-public class Footer extends Visitable {
-  @Override
-   public int type(TypeFactory factory) {
-      return factory.type(this);
-      }
- }  
-</code></pre></li>
-<li><p>具体访问者 <code>TypeFactoryList</code>   </p>
-<pre><code>/*
- * 具体的访问者实现了抽象访问者的方法
-* 同时 onCreateViewHolder 也是利用工厂方法模式创建了各个 item 的 viewholder 实例
-*/
-
-public class TypeFactoryList extends TypeFactory {
-//声明每个item的布局id
-public static final int BANNER = R.layout.banner;
-public static final int CATEGORY = R.layout.category;
-public static final int ITEM = R.layout.item;
-public static final int FOOTER = R.layout.footer;
-
-@Override
-public int type(Banner banner) {
-    return BANNER;
-}
-
-@Override
-public int type(Category category) {
-    return CATEGORY;
-}
-
-@Override
-public int type(Item item) {
-    return ITEM;
-}
-
-@Override
-public int type(Footer footer) {
-    return FOOTER;
-}
-
-@Override
-public BetterViewHolder onCreateViewHolder(View itemView, int type) {
-    BetterViewHolder viewHolder = null;
-    switch (type) {
-        case BANNER:
-            viewHolder = new BannerViewHolder(itemView);
-            break;
-        case CATEGORY:
-            viewHolder = new CategoryViewHolder(itemView);
-            break;
-        case ITEM:
-            viewHolder = new ItemViewHolder(itemView);
-            break;
-        case FOOTER:
-            viewHolder = new FooterViewHolder(itemView);
-            break;
-        default:
-            break;
-    }
-    return viewHolder;
- }
-}  
-</code></pre></li>
-<li><p>定义适配器   </p>
-<pre><code>public class MainActivityAdapter extends RecyclerView.Adapter&lt;BetterViewHolder&gt; {
-private List&lt;Visitable&gt; mVisitables;
-private TypeFactory factory;
-
-public MainActivityAdapter(List&lt;Visitable&gt; mVisitables) {
-    this.mVisitables = mVisitables;
-    factory = new TypeFactoryList();
-}
-//此 ViewHolder 的创建细节已经抽象到 TypeFactoryList 中去实现了 此处等同与获取工厂生产的产品
-@Override
-public BetterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    View itemView = View.inflate(parent.getContext(), viewType, null);
-    return factory.onCreateViewHolder(itemView, viewType);
-}
-
-//此处的实现交由 BetterViewHolder 的各个子类去实现，故此处 Java 会根据相应的子类去获取其下实现的 bindDataToItem（）,利用JAVA动态分派而无需进行类型检查
-@Override
-public void onBindViewHolder(BetterViewHolder holder, int position) {
-    holder.bindDataToItem(mVisitables.get(position),position);
-}
-
-//此处即代表访问者模式中的客户端调用被访问者的 type()，进行访问操作获取其布局 id
-@Override
-public int getItemViewType(int position) {
-    return mVisitables.get(position).type(factory);
-}
-@Override
-public int getItemCount() {
-    return mVisitables.size();
-}
-}  
-</code></pre><p>该适配器的数据就是得到访问者模式中的对象结构 <code>Object Structure</code> 中存储的被访问者集合，对应到例子中就是 <code>mVisitables</code> 集合。同时需要一个访问者引用,以便该适配器(客户端)能够利用这个引用获取每个被访问者关联到的布局Id(利用该引用执行某些操作)，如<code>mVisitables.ge(position).type(factory)</code>可以获取到每个被访问者关联到的布局 <code>id</code>。  </p>
-</li>
-<li><p>四个 <code>BetterViewHolder</code> 的子类  </p>
-<p>  四个子类代表了其对应 <code>item</code> 的 <code>ViewHolder</code> ,可以在该类上实现 <code>item</code> 上的操作，比如点击事件，设置 <code>item</code> 上子控件的所有数据等。  </p>
-</li>
-</ul>
-<p><strong>代码见底部源码</strong>  </p>
-<ul>
-<li><code>Activity</code> 收集数据并设置适配器  </li>
-</ul>
-<pre><code>    public class MainActivity extends AppCompatActivity {
-
-    private RecyclerView recyclerView;
-    private List&lt;Visitable&gt; mVisitable;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
-        //默认4列
-        final GridLayoutManager manager = new GridLayoutManager(this, 4);
-        //此方法定义每个item占几列,有点类似线性布局的权重属性
-        manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-            @Override
-            public int getSpanSize(int position) {
-                if (position &gt; 2 &amp;&amp; position &lt; 7) {
-                    return 1;
-                }
-                return 4;
-            }
-        });
-        recyclerView.setLayoutManager(manager);
-        initData();
-        recyclerView.setAdapter(new MainActivityAdapter(mVisitable));
-
-    }
-
-    private void initData() {
-        mVisitable = new ArrayList&lt;&gt;();
-        //按布局的顺序依次加入各个被访问者
-        Banner banner = new Banner();
-        mVisitable.add(banner);
-        Category category = new Category();
-        mVisitable.add(category);
-        //加入4个item
-        for (int i = 0; i &lt; 5; i++) {
-            Item item = new Item();
-            item.setPosition(i + 2);
-            mVisitable.add(item);
-        }
-        Footer footer = new Footer();
-        mVisitable.add(footer);
-    }
-}
-</code></pre><blockquote>
-<p>注:<code>mVisitable</code> 集合中被访问者的加入顺序即代表了最终显示出来的顺序，并且集合中的每个元素仅能代表其中一个 <code>item</code>，意味着如果你要重复该 <code>item</code> 就要重复声明一个实体再加入集合中。</p>
-</blockquote>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>利用访问者模式和工厂方法模式大大解耦了上述复杂布局的实现过程，同时可扩展性大大提高。如果往后还需修改布局，只需修改对应 <code>item</code> 的布局文件和数据的绑定。而若是增加 <code>item</code>，那么只需定义新的实体加入被访问者集合中，同时编写布局文件及对应的 <code>ViewHolder</code> 实现即可。这样一来，不同 <code>item</code> 间就不会相互影响，变得易维护和易扩展，相信你学会之后，一定会爱上此法。  </p>
-<p>最后，谢谢你看到这里，欢迎交流意见。   </p>
-<p><a href="https://github.com/rongxuanhong/MultiItemLayout" target="_blank" rel="noopener">源码地址</a></p>
-<h1 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h1><blockquote>
-<p><a href="http://www.jianshu.com/p/c6a44e18badb" target="_blank" rel="noopener">[译]关于 Android Adapter，你的实现方式可能一直都有问题</a><br><a href="http://blog.csdn.net/janice0529/article/details/41151987" target="_blank" rel="noopener">Java设计模式之 访问者模式【Visitor Pattern】</a><br><a href="http://blog.csdn.net/zhengzhb/article/details/7348707" target="_blank" rel="noopener">Java设计模式之 工厂方法模式</a></p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-	<div>
-
-</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -2058,7 +2786,7 @@ public int getItemCount() {
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">29</span>
+                    <span class="site-state-item-count">31</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2376,6 +3104,8 @@ public int getItemCount() {
 
   
   
+    
+      
     
       
     

@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.6" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.6">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.6">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.6">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.6" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.0.6',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="前言在经过前面漫长的 SVM 学习之后，是时候学习怎么实现 SVM 了。其实，SVM 常常表现得很好并且有着高效的训练算法，这使得 SVM 曾经非常盛行。只是近些年来，由于深度学习起势，SVM 才不再那么盛行，但它依旧是很好用的分类算法。所以探究 SVM 的原理及思想显得非常有必要，那么现在我们就谈谈 SMO 算法。首先，在前面的 SVM 学习中，我们有如下对偶问题:$$ \max _{\alph">
+<meta name="keywords" content="机器学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SVM系列之最小序列算法SMO(三)">
+<meta property="og:url" content="http://yoursite.com/2018/04/27/SVM系列之最小序列算法SMO(三)/index.html">
+<meta property="og:site_name" content="Rongxuanhong&#39;s Blog">
+<meta property="og:description" content="前言在经过前面漫长的 SVM 学习之后，是时候学习怎么实现 SVM 了。其实，SVM 常常表现得很好并且有着高效的训练算法，这使得 SVM 曾经非常盛行。只是近些年来，由于深度学习起势，SVM 才不再那么盛行，但它依旧是很好用的分类算法。所以探究 SVM 的原理及思想显得非常有必要，那么现在我们就谈谈 SMO 算法。首先，在前面的 SVM 学习中，我们有如下对偶问题:$$ \max _{\alph">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fq8zcj36tnj20b30b5dgj.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqbaf76wakj20k0088t8x.jpg">
+<meta property="og:updated_time" content="2018-04-27T11:02:11.979Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SVM系列之最小序列算法SMO(三)">
+<meta name="twitter:description" content="前言在经过前面漫长的 SVM 学习之后，是时候学习怎么实现 SVM 了。其实，SVM 常常表现得很好并且有着高效的训练算法，这使得 SVM 曾经非常盛行。只是近些年来，由于深度学习起势，SVM 才不再那么盛行，但它依旧是很好用的分类算法。所以探究 SVM 的原理及思想显得非常有必要，那么现在我们就谈谈 SMO 算法。首先，在前面的 SVM 学习中，我们有如下对偶问题:$$ \max _{\alph">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fq8zcj36tnj20b30b5dgj.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/27/SVM系列之最小序列算法SMO(三)/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>SVM系列之最小序列算法SMO(三) | Rongxuanhong's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> 
+
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Rongxuanhong's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">脚踏实地地做好自己</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+          
+  <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Categories</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+</li>
+
+      
+
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/27/SVM系列之最小序列算法SMO(三)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SVM系列之最小序列算法SMO(三)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-27T19:01:41+08:00">2018-04-27</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/27/SVM系列之最小序列算法SMO(三)/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/27/SVM系列之最小序列算法SMO(三)/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             Views: 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在经过前面漫长的 SVM 学习之后，是时候学习怎么实现 SVM 了。其实，SVM 常常表现得很好并且有着高效的训练算法，这使得 SVM 曾经非常盛行。只是近些年来，由于深度学习起势，SVM 才不再那么盛行，但它依旧是很好用的分类算法。所以探究 SVM 的原理及思想显得非常有必要，那么现在我们就谈谈 SMO 算法。<br>首先，在前面的 SVM 学习中，我们有如下对偶问题:<br>$$ \max _{\alpha }\sum ^{m}_{i=1}\alpha _{i}-\dfrac {1}{2}\sum ^{m}_{i=1}\sum ^{m}_{j=1}\alpha _{i}\alpha _{j}y_{i}y_{j}x_{i}^{T}x_{j}\quad s.t.\quad \sum ^{m}_{i=1}\alpha _{i}y_{i}=0,0\leq \alpha _{i}\leq C,i=1,2,\ldots ,m$$  </p>
+<p>并且需要满足KKT条件:  </p>
+<ol>
+<li>当 \(\alpha_{i}=0\)，     \(y_{i}\left( w^{T}x_{i}+b\right) \geq 1\);</li>
+<li>当 \(0&lt;\alpha _{i}&lt;C\)，  \(y_{i}\left( w^{T}x_{i}+b\right)=1\)；</li>
+<li>当 \(\alpha_{i}=C\)，     \(y_{i}\left( w^{T}x_{i}+b\right) \leq 1\)。</li>
+</ol>
+<p>那么，由于一个训练样本 \(\left(x_{i},y_{i}\right)\) 对应一个 \(\alpha_{i}\)，因此我们只需要找到这样一组 \(\alpha_{i}\) 满足上述条件，这就是该对偶问题的最优解。有了这组 \(\alpha_{i}\) ,\(w\)、b 以及分类函数 \(f\left(x\right)\)就可以顺其自然地得到求解。  </p>
+<p>上述对偶问题是个凸二次规划问题，它具有全局最优解。一般可以使用现有的 QP 工具来进行求解。但是，当训练容量非常大的时候，训练算法反而耗时且低效。因此，有必要寻找更优的求解算法来代替实现。虽然出现了很多优化算法，但比较著名的是一个叫做 John C. Platt 的研究者提出的序列最小化算法 (Sequential Minimal Optimization，简称 SMO)。而它的思想是：将大优化的问题分解成多个小优化的问题。这些小问题往往比较容易求解，然后对他们进行顺序求解。这样之后得到的结果与将他们作为整体来求解的结果完全一致并且最重要的是 SMO 的求解时间更短了。<br>在介绍 SMO 之前，先介绍下坐标梯度下降算法，这也是 SMO 中利用到的简单的算法思想。</p>
+<h1 id="坐标梯度下降-上升"><a href="#坐标梯度下降-上升" class="headerlink" title="坐标梯度下降(上升)"></a>坐标梯度下降(上升)</h1><p>坐标下降是一种非梯度优化算法(坐标下降用于优化最小值，而坐标上升用于优化最大值，可通过加负号相互转换)。因为算法在每次迭代中，只会从当前点处沿一个坐标方向进行一维搜索以求得一个函数的局部极小值，并在迭代的过程中不断变化优化的坐标方向，直至函数得到收敛。<br>例如，我们要寻找函数 \(f\left( x,y\right) =5x^{2}-6xy+5y^{2}\) 的最小值。那么坐标优化的迭代过程如下图所示:  </p>
+<center><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fq8zcj36tnj20b30b5dgj.jpg" alt=""></center>
+
+<p>我们从某个起始点开始寻找，然后沿着一个方向往等高线上数值小的高度前进(类似下山)，在前进的时候，可以改变方向，例如此处可以往上或往右走，直至不断走向中心点，也就是收敛到最优解。</p>
+<h1 id="SMO-算法"><a href="#SMO-算法" class="headerlink" title="SMO 算法"></a>SMO 算法</h1><p>SMO 算法和坐标梯度下降思想差不多，只是 SMO 一次迭代优化的是两个变量 \(\alpha_{i}\)、\(\alpha_{j}\)。所以它的思想就是将带有多个优化变量的二次规划大问题分解为多个只含两个优化变量的二次规划小问题，这样既节省了时间成本也降低了内存消耗。  </p>
+<p>那么为什么需要一次优化两个变量呢？这是因为在 SVM 中存在着 \(\sum ^{m}_{i=1}\alpha _{i}y_{i}=c\) 约束，这是一个线性组合关系。而 SMO 在优化前会先固定暂时不进行优化的变量，那么如果仅优化一个变量，那么这个变量就会被其他已固定的参数表示出来，则它就不再是变量，因此，需要再找一个变量。即 SMO 算法先要确定一对 \(\alpha_{i},\alpha_{j}\)，其他的变量则先固定。</p>
+<p>那么固定参数之后，就可以得到 \(\alpha_{i}\) 和 \(\alpha_{j}\) 的等式关系了。即：<br>$$\alpha_{i} y_{i}+\alpha_{j}y_{j}=\xi, \quad\xi为常数$$<br>那么我们就可以消去上述对偶问题中的 \(\alpha_{i}\)了，然后就得到了仅关于 \(\alpha_{i}\) 的单变量二次规划问题，然后利用费马引理进行求解即可。解出 \(\alpha_{j}\) 之后，\(\alpha_{i}\) 便可由等式轻易推出，这样就是一次迭代过程。迭代一次仅调整两个拉格朗日乘子。那么这样看来，SMO 之所以高效的原因就在于它是对单变量进行优化，可想而知单变量的收敛速度是比较快的。<br>总之，一次迭代的三个步骤是:  </p>
+<ol>
+<li>确定一对 \(\left(\alpha_{i},\alpha_{j}\right)\);</li>
+<li>固定其他 (m-2) 个变量后，消去其中一个变量，得到含单变量的优化式子；</li>
+<li>根据优化后的 \(\alpha_{i},\alpha_{j}\)，更新阈值 b。<h2 id="关于-alpha-i-和-alpha-j-的-选择"><a href="#关于-alpha-i-和-alpha-j-的-选择" class="headerlink" title="关于 \(\alpha_{i}\) 和 \(\alpha_{j}\) 的 选择"></a>关于 \(\alpha_{i}\) 和 \(\alpha_{j}\) 的 选择</h2>现在我们需要从 m 个变量中确定两个变量，那么可能的组合非常多。如何确定到底是哪一对呢？首先，我们的优化目标其实就是尽量使大部分的样本都满足 KKT 条件，即使大部分的样本得到正确分类。那么，我们就需要先纠正违反 KKT 条件最严重的那个样本对应的优化变量，就好像先把最难的事情做了，接下来再做简单的事，这样就会很轻松。那么第二个变量怎么选？它选择的标准是必须有足够大的变化，也就是能够对目标函数沿着优化方向下降幅度最大的那个变量。这样选择的依据是，对它们进行更新可以加快目标函数的收敛速度。<h2 id="SMO-算法公式推导"><a href="#SMO-算法公式推导" class="headerlink" title="SMO 算法公式推导"></a>SMO 算法公式推导</h2><h3 id="求解未被修剪的-alpha-new-unclipped-i-，-alpha-new-unclipped-j"><a href="#求解未被修剪的-alpha-new-unclipped-i-，-alpha-new-unclipped-j" class="headerlink" title="求解未被修剪的 \(\alpha^{new,unclipped}_{i}\) ，\(\alpha^{new,unclipped}_{j}\)"></a>求解未被修剪的 \(\alpha^{new,unclipped}_{i}\) ，\(\alpha^{new,unclipped}_{j}\)</h3>首先，我们把 SVM 中对偶问题的目标函数写为:<br>$$\max _{\alpha }w\left( \alpha \right) $$ </li>
+</ol>
+<p>并且用 \(k_{i,j}\) 代替 \(k\left( x_{i},x_{j}\right)\) 表示。<br>然后，假设我们选中的待优化变量为 \(\alpha_{1}\) ，\(\alpha_{2}\) 。那么 \(\alpha_{3}\),\(\alpha_{4}\)，…，\(\alpha_{m}\) 则被固定，当做常数处理。那么将 SVM 的优化问题展开后得到：</p>
+<p> $$w\left( \alpha_{1},\alpha _{2}\right) =\alpha_{1} +\alpha _{2}+C_{1}-\dfrac {1}{2}\left( \sum ^{m}_{i=1}\alpha _{i}y_{i}\left( \alpha _{1}y_{1}K_{i,1}+\alpha _{2}y_{2}k_{i,2}+\sum ^{m}_{j=3}\alpha _{j}y_{j}k_{i,j}\right) \right) $$<br>$$=\alpha_{1} +\alpha _{2}+C_{1}-\dfrac {1}{2}\left( \alpha ^{2}_{1}y^{2}_{1}k_{1,1}+\alpha ^{2}_{2}y^{2}_{2}k_{2,2}+2\alpha _{1}\alpha _{2}y_{1}y_{2}k_{1,2}+\alpha _{1}y_{1}\sum ^{m}_{j=3}\alpha _{j}y_{j}k_{1,j}+\alpha _{2}y_{2}\sum ^{m}_{j=3}\alpha _{j}y_{j}k_{2,j}+\sum ^{m}_{i=3}\alpha _{i}y_{i}\left( \alpha_{1}y_{1}k_{i,1}+\alpha _{2}y_{2}k_{i,2}+\sum ^{m}_{j=3}\alpha _{j}y_{j}k_{i,j}\right)\right)$$<br>$$=\alpha_{1} +\alpha _{2}+C_{1}-\dfrac {1}{2}\left( \alpha ^{2}_{1}y^{2}_{1}k_{1,1}+\alpha ^{2}_{2}y^{2}_{2}k_{2,2}+2\alpha _{1}\alpha _{2}y_{1}y_{2}k_{1,2}+\alpha _{1}y_{1}\sum ^{m}_{i=3}\alpha _{i}y_{i}k_{1,i}+\alpha _{2}y_{2}\sum ^{m}_{i=3}\alpha _{i}y_{i}k_{2,i}+\sum ^{m}_{i=3}\alpha _{i}y_{i}\left( \alpha_{1}y_{1}k_{i,1}+\alpha _{2}y_{2}k_{i,2}+\sum ^{m}_{j=3}\alpha _{j}y_{j}k_{i,j}\right)\right)$$<br>$$=\alpha_{1} +\alpha _{2}+C_{1}-\dfrac {1}{2}\left( \alpha ^{2}_{1}y^{2}_{1}k_{1,1}+\alpha ^{2}_{2}y^{2}_{2}k_{2,2}+2\alpha _{1}\alpha _{2}y_{1}y_{2}k_{1,2}+2\alpha _{1}y_{1}\sum ^{m}_{i=3}\alpha _{i}y_{i}k_{i,1}+2\alpha _{2}y_{2}\sum ^{m}_{i=3}\alpha _{i}y_{i}k_{i,2}+\sum ^{m}_{i=3}\sum ^{m}_{j=3}\alpha _{i}y_{i}\alpha _{j}y_{j}k_{i,j}\right)$$<br>$$=\alpha_{1} +\alpha _{2}-\dfrac {1}{2}\alpha ^{2}_{1}y^{2}_{1}k_{1,1}-\dfrac {1}{2}\alpha ^{2}_{2}y^{2}_{2}k_{2,2}-\alpha _{1}\alpha _{2}y_{1}y_{2}k_{1,2}-\alpha _{1}y_{1}\sum ^{m}_{i=3}\alpha _{i}y_{i}k_{i,1}-\alpha _{2}y_{2}\sum ^{m}_{i=3}\alpha _{i}y_{i}k_{i,2}+C$$<br>其中将与 \(\alpha_{1}\)、\(\alpha_{2}\) 无关的 \(C_{1}\) 和 \(\sum ^{m}_{i=3}\sum ^{m}_{j=3}\alpha _{i}y_{i}\alpha _{j}y_{j}k_{i,j}\) 合并为常数项 C。<br>又已知 \(\alpha_{1} y_{1}+\alpha_{2}y_{2}=\xi\) ,\(y_{i}y_{i}=1\)，然后等式两边同时乘上 \(y_{1}\) 得到:<br>$$\alpha _{1}=\xi y_{1}-\alpha _{2}y_{1}y_{2}$$<br>另外，记 \(v_{1}=\sum ^{m}_{i=3}\alpha _{i}y_{i}k_{i,1}\)，\(v_{2}=\sum ^{m}_{i=3}\alpha _{i}y_{i}k_{i,2}\)，最后将所有式子带入 \(w\left( \alpha_{1},\alpha _{2}\right)\) 得到：<br>$$w\left( \alpha_{2}\right) =\begin{aligned}\xi y_{1}+\left( 1-y_{1}y_{2}\right) \alpha _{2}-\dfrac {1}{2}\left( \xi -y_{2}\alpha _{2}\right) ^{2}k_{1,1}-\dfrac {1}{2}k_{2,2}\alpha^{2} _{2}-y_{2}k_{1,2}\left( \xi -\alpha _{2}y_{2}\right) \alpha _{2}-v_{1} \left( \xi -\alpha _{2}y_{2}\right)-v_{2}y_{2}\alpha _{2}+C\end{aligned}$$<br>接下来利用费马引理求极值，令 \(w\) 对 \(\alpha_{2}\) 的导数为零，得:<br>$$\dfrac {\partial w\left( \alpha _{2}\right) }{\alpha <em>{2}}=-\left(k\</em>{1,1}+k_{2,2}-2k_{1,2}\right) \alpha _{2}+\left( k_{1,1}-k_{1,2}\right) \xi y_{2}+v_{1}y_{2}+v_{2}y_{2}-y_{1}y_{2}+y^{2}_{2}=0 ,\quad 其中把 1 构造成 y^{2}_{2}$$<br>然后，现在我们要将 \(\xi\) 消去。<br>已知 SVM 分类函数公式:\(f\left( x_{i}\right) =\sum ^{m}_{i=1}\alpha _{i}y_{i}k_{i,i}+b\)，那么:<br>$$v_{1}=\sum ^{m}_{i=3}\alpha _{i}y_{i}k_{i,1}=f\left( x_{1}\right) -\alpha _{1}y_{1}k_{1,1}-\alpha _{2}y_{2}k_{2,1}-b=f\left( x_{1}\right) -\left( \xi -\alpha _{2}y_{2}\right) k_{1,1}-\alpha _{2}y_{2}k_{2,1}-b$$<br>$$v_{2}=\sum ^{m}_{i=3}\alpha _{i}y_{i}k_{i,2}=f\left( x_{2}\right) -\alpha _{1}y_{1}k_{1,2}-\alpha _{2}y_{2}k_{2,2}-b=f\left( x_{1}\right) -\left( \xi -\alpha _{2}y_{2}\right) k_{1,2}-\alpha _{2}y_{2}k_{2,2}-b$$<br>得到： \(v_{1}-v_{2}=f\left( x_{1}\right) -f\left( x_{2}\right) -k_{1,1}\xi+k_{1,2}\xi +\left( k_{1,1}+k_{2,2}-2k_{1,2}\right) y_{2}\alpha _{2}\)<br>现在，我们需要区别下迭代前和迭代之后的变量。其实我们固定的 m-2 个拉格朗日乘子都是上一次迭代的值，所以 \(v_{1}\) 和 \(v_{2}\) 所表示的式子都是前一次迭代的量，那么，由他们推导出来的 \(\alpha_{1}\) 和 \(\alpha_{2}\) 当然也是前一次迭代的量。<br>那么现在我们以 old 和 new 上角标分别区别前一次迭代和当前迭代的优化量，那么区分后式子改为：<br>$$v_{1}-v_{2}=f\left( x_{1}\right) -f\left( x_{2}\right) -k_{1,1}\xi+k_{1,2}\xi +\left( k_{1,1}+k_{2,2}-2k_{1,2}\right) y_{2}\alpha ^{old}_{2} $$<br>$$\dfrac {\partial w\left( \alpha ^{new}_{2}\right) }{\alpha ^{new}_{2}}=-\left(k_{1,1}+k_{2,2}-2k_{1,2}\right) \alpha ^{new}_{2}+\left( k_{1,1}-k_{1,2}\right) \xi y_{2}+v_{1}y_{2}+v_{2}y_{2}-y_{1}y_{2}+y^{2}_{2}=0 $$<br>接下来，合并两个式子，再得：<br>$$\dfrac {\partial w\left( \alpha ^{new}_{2}\right) }{\alpha ^{new}_{2}}=-\left( k_{1,1}+k_{2,2}-2k_{1,2}\right) \alpha ^{new}_{2}+\left( k_{1,1}+k_{2,2}-2k_{1,2}\right) \alpha ^{old}_{2}+y_{2}\left[ f\left( x_{1}\right) -y_{1}-\left( f\left( x_{2}\right) -y_{2}\right) \right] $$</p>
+<p>然后，我们记 \(E_{i}\) 为 SVM 的预测值和实际值的误差: \(E_{i}=f\left( x_{i}\right) -y_{i}\)，并且令 \(\eta=k_{1,1}+k_{2,2}-2k_{1,2}\)，所以最终的一阶求导公式为：<br>$$\dfrac {\partial w\left( \alpha ^{new}_{2}\right) }{\alpha ^{new}_{2}}=-\eta\alpha ^{new}_{2}+\eta\alpha ^{old}_{2}+y_{2}\left(  E_{1}-E_{2}\right) =0$$<br>那么就可以解出:<br>$$\alpha ^{new}_{2}=\alpha ^{old}_{2}+\dfrac {y_{2}\left( E_{1}-E_{2}\right) }{\eta}$$</p>
+<h3 id="修剪解出的最优解"><a href="#修剪解出的最优解" class="headerlink" title="修剪解出的最优解"></a>修剪解出的最优解</h3><p>上面解出的 \(\alpha_{i}\) 和 \(\alpha_{2}\) 并未考虑约束条件。那么，现在我们需要将约束条件加上，然后对所求出的最优解进行范围的修剪以得到最终满足约束条件的最优解。<br>即:<br>$$\alpha ^{new,unclipped}_{2}=\alpha ^{old}_{2}+\dfrac {y_{2}\left( E_{1}-E_{2}\right) }{\eta}$$<br>由于约束条件 \(0\leq \alpha _{1}\leq C\) 、 \(0\leq \alpha <em>{2}\leq C\) 以及 \(\alpha\</em>{1} y_{1}+\alpha_{2}y_{2}=k, \quad k为常数\) 的存在，所以我们需要给 \(\alpha _{1}\) 和 \(\alpha _{2}\) 找到区间 \(\left[L,H\right]\)。由于只有两个变量，因此约束可以用二维空间中的图形来表示，如下图所示(方形约束)。</p>
+<center><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqbaf76wakj20k0088t8x.jpg" alt=""></center>
+
+<p>那么对于约束 \(\alpha_{1} y_{1}+\alpha_{2}y_{2}=k\)<br>根据左图：当 \(y_{1}\neq y_{2}\) 时，此约束简化为：\(\alpha_{1}-\alpha_{2}=k\)，那么根据 k 的正负可以得到上下界为：  </p>
+<ul>
+<li>下界：\(L=\max \left( 0,\alpha ^{old}_{2}-\alpha ^{old}_{1}\right) \);</li>
+<li>上界：\(H=\min \left( C,C+\alpha ^{old}_{2}-\alpha ^{old}_{1}\right)\)。</li>
+</ul>
+<p>根据右图：当 \(y_{1}= y_{2}\) 时，此约束简化为：\(\alpha_{1}+\alpha_{2}=k\)，上下界表示为：</p>
+<ul>
+<li>下界：\(L=\max \left( 0,\alpha ^{old}_{1}+\alpha ^{old}_{2}-C\right) \);</li>
+<li>上界：\(H=\min \left( C,\alpha ^{old}_{1}+\alpha ^{old}_{2}\right)\)。 </li>
+</ul>
+<p>那么，有了上下界之后，如果优化之后的 \(\alpha_{1}\) 和 \(\alpha_{2}\)跑出了边界，那么我们就需要纠正它，所以有：<br>$$\alpha ^{new}_{2}\begin{cases}H \qquad \alpha ^{new,unclipped}_{2} &gt;H\<br>\alpha ^{new,unclipped}_{2}\qquad L\leq \alpha ^{new,unclipped}_{2}\leq H\<br>L\qquad \alpha ^{new,unclipped}_{2} &lt;L\end{cases}$$<br>得到了 \(\alpha ^{new}_{2}\)，再根据 \(\alpha^{new}_{1} y_{1}+\alpha^{new}_{2}y_{2}=\alpha^{old}_{1} y_{1}+\alpha^{old}_{2}y_{2}\) ，然后两边同乘以 \(y_{1}\) 可解出 \(\alpha ^{new}_{1}\)，即:<br>$$ \alpha^{new}_{1}=\alpha^{old}_{1}+y_{1}y_{2}\left(\alpha^{old}_{2}-\alpha^{new}_{2}\right)$$</p>
+<p>这样，我们就得到了两个优化的拉格朗日乘子 \(\alpha^{new}_{1}\) 和 \(\alpha^{new}_{2}\)</p>
+<h3 id="计算更新后的阈值-b"><a href="#计算更新后的阈值-b" class="headerlink" title="计算更新后的阈值 b"></a>计算更新后的阈值 b</h3><p>在每一次迭代中，优化 \(\alpha^{new}_{1}\) 和 \(\alpha^{new}_{2}\) 之后，就要更新阈值 \(b\)。那么为了使得被优化的样本都满足 KKT 条件，此时需要分为样本在边界上和样本不在边界上两种情况进行讨论。</p>
+<ul>
+<li>当优化后的 \(\alpha^{new}_{1}\) 不在边界上，也就是满足约束 \(0\leq \alpha^{new}_{1}\leq C\) ，那么根据 KKT 条件得知该样本为支持向量，所以 \(y_{1}f\left( x_{1}\right) =1\),则阈值 \(b_{1}\)是有效的。那么两边同时乘以 \(y_{1}\)，并展开式子得: \(\sum ^{m}_{i=1}\alpha _{i}y_{i}k_{i,1}+b=y_{1}\)，那么解出 \(b^{new}_{1}\) 为:<br>$$ b^{new}_{1}=y_{1}-\sum ^{m}_{i=3}\alpha _{i}y_{i}k_{i,1} -\alpha ^{new}_{1}y_{1}k_{1,1}-\alpha^{new}_{2}y_{2}k_{2,1}$$<br>$$=-E_{1}+\alpha ^{old}_{1}y_{1}k_{1,1}+\alpha^{old}_{2}y_{2}k_{2,1}+b^{old}-\alpha ^{new}_{1}y_{1}k_{1,1}-\alpha^{new}_{2}y_{2}k_{2,1}$$<br>$$=-E_{1}-y_{1}k_{1,1}\left(\alpha ^{new}_{1}-\alpha ^{old}_{1}\right)-y_{2}k_{2,1}\left(\alpha ^{new}_{2}-\alpha ^{old}_{2}\right)+b^{old}$$<br>同理可计算出 \(b^{new}_{2}\)：<br>$$b^{new}_{2}=-E_{2}-y_{1}k_{1,2}\left(\alpha ^{new}_{1}-\alpha ^{old}_{1}\right)-y_{2}k_{2,2}\left(\alpha ^{new}_{2}-\alpha ^{old}_{2}\right)+b^{old}$$<br>另外，当 \(b^{new}_{1}\) 和 \(b^{new}_{2}\) 均有效时，\(b^{new}=b^{new}_{1}=b^{new}_{2}\)</li>
+<li>当优化后的 \(\alpha^{new}_{1}\) 和 \(\alpha^{new}_{2}\) 都在边界上，即 (\(\alpha^{new}_{1}=0\) 或 \(\alpha^{new}_{1}=C\)，同时 \(\alpha^{new}_{2}=0\) 或 \(\alpha^{new}_{2}=C\))，那么在 \(b^{new}_{1}\) 和 \(b^{new}_{2}\) 之间的阈值都是满足 KKT 条件的，一般我们取它们的中间值来更新阈值，即：\(b^{new}=\dfrac {b^{new}_{1}+b^{new}_{2}}{2}\)。</li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-98-14.pdf" target="_blank" rel="noopener">Sequential Minimal Optimization:<br>A Fast Algorithm for Training Support Vector Machines</a>   by John C. Platt<br>[2] <a href="https://blog.csdn.net/zouxy09/article/details/17292011" target="_blank" rel="noopener">机器学习算法与Python实践之（四）支持向量机（SVM）实现</a>  by zouxy<br>[3] <a href="https://zhuanlan.zhihu.com/p/29212107" target="_blank" rel="noopener">机器学习算法实践-SVM中的SMO算法</a> by PytLab酱</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+
+        
+-------------本文结束感谢您的阅读-------------
+
+    
+</div>
+  	
+</div>
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author: </strong>洪荣宣</li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="http://yoursite.com/2018/04/27/SVM系列之最小序列算法SMO(三)/" title="SVM系列之最小序列算法SMO(三)">http://yoursite.com/2018/04/27/SVM系列之最小序列算法SMO(三)/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>All articles in this blog are licensed under 本文由 rongxuanhong 原创，采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">保留署名-非商业性使用-禁止演绎 4.0-国际许可协议</a></br>转载请保留以上声明信息! unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"><i class="fa fa-tag"></i> 机器学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/27/剑指offer之表示数值的字符串/" rel="next" title="剑指offer之表示数值的字符串">
+                <i class="fa fa-chevron-left"></i> 剑指offer之表示数值的字符串
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg"
+                alt="洪荣宣" />
+            
+              <p class="site-author-name" itemprop="name">洪荣宣</p>
+              <p class="site-description motion-element" itemprop="description">Rongxuanhong's Blog</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/rongxuanhong" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:francishongrx@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.jianshu.com/u/68e7b05458bc" target="_blank" title="简书"><i class="fa fa-fw fa-globe"></i>简书</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://blog.csdn.net/u013534680" target="_blank" title="CSDN"><i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#坐标梯度下降-上升"><span class="nav-number">2.</span> <span class="nav-text">坐标梯度下降(上升)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SMO-算法"><span class="nav-number">3.</span> <span class="nav-text">SMO 算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于-alpha-i-和-alpha-j-的-选择"><span class="nav-number">3.1.</span> <span class="nav-text">关于 \(\alpha_{i}\) 和 \(\alpha_{j}\) 的 选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SMO-算法公式推导"><span class="nav-number">3.2.</span> <span class="nav-text">SMO 算法公式推导</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#求解未被修剪的-alpha-new-unclipped-i-，-alpha-new-unclipped-j"><span class="nav-number">3.2.1.</span> <span class="nav-text">求解未被修剪的 \(\alpha^{new,unclipped}_{i}\) ，\(\alpha^{new,unclipped}_{j}\)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修剪解出的最优解"><span class="nav-number">3.2.2.</span> <span class="nav-text">修剪解出的最优解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算更新后的阈值-b"><span class="nav-number">3.2.3.</span> <span class="nav-text">计算更新后的阈值 b</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">洪荣宣</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="Total Visitors">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="Total Views">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/reading_progress/reading_progress.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.6"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.6"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.0.6"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.0.6"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.6"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.6"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.6"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'PHg2RRIUgmj5CjX5xB2yjkbQ-gzGzoHsz',
+        appKey: '3feashi2HbnYMycDoEQPqaIx',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  <!-- 页面点击小红心 start--> 
+  <script type="text/javascript" src="/js/src/love.js"></script>
+<!-- 页面点击小红心 end--> 
+
+<!--崩溃欺骗-->
+<script>
+var OriginTitile = document.title;
+ var titleTime;
+ document.addEventListener('visibilitychange', function () {
+     if (document.hidden) {
+        // $('[rel="icon"]').attr('href', "/img/TEP.ico");
+         document.title = '╭(°A°`)╮ 页面崩溃啦 ~ ';
+         clearTimeout(titleTime);
+     }
+     else {
+       //  $('[rel="icon"]').attr('href', "/favicon.ico");
+         document.title = '(ฅ>ω<*ฅ) 噫又好了~' + OriginTitile;
+         titleTime = setTimeout(function () {
+             document.title = OriginTitile;
+         }, 2000);
+     }
+ });
+ </script>
+</body>
+</html>

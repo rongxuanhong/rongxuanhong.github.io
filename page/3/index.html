@@ -302,6 +302,296 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/13/剑指offer2之机器人的运动范围/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/13/剑指offer2之机器人的运动范围/" itemprop="url">剑指offer2之机器人的运动范围</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-13T10:13:52+08:00">2018-04-13</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/13/剑指offer2之机器人的运动范围/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/13/剑指offer2之机器人的运动范围/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>机器人的运动范围仍然和前一篇的寻找矩阵路径相似，都是在一个给定的网格内搜索问题的解，因此思路大体一致，还是利用回溯法来进行求解。</p>
+<h1 id="题目-机器人的运动范围"><a href="#题目-机器人的运动范围" class="headerlink" title="题目(机器人的运动范围)"></a>题目(机器人的运动范围)</h1><p>题目：地上有一个m行和n列的方格。一个机器人从坐标0,0的格子开始移动，每一次只能向左，右，上，下四个方向移动一格，但是不能进入行坐标和列坐标的数位之和大于k的格子。 例如，当k为 18 时，机器人能够进入方格（35,37），因为 3+5+3+7 = 18。但是，它不能进入方格（35,38），因为 3+5+3+8 = 19。请问该机器人能够达到多少个格子？</p>
+<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>虽然本题不是给定一个矩阵进行搜索，但是它给定了可以搜寻的网格边界，因此还是类似矩阵搜索问题解的办法。<br>首先本题进入格子的条件基本和前一篇相似，只是字符串可以匹配换成了行坐标和列坐标的数位之和小于等于  k。然后，机器人每进入一个格子之后，它可以继续向该格子的左、右、上、下移动一格，所以我们依然只需递归下去求解，并返回递归结束后的格子数即可。也就是说，能进入的格子总数=当前格子(1) + 来自上下左右递归后返回的计数。</p>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fq7dlgvkbjj20v70l7tao.jpg" alt=""></p>
+<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>时间复杂度 O(rowsxcols)。</p>
+<h2 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h2><p>建立了一个辅助空间布尔矩阵，空间复杂度为 O(rows*cols)。递归工作栈消耗 O(max(rows,cols))。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/11/剑指offer2之回溯法-矩阵中的路径/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/11/剑指offer2之回溯法-矩阵中的路径/" itemprop="url">剑指offer2之回溯法(矩阵中的路径)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-11T14:49:00+08:00">2018-04-11</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/11/剑指offer2之回溯法-矩阵中的路径/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/11/剑指offer2之回溯法-矩阵中的路径/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>回溯法可以看成蛮力法的升级版。它会搜遍问题的解空间，试图找到一个符合约束条件的解决方案。回溯法非常适合由多个步骤组成的问题，并且每个步骤都有多个选项。当我们在某一步选择了一中一个选项时，就进入下一步，然后有面临新的选项。我们就这样重复选择，直至到达最终的状态。</p>
+<p>而这样的选择过程非常适合用树结构来表示。在某一步有 n 个可能的选项，那么把该步骤看出树状结构中的一个节点，每个选项就看出树中节点连接线，经过这些连接线到达该节点的 n 个子节点，再选定符合的子节点到达下一步骤。树的叶节点对应着终结状态。如果叶节点的状态满足题目的约束条件，那么我们找到了一个可行的解决方案。</p>
+<p>如果在叶节点的状态不满足约束条件，那么需要回溯到上一节点再尝试其他的选项。如果上一节点所有可能的选项都已经尝试过，仍满足不了题目的约束条件，则再次回溯到上一节点。如果所有选项都已经尝试过仍然不能到达满足约束条件的终结状态，则该问题无解。</p>
+<h1 id="题目-矩阵中的路径）"><a href="#题目-矩阵中的路径）" class="headerlink" title="题目(矩阵中的路径）"></a>题目(矩阵中的路径）</h1><p>题目：请设计一个函数，用来判断在一个矩阵中是否存在一条包含某字符串所有字符的路径。路径可以从矩阵中的任意一个格子开始，每一步可以在矩阵中向左，向右，向上，向下移动一个格子。如果一条路径经过了矩阵中的某一个格子，则该路径不能再进入该格子。 例如 a b c e s f c s a d e e 矩阵中包含一条字符串”bcced”的路径，但是矩阵中不包含”abcb”路径，因为字符串的第一个字符b占据了矩阵中的第一行第二个格子之后，路径不能再次进入该格子。</p>
+<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>首先，由于可以在矩阵中任意选择一个格子作为路径的起点，因此首先应该遍历矩阵的每个位置作为可能的起点。然后，假设矩阵中的某个格子上的字符为ch，并且字符串的第 i 个位置也为字符 ch，那么就到相邻的格子寻找字符串中第 i+1 位置上的字符。如果该格子上的字符与字符串的第i个路径上的字符不同，则跳过该格子。重复以上过程，直至字符串中的字符都在矩阵中相应位置出现。另外，需要定义 bool 矩阵标识路径是否已经进过每个格子。   </p>
+<p>当矩阵中坐标为(row,col)的格子和路径字符串中下标为pathLength的字符一样时，从4个相邻的格子(row,col-1),(row-1,col),(row,col+1)和(row+1,col)中去定位字符串中下标为pathLength+1的字符。<br>如果都没有匹配到，则需要回到前一个字符(pathLength-1)，重新定位。</p>
+<p>重复这个过程，直到遇到’\0’。</p>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fq6b0g2zb4j20v70laabw.jpg" alt=""></p>
+<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>首先hasPath中有两层循环，耗时O(rowsxcols),接着每个格子最多需要判断周围 4 个格子是否为路径的下一个字符，时间复杂度O(4xrowsxcols)。因此最后的时间复杂度为O(rows^2xcols^2)。可能分析的不是很对，请指教。</p>
+<h2 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h2><p>建立了一个辅助空间布尔矩阵，空间复杂度为O(rowsxcols)。假设字符长度为n，则递归栈需要O(n)的空间，但最大的复杂度还是O(rowsxcols)。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/09/剑指offer2之旋转数组/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -755,307 +1045,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/31/剑指offer2笔记之从尾到头打印链表/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="洪荣宣">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rongxuanhong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/31/剑指offer2笔记之从尾到头打印链表/" itemprop="url">剑指offer2笔记之从尾到头打印链表</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-31T14:50:01+08:00">2018-03-31</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/03/31/剑指offer2笔记之从尾到头打印链表/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/03/31/剑指offer2笔记之从尾到头打印链表/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>链表的结构简单，它由指针把若干个节点连接成链状结构。那么必然涉及到链表的创建，如何插入节点，如何删除节点等链表操作。由于这些操作思想简单，还可借助画图理解实现，代码量又不多，因而在面试中经常出现。  </p>
-<p>链表是一种动态的数据结构，在创建链表的时候，我们无需提前知道链表的长度，而是按需为新节点分配内存即可，这样一来空间的利用率就比数组相对高了。  </p>
-<h1 id="链表的部分操作"><a href="#链表的部分操作" class="headerlink" title="链表的部分操作"></a>链表的部分操作</h1><h2 id="链表节点定义"><a href="#链表节点定义" class="headerlink" title="链表节点定义"></a>链表节点定义</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpmj9yo279j20v602i0sk.jpg" alt="">  </p>
-<h2 id="链表尾部加入节点"><a href="#链表尾部加入节点" class="headerlink" title="链表尾部加入节点"></a>链表尾部加入节点</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpmji3k54fj20v80aq0ta.jpg" alt="">   </p>
-<p>在上面代码中，函数的第一个参数 head 是一个指向指针的指针(二级指针)。由于此时会改动头指针(形参)，而我们也需要改变头指针对应的实参，那么需要使用二级指针传递，即需要再加一级的指针，这样当对形参(指向头指针的指针)的指向操作时，就相当于对实参(头指针)本身进行的操作。</p>
-<h2 id="链表删除节点"><a href="#链表删除节点" class="headerlink" title="链表删除节点"></a>链表删除节点</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpmka8c1ewj20v70fz0tm.jpg" alt="">  </p>
-<h1 id="题目描述-从尾到头打印链表"><a href="#题目描述-从尾到头打印链表" class="headerlink" title="题目描述(从尾到头打印链表)"></a>题目描述(从尾到头打印链表)</h1><p>题目：输入一个链表的头结点，从尾到头反过来打印出每个节点的值(不改变链表结构)。</p>
-<h2 id="解题思路一"><a href="#解题思路一" class="headerlink" title="解题思路一"></a>解题思路一</h2><p>利用栈线性处理。当我们遍历链表的时候是从头开始访问元素，而输出的时候确要从后面访问的元素先输出，由此联想到栈的特性–后进先出。那么一旦我们访问一个节点就将其入栈，遍历结束后再统一出栈即可逆序输出链表节点。</p>
-<h2 id="解题思路二"><a href="#解题思路二" class="headerlink" title="解题思路二"></a>解题思路二</h2><p>利用递归的思想。我们每访问一个节点的时候，先递归输出它后面的节点，再输出该节点本身，这样链表的输出结果就反过来了。但是，一旦链表过长，会导致递归层级过深。</p>
-<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><h2 id="算法实现一"><a href="#算法实现一" class="headerlink" title="算法实现一"></a>算法实现一</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpmkllo5euj20v70a3mxr.jpg" alt="">  </p>
-<h2 id="算法实现二"><a href="#算法实现二" class="headerlink" title="算法实现二"></a>算法实现二</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpmkomqim2j20v6062aab.jpg" alt="">  </p>
-<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>解题思路一中，对链表和栈分别仅遍历一次，时间复杂度为 O(n),由于借助了栈，其递归深度为O(n),因而空间复杂度为 O(n)；  </p>
-<p>解题思路二同上(递归本质上一个栈的结构)。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-	<div>
-
-</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/29/剑指offer2笔记之重建二叉树/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="洪荣宣">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rongxuanhong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/29/剑指offer2笔记之重建二叉树/" itemprop="url">剑指offer2笔记之重建二叉树</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-29T20:29:10+08:00">2018-03-29</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/03/29/剑指offer2笔记之重建二叉树/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/03/29/剑指offer2笔记之重建二叉树/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>树是一种在实际编程中经常遇到的数据结构。它的逻辑结构很简单：除了根节点以外，每个节点只有一个父节点；除叶节点之外所有节点都有一个或多个子节点。父节点和子节点之间用指针链接。由于树会涉及到大量的指针，因此与树有关的面试题成为了面试官的青睐。<br>那么需要掌握哪些？就其中一部分来说，关于树的三大遍历方式：前序遍历、中序遍历、后序遍历都必须掌握，并且由于每种遍历方式都有递归和循环两种实现方式，因此我们需要<strong>掌握</strong>三种遍历六种实现方式。  </p>
-<p>后期需要掌握的我们后面再提…</p>
-<h1 id="题目描述-重建二叉树"><a href="#题目描述-重建二叉树" class="headerlink" title="题目描述(重建二叉树)"></a>题目描述(重建二叉树)</h1><p>题目：输入某二叉树的前序遍历和中序遍历的结果，请重建该二叉树。(假设输入的前序遍历和中序遍历的结果中都不含重复的数字)  </p>
-<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>首先，重建一棵二叉树，我们可以通过树的两种遍历方式推出树的结构，其中中序遍历是必不可少的序列。<br>题目给定的是前序遍历和中序遍历，我们知道在前序序列中第一个值root 一定是根节点，而这个 root 所在的中序序列中也是根节点,那么根据前序遍历的特性–先根再左再右，我们知道左右子树的序列一定从前序序列的root的下一个位置开始，而中序遍历的特性是–先左再根再右,那么，对于中序序列，左子树的中序序列从第一个位置到 root 的前一位置的范围内，而右子树的中序序列则从 root 的下一位置到末位置。再者，无论是前序序列还是中序序列，前序序列的左子树序列长度一定等于中序序列的左子树序列长度，右子树亦是。最后其实我们分别得到了 root 节点的左子树对应的前序序列和中序序列，以及右子树对应的前序序列和中序序列。</p>
-<p><strong>关键的地方来了</strong>，我们还需要对左子树和右子树进行重建二叉树，我们发现这个过程已经在以根节点为 root 的二叉树上走过了，只是序列长度缩短了，那么我们其实可以再次调用一次这个过程(函数)，只要确定左右子树前序和中序序列的范围即可，那么这个过程其实就是利用树的递归特性。而递归的出口就是处理好叶节点的创建。<br>一个形象的图例:<br><img src="https://img-blog.csdn.net/20170927101737391?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMTQ3NTIxMA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
-<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><h2 id="建立树的数据结构"><a href="#建立树的数据结构" class="headerlink" title="建立树的数据结构"></a>建立树的数据结构</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpr7d95w1ij20v6047wej.jpg" alt="">  </p>
-<h2 id="重建二叉树"><a href="#重建二叉树" class="headerlink" title="重建二叉树"></a>重建二叉树</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpr7fonarfj20v70lcq4q.jpg" alt="">  </p>
-<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>每次在中序遍历序列中找到根节点的位置需要 O(n) 的查找时间。<br>则T(n)=2T(2/n)+O(n),(两个子问题的时间加中序序列上的查找时间)那么T(n)=O(nlogn)。</p>
-<h2 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h2><p>由于每个节点都会被递归到，所以递归栈需要 O(n) 的空间。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-	<div>
-
-</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1102,7 +1096,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">29</span>
+                    <span class="site-state-item-count">31</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
