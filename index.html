@@ -20,6 +20,10 @@
 
 
 
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
 
 
 
@@ -374,7 +378,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
+    <div class="post-body han-init-context" itemprop="articleBody">
 
       
       
@@ -425,18 +429,14 @@
 <li>上界：\(H=\min \left( C,\alpha ^{old}_{1}+\alpha ^{old}_{2}\right)\)。 </li>
 </ul>
 <p>那么，有了上下界之后，如果优化之后的 \(\alpha_{1}\) 和 \(\alpha_{2}\)跑出了边界，那么我们就需要纠正它，所以有：  </p>
-<script type="math/tex; mode=display">\alpha ^{new}_{2}\begin{cases}H \qquad \alpha ^{new,unclipped}_{2} >H\\
+<script type="math/tex; mode=display">\alpha ^{new}_{2}\begin{cases}H \qquad\qquad\qquad \alpha ^{new,unclipped}_{2} >H\\
 \alpha ^{new,unclipped}_{2}\qquad L\leq \alpha ^{new,unclipped}_{2}\leq H\\
-L\qquad \alpha ^{new,unclipped}_{2} <L\end{cases}</script><p>得到了 \(\alpha ^{new}_{2}\)，再根据 \(\alpha^{new}_{1} y_{1}+\alpha^{new}_{2}y_{2}=\alpha^{old}_{1} y_{1}+\alpha^{old}_{2}y_{2}\) ，然后两边同乘以 \(y_{1}\) 可解出 \(\alpha ^{new}_{1}\)，即:</p>
+L\qquad\qquad\qquad \alpha ^{new,unclipped}_{2} <L\end{cases}</script><p>得到了 \(\alpha ^{new}_{2}\)，再根据 \(\alpha^{new}_{1} y_{1}+\alpha^{new}_{2}y_{2}=\alpha^{old}_{1} y_{1}+\alpha^{old}_{2}y_{2}\) ，然后两边同乘以 \(y_{1}\) 可解出 \(\alpha ^{new}_{1}\)，即:</p>
 <script type="math/tex; mode=display">\alpha^{new}_{1}=\alpha^{old}_{1}+y_{1}y_{2}\left(\alpha^{old}_{2}-\alpha^{new}_{2}\right)</script><p>这样，我们就得到了两个优化的拉格朗日乘子 \(\alpha^{new}_{1}\) 和 \(\alpha^{new}_{2}\)</p>
 <h3 id="计算更新后的阈值-b"><a href="#计算更新后的阈值-b" class="headerlink" title="计算更新后的阈值 b"></a>计算更新后的阈值 b</h3><p>在每一次迭代中，优化 \(\alpha^{new}_{1}\) 和 \(\alpha^{new}_{2}\) 之后，就要更新阈值 \(b\)。那么为了使得被优化的样本都满足 KKT 条件，此时需要分为样本在边界上和样本不在边界上两种情况进行讨论。</p>
 <ul>
 <li>当优化后的 \(\alpha^{new}_{1}\) 不在边界上，也就是满足约束 \(0\leq \alpha^{new}_{1}\leq C\) ，那么根据 KKT 条件得知该样本为支持向量，所以 \(y_{1}f\left( x_{1}\right) =1\),则阈值 \(b_{1}\)是有效的。那么两边同时乘以 \(y_{1}\)，并展开式子得: \(\sum ^{m}_{i=1}\alpha _{i}y_{i}k_{i,1}+b=y_{1}\)，那么解出 \(b^{new}_{1}\) 为:<script type="math/tex; mode=display">b^{new}_{1}=y_{1}-\sum ^{m}_{i=3}\alpha _{i}y_{i}k_{i,1} -\alpha ^{new}_{1}y_{1}k_{1,1}-\alpha^{new}_{2}y_{2}k_{2,1}</script><script type="math/tex; mode=display">=-E_{1}+\alpha ^{old}_{1}y_{1}k_{1,1}+\alpha^{old}_{2}y_{2}k_{2,1}+b^{old}-\alpha ^{new}_{1}y_{1}k_{1,1}-\alpha^{new}_{2}y_{2}k_{2,1}</script><script type="math/tex; mode=display">=-E_{1}-y_{1}k_{1,1}\left(\alpha ^{new}_{1}-\alpha ^{old}_{1}\right)-y_{2}k_{2,1}\left(\alpha ^{new}_{2}-\alpha ^{old}_{2}\right)+b^{old}</script>同理可计算出 \(b^{new}_{2}\)：<script type="math/tex; mode=display">b^{new}_{2}=-E_{2}-y_{1}k_{1,2}\left(\alpha ^{new}_{1}-\alpha ^{old}_{1}\right)-y_{2}k_{2,2}\left(\alpha ^{new}_{2}-\alpha ^{old}_{2}\right)+b^{old}</script>另外，当 \(b^{new}_{1}\) 和 \(b^{new}_{2}\) 均有效时，\(b^{new}=b^{new}_{1}=b^{new}_{2}\)</li>
-<li>当优化后的 \(\alpha^{new}_{1}\) 和 \(\alpha^{new}_{2}\) 都在边界上，即 (\(\alpha^{new}_{1}=0\) 或 \(\alpha^{new}_{1}=C\)，同时 \(\alpha^{new}_{2}=0\) 或 \(\alpha^{new}_{2}=C\))，那么在 \(b^{new}_{1}\) 和 \(b^{new}_{2}\) 之间的阈值都是满足 KKT 条件的，一般我们取它们的中间值来更新阈值，即：\(b^{new}=\dfrac {b^{new}_{1}+b^{new}_{2}}{2}\)。  <script type="math/tex; mode=display">
-f(n)=\begin{cases}
-n/2, & \text{如果$ x<=2 $}\\
-3n+1, & \text{如果$ x>2 $}
-\end{cases}</script><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1>[1] <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-98-14.pdf" target="_blank" rel="noopener">Sequential Minimal Optimization:<br>A Fast Algorithm for Training Support Vector Machines</a>   by John C. Platt<br>[2] <a href="https://blog.csdn.net/zouxy09/article/details/17292011" target="_blank" rel="noopener">机器学习算法与Python实践之（四）支持向量机（SVM）实现</a>  by zouxy<br>[3] <a href="https://zhuanlan.zhihu.com/p/29212107" target="_blank" rel="noopener">机器学习算法实践-SVM中的SMO算法</a> by PytLab酱</li>
+<li>当优化后的 \(\alpha^{new}_{1}\) 和 \(\alpha^{new}_{2}\) 都在边界上，即 (\(\alpha^{new}_{1}=0\) 或 \(\alpha^{new}_{1}=C\)，同时 \(\alpha^{new}_{2}=0\) 或 \(\alpha^{new}_{2}=C\))，那么在 \(b^{new}_{1}\) 和 \(b^{new}_{2}\) 之间的阈值都是满足 KKT 条件的，一般我们取它们的中间值来更新阈值，即：\(b^{new}=\dfrac {b^{new}_{1}+b^{new}_{2}}{2}\)。  <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1>[1] <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-98-14.pdf" target="_blank" rel="noopener">Sequential Minimal Optimization:<br>A Fast Algorithm for Training Support Vector Machines</a>   by John C. Platt<br>[2] <a href="https://blog.csdn.net/zouxy09/article/details/17292011" target="_blank" rel="noopener">机器学习算法与Python实践之（四）支持向量机（SVM）实现</a>  by zouxy<br>[3] <a href="https://zhuanlan.zhihu.com/p/29212107" target="_blank" rel="noopener">机器学习算法实践-SVM中的SMO算法</a> by PytLab酱</li>
 </ul>
 
           
@@ -566,7 +566,7 @@ n/2, & \text{如果$ x<=2 $}\\
     
     
     
-    <div class="post-body" itemprop="articleBody">
+    <div class="post-body han-init-context" itemprop="articleBody">
 
       
       
@@ -709,7 +709,7 @@ n/2, & \text{如果$ x<=2 $}\\
     
     
     
-    <div class="post-body" itemprop="articleBody">
+    <div class="post-body han-init-context" itemprop="articleBody">
 
       
       
@@ -861,7 +861,7 @@ void DeleteNode(ListNode** head, ListNode* pToBeDeleted);
     
     
     
-    <div class="post-body" itemprop="articleBody">
+    <div class="post-body han-init-context" itemprop="articleBody">
 
       
       
@@ -1007,7 +1007,7 @@ void DeleteNode(ListNode** head, ListNode* pToBeDeleted);
     
     
     
-    <div class="post-body" itemprop="articleBody">
+    <div class="post-body han-init-context" itemprop="articleBody">
 
       
       
