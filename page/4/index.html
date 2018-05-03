@@ -306,6 +306,157 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/09/剑指offer2之旋转数组/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/09/剑指offer2之旋转数组/" itemprop="url">剑指offer2之旋转数组</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-09T13:17:10+08:00">2018-04-09</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/09/剑指offer2之旋转数组/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/09/剑指offer2之旋转数组/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>查找和排序是在程序设计中经常用到的算法。查找相对而言不外乎<strong>顺序查找、二分查找、哈希表查找和二叉排序树查找</strong>，因此只要我们掌握了这些查找技巧，然后在面对不同问题的时候就可以选择合适的查找方法解决。最重要的是，<strong>二分查找</strong>是面试时候的重点，也是面试官最喜欢考查的查找方式。  </p>
+<p>哈希表和二叉排序树查找的重点在于构建对应的数据结构而不是算法本身。哈希表主要的优点是可以在 O(1) 的时间内查找某一元素，是效率最高的查找方式，而其缺点必然是消耗额外的空间来实现哈希表。<br>最后，我们应该要熟练掌握<strong>插入排序、冒泡排序、归并排序和快速排序</strong>算法的实现并能比较算法之间的优劣，能够从<strong>空间复杂度、平均时间复杂度和最差时间复杂度</strong>等方面去比较它们的优缺点。  </p>
+<h1 id="题目-旋转数组"><a href="#题目-旋转数组" class="headerlink" title="题目(旋转数组)"></a>题目(旋转数组)</h1><p>题目：把一个数组最开始的<strong>若干个</strong>元素搬到数组的末尾，我们称之为数组的旋转。输入一个递增排序的数组的一个旋转，输出旋转数组的最小元素。例如，数组{3，4，5,1,2}为{1,2,3,4,5}的一个旋转，该数组的最小元素为1。  </p>
+<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>为了能够充分利用旋转数组的特性，我们肯定不能采用 O(n) 时间复杂度的方式去遍历数组得到最小的那个元素(顺序查找)，那么旋转数组的特性是什么？ 其一是旋转后的数组一般可以划分为两个递增有序的子数组，并且前一个子数组的元素都大于后面子数组的元素；其二是最小的元素刚好是这两个子数组的分界线。那么可以考虑利用二分查找来缩小查找的范围。具体如下：  </p>
+<ol>
+<li>情况一：当搬运的若干个元素为0时，意味这旋转数组仍为原排序数组，那么最小的元素肯定是第一个元素；  </li>
+<li>情况二：我们给排序数组两个指针，一个指向首元素，另一个指向尾元素，接着取中点，然后先判断首元素和中点元素以及尾元素是否相等，如果相等，那么我们此时我们无法知道两个子数组谁一定会比谁更大，因此我们只能采用顺序查找的方式来返回最小的元素；否则，我们判断中点元素的值是否比首元素大，如果大，那么说明前面的子数组必定大于后面的子数组，最小值肯定在后面的子数组中，那么此时将指向首元素的指针移动到中点元素，缩小查找的范围，然后继续二分查找；如果小，那么原理相反，只需要把指向尾元素的指针移动到中点元素，继续二分查找即可。  </li>
+<li>进入二分查找的条件：二分查找数组的首元素大于其尾元素。这样说明有大于0个的元素被搬到了后面。  </li>
+<li>二分查找的结束条件：当首指针和尾指针位置相邻的时候，尾指针指向的元素即为最小的元素，此时退出循环即可。  </li>
+</ol>
+<p>下图为首元素、中点元素和尾元素都相等的情况(阴影部分为其中一个子数组，这种特例对于二分查找失效)：<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpzgka8w6uj20gp03d3z4.jpg" alt="">  </p>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpzgr0mh3tj20va0jmabl.jpg" alt="">  </p>
+<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>当旋转数组仍为排序数组的之后，直接去第一个元素，时间复杂度O(1)；当旋转数组采用顺序查找的时候，时间复杂度为O(n)；当旋转数组采用二分查找的时候，时间复杂度为O(logn)，所以最好的时间复杂度为O(1)，最坏时间复杂度为O(n)。  </p>
+<h2 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h2><p>空间复杂度为O(1)。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/03/剑指offer2之按年龄排序/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -904,154 +1055,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/28/剑指offer2笔记之替换空格/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="洪荣宣">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rongxuanhong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/28/剑指offer2笔记之替换空格/" itemprop="url">剑指offer2笔记之替换空格</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-28T11:22:02+08:00">2018-03-28</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/03/28/剑指offer2笔记之替换空格/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/03/28/剑指offer2笔记之替换空格/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>说到字符串，其实在 C/C++ 中字符串都是以<code>&#39;\0&#39;</code>作为结尾标志。这样做的优点是容易找到字符串尾部，而缺点则是每个字符串额外多了一个字符的内存开销(1 字节),最后计算字符串的实际长度时会比原来多1。  </p>
-<p>另外，为了节省内存，C/C++    把常量字符串存储到单独的内存区域，因此，当多个指针赋值给相同的常量字符串时，这些指针所指向的内存地址是相同的。  </p>
-<p>最后，注意字符数组容量的长度以及字符串实际长度的区别。</p>
-<h1 id="题目描述-替换空格"><a href="#题目描述-替换空格" class="headerlink" title="题目描述(替换空格)"></a>题目描述(替换空格)</h1><p>请实现一个函数，把字符串中的每个空格替换成”%20”。例如，输入 “We are happy.”，则输出 “We%20are%20happy.”。</p>
-<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><h2 id="常规思路"><a href="#常规思路" class="headerlink" title="常规思路"></a>常规思路</h2><p>我们可以从左往右扫描字符串中的每个字符，但遇到空格的时候，先把空格之后的所有字符统一向后移动两个字符，这样一来刚好空出三个位置，然后再依次填入三个字符’%’,’2’,’0’,接下来，继续查找空格字符，继续执行相同操作。  </p>
-<p>此方法的缺点是时间复杂度较高,还不是最优的情况，达到了O(n^2)。其实，这种情况有点类似直接插入排序法的操作。对于每个空格的字符，需要移动后面O(n)个字符，那么对于含有O(n)个空字符的字符串而言，总的时间复杂度为O(n^2)。</p>
-<h2 id="终极思路"><a href="#终极思路" class="headerlink" title="终极思路"></a>终极思路</h2><p>常规思路中的缺点在于，当我们遇到一次空格，然后移动一次后面的所有字符，此时我们无法保证这些字符在之后不会被再次移动。而我们要寻找的就是能不能让移动的这些字符一次就能确定其最终的位置？  </p>
-<p>常规思路中，是从前往后扫描字符，那么从后往前扫描字符呢。<br>首先，我们应该统计非空字符的个数，以及空格的个数，那么将一个空格替换为三个字符，原数组长度将增加 2，最后我们得到了字符串中空格都替换成 “%20”所需的长度。</p>
-<p>那么，当我们从后往前扫描时，我们先确定替换之后字符串的最终长度。然后利用两个指针 P1和P2 在数组后面复制和替换。当 p1遇到非空字符，则将 p1 所指的元素复制到 p2所指的位置，然后p1、p2继续向前更新指针；当p1 遇到空字符时，将”%20”倒序依次从 p2 处往前插入,接下来，p1、p2  继续向前更新指针，重复上述过程，直至完成替换。具体形象的操作见下图。<br><img src="http://img.blog.csdn.net/20170925111500819?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMTQ3NTIxMA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
-<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpjd3mtsdcj20v70jtt9w.jpg" alt="">  </p>
-<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>我们先用第一个 <code>while</code> 遍历了字符串，耗时约 O(n),第二个 <code>while</code> 中我们主要是移动和插入元素，由于每个元素最多仅移动一次，因此耗时也约 O(n),那么总的时间复杂度为 <code>O(n)=O(n)+O(n)</code>。空间复杂度为 O(1)。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-	<div>
-
-</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1103,7 +1106,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">33</span>
+                    <span class="site-state-item-count">34</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
