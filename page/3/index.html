@@ -306,6 +306,152 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/20/剑指offer2之打印从1到最大的n位数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/20/剑指offer2之打印从1到最大的n位数/" itemprop="url">剑指offer2之打印从1到最大的n位数</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-20T13:03:23+08:00">2018-04-20</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/20/剑指offer2之打印从1到最大的n位数/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/20/剑指offer2之打印从1到最大的n位数/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>如果面试题是关于 n 为的整数并且没有限定 n 的取值范围，或者输入任意大小的整数，那么可能需要考虑大数问题。而字符串是一种简单、有效地表示大数的方法。</p>
+<h1 id="题目-打印从-1-到最大的-n-位数"><a href="#题目-打印从-1-到最大的-n-位数" class="headerlink" title="题目(打印从 1 到最大的 n 位数)"></a>题目(打印从 1 到最大的 n 位数)</h1><p>题目:输入数字 n，按顺序打印出从 1 到最大的 n 位十进制数。比如输入 3，则打印出 1、2、3 一直到最大的3 位数即 999。</p>
+<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>本题没有给定 n 的范围，因此需要考虑大数问题。</p>
+<h2 id="算法思路一-字符串模拟"><a href="#算法思路一-字符串模拟" class="headerlink" title="算法思路一(字符串模拟)"></a>算法思路一(字符串模拟)</h2><p>用字符串表示数字的时候，最直观的方法就是字符串里每个字符都是 ‘0’-‘9’ 之间的某一个字符，用来表示数字中的任一位。因为数字最大是 n 位的，因此我们需要一个长度为 n+1 的字符串(<strong>字符串中最后一位是结束符号 ‘\0’</strong>)。并且将字符串的每一位初始化为 ‘0’，但要注意的是，最后打印的时候，前半部分的 0 需要过滤掉。</p>
+<p>接下来，我们就对字符串的最后一位一直加 1 ，然后再判断是否需要进位，如果需要进位，那么就需要把字符串最后一位变为 ‘0’，而前一位的字符也要跟着加 1，然后继续判断是否需要继续进位，一直到直接加 1，不需要进位，或者遇到了最大的 n 位数退出外层循环。</p>
+<h2 id="算法思路二-递归法"><a href="#算法思路二-递归法" class="headerlink" title="算法思路二(递归法)"></a>算法思路二(递归法)</h2><p>将问题转换成按数字排列，也就是所对于字符串的每一位都可以有 10 种选择—-‘0’-‘9’。也就是说，我们把数字的每一位都从 0 到 9 依次排列一遍，就得到所有的十进制数。最后打印的时候只要从第一个非 0 的字符开始打印即可。</p>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><h2 id="字符串模拟"><a href="#字符串模拟" class="headerlink" title="字符串模拟"></a>字符串模拟</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfl5hcjg2j20uy0rdjs9.jpg" alt=""></p>
+<h2 id="递归法"><a href="#递归法" class="headerlink" title="递归法"></a>递归法</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqflaty90rj20v90ksmxs.jpg" alt=""></p>
+<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>算法一的时间消耗主要在 while 循环上，由于需要打印出从 1 到最大的 n 位数，因此若设这些数共有 m 个，那么时间复杂度为 O(m)；而算法二采用递归思想，时间复杂度也为 O(m)，差不多共有 10^n 个组合。空间复杂度都为 O(n)。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/18/SVM系列之初识SVM(一)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -921,153 +1067,6 @@ $$ L\left(w,\alpha \right) =\dfrac {1}{2}\left\| w\right\| ^{2}+\sum ^{m}\_{i=1}
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/11/剑指offer2之回溯法-矩阵中的路径/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="洪荣宣">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rongxuanhong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/11/剑指offer2之回溯法-矩阵中的路径/" itemprop="url">剑指offer2之回溯法(矩阵中的路径)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-11T14:49:00+08:00">2018-04-11</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/04/11/剑指offer2之回溯法-矩阵中的路径/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/11/剑指offer2之回溯法-矩阵中的路径/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>回溯法可以看成蛮力法的升级版。它会搜遍问题的解空间，试图找到一个符合约束条件的解决方案。回溯法非常适合由多个步骤组成的问题，并且每个步骤都有多个选项。当我们在某一步选择了一中一个选项时，就进入下一步，然后有面临新的选项。我们就这样重复选择，直至到达最终的状态。</p>
-<p>而这样的选择过程非常适合用树结构来表示。在某一步有 n 个可能的选项，那么把该步骤看出树状结构中的一个节点，每个选项就看出树中节点连接线，经过这些连接线到达该节点的 n 个子节点，再选定符合的子节点到达下一步骤。树的叶节点对应着终结状态。如果叶节点的状态满足题目的约束条件，那么我们找到了一个可行的解决方案。</p>
-<p>如果在叶节点的状态不满足约束条件，那么需要回溯到上一节点再尝试其他的选项。如果上一节点所有可能的选项都已经尝试过，仍满足不了题目的约束条件，则再次回溯到上一节点。如果所有选项都已经尝试过仍然不能到达满足约束条件的终结状态，则该问题无解。</p>
-<h1 id="题目-矩阵中的路径）"><a href="#题目-矩阵中的路径）" class="headerlink" title="题目(矩阵中的路径）"></a>题目(矩阵中的路径）</h1><p>题目：请设计一个函数，用来判断在一个矩阵中是否存在一条包含某字符串所有字符的路径。路径可以从矩阵中的任意一个格子开始，每一步可以在矩阵中向左，向右，向上，向下移动一个格子。如果一条路径经过了矩阵中的某一个格子，则该路径不能再进入该格子。 例如 a b c e s f c s a d e e 矩阵中包含一条字符串”bcced”的路径，但是矩阵中不包含”abcb”路径，因为字符串的第一个字符b占据了矩阵中的第一行第二个格子之后，路径不能再次进入该格子。</p>
-<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>首先，由于可以在矩阵中任意选择一个格子作为路径的起点，因此首先应该遍历矩阵的每个位置作为可能的起点。然后，假设矩阵中的某个格子上的字符为ch，并且字符串的第 i 个位置也为字符 ch，那么就到相邻的格子寻找字符串中第 i+1 位置上的字符。如果该格子上的字符与字符串的第i个路径上的字符不同，则跳过该格子。重复以上过程，直至字符串中的字符都在矩阵中相应位置出现。另外，需要定义 bool 矩阵标识路径是否已经进过每个格子。   </p>
-<p>当矩阵中坐标为(row,col)的格子和路径字符串中下标为pathLength的字符一样时，从4个相邻的格子(row,col-1),(row-1,col),(row,col+1)和(row+1,col)中去定位字符串中下标为pathLength+1的字符。<br>如果都没有匹配到，则需要回到前一个字符(pathLength-1)，重新定位。</p>
-<p>重复这个过程，直到遇到’\0’。</p>
-<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fq6b0g2zb4j20v70laabw.jpg" alt=""></p>
-<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>首先hasPath中有两层循环，耗时O(rowsxcols),接着每个格子最多需要判断周围 4 个格子是否为路径的下一个字符，时间复杂度O(4xrowsxcols)。因此最后的时间复杂度为O(rows^2xcols^2)。可能分析的不是很对，请指教。</p>
-<h2 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h2><p>建立了一个辅助空间布尔矩阵，空间复杂度为O(rowsxcols)。假设字符长度为n，则递归栈需要O(n)的空间，但最大的复杂度还是O(rowsxcols)。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-	<div>
-
-</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1119,7 +1118,7 @@ $$ L\left(w,\alpha \right) =\dfrac {1}{2}\left\| w\right\| ^{2}+\sum ^{m}\_{i=1}
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-count">35</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
