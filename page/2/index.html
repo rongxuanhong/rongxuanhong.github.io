@@ -306,6 +306,344 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/30/剑指offer2之正则表达式匹配/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/30/剑指offer2之正则表达式匹配/" itemprop="url">剑指offer2之正则表达式匹配</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-30T16:02:32+08:00">2018-04-30</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/30/剑指offer2之正则表达式匹配/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/30/剑指offer2之正则表达式匹配/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>正则表达式匹配也是编程中很常见的技术，那么给定正则表达式匹配的规则，那么对于模式串，如何判断字符串是否与之匹配呢？这就涉及到了字符串的编程能力。字符串的应用也是面试中非常重要的一类。</p>
+<h1 id="题目-正则表达式匹配"><a href="#题目-正则表达式匹配" class="headerlink" title="题目(正则表达式匹配)"></a>题目(<a href="https://blog.csdn.net/u011475210/article/details/78858064" target="_blank" rel="noopener">正则表达式匹配</a>)</h1><p>题目：请实现一个函数用来匹配包括 ‘.’ 和 ‘<em>‘ 的正则表达式。模式中的字符 ‘.’ 表示任意一个字符，而 ‘</em>‘ 表示它前面的字符可以出现任意次（包含0次）。 在本题中，匹配是指字符串的所有字符匹配整个模式。例如，字符串 “aaa” 与模式 “a.a” 和 “ab<em>ac</em>a” 匹配，但是与 “aa.a” 和 “ab*a” 均不匹配。</p>
+<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>很明显需要利用递归。<br>首先考虑下递归的出口。如果字符串与模式串能够匹配，那么此时，他们都匹配到了字符终止标记’\0’；否则，如果字符串还未到达’\0’,而模式串已经到达了 ‘\0’,那么说明此时匹配不成功。</p>
+<p>接下来我们先考虑含 <em> 的情况，**这里要注意含 </em> 的情况有包含一些 . 的情况<strong>，所以我们需要先考虑 <em> 的情况。<br>那么如果模式串的下一个字符是 </em> ，首先分为两种情况。  
+</strong>情况一**：如果字符串和模式串的第一个字符相等或者模式串中第一个字符含 ‘.’而字符串未到达末位，那么又可以分为三种子情况：</p>
+<ul>
+<li>如果字符串的第一个字符和模式串的第一个字符不相等，字符串可以继续和模式串中的下下一个字符判断匹配(忽略 * 本身及其前面的字符)；</li>
+<li>如果字符串的第一个字符和模式串的第一个字符相等，那么字符串继续前进，然后可以和模式串的第一个字符开始匹配。</li>
+<li>如果字符串的第一个字符和模式串的第一个字符相等，那么字符串继续前进，然后可以和模式串中 ‘<em>‘ 的下一个字符开始匹配(忽略 </em> 本身及其前面的字符)。</li>
+</ul>
+<p><strong>情况二</strong>：字符串第一个字符和模式串第一个字符都匹配，或者模式串中含 . 并且字符串第一个字符不是’\0’，那么字符串和模式串继续前进一位匹配。</p>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqlpq02f66j20v20bbwer.jpg" alt=""></p>
+<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>算法需要对每个字符都进行匹配，因此时间复杂度为 O(n)，另外由于采用递归，需要消耗 O(n)的递归工作栈，所以空间复杂度为 O(n)。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/27/SVM系列之最小序列算法SMO(三)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/27/SVM系列之最小序列算法SMO(三)/" itemprop="url">SVM系列之最小序列算法SMO(三)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-27T19:01:41+08:00">2018-04-27</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/27/SVM系列之最小序列算法SMO(三)/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/27/SVM系列之最小序列算法SMO(三)/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在经过前面漫长的 SVM 学习之后，是时候学习怎么实现 SVM 了。其实，SVM 常常表现得很好并且有着高效的训练算法，这使得 SVM 曾经非常盛行。只是近些年来，由于深度学习起势，SVM 才不再那么盛行，但它依旧是很好用的分类算法。所以探究 SVM 的原理及思想显得非常有必要，那么现在我们就谈谈 SMO 算法。<br>首先，在前面的 SVM 学习中，我们有如下对偶问题:  </p>
+<script type="math/tex; mode=display">\max _{\alpha }\sum ^{m}_{i=1}\alpha _{i}-\dfrac {1}{2}\sum ^{m}_{i=1}\sum ^{m}_{j=1}\alpha _{i}\alpha _{j}y_{i}y_{j}x_{i}^{T}x_{j}\quad s.t.\quad \sum ^{m}_{i=1}\alpha _{i}y_{i}=0,0\leq \alpha _{i}\leq C,i=1,2,\ldots ,m</script><p>并且需要满足KKT条件:  </p>
+<ol>
+<li>当 \(\alpha_{i}=0\)，     \(y_{i}\left( w^{T}x_{i}+b\right) \geq 1\);</li>
+<li>当 \(0&lt;\alpha _{i}&lt;C\)，  \(y_{i}\left( w^{T}x_{i}+b\right)=1\)；</li>
+<li>当 \(\alpha_{i}=C\)，     \(y_{i}\left( w^{T}x_{i}+b\right) \leq 1\)。</li>
+</ol>
+<p>那么，由于一个训练样本 \(\left(x_{i},y_{i}\right)\) 对应一个 \(\alpha_{i}\)，因此我们只需要找到这样一组 \(\alpha_{i}\) 满足上述条件，这就是该对偶问题的最优解。有了这组 \(\alpha_{i}\) ,\(w\)、b 以及分类函数 \(f\left(x\right)\)就可以顺其自然地得到求解。  </p>
+<p>上述对偶问题是个凸二次规划问题，它具有全局最优解。一般可以使用现有的 QP 工具来进行求解。但是，当训练容量非常大的时候，训练算法反而耗时且低效。因此，有必要寻找更优的求解算法来代替实现。虽然出现了很多优化算法，但比较著名的是一个叫做 John C. Platt 的研究者提出的序列最小化算法 (Sequential Minimal Optimization，简称 SMO)。而它的思想是：将大优化的问题分解成多个小优化的问题。这些小问题往往比较容易求解，然后对他们进行顺序求解。这样之后得到的结果与将他们作为整体来求解的结果完全一致并且最重要的是 SMO 的求解时间更短了。<br>在介绍 SMO 之前，先介绍下坐标梯度下降算法，这也是 SMO 中利用到的简单的算法思想。</p>
+<h1 id="坐标梯度下降-上升"><a href="#坐标梯度下降-上升" class="headerlink" title="坐标梯度下降(上升)"></a>坐标梯度下降(上升)</h1><p>坐标下降是一种非梯度优化算法(坐标下降用于优化最小值，而坐标上升用于优化最大值，可通过加负号相互转换)。因为算法在每次迭代中，只会从当前点处沿一个坐标方向进行一维搜索以求得一个函数的局部极小值，并在迭代的过程中不断变化优化的坐标方向，直至函数得到收敛。<br>例如，我们要寻找函数 \(f\left( x,y\right) =5x^{2}-6xy+5y^{2}\) 的最小值。那么坐标优化的迭代过程如下图所示:<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fq8zcj36tnj20b30b5dgj.jpg" alt=""></p>
+<p>我们从某个起始点开始寻找，然后沿着一个方向往等高线上数值小的高度前进(类似下山)，在前进的时候，可以改变方向，例如此处可以往上或往右走，直至不断走向中心点，也就是收敛到最优解。</p>
+<h1 id="SMO-算法"><a href="#SMO-算法" class="headerlink" title="SMO 算法"></a>SMO 算法</h1><p>SMO 算法和坐标梯度下降思想差不多，只是 SMO 一次迭代优化的是两个变量 \(\alpha_{i}\)、\(\alpha_{j}\)。所以它的思想就是将带有多个优化变量的二次规划大问题分解为多个只含两个优化变量的二次规划小问题，这样既节省了时间成本也降低了内存消耗。  </p>
+<p>那么为什么需要一次优化两个变量呢？这是因为在 SVM 中存在着 \(\sum ^{m}_{i=1}\alpha _{i}y_{i}=c\) 约束，这是一个线性组合关系。而 SMO 在优化前会先固定暂时不进行优化的变量，那么如果仅优化一个变量，那么这个变量就会被其他已固定的参数表示出来，则它就不再是变量，因此，需要再找一个变量。即 SMO 算法先要确定一对 \(\alpha_{i},\alpha_{j}\)，其他的变量则先固定。</p>
+<p>那么固定参数之后，就可以得到 \(\alpha_{i}\) 和 \(\alpha_{j}\) 的等式关系了。即：</p>
+<script type="math/tex; mode=display">\alpha_{i} y_{i}+\alpha_{j}y_{j}=\xi, \quad\xi为常数</script><p>那么我们就可以消去上述对偶问题中的 \(\alpha_{i}\)了，然后就得到了仅关于 \(\alpha_{i}\) 的单变量二次规划问题，然后利用费马引理进行求解即可。解出 \(\alpha_{j}\) 之后，\(\alpha_{i}\) 便可由等式轻易推出，这样就是一次迭代过程。迭代一次仅调整两个拉格朗日乘子。那么这样看来，SMO 之所以高效的原因就在于它是对单变量进行优化，可想而知单变量的收敛速度是比较快的。<br>总之，一次迭代的三个步骤是:  </p>
+<ol>
+<li>确定一对 \(\left(\alpha_{i},\alpha_{j}\right)\);</li>
+<li>固定其他 (m-2) 个变量后，消去其中一个变量，得到含单变量的优化式子；</li>
+<li>根据优化后的 \(\alpha_{i},\alpha_{j}\)，更新阈值 b。<h2 id="关于-alpha-i-和-alpha-j-的-选择"><a href="#关于-alpha-i-和-alpha-j-的-选择" class="headerlink" title="关于 \(\alpha_{i}\) 和 \(\alpha_{j}\) 的 选择"></a>关于 \(\alpha_{i}\) 和 \(\alpha_{j}\) 的 选择</h2>现在我们需要从 m 个变量中确定两个变量，那么可能的组合非常多。如何确定到底是哪一对呢？首先，我们的优化目标其实就是尽量使大部分的样本都满足 KKT 条件，即使大部分的样本得到正确分类。那么，我们就需要先纠正违反 KKT 条件最严重的那个样本对应的优化变量，就好像先把最难的事情做了，接下来再做简单的事，这样就会很轻松。那么第二个变量怎么选？它选择的标准是必须有足够大的变化，也就是能够对目标函数沿着优化方向下降幅度最大的那个变量。这样选择的依据是，对它们进行更新可以加快目标函数的收敛速度。<h2 id="SMO-算法公式推导"><a href="#SMO-算法公式推导" class="headerlink" title="SMO 算法公式推导"></a>SMO 算法公式推导</h2><h3 id="求解未被修剪的-alpha-new-unclipped-i-，-alpha-new-unclipped-j"><a href="#求解未被修剪的-alpha-new-unclipped-i-，-alpha-new-unclipped-j" class="headerlink" title="求解未被修剪的 \(\alpha^{new,unclipped}_{i}\) ，\(\alpha^{new,unclipped}_{j}\)"></a>求解未被修剪的 \(\alpha^{new,unclipped}_{i}\) ，\(\alpha^{new,unclipped}_{j}\)</h3>首先，我们把 SVM 中对偶问题的目标函数写为:<script type="math/tex; mode=display">\max _{\alpha }w\left( \alpha \right)</script></li>
+</ol>
+<p>并且用 \(k_{i,j}\) 代替 \(k\left( x_{i},x_{j}\right)\) 表示。<br>然后，假设我们选中的待优化变量为 \(\alpha_{1}\) ，\(\alpha_{2}\) 。那么 \(\alpha_{3}\),\(\alpha_{4}\)，…，\(\alpha_{m}\) 则被固定，当做常数处理。那么将 SVM 的优化问题展开后得到：</p>
+<script type="math/tex; mode=display">w\left( \alpha_{1},\alpha _{2}\right) =\alpha_{1} +\alpha _{2}+C_{1}-\dfrac {1}{2}\left( \sum ^{m}_{i=1}\alpha _{i}y_{i}\left( \alpha _{1}y_{1}K_{i,1}+\alpha _{2}y_{2}k_{i,2}+\sum ^{m}_{j=3}\alpha _{j}y_{j}k_{i,j}\right) \right)</script><script type="math/tex; mode=display">=\alpha_{1} +\alpha _{2}+C_{1}-\dfrac {1}{2}\left( \alpha ^{2}_{1}y^{2}_{1}k_{1,1}+\alpha ^{2}_{2}y^{2}_{2}k_{2,2}+2\alpha _{1}\alpha _{2}y_{1}y_{2}k_{1,2}+\alpha _{1}y_{1}\sum ^{m}_{j=3}\alpha _{j}y_{j}k_{1,j}+\alpha _{2}y_{2}\sum ^{m}_{j=3}\alpha _{j}y_{j}k_{2,j}+\sum ^{m}_{i=3}\alpha _{i}y_{i}\left( \alpha_{1}y_{1}k_{i,1}+\alpha _{2}y_{2}k_{i,2}+\sum ^{m}_{j=3}\alpha _{j}y_{j}k_{i,j}\right)\right)</script><script type="math/tex; mode=display">=\alpha_{1} +\alpha _{2}+C_{1}-\dfrac {1}{2}\left( \alpha ^{2}_{1}y^{2}_{1}k_{1,1}+\alpha ^{2}_{2}y^{2}_{2}k_{2,2}+2\alpha _{1}\alpha _{2}y_{1}y_{2}k_{1,2}+\alpha _{1}y_{1}\sum ^{m}_{i=3}\alpha _{i}y_{i}k_{1,i}+\alpha _{2}y_{2}\sum ^{m}_{i=3}\alpha _{i}y_{i}k_{2,i}+\sum ^{m}_{i=3}\alpha _{i}y_{i}\left( \alpha_{1}y_{1}k_{i,1}+\alpha _{2}y_{2}k_{i,2}+\sum ^{m}_{j=3}\alpha _{j}y_{j}k_{i,j}\right)\right)</script><script type="math/tex; mode=display">=\alpha_{1} +\alpha _{2}+C_{1}-\dfrac {1}{2}\left( \alpha ^{2}_{1}y^{2}_{1}k_{1,1}+\alpha ^{2}_{2}y^{2}_{2}k_{2,2}+2\alpha _{1}\alpha _{2}y_{1}y_{2}k_{1,2}+2\alpha _{1}y_{1}\sum ^{m}_{i=3}\alpha _{i}y_{i}k_{i,1}+2\alpha _{2}y_{2}\sum ^{m}_{i=3}\alpha _{i}y_{i}k_{i,2}+\sum ^{m}_{i=3}\sum ^{m}_{j=3}\alpha _{i}y_{i}\alpha _{j}y_{j}k_{i,j}\right)</script><script type="math/tex; mode=display">=\alpha_{1} +\alpha _{2}-\dfrac {1}{2}\alpha ^{2}_{1}y^{2}_{1}k_{1,1}-\dfrac {1}{2}\alpha ^{2}_{2}y^{2}_{2}k_{2,2}-\alpha _{1}\alpha _{2}y_{1}y_{2}k_{1,2}-\alpha _{1}y_{1}\sum ^{m}_{i=3}\alpha _{i}y_{i}k_{i,1}-\alpha _{2}y_{2}\sum ^{m}_{i=3}\alpha _{i}y_{i}k_{i,2}+C</script><p>其中将与 \(\alpha_{1}\)、\(\alpha_{2}\) 无关的 \(C_{1}\) 和 \(\sum ^{m}_{i=3}\sum ^{m}_{j=3}\alpha _{i}y_{i}\alpha _{j}y_{j}k_{i,j}\) 合并为常数项 C。<br>又已知 \(\alpha_{1} y_{1}+\alpha_{2}y_{2}=\xi\) ,\(y_{i}y_{i}=1\)，然后等式两边同时乘上 \(y_{1}\) 得到:  </p>
+<script type="math/tex; mode=display">\alpha _{1}=\xi y_{1}-\alpha _{2}y_{1}y_{2}</script><p>另外，记 \(v_{1}=\sum ^{m}_{i=3}\alpha _{i}y_{i}k_{i,1}\)，\(v_{2}=\sum ^{m}_{i=3}\alpha _{i}y_{i}k_{i,2}\)，最后将所有式子带入 \(w\left( \alpha_{1},\alpha _{2}\right)\) 得到：</p>
+<script type="math/tex; mode=display">w\left( \alpha_{2}\right) =\begin{aligned}\xi y_{1}+\left( 1-y_{1}y_{2}\right) \alpha _{2}-\dfrac {1}{2}\left( \xi -y_{2}\alpha _{2}\right) ^{2}k_{1,1}-\dfrac {1}{2}k_{2,2}\alpha^{2} _{2}-y_{2}k_{1,2}\left( \xi -\alpha _{2}y_{2}\right) \alpha _{2}-v_{1} \left( \xi -\alpha _{2}y_{2}\right)-v_{2}y_{2}\alpha _{2}+C\end{aligned}</script><p>接下来利用费马引理求极值，令 \(w\) 对 \(\alpha_{2}\) 的导数为零，得:</p>
+<script type="math/tex; mode=display">\dfrac {\partial w\left( \alpha _{2}\right) }{\alpha _{2}}=-\left(k_{1,1}+k_{2,2}-2k_{1,2}\right) \alpha _{2}+\left( k_{1,1}-k_{1,2}\right) \xi y_{2}+v_{1}y_{2}+v_{2}y_{2}-y_{1}y_{2}+y^{2}_{2}=0 ,\quad 其中把 1 构造成 y^{2}_{2}</script><p>然后，现在我们要将 \(\xi\) 消去。<br>已知 SVM 分类函数公式:\(f\left( x_{i}\right) =\sum ^{m}_{i=1}\alpha _{i}y_{i}k_{i,i}+b\)，那么:  </p>
+<script type="math/tex; mode=display">v_{1}=\sum ^{m}_{i=3}\alpha _{i}y_{i}k_{i,1}=f\left( x_{1}\right) -\alpha _{1}y_{1}k_{1,1}-\alpha _{2}y_{2}k_{2,1}-b=f\left( x_{1}\right) -\left( \xi -\alpha _{2}y_{2}\right) k_{1,1}-\alpha _{2}y_{2}k_{2,1}-b</script><script type="math/tex; mode=display">v_{2}=\sum ^{m}_{i=3}\alpha _{i}y_{i}k_{i,2}=f\left( x_{2}\right) -\alpha _{1}y_{1}k_{1,2}-\alpha _{2}y_{2}k_{2,2}-b=f\left( x_{1}\right) -\left( \xi -\alpha _{2}y_{2}\right) k_{1,2}-\alpha _{2}y_{2}k_{2,2}-b</script><p>得到： \(v_{1}-v_{2}=f\left( x_{1}\right) -f\left( x_{2}\right) -k_{1,1}\xi+k_{1,2}\xi +\left( k_{1,1}+k_{2,2}-2k_{1,2}\right) y_{2}\alpha _{2}\)<br>现在，我们需要区别下迭代前和迭代之后的变量。其实我们固定的 m-2 个拉格朗日乘子都是上一次迭代的值，所以 \(v_{1}\) 和 \(v_{2}\) 所表示的式子都是前一次迭代的量，那么，由他们推导出来的 \(\alpha_{1}\) 和 \(\alpha_{2}\) 当然也是前一次迭代的量。<br>那么现在我们以 old 和 new 上角标分别区别前一次迭代和当前迭代的优化量，那么区分后式子改为：</p>
+<script type="math/tex; mode=display">v_{1}-v_{2}=f\left( x_{1}\right) -f\left( x_{2}\right) -k_{1,1}\xi+k_{1,2}\xi +\left( k_{1,1}+k_{2,2}-2k_{1,2}\right) y_{2}\alpha ^{old}_{2}</script><script type="math/tex; mode=display">\dfrac {\partial w\left( \alpha ^{new}_{2}\right) }{\alpha ^{new}_{2}}=-\left(k_{1,1}+k_{2,2}-2k_{1,2}\right) \alpha ^{new}_{2}+\left( k_{1,1}-k_{1,2}\right) \xi y_{2}+v_{1}y_{2}+v_{2}y_{2}-y_{1}y_{2}+y^{2}_{2}=0</script><p>接下来，合并两个式子，再得：</p>
+<script type="math/tex; mode=display">\dfrac {\partial w\left( \alpha ^{new}_{2}\right) }{\alpha ^{new}_{2}}=-\left( k_{1,1}+k_{2,2}-2k_{1,2}\right) \alpha ^{new}_{2}+\left( k_{1,1}+k_{2,2}-2k_{1,2}\right) \alpha ^{old}_{2}+y_{2}\left[ f\left( x_{1}\right) -y_{1}-\left( f\left( x_{2}\right) -y_{2}\right) \right]</script><p>然后，我们记 \(E_{i}\) 为 SVM 的预测值和实际值的误差: \(E_{i}=f\left( x_{i}\right) -y_{i}\)，并且令 \(\eta=k_{1,1}+k_{2,2}-2k_{1,2}\)，所以最终的一阶求导公式为：</p>
+<script type="math/tex; mode=display">\dfrac {\partial w\left( \alpha ^{new}_{2}\right) }{\alpha ^{new}_{2}}=-\eta\alpha ^{new}_{2}+\eta\alpha ^{old}_{2}+y_{2}\left(  E_{1}-E_{2}\right) =0</script><p>那么就可以解出:  </p>
+<script type="math/tex; mode=display">\alpha ^{new}_{2}=\alpha ^{old}_{2}+\dfrac {y_{2}\left( E_{1}-E_{2}\right) }{\eta}</script><h3 id="修剪解出的最优解"><a href="#修剪解出的最优解" class="headerlink" title="修剪解出的最优解"></a>修剪解出的最优解</h3><p>上面解出的 \(\alpha_{1}\) 和 \(\alpha_{2}\) 并未考虑约束条件。那么，现在我们需要将约束条件加上，然后对所求出的最优解进行范围的修剪以得到最终满足约束条件的最优解。<br>即:</p>
+<script type="math/tex; mode=display">\alpha ^{new,unclipped}_{2}=\alpha ^{old}_{2}+\dfrac {y_{2}\left( E_{1}-E_{2}\right) }{\eta}</script><p>由于约束条件 \(0\leq \alpha _{1}\leq C\) 、 \(0\leq \alpha _{2}\leq C\) 以及 \(\alpha_{1} y_{1}+\alpha_{2}y_{2}=k, \quad k为常数\) 的存在，所以我们需要给 \(\alpha _{1}\) 和 \(\alpha _{2}\) 找到区间 \(\left[L,H\right]\)。由于只有两个变量，因此约束可以用二维空间中的图形来表示，如下图所示(方形约束)。</p>
+<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqbaf76wakj20k0088t8x.jpg" alt=""></p>
+<p>那么对于约束 \(\alpha_{1} y_{1}+\alpha_{2}y_{2}=k\)<br>根据左图：当 \(y_{1}\neq y_{2}\) 时，此约束简化为：\(\alpha_{1}-\alpha_{2}=k\)，那么根据 k 的正负可以得到上下界为：  </p>
+<ul>
+<li>下界：\(L=\max \left( 0,\alpha ^{old}_{2}-\alpha ^{old}_{1}\right) \);</li>
+<li>上界：\(H=\min \left( C,C+\alpha ^{old}_{2}-\alpha ^{old}_{1}\right)\)。</li>
+</ul>
+<p>根据右图：当 \(y_{1}= y_{2}\) 时，此约束简化为：\(\alpha_{1}+\alpha_{2}=k\)，上下界表示为：</p>
+<ul>
+<li>下界：\(L=\max \left( 0,\alpha ^{old}_{1}+\alpha ^{old}_{2}-C\right) \);</li>
+<li>上界：\(H=\min \left( C,\alpha ^{old}_{1}+\alpha ^{old}_{2}\right)\)。 </li>
+</ul>
+<p>那么，有了上下界之后，如果优化之后的 \(\alpha_{1}\) 和 \(\alpha_{2}\)跑出了边界，那么我们就需要纠正它，所以有：  </p>
+<script type="math/tex; mode=display">\alpha ^{new}_{2}\begin{cases}H \qquad\qquad\qquad \alpha ^{new,unclipped}_{2} >H\\
+\alpha ^{new,unclipped}_{2}\qquad L\leq \alpha ^{new,unclipped}_{2}\leq H\\
+L\qquad\qquad\qquad \alpha ^{new,unclipped}_{2} <L\end{cases}</script><p>得到了 \(\alpha ^{new}_{2}\)，再根据 \(\alpha^{new}_{1} y_{1}+\alpha^{new}_{2}y_{2}=\alpha^{old}_{1} y_{1}+\alpha^{old}_{2}y_{2}\) ，然后两边同乘以 \(y_{1}\) 可解出 \(\alpha ^{new}_{1}\)，即:</p>
+<script type="math/tex; mode=display">\alpha^{new}_{1}=\alpha^{old}_{1}+y_{1}y_{2}\left(\alpha^{old}_{2}-\alpha^{new}_{2}\right)</script><p>这样，我们就得到了两个优化的拉格朗日乘子 \(\alpha^{new}_{1}\) 和 \(\alpha^{new}_{2}\)</p>
+<h3 id="计算更新后的阈值-b"><a href="#计算更新后的阈值-b" class="headerlink" title="计算更新后的阈值 b"></a>计算更新后的阈值 b</h3><p>在每一次迭代中，优化 \(\alpha^{new}_{1}\) 和 \(\alpha^{new}_{2}\) 之后，就要更新阈值 \(b\)。那么为了使得被优化的样本都满足 KKT 条件，此时需要分为样本在边界上和样本不在边界上两种情况进行讨论。</p>
+<ul>
+<li>当优化后的 \(\alpha^{new}_{1}\) 不在边界上，也就是满足约束 \(0\leq \alpha^{new}_{1}\leq C\) ，那么根据 KKT 条件得知该样本为支持向量，所以 \(y_{1}f\left( x_{1}\right) =1\),则阈值 \(b_{1}\)是有效的。那么两边同时乘以 \(y_{1}\)，并展开式子得: \(\sum ^{m}_{i=1}\alpha _{i}y_{i}k_{i,1}+b=y_{1}\)，那么解出 \(b^{new}_{1}\) 为:<script type="math/tex; mode=display">b^{new}_{1}=y_{1}-\sum ^{m}_{i=3}\alpha _{i}y_{i}k_{i,1} -\alpha ^{new}_{1}y_{1}k_{1,1}-\alpha^{new}_{2}y_{2}k_{2,1}</script><script type="math/tex; mode=display">=-E_{1}+\alpha ^{old}_{1}y_{1}k_{1,1}+\alpha^{old}_{2}y_{2}k_{2,1}+b^{old}-\alpha ^{new}_{1}y_{1}k_{1,1}-\alpha^{new}_{2}y_{2}k_{2,1}</script><script type="math/tex; mode=display">=-E_{1}-y_{1}k_{1,1}\left(\alpha ^{new}_{1}-\alpha ^{old}_{1}\right)-y_{2}k_{2,1}\left(\alpha ^{new}_{2}-\alpha ^{old}_{2}\right)+b^{old}</script>同理可计算出 \(b^{new}_{2}\)：<script type="math/tex; mode=display">b^{new}_{2}=-E_{2}-y_{1}k_{1,2}\left(\alpha ^{new}_{1}-\alpha ^{old}_{1}\right)-y_{2}k_{2,2}\left(\alpha ^{new}_{2}-\alpha ^{old}_{2}\right)+b^{old}</script>另外，当 \(b^{new}_{1}\) 和 \(b^{new}_{2}\) 均有效时，\(b^{new}=b^{new}_{1}=b^{new}_{2}\)</li>
+<li>当优化后的 \(\alpha^{new}_{1}\) 和 \(\alpha^{new}_{2}\) 都在边界上，即 (\(\alpha^{new}_{1}=0\) 或 \(\alpha^{new}_{1}=C\)，同时 \(\alpha^{new}_{2}=0\) 或 \(\alpha^{new}_{2}=C\))，那么在 \(b^{new}_{1}\) 和 \(b^{new}_{2}\) 之间的阈值都是满足 KKT 条件的，一般我们取它们的中间值来更新阈值，即：\(b^{new}=\dfrac {b^{new}_{1}+b^{new}_{2}}{2}\)。  <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1>[1] <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-98-14.pdf" target="_blank" rel="noopener">Sequential Minimal Optimization:<br>A Fast Algorithm for Training Support Vector Machines</a>   by John C. Platt<br>[2] <a href="https://blog.csdn.net/zouxy09/article/details/17292011" target="_blank" rel="noopener">机器学习算法与Python实践之（四）支持向量机（SVM）实现</a>  by zouxy<br>[3] <a href="https://zhuanlan.zhihu.com/p/29212107" target="_blank" rel="noopener">机器学习算法实践-SVM中的SMO算法</a> by PytLab酱</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/27/剑指offer2之表示数值的字符串/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -732,340 +1070,11 @@ void DeleteNode(ListNode** head, ListNode* pToBeDeleted);
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/22/SVM系列之核函数与KKT条件(二)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="洪荣宣">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rongxuanhong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/22/SVM系列之核函数与KKT条件(二)/" itemprop="url">SVM系列之核函数与KKT条件(二)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-22T20:42:07+08:00">2018-04-22</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/04/22/SVM系列之核函数与KKT条件(二)/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/22/SVM系列之核函数与KKT条件(二)/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在前一篇文章中介绍的 SVM 基本型，其实还可以进行优化。主要是利用核函数对向量内积的计算进行优化。另外，我们还将详细分析拉格朗日乘子法与KKT条件,以及KKT条件对SVM分类的作用。那我们先来看看核函数是什么。</p>
-<h1 id="核函数"><a href="#核函数" class="headerlink" title="核函数"></a>核函数</h1><p>在异或问题中，由于 \(0\oplus 0=0\)、\(1\oplus 1=0\)、\(0\oplus 1=1\)、\(1\oplus 0=1\)，所有只有两类结果，我们将 0 标记为负号，将 1 标记为正号，并且将这四种情况形象地标注在下图左侧中。可以看到，对于这类样本点，我们无法找到线性可分的超平面，而只能绘制一条非线性曲线将他们划分开。那么有什么办法可以将他们划分开呢？这时候，核方法(kernel trick)就出场啦。</p>
-<p>所谓的核方法，其实就是将样本从原始的特征空间映射到一个高维的特征空间，以使得样本在高维特征空间中仍然线性可分。正如下图中所示，我们对 \(x\) 使用一个映射函数 \(\phi\)，得到映射到高维特征空间的特征向量 \(\phi \left( x\right) \)，然后这些样本点在三维空间的确可以找到一个平面将样本点线性可分(黑色实线所画的平面)。幸运的是，如果原始空间是有限维，即属性树有限，那么一定存在一个高维特征空间使样本可分。那么其实我们只要找到映射函数，就可以将线性不可分的样本转为线性可分的情况了。但是，这个映射函数很难寻找，SVM 模型没有直接硬来，而是巧妙的引入核函数来间接地解决实现这种变换。  </p>
-<p>那么接下来我们看看核函数如何应用于模型上。<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fq6oh1ovtyj20l008u74k.jpg" alt="三维上的异或问题分类"></p>
-<p>在前一篇文章中的 SVM 对偶问题为:</p>
-<script type="math/tex; mode=display">\max _{\alpha }\sum ^{m}_{i=1}\alpha _{i}-\dfrac {1}{2}\sum ^{m}_{i=1}\sum ^{m}_{j=1}\alpha _{i}\alpha _{j}y_{i}y_{j} x_{i}^{T}x_{j}\quad \alpha _{i}\geq 0</script><p>可以看到，我们需要计算第 i 和第 j 两个样本的内积。<br>另外，对应的分类决策函数的公式为：</p>
-<script type="math/tex; mode=display">\begin{aligned}f\left( x\right) =w^{T}x+b\\
-=\sum ^{m}_{i=1}\alpha _{i}y_{i}x_{i}^{T}x+b\end{aligned}</script><p>我们也需要计算总样本 X 和样本 i 之间的内积。我们发现，这里其实存在着重复的内积计算，并且在高维中内积计算非常耗时，可不可以只算一次？事实上，是可以的，我们完全可以提前将两两样本间以及样本与自身的内积都算出来并存储下来，下次使用时只需直接取出使用即可，这大大提高了计算效率。但是，现在问题是当样本点映射到高维空间中内积计算的问题。这里，就巧妙引入了核函数,替代了向量内积。它可表示为:</p>
-<script type="math/tex; mode=display">k\left( x_{i},x_{j}\right) =\phi \left( x_{i}\right) ^{T}\phi \left( x_{j}\right)</script><p>那么引入核函数后，对偶问题变为:</p>
-<script type="math/tex; mode=display">\max _{\alpha }\sum ^{m}_{i=1}\alpha _{i}-\dfrac {1}{2}\sum ^{m}_{i=1}\sum ^{m}_{j=1}\alpha _{i}\alpha _{j}y_{i}y_{j}\phi \left( x_{i}\right)^{T}\phi \left( x_{j}\right)=\max _{\alpha }\sum ^{m}_{i=1}\alpha _{i}-\dfrac {1}{2}\sum ^{m}_{i=1}\sum ^{m}_{j=1}\alpha _{i}\alpha _{j}y_{i}y_{j}k\left( x_{i},x_{j}\right)\quad \alpha _{i}\geq 0</script><p>分类决策函数变为:</p>
-<script type="math/tex; mode=display">\begin{aligned}f\left( x\right) =w^{T}x+b\\
-=\sum ^{m}_{i=1}\alpha _{i}y_{i}\phi \left( x_{i}\right)^{T}\phi \left( x_{j}\right)+b\end{aligned}=\sum ^{m}_{i=i}\alpha _{i}y_{i}k\left( x,x_{i}\right)+b</script><p>所以我们只需要计算核函数的值即可，而核函数的计算只需套用公式。常用的核函数有线性核(\(k\left( x_{i},x_{j}\right) =x_{i}^{T}x_{j}\))以及高斯核(\(k\left( x_{i},x_{j}\right) =\exp \left( -\dfrac {\left| x_{i}-x_{j}\right| ^{2}}{2\sigma ^{2}}\right) \))</p>
-<p>注意到大部分的拉格朗日乘子 \(\alpha_{i}\) 都是0。因为大部分的样本都会被分类正确，只有少部分的样本被误分类，也就说只要被分类正确，\(\alpha_{i}=0\)，该样本不会出现在分类决策函数的求和公式中，自然不会对最终的决策结果产生任何影响。</p>
-<p>最后，支持向量机的决策过程也可以看做一种相似性比较的过程。首先，输入样本与一系列模板样本进行相似性比较，模板样本就是训练过程决定的支持向量，而采用的相似性度量就是核函数。样本与各支持向量比较后的得分进行加权后求和，权值就是训练时得到的各支持向量的系数 \(\alpha_{i}\) 和类别标号的成绩。最后根据加权求和值大小来进行决策。而采用不同的核函数，就相当于采用不同的相似度的衡量方法。</p>
-<p>到这里，SVM 的理论基础基本都介绍完了。总的来说，首先进行特征空间的非线性映射，然后在这个新的空间中求最优分类面即最大间隔分类面，而这种非线性映射是通过定义适当的内积核函数来巧妙实现的。  </p>
-<p>接下来，我们介绍下凸优化问题中涉及的KKT条件。</p>
-<h1 id="KKT-条件（Karush–Kuhn–Tucker-conditions）"><a href="#KKT-条件（Karush–Kuhn–Tucker-conditions）" class="headerlink" title="KKT 条件（Karush–Kuhn–Tucker conditions）"></a>KKT 条件（Karush–Kuhn–Tucker conditions）</h1><h2 id="什么是-KKT"><a href="#什么是-KKT" class="headerlink" title="什么是 KKT"></a>什么是 KKT</h2><p>KKT 是一组不等式约束，主要应用在凸优化问题上。其实大家在高数中曾使用过拉格朗日乘子法求解带等式约束的优化问题，而KKT条件解优化问题就是升级版啦。</p>
-<h2 id="拉格朗日乘子法"><a href="#拉格朗日乘子法" class="headerlink" title="拉格朗日乘子法"></a>拉格朗日乘子法</h2><p>假设有如下带等式约束的优化问题：</p>
-<script type="math/tex; mode=display">\min f\left( x\right) \quad s.t.h_{i}\left( x\right) =0\quad i=1,2,\ldots ,m</script><p>我们使用拉格朗日乘子法通过引入拉格朗日乘子将等式约束的优化问题转化为无等式约束的优化问题。<br>所以我们通过一个拉格朗日乘子组成的行向量 \(\alpha\)(其中 \(\alpha=\left[ \alpha _{1},\alpha_{2},\ldots ,\alpha_{n}\right] \))，将目标函数和等式约束组合成 \(L\left( \alpha ,x\right) =f\left( x\right) +\alpha^{T} \cdot h\),其中\(h\left( x\right) =\left[ h_{1}\left( x\right),h_{2}\left( x\right),\ldots ,h_{m}\left( x\right)\right] ^{T}\)。然后就可以求最优值，也就是利用<a href="https://zh.wikipedia.org/wiki/%E8%B4%B9%E9%A9%AC%E5%BC%95%E7%90%86" target="_blank" rel="noopener">费马引理</a>，将函数 L 对各个参数求导取零，然后等式联立进行求解。</p>
-<h2 id="KKT条件"><a href="#KKT条件" class="headerlink" title="KKT条件"></a>KKT条件</h2><p>假设有如下带不等式约束的优化问题:</p>
-<script type="math/tex; mode=display">\min f\left( x\right) \quad s.t.g_{i}\left( x\right) \leq0\quad i=1,2,\ldots ,n\quad h_{j}\left( x\right)=0\quad j=1,2,\ldots ,m</script><p>我们同样先将约束问题转化为无约束的优化问题，得到函数:  </p>
-<script type="math/tex; mode=display">L\left( \alpha ,\beta ,x\right) =f\left( x\right) +\alpha g\left( x\right) +\beta h\left( x\right)</script><p>其中\(\alpha\)、\(\beta\)为行向量，\(g\left( x\right)\)、\(h\left( x\right)\)均为列向量。那么 KKT 条件的作用就是，该问题的最优解必须满足以下条件:  </p>
-<ol>
-<li>\(L\left( \alpha ,\beta ,x\right)\) 对 \(x\) 的导数为零；</li>
-<li>\(h\left(x\right)=0\)；</li>
-<li>\(\alpha g\left( x\right)\leq 0\)。</li>
-</ol>
-<p>这样之后就能求得最优值。其中第三个式子比较有意思。由于 \(g\left(x\right) \leq0\)，因此只有 \(\alpha=0\) 或 \(g\left(x\right)=0\) 时，等式才成立。而这里是 SVM 中很多重要性质的来源，比如支持向量的概念。后面我们在介绍KKT条件与 SVM 的关系时再具体解释。那为什么拉格朗日乘子法和KKT条件能够得到最优值?</p>
-<h2 id="拉格朗日乘子法和KKT条件能够得到最优值的原因"><a href="#拉格朗日乘子法和KKT条件能够得到最优值的原因" class="headerlink" title="拉格朗日乘子法和KKT条件能够得到最优值的原因"></a>拉格朗日乘子法和KKT条件能够得到最优值的原因</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25ly1fq7wtuwsxqj20960813yz.jpg" alt="拉格朗日求最优的几何分析"></p>
-<p>对于拉格朗日乘子法，假设目标函数为 \(f\left(x,y\right)\),要求其极值，且满足 \(g\left(x,y\right)=c\) (c为常数)。假设 \(d_{n}=f\left(x,y\right)\)，其中 \(d_{n}\) 可以取不同的值。不难看出，当\(d_{n}\)取不同的值时，我们可以得到不同的等高线(如上图所示)。(其实等高线主要针对二维输入而只有一维输出的，由于三维曲面难以分析，因此，我们利用水平横切面将切面投影到 xoy 平面上而形成等高线)。<br>而对于方程 \(g\left(x,y\right)=c\) 的可行集，假设他们构成了一条曲线。由于在无解的时候这条曲线和等高线是不会相交的，只有有解的时候，曲线和等高线就会相交。由于等高线可以变大或变小，所以只有等高线与曲线相切的时候，等高线才能确定下来，也才能找到最优解。否则相交的时候会存在多个等高线，那么便无法找到最优解。那么，相切意味者切线必须平行，同时也意味着两者的梯度平行。此时引入一个未知标量 \(\lambda \)。有：</p>
-<script type="math/tex; mode=display">\nabla \left[ f\left( x,y\right) +\lambda \left( g\left( x,y\right) -c\right) \right] =0 \quad \lambda\neq0</script><p>到这里，其实这个式子就对应到了 \(L\left( \alpha ,x\right)\)对 \(x\) 的导数为零；</p>
-<p>对于KKT条件，它是解决凸优化问题的必要条件。我们以上文提到的带不等式约束的优化问题为例。其实，\(f\left( x\right) =\max _{\alpha,\beta}L\left( \alpha ,\beta ,x\right)\)。为什么呢？由于有约束条件\(h_{j}\left(x\right)=0\) 且 \(\alpha g\left(x\right)\leq 0\)，所以只有当\(g_{j}\left(x\right)=0\) 时，函数L 才会在满足约束条件下取得最大值。诶？刚好这个最大值是 \(f\left(x\right)\)。所以现在我们要最小化的 \(f\left(x\right)\) 就可以写为 \(\min_{x}\max _{\alpha,\beta}L\left( \alpha ,\beta ,x\right)\) 。然后，由于我们的优化是满足强对偶的,即可以利用对偶式子来求解原问题的最优解，所以式子又可以写为 \(\max_{\alpha,\beta}\min _{x}L\left( \alpha ,\beta ,x\right)\)。那么当式子在 \(x_{0}\) 处取得最小值的时候，根据费马引理，有\(L\left( \alpha ,\beta ,x\right)\)对 \(x\) 的导数必须为零，这就是 KKT 的第一个条件,而  \(h\left(x\right)=0\) 为已知条件作为 KKT 的第二个条件，接着 \(\alpha g\left( x\right)=0\)为必须满足的 KKT 的第三个条件，另外 KKT 乘子\(\alpha _{i}\)、\(\beta _{i}\)均需要大于等于零。所有上述说明，满足强对偶条件的优化问题的最优值都必须满足 KKT 条件。</p>
-<h1 id="SVM-与-KKT-条件分析"><a href="#SVM-与-KKT-条件分析" class="headerlink" title="SVM 与 KKT 条件分析"></a>SVM 与 KKT 条件分析</h1><p>在 SVM 软间隔基本型的优化问题中，要满足的 KKT 条件为：</p>
-<script type="math/tex; mode=display">\begin{cases}\alpha _{i}\geq 0,\quad \mu_{i}\geq 0\\
-y_{i}f\left( x_{i}\right) -1+\xi _{i}\geq 0\\
-\alpha _{i}\left( y_{i}f\left( x_{i}\right) -1+\xi _{i}\right) =0\\
-\xi _{i}\geq 0,u_{i}\xi _{i}=0\end{cases}</script><p>再结合求解出的约束 \(0\leq \alpha _{i}\leq C\) 以及 \(C=\alpha_{i}+\mu_{i}\)。<br>那么，对于任意一个样本 \(\left(x _{i},y _{i}\right)\)，由括号中的第四个条件可知，总有 \(\alpha _{i}=0\) 或者 \(y_{i}f\left( x_{i}\right)=1-\xi _{i}\);<br>那么当 \(\alpha _{i}=0\)，即样本被分类正确，它们处在边界的外面，不会影响到函数 f,即 \(y_{i}\left( w^{T}x_{i}+b\right) \geq 1\);<br>当 \(\alpha_{i}&gt;0\) 时，该样本是支持向量;<br>若 \(0&lt;\alpha _{i}&lt;C\),则 \(\mu_{i}&lt;0\)，推出  \(\xi_{i}=0\),所以 \(y_{i}f\left( x_{i}\right)=1-\xi _{i}\)，即该样本恰好落在最大间隔的边界线上，即 \(y_{i}\left( w^{T}x_{i}+b\right)=1\);<br>若 \(\alpha_{i}=C\)，则有 \(\mu_{i}=0\)，那么此时若 \(\xi_{i}\leq 0\)，则样本落在最大间隔的内部，否则该样本被错误分类了，即它跑到了对面的间隔边界外了，即 \(y_{i}\left( w^{T}x_{i}+b\right) \leq 1\)。<br>总之，软间隔的支持向量可以在边界上，边界内或者错误的边界外。</p>
-<blockquote>
-<p>注意硬间隔支持向量与软间隔支持向量的区别。</p>
-</blockquote>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] &lt;&lt;机器学习&gt;&gt; by 周志华<br>[2] &lt;&lt;统计学习方法&gt;&gt; by 李航<br>[3] <a href="https://blog.csdn.net/zouxy09/article/details/17291805" target="_blank" rel="noopener">机器学习算法与Python实践之（三）支持向量机（SVM）进阶</a><br>[4] <a href="https://blog.csdn.net/xianlingmao/article/details/7919597" target="_blank" rel="noopener">深入理解拉格朗日乘子法（Lagrange Multiplier) 和KKT条件</a><br>[5] <a href="https://zhuanlan.zhihu.com/p/26514613" target="_blank" rel="noopener">浅谈最优化问题的KKT条件</a><br>[6] <a href="https://zh.wikipedia.org/wiki/%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E4%B9%98%E6%95%B0" target="_blank" rel="noopener">拉格朗日乘数Wiki</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-	<div>
-
-</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/22/剑指offer2之数值的整数次方/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="洪荣宣">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rongxuanhong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/22/剑指offer2之数值的整数次方/" itemprop="url">剑指offer2之数值的整数次方</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-22T20:41:01+08:00">2018-04-22</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/04/22/剑指offer2之数值的整数次方/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/22/剑指offer2之数值的整数次方/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在面试编程的时候，代码的规范性和完整性非常重要，可能成为能否拿到 offer 的关键因素。那么代码的规范性如何体现呢？比如清晰的书写、代码布局清晰(如缩进，括号对齐)、变量和函数的命名易懂。而代码的完整性体现在代码基本功能实现的正确性以及在边界值、错误处理等方面的全面考虑。</p>
-<p>那么完整的代码需要从功能测试、边界测试以及负面测试来提高鲁棒性。例如，在功能测试中，除了完成基本功能，还需要考虑数值的表示范围；在边界测试中，需要考虑循环条件和递归终止条件的正确性；在负面测试中，需要考虑边界值和特殊值的输入，以解决一些不合法的情况。</p>
-<p>那么对于错误处理的方式主要有三种，分别是函数用返回值来告知API调用者是否出错，如返回 0 表示出错；当错误发生时设置一个全局变量来记录；对错误情况，采用抛异常的处理方式。</p>
-<h1 id="题目-数值的整数次方"><a href="#题目-数值的整数次方" class="headerlink" title="题目(数值的整数次方)"></a>题目(数值的整数次方)</h1><p>题目：实现函数 double Power(double base,int exponent)，求 base 的 exponent 次方。不得使用库函数，同时不需要考虑大数范围。</p>
-<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>首先我们应该对输入参数的各种情况进行讨论。</p>
-<ol>
-<li>如果基 base 是 0 而且 指数 exponent 是负数，那么情况判为不合法输入；</li>
-<li>注意基 base 是 0 而且 指数 exponent 也是 0 ，这种情况在数学上是无意义的。</li>
-<li>无论指数 exponent 是正还是负都统一先转成无符号的整形类型，方便统一计算整数次方。然后，对于 exponent 为负的情况，只需将结果变为倒数即可。</li>
-</ol>
-<p>优化多次乘方的思路：<br>如果输入的指数 exponent 为 32，那么需要进行 31 次乘法操作。那么，如果我们能先算出数字的 16 次方，然后再平方一次即可；那么假如知道了数字的 16 次方，那么只需要在数字的 16 次方的基础上平方一次即可得到结果，那如果知道了数字的 8 次方，那么就可以在数字的 8 次方基础上平方一次得到数字的 16 次方的结果；那么如果知道数字的 4 次方，就可以在数字 4 此方的基础上平方一次得到数字的 8 次方；一次类推，直到知道了数字的 1 次方。  </p>
-<p>那么可用如下公式表示 a 的 n 次方:</p>
-<script type="math/tex; mode=display">a^{n}=\begin{cases}a^{n/2}\cdot a^{n/2}\qquad n为偶数 \\
-a^{\left( n-1\right) /2}\cdot a^{\left( n-1\right) /2}\qquad n为奇数\end{cases}</script><h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqeg3s6edkj20v10iywfl.jpg" alt=""></p>
-<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>时间主要消耗在求解乘法运算结果上面，而使用递归方法(二分原问题)进行乘法求解的时间复杂度为 O(logn)，空间复杂度为 O(1)。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-	<div>
-
-</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1112,7 +1121,7 @@ a^{\left( n-1\right) /2}\cdot a^{\left( n-1\right) /2}\qquad n为奇数\end{case
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-count">37</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -1433,6 +1442,8 @@ a^{\left( n-1\right) /2}\cdot a^{\left( n-1\right) /2}\qquad n为奇数\end{case
     
       
     
+      
+        
       
     
       

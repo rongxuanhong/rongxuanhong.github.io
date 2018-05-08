@@ -103,35 +103,38 @@
 
 
 
-  <meta name="description" content="前言在开启本文的内容介绍时，我们先来了解下什么是函数式编程。所谓的函数式编程其实是一种编程范式，用人话就是写代码所遵循的一种方法或模式。简单地说，当某个函数(可称高阶函数)可以接受函数对象当做输入参数和返回值，这样一种写法即函数式编程。那么本文的闭包则应用了函数式编程的思想，而装饰器可以说是闭包的应用之一。 闭包作用域作用域是程序运行时变量可被访问的范围，故有全局变量和局部变量之说。一般我们把定义">
-<meta name="keywords" content="python">
+  <meta name="description" content="前言经过前面三篇漫长的 SVM 介绍以及 SMO 算法的原理介绍和公式推导，终于到了 SMO 的算法实现以及最终的 SVM 分类实现了。那么现在就先看看 SMO 的 python 实现。 SMO python 实现 代码中的 \\(\alpha_{i}\\)，\\(\alpha_{j}\\) 对应了前一篇中的 \(\alpha_{1}\) 和 \(\alpha_{2}\)，并且代码中的计算方式都是">
+<meta name="keywords" content="机器学习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python中闭包与装饰器解析">
-<meta property="og:url" content="http://yoursite.com/2018/03/20/python中闭包与装饰器解析/index.html">
+<meta property="og:title" content="SVM系列之SMO的Python实现(四)">
+<meta property="og:url" content="http://yoursite.com/2018/05/08/SVM系列之SMO的Python实现(四)/index.html">
 <meta property="og:site_name" content="Rongxuanhong&#39;s Blog">
-<meta property="og:description" content="前言在开启本文的内容介绍时，我们先来了解下什么是函数式编程。所谓的函数式编程其实是一种编程范式，用人话就是写代码所遵循的一种方法或模式。简单地说，当某个函数(可称高阶函数)可以接受函数对象当做输入参数和返回值，这样一种写法即函数式编程。那么本文的闭包则应用了函数式编程的思想，而装饰器可以说是闭包的应用之一。 闭包作用域作用域是程序运行时变量可被访问的范围，故有全局变量和局部变量之说。一般我们把定义">
+<meta property="og:description" content="前言经过前面三篇漫长的 SVM 介绍以及 SMO 算法的原理介绍和公式推导，终于到了 SMO 的算法实现以及最终的 SVM 分类实现了。那么现在就先看看 SMO 的 python 实现。 SMO python 实现 代码中的 \\(\alpha_{i}\\)，\\(\alpha_{j}\\) 对应了前一篇中的 \(\alpha_{1}\) 和 \(\alpha_{2}\)，并且代码中的计算方式都是">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpayu1fudij20u104daa7.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpaznm1msmj20u503q74d.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpb7mq94kkj20u805lt8p.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpb84qewo6j20u3060dfz.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpb0bx66boj20u805xt9d.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpb0x1xv3hj20u005t0t9.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpb5qb8lspj20tz08o3yz.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpb6bwaarlj20u00ap0t1.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpb75si22kj20u20bwgmg.jpg">
-<meta property="og:updated_time" content="2018-03-20T03:11:33.275Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzcfzje9j20uh0dfwf0.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzd2c8hlj20ui0elwf5.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzdnxcnyj20ui07ddfw.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzer7h0jj20u90itwf3.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzfdpksvj20uc08m749.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqdes6r7xhj211l06b3yn.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzgsr5vlj20ug16nq5e.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzi0ojfsj20uf0egq3r.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzirll6pj20ue0a6mxc.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzlckcb3j20ug0aljrv.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqfznm8e9qj20ug0jlwf6.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzozi9u9j20g60c3jrk.jpg">
+<meta property="og:updated_time" content="2018-05-08T11:03:07.249Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python中闭包与装饰器解析">
-<meta name="twitter:description" content="前言在开启本文的内容介绍时，我们先来了解下什么是函数式编程。所谓的函数式编程其实是一种编程范式，用人话就是写代码所遵循的一种方法或模式。简单地说，当某个函数(可称高阶函数)可以接受函数对象当做输入参数和返回值，这样一种写法即函数式编程。那么本文的闭包则应用了函数式编程的思想，而装饰器可以说是闭包的应用之一。 闭包作用域作用域是程序运行时变量可被访问的范围，故有全局变量和局部变量之说。一般我们把定义">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpayu1fudij20u104daa7.jpg">
+<meta name="twitter:title" content="SVM系列之SMO的Python实现(四)">
+<meta name="twitter:description" content="前言经过前面三篇漫长的 SVM 介绍以及 SMO 算法的原理介绍和公式推导，终于到了 SMO 的算法实现以及最终的 SVM 分类实现了。那么现在就先看看 SMO 的 python 实现。 SMO python 实现 代码中的 \\(\alpha_{i}\\)，\\(\alpha_{j}\\) 对应了前一篇中的 \(\alpha_{1}\) 和 \(\alpha_{2}\)，并且代码中的计算方式都是">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzcfzje9j20uh0dfwf0.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/20/python中闭包与装饰器解析/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/08/SVM系列之SMO的Python实现(四)/"/>
 
 
 
@@ -141,7 +144,7 @@
   };
 </script>
 
-  <title>python中闭包与装饰器解析 | Rongxuanhong's Blog</title>
+  <title>SVM系列之SMO的Python实现(四) | Rongxuanhong's Blog</title>
   
 
 
@@ -319,7 +322,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/20/python中闭包与装饰器解析/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/08/SVM系列之SMO的Python实现(四)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="洪荣宣">
@@ -336,7 +339,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">python中闭包与装饰器解析</h1>
+          <h1 class="post-title" itemprop="name headline">SVM系列之SMO的Python实现(四)</h1>
         
 
         <div class="post-meta">
@@ -348,7 +351,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-20T11:09:41+08:00">2018-03-20</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-08T19:02:28+08:00">2018-05-08</time>
             
 
             
@@ -366,8 +369,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/03/20/python中闭包与装饰器解析/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/03/20/python中闭包与装饰器解析/" itemprop="commentCount"></span>
+                <a href="/2018/05/08/SVM系列之SMO的Python实现(四)/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/05/08/SVM系列之SMO的Python实现(四)/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -403,34 +406,38 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在开启本文的内容介绍时，我们先来了解下什么是函数式编程。所谓的函数式编程其实是一种编程范式，用人话就是写代码所遵循的一种方法或模式。简单地说，当某个函数(可称高阶函数)可以接受函数对象当做输入参数和返回值，这样一种写法即函数式编程。那么本文的闭包则应用了函数式编程的思想，而装饰器可以说是闭包的应用之一。</p>
-<h1 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h1><h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><p>作用域是程序运行时变量可被访问的范围，故有全局变量和局部变量之说。一般我们把定义在函数之外的变量称之为全局变量，其作用域为当前文件或者当前类下。而定义在函数体内的局部变量称之为局部变量。而在python中函数可以嵌套，因而作用域的范围也有了明显的层级关系。即作用域最外层&gt;第一层函数&gt;第二层函数&gt;…第n层函数,有相对的访问限制。我们来看个例子。  </p>
-<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpayu1fudij20u104daa7.jpg" alt=""></p>
-<h2 id="什么是闭包"><a href="#什么是闭包" class="headerlink" title="什么是闭包"></a>什么是闭包</h2><p>我们先从一个例子来看看。  </p>
-<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpaznm1msmj20u503q74d.jpg" alt="">  </p>
-<p>这段代码最终的输出结果是<code>python</code>。按照一般的生命周期，变量<code>name</code>会随着<code>function()</code>的调用而移出内存。然而当你利用<code>function()</code>的返回函数<code>wrapper</code>再次调用时，仍旧返回了变量<code>name</code>的值，那也就说它并没有离开内存。这其实就是闭包的作用，它使得局部变量在函数外被访问成为可能。<br>而在<a href="https://zh.wikipedia.org/wiki/%E9%97%AD%E5%8C%85_(%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6" target="_blank" rel="noopener">Wiki</a>)上，闭包的定义如下:在计算机科学中，闭包（英语：Closure），又称词法闭包（Lexical Closure）或函数闭包（function closures），是引用了自由变量的函数。这个被引用的自由变量将和这个函数一同存在，即使已经离开了创造它的环境也不例外。所以，有另一种说法认为闭包是由函数和与其相关的引用环境组合而成的实体。</p>
-<p>在定义中的关键信息就是自由变量和函数(具体所指见上图),简单地说，该自由变量和函数一同存在于一个封闭的环境即函数所在的作用域内，同生共死。  </p>
-<p>总之，闭包本质上是一个函数，它包括了自由变量和函数两大部分，闭包使得这些变量的值保存在内存中。</p>
-<h2 id="闭包中的难点"><a href="#闭包中的难点" class="headerlink" title="闭包中的难点"></a>闭包中的难点</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpb7mq94kkj20u805lt8p.jpg" alt=""> </p>
-<p>首先可以自己先想一下如果是你，你会给出什么样的答案??  如果是 <strong>0,2,4,6</strong> 那么请往下看。</p>
-<p>首先我们定义了一个函数 <code>fun()</code>  并且是以列表生成式的方式返回结果，并且列表中的元素是由匿名函数lambda定义的。<br>为什么答案都是 <code>6</code> 呢？其实这是由于闭包的后期绑定导致的late binding,意思就是说在闭包中的自由变量是在内部函数被调用时被查找的，而随着 <code>for</code> 循环的执行，<code>i</code> 的值已经被更新到了<strong>3</strong>，即在闭包的封闭环境中自由变量 <code>i</code> 每次被查找都是拿到<code>3</code>的结果,再乘以 <code>2</code>，自然每次结果只能都是 <code>6</code> 。<br>那如果不想得到这样的结果，如何改写？ 下面提供两种优雅的写法。  </p>
-<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpb84qewo6j20u3060dfz.jpg" alt=""></p>
-<h1 id="装饰器"><a href="#装饰器" class="headerlink" title="装饰器"></a>装饰器</h1><h2 id="简单的装饰器"><a href="#简单的装饰器" class="headerlink" title="简单的装饰器"></a>简单的装饰器</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpb0bx66boj20u805xt9d.jpg" alt="">  </p>
-<p><code>decorator</code> 就代表了一个装饰器，它用于给 <code>log</code> 函数增加额外的功能。实际的装饰过程定义在嵌套函数内部，在函数内部，<code>log</code>函数对象 以 <code>func</code> 参数来表示。那么这样一看就好像<code>log</code>被<code>decorator</code> 装饰了一样。</p>
-<h2 id="语法糖"><a href="#语法糖" class="headerlink" title="语法糖"></a>语法糖</h2><p>在<code>python</code>,能在代码运行期间动态增加功能的方式即借助<code>@</code>符号。而这和<code>Java</code> 中的注解差不多一个意思。那么我们就可以用它来简化装饰器的调用过程。  </p>
-<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpb0x1xv3hj20u005t0t9.jpg" alt="">  </p>
-<p>如上所示，<code>@</code>语法自动帮我们调用了<code>decorator(log)</code>,省去了一次手动调用的过程，现在只需要调用一次<code>log()</code>,即可得到装饰效果，可谓是便民操作。而且如果还有其他函数也想被该装饰器装饰，同样加上个<code>@decorator</code>即可。这样其实也有一种封装代码的思想在里面。</p>
-<h2 id="带参数的装饰器"><a href="#带参数的装饰器" class="headerlink" title="带参数的装饰器"></a>带参数的装饰器</h2><p>装饰器本质上亦是函数，那么就会有传入参数的需求。比如根据<code>level</code> 级别做不同的装饰操作,如此依赖也提高了装饰器的扩展性。</p>
-<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpb5qb8lspj20tz08o3yz.jpg" alt="">  </p>
-<p>如上所示，我们给装饰器函数<code>user_logging</code>设置了一个参数，这样当你指定不同的<code>level</code> 时，<code>log</code> 就会输出不同的结果。在此程序中调用<code>log(&quot;hrx&quot;)</code> 等价于调用<code>wrapper=user_logging(decorator(log))</code> ,然后再调用<code>wrapper(&quot;hrx&quot;)</code>，这样其实比前述例子多了一层函数调用(因为多嵌套了一个函数)。  </p>
-<blockquote>
-<p>注：我们使用*arg,**kw作为 wrapper 函数的参数，这样设置之后表示此函数可以接受任意位置参数和关键字参数，这样一来 log 函数就可以指定各种各样的参数。  </p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>经过前面三篇漫长的 SVM 介绍以及 SMO 算法的原理介绍和公式推导，终于到了 SMO 的算法实现以及最终的 SVM 分类实现了。那么现在就先看看 SMO 的 python 实现。</p>
+<h1 id="SMO-python-实现"><a href="#SMO-python-实现" class="headerlink" title="SMO python 实现"></a>SMO python 实现</h1><blockquote>
+<p>代码中的 <code>\\(\alpha_{i}\\)</code>，<code>\\(\alpha_{j}\\)</code> 对应了前一篇中的 \(\alpha_{1}\) 和 \(\alpha_{2}\)，并且代码中的计算方式都是套用前一篇中推导出来的公式，请仔细体会。另外，以下我把选出来的 <code>\\(\alpha_{i}\\)</code>，<code>\\(\alpha_{j}\\)</code> 分别成为第一个 alpha 值和第二个 alpha 值。</p>
 </blockquote>
-<h2 id="类装饰器"><a href="#类装饰器" class="headerlink" title="类装饰器"></a>类装饰器</h2><p>函数有装饰器，其实类也有装饰器，思想一样，但写法不太一样。其中实现装饰的步骤主要在类中的<code>__call__ ()</code> 方法中进行。<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpb6bwaarlj20u00ap0t1.jpg" alt="">  </p>
-<h2 id="装饰器的缺点"><a href="#装饰器的缺点" class="headerlink" title="装饰器的缺点"></a>装饰器的缺点</h2><p>在以上例子中，装饰器的实质都是<code>log=wrapper</code> (表面调用的是<code>log</code> ，但实际上调用了<code>wrapper</code> 执行),所以如果此时输入<code>log.__name__</code>得到的将会是<code>wrapper</code>的名字。可以使用<code>wrapper__name__=log__name__</code>,或利用<code>python</code> 内置装饰器<code>functiontools.wrap</code>实现。<code>wrap</code>操作可以将原函数的元信息拷贝到装饰器函数中的<code>func</code>内。<strong>所以完整的装饰器函数还应该加上<code>functiontools.wrap(func)</code></strong>。  </p>
-<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpb75si22kj20u20bwgmg.jpg" alt="">  </p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>记住,<code>python</code> 中一切皆为对象,而函数算个特殊的对象吧。在闭包中，主要由函数对象与自由变量，加上其所处的封闭环境组成。再来，利用闭包，又得到了装饰器的用法，最后既扩展的函数的功能，又方便了代码的编写。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://gohom.win/2015/10/25/pyDecorator/" target="_blank" rel="noopener">Python装饰器和符号@</a><br><a href="https://foofish.net/python-decorator.html" target="_blank" rel="noopener">理解 Python 装饰器看这一篇就够了</a><br><a href="https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/00143449934543461c9d5dfeeb848f5b72bd012e1113d15000" target="_blank" rel="noopener">闭包</a></p>
+<p>首先定义一个核转换函数用于计算训练集矩阵(X)与任意给定样本矩阵间的核转换结果。</p>
+<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzcfzje9j20uh0dfwf0.jpg" alt=""></p>
+<p>下面定义一个 <code>SVMStruct</code> 类来封装一些属性和方法，以便可以快速构建一个 SVM 模型。</p>
+<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzd2c8hlj20ui0elwf5.jpg" alt=""></p>
+<p>接下来定义一些 <code>SVMStruct</code> 类下的辅助方法。</p>
+<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzdnxcnyj20ui07ddfw.jpg" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzer7h0jj20u90itwf3.jpg" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzfdpksvj20uc08m749.jpg" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqdes6r7xhj211l06b3yn.jpg" alt=""></p>
+<p>接下来，函数 <code>innerL</code>为 SMO 主程序内层循环的代码。</p>
+<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzgsr5vlj20ug16nq5e.jpg" alt="">  </p>
+<p>外层循环的代码：</p>
+<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzi0ojfsj20uf0egq3r.jpg" alt=""></p>
+<p>计算权重 \(w\) 的函数：</p>
+<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzirll6pj20ue0a6mxc.jpg" alt=""></p>
+<p>分类函数的代码：</p>
+<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzlckcb3j20ug0aljrv.jpg" alt=""></p>
+<p>最后是 plot 出样本点，和划分线：</p>
+<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfznm8e9qj20ug0jlwf6.jpg" alt="">  </p>
+<p>那么最后可视化的结果为：</p>
+<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzozi9u9j20g60c3jrk.jpg" alt=""></p>
+<blockquote>
+<ol>
+<li>本例中所用的数据集必须使用线性核才使得样本可分。</li>
+<li>本文代码见个人github repository <a href="https://github.com/rongxuanhong/MLCodeOnTheBlog/tree/master/SVM%E4%B9%8BPython%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81" target="_blank" rel="noopener">MLCodeOnTheBlog</a></li>
+</ol>
+</blockquote>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] &lt;&lt;机器学习实战-中文版&gt;&gt;<br>[2] <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-98-14.pdf" target="_blank" rel="noopener">Sequential Minimal Optimization:<br>A Fast Algorithm for Training Support Vector Machines</a>   by John C. Platt<br>[3] <a href="https://blog.csdn.net/zouxy09/article/details/17292011" target="_blank" rel="noopener">机器学习算法与Python实践之（四）支持向量机（SVM）实现</a>  by zouxy<br>[4] <a href="https://zhuanlan.zhihu.com/p/29212107" target="_blank" rel="noopener">机器学习算法实践-SVM中的SMO算法</a> by PytLab酱</p>
 
       
     </div>
@@ -463,7 +470,7 @@
     <strong>Post author: </strong>洪荣宣</li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="http://yoursite.com/2018/03/20/python中闭包与装饰器解析/" title="python中闭包与装饰器解析">http://yoursite.com/2018/03/20/python中闭包与装饰器解析/</a>
+    <a href="http://yoursite.com/2018/05/08/SVM系列之SMO的Python实现(四)/" title="SVM系列之SMO的Python实现(四)">http://yoursite.com/2018/05/08/SVM系列之SMO的Python实现(四)/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>All articles in this blog are licensed under 本文由 rongxuanhong 原创，采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">保留署名-非商业性使用-禁止演绎 4.0-国际许可协议</a></br>转载请保留以上声明信息! unless stating additionally.</li>
@@ -476,7 +483,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+            <a href="/tags/机器学习/" rel="tag"><i class="fa fa-tag"></i> 机器学习</a>
           
         </div>
       
@@ -489,8 +496,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/27/View源码解析之测量Measure/" rel="next" title="View源码解析之测量Measure">
-                <i class="fa fa-chevron-left"></i> View源码解析之测量Measure
+              <a href="/2018/05/08/剑指offer2之合并两个排序的链表/" rel="next" title="剑指offer2之合并两个排序的链表">
+                <i class="fa fa-chevron-left"></i> 剑指offer2之合并两个排序的链表
               </a>
             
           </div>
@@ -498,10 +505,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/20/剑指offer2笔记之赋值运算符函数/" rel="prev" title="剑指offer2笔记之赋值运算符函数">
-                剑指offer2笔记之赋值运算符函数 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -679,7 +682,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#闭包"><span class="nav-number">2.</span> <span class="nav-text">闭包</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#作用域"><span class="nav-number">2.1.</span> <span class="nav-text">作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是闭包"><span class="nav-number">2.2.</span> <span class="nav-text">什么是闭包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#闭包中的难点"><span class="nav-number">2.3.</span> <span class="nav-text">闭包中的难点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#装饰器"><span class="nav-number">3.</span> <span class="nav-text">装饰器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单的装饰器"><span class="nav-number">3.1.</span> <span class="nav-text">简单的装饰器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#语法糖"><span class="nav-number">3.2.</span> <span class="nav-text">语法糖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#带参数的装饰器"><span class="nav-number">3.3.</span> <span class="nav-text">带参数的装饰器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类装饰器"><span class="nav-number">3.4.</span> <span class="nav-text">类装饰器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#装饰器的缺点"><span class="nav-number">3.5.</span> <span class="nav-text">装饰器的缺点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SMO-python-实现"><span class="nav-number">2.</span> <span class="nav-text">SMO python 实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
