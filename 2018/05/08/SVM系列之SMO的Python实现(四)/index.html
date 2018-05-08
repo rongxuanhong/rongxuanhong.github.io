@@ -103,13 +103,13 @@
 
 
 
-  <meta name="description" content="前言经过前面三篇漫长的 SVM 介绍以及 SMO 算法的原理介绍和公式推导，终于到了 SMO 的算法实现以及最终的 SVM 分类实现了。那么现在就先看看 SMO 的 python 实现。 SMO python 实现 代码中的 \\(\alpha_{i}\\)，\\(\alpha_{j}\\) 对应了前一篇中的 \(\alpha_{1}\) 和 \(\alpha_{2}\)，并且代码中的计算方式都是">
+  <meta name="description" content="前言经过前面三篇漫长的 SVM 介绍以及 SMO 算法的原理介绍和公式推导，终于到了 SMO 的算法实现以及最终的 SVM 分类实现了。那么现在就先看看 SMO 的 python 实现。 SMO python 实现 代码中的 \(\alpha_{i}\)，\(\alpha_{j}\) 对应了前一篇中的 \(\alpha_{1}\) 和 \(\alpha_{2}\)，并且代码中的计算方式都是套用前一">
 <meta name="keywords" content="机器学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SVM系列之SMO的Python实现(四)">
 <meta property="og:url" content="http://yoursite.com/2018/05/08/SVM系列之SMO的Python实现(四)/index.html">
 <meta property="og:site_name" content="Rongxuanhong&#39;s Blog">
-<meta property="og:description" content="前言经过前面三篇漫长的 SVM 介绍以及 SMO 算法的原理介绍和公式推导，终于到了 SMO 的算法实现以及最终的 SVM 分类实现了。那么现在就先看看 SMO 的 python 实现。 SMO python 实现 代码中的 \\(\alpha_{i}\\)，\\(\alpha_{j}\\) 对应了前一篇中的 \(\alpha_{1}\) 和 \(\alpha_{2}\)，并且代码中的计算方式都是">
+<meta property="og:description" content="前言经过前面三篇漫长的 SVM 介绍以及 SMO 算法的原理介绍和公式推导，终于到了 SMO 的算法实现以及最终的 SVM 分类实现了。那么现在就先看看 SMO 的 python 实现。 SMO python 实现 代码中的 \(\alpha_{i}\)，\(\alpha_{j}\) 对应了前一篇中的 \(\alpha_{1}\) 和 \(\alpha_{2}\)，并且代码中的计算方式都是套用前一">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzcfzje9j20uh0dfwf0.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzd2c8hlj20ui0elwf5.jpg">
@@ -123,10 +123,10 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzlckcb3j20ug0aljrv.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqfznm8e9qj20ug0jlwf6.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzozi9u9j20g60c3jrk.jpg">
-<meta property="og:updated_time" content="2018-05-08T11:03:07.249Z">
+<meta property="og:updated_time" content="2018-05-08T11:07:07.265Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SVM系列之SMO的Python实现(四)">
-<meta name="twitter:description" content="前言经过前面三篇漫长的 SVM 介绍以及 SMO 算法的原理介绍和公式推导，终于到了 SMO 的算法实现以及最终的 SVM 分类实现了。那么现在就先看看 SMO 的 python 实现。 SMO python 实现 代码中的 \\(\alpha_{i}\\)，\\(\alpha_{j}\\) 对应了前一篇中的 \(\alpha_{1}\) 和 \(\alpha_{2}\)，并且代码中的计算方式都是">
+<meta name="twitter:description" content="前言经过前面三篇漫长的 SVM 介绍以及 SMO 算法的原理介绍和公式推导，终于到了 SMO 的算法实现以及最终的 SVM 分类实现了。那么现在就先看看 SMO 的 python 实现。 SMO python 实现 代码中的 \(\alpha_{i}\)，\(\alpha_{j}\) 对应了前一篇中的 \(\alpha_{1}\) 和 \(\alpha_{2}\)，并且代码中的计算方式都是套用前一">
 <meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzcfzje9j20uh0dfwf0.jpg">
 
 
@@ -408,7 +408,7 @@
       
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>经过前面三篇漫长的 SVM 介绍以及 SMO 算法的原理介绍和公式推导，终于到了 SMO 的算法实现以及最终的 SVM 分类实现了。那么现在就先看看 SMO 的 python 实现。</p>
 <h1 id="SMO-python-实现"><a href="#SMO-python-实现" class="headerlink" title="SMO python 实现"></a>SMO python 实现</h1><blockquote>
-<p>代码中的 <code>\\(\alpha_{i}\\)</code>，<code>\\(\alpha_{j}\\)</code> 对应了前一篇中的 \(\alpha_{1}\) 和 \(\alpha_{2}\)，并且代码中的计算方式都是套用前一篇中推导出来的公式，请仔细体会。另外，以下我把选出来的 <code>\\(\alpha_{i}\\)</code>，<code>\\(\alpha_{j}\\)</code> 分别成为第一个 alpha 值和第二个 alpha 值。</p>
+<p>代码中的 \(\alpha_{i}\)，\(\alpha_{j}\) 对应了前一篇中的 \(\alpha_{1}\) 和 \(\alpha_{2}\)，并且代码中的计算方式都是套用前一篇中推导出来的公式，请仔细体会。另外，以下我把选出来的 \(\alpha_{i}\)，\(\alpha_{j}\) 分别成为第一个 alpha 值和第二个 alpha 值。</p>
 </blockquote>
 <p>首先定义一个核转换函数用于计算训练集矩阵(X)与任意给定样本矩阵间的核转换结果。</p>
 <p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzcfzje9j20uh0dfwf0.jpg" alt=""></p>
