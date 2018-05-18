@@ -306,6 +306,150 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/03/剑指offer2之链表中倒数第k个节点/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/03/剑指offer2之链表中倒数第k个节点/" itemprop="url">剑指offer2之链表中倒数第k个节点</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-03T17:16:34+08:00">2018-05-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/03/剑指offer2之链表中倒数第k个节点/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/05/03/剑指offer2之链表中倒数第k个节点/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>我们在写代码的时候要注意鲁棒性。那么所谓的鲁棒性是指程序能够判断输入是否合乎规范要求，并对不符合要求的输入予以合理的处理。提高代码的鲁棒性的有效途径是进行防御性编程。防御性编程是一种编程习惯，是指预见在什么地方可能会出现问题，并为这些可能出现的问题制定处理方式。  </p>
+<p>那么在面试时，最简单也是最实用的防御性编程就是在函数入口添加代码以验证用户输入是否符合要求。比如我们常用的输入值的边界值检测和特殊值判断。另外，我们在面对题目的时候，要多问自己几个 “如果不…那么…” 这样的话，比如接下来的这题 “链表中倒数第 k 个节点”，就隐含着的一个条件，如果链表中的节点个数大于 k 呢。那么我们在编写代码的时候就必须把这种情况处理好。</p>
+<h1 id="题目-链表中倒数第-k-个节点"><a href="#题目-链表中倒数第-k-个节点" class="headerlink" title="题目(链表中倒数第 k 个节点)"></a>题目(链表中倒数第 k 个节点)</h1><p>题目:输入一个链表，输出该链表中倒数第 k 个结点。题目从 1 开始计数，头结点为1，以此类推…</p>
+<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>比较直观的思路就是遍历一遍链表，得到链表的节点个数 n，那么倒数第 k 个节点的位置就在 n-k+1 的位置上，因此需要再次遍历链表。</p>
+<p>那么能不能只遍历链表一次呢？可以的。我们可以设置两个指针p1，p2,初始 p1 指向头结点，p2为空。然后，p1 先移动到正向第 k 个节点的位置，然后更新 p2 的指针指向头结点。然后就这样两个指针同时前进，直到前面的 p1 指针指向链表尾节点，此时 p2 所指的节点即为所求。有点类似有个尺子在衡量，然后水平移动尺子，最后尺子的初始位置就是所求。</p>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqnzzvu633j20v50e8wet.jpg" alt=""></p>
+<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>两个算法思路的时间复杂度都为 O(n)，因为都是线性遍历。但是由于后者只需遍历一遍，因而后者的时间效率更优；空间复杂度为 O(n)</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/02/剑指offer2之链表中环的入口节点/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -915,158 +1059,6 @@ L\qquad\qquad\qquad \alpha ^{new,unclipped}_{2} <L\end{cases}</script><p>得到�
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/24/剑指offer2之删除链表结点/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="洪荣宣">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rongxuanhong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/24/剑指offer2之删除链表结点/" itemprop="url">剑指offer2之删除链表结点</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-24T20:05:36+08:00">2018-04-24</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/04/24/剑指offer2之删除链表结点/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/24/剑指offer2之删除链表结点/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在单链表中删除一个节点，一般都是从链表的头节点开始顺序遍历，然后在链表中删除。但是这样的时候复杂度为 O(n)，那么能不能在 O(1) 时间内删除元素呢？</p>
-<h1 id="题目一-删除链表的结点"><a href="#题目一-删除链表的结点" class="headerlink" title="题目一(删除链表的结点)"></a>题目一(删除链表的结点)</h1><p>给定单向链表的头指针和一个节点指针，定义一个函数在 O(1) 时间删除该节点。链表结点与函数的定义如下：</p>
-<pre><code>struct ListNode{
-  int val;
-  ListNode* next;
-}
-
-void DeleteNode(ListNode** head, ListNode* pToBeDeleted);
-</code></pre><h2 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h2><p>首先，我们应该先考虑删除位置的情况。所以需要讨论删除位置在头节点、链表中以及链表尾部。然后，要实现在 O(1) 中删除节点，我们可以将待删除节点的下一节点的信息赋值给前一节点，那么现在只需要删除原待删除节点的下一节点即可，因为已经知道了新的待删除节点的前一节点的指针了，所以操作便只需耗时 O(1)。</p>
-<h2 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqgwcz7n97j20v70grt96.jpg" alt=""></p>
-<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><p>时间复杂度为 O(1)</p>
-<h1 id="题目二-删除链表中重复的结点"><a href="#题目二-删除链表中重复的结点" class="headerlink" title="题目二(删除链表中重复的结点)"></a>题目二(删除链表中重复的结点)</h1><p>题目：在一个排序的链表中，如何删除重复的节点。(无头节点)</p>
-<h2 id="算法思路-1"><a href="#算法思路-1" class="headerlink" title="算法思路"></a>算法思路</h2><p>首先，为了更方便地操作链表，<strong>我们需要给链表加一个头结点</strong>。然后，我们需要两个指针 p 和 pre，分别表示指向当前节点和指向当前节点的前一节点。接着，需要判断当前节点和其下一节点是否存在重复节点，如果不存在则指针依次前移，继续遍历；否则从重复的第一个节点开始，循环跳过重复的节点并删除重复节点，最后 p 指针指向了第一个不重复的节点，然后只需把 pre 指针指向的节点和这个第一个不重复的节点连接即可,之后继续遍历。</p>
-<h2 id="算法实现-1"><a href="#算法实现-1" class="headerlink" title="算法实现"></a>算法实现</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqgw4ry29hj20v70hswes.jpg" alt=""></p>
-<h2 id="复杂度分析-1"><a href="#复杂度分析-1" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><p>需要遍历整个链表，所以时间复杂度为 O(n)。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-	<div>
-
-</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1118,7 +1110,7 @@ void DeleteNode(ListNode** head, ListNode* pToBeDeleted);
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">38</span>
+                    <span class="site-state-item-count">39</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -1442,9 +1434,9 @@ void DeleteNode(ListNode** head, ListNode* pToBeDeleted);
       
     
       
-        
-      
     
+      
+        
       
     
       

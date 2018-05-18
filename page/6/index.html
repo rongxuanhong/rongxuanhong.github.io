@@ -306,6 +306,154 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/28/剑指offer2笔记之替换空格/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/28/剑指offer2笔记之替换空格/" itemprop="url">剑指offer2笔记之替换空格</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-28T11:22:02+08:00">2018-03-28</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/28/剑指offer2笔记之替换空格/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/03/28/剑指offer2笔记之替换空格/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>说到字符串，其实在 C/C++ 中字符串都是以<code>&#39;\0&#39;</code>作为结尾标志。这样做的优点是容易找到字符串尾部，而缺点则是每个字符串额外多了一个字符的内存开销(1 字节),最后计算字符串的实际长度时会比原来多1。  </p>
+<p>另外，为了节省内存，C/C++    把常量字符串存储到单独的内存区域，因此，当多个指针赋值给相同的常量字符串时，这些指针所指向的内存地址是相同的。  </p>
+<p>最后，注意字符数组容量的长度以及字符串实际长度的区别。</p>
+<h1 id="题目描述-替换空格"><a href="#题目描述-替换空格" class="headerlink" title="题目描述(替换空格)"></a>题目描述(替换空格)</h1><p>请实现一个函数，把字符串中的每个空格替换成”%20”。例如，输入 “We are happy.”，则输出 “We%20are%20happy.”。</p>
+<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><h2 id="常规思路"><a href="#常规思路" class="headerlink" title="常规思路"></a>常规思路</h2><p>我们可以从左往右扫描字符串中的每个字符，但遇到空格的时候，先把空格之后的所有字符统一向后移动两个字符，这样一来刚好空出三个位置，然后再依次填入三个字符’%’,’2’,’0’,接下来，继续查找空格字符，继续执行相同操作。  </p>
+<p>此方法的缺点是时间复杂度较高,还不是最优的情况，达到了O(n^2)。其实，这种情况有点类似直接插入排序法的操作。对于每个空格的字符，需要移动后面O(n)个字符，那么对于含有O(n)个空字符的字符串而言，总的时间复杂度为O(n^2)。</p>
+<h2 id="终极思路"><a href="#终极思路" class="headerlink" title="终极思路"></a>终极思路</h2><p>常规思路中的缺点在于，当我们遇到一次空格，然后移动一次后面的所有字符，此时我们无法保证这些字符在之后不会被再次移动。而我们要寻找的就是能不能让移动的这些字符一次就能确定其最终的位置？  </p>
+<p>常规思路中，是从前往后扫描字符，那么从后往前扫描字符呢。<br>首先，我们应该统计非空字符的个数，以及空格的个数，那么将一个空格替换为三个字符，原数组长度将增加 2，最后我们得到了字符串中空格都替换成 “%20”所需的长度。</p>
+<p>那么，当我们从后往前扫描时，我们先确定替换之后字符串的最终长度。然后利用两个指针 P1和P2 在数组后面复制和替换。当 p1遇到非空字符，则将 p1 所指的元素复制到 p2所指的位置，然后p1、p2继续向前更新指针；当p1 遇到空字符时，将”%20”倒序依次从 p2 处往前插入,接下来，p1、p2  继续向前更新指针，重复上述过程，直至完成替换。具体形象的操作见下图。<br><img src="http://img.blog.csdn.net/20170925111500819?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMTQ3NTIxMA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpjd3mtsdcj20v70jtt9w.jpg" alt="">  </p>
+<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>我们先用第一个 <code>while</code> 遍历了字符串，耗时约 O(n),第二个 <code>while</code> 中我们主要是移动和插入元素，由于每个元素最多仅移动一次，因此耗时也约 O(n),那么总的时间复杂度为 <code>O(n)=O(n)+O(n)</code>。空间复杂度为 O(1)。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/27/剑指offer2笔记之二维数组的查找/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -930,157 +1078,6 @@ d=\sqrt {\left( xA_{0}-xB_{0}\right) ^{2}+\left( xA_{1}-xB_{1}\right) ^{2}}</scr
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/20/剑指offer2笔记之赋值运算符函数/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="洪荣宣">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rongxuanhong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/20/剑指offer2笔记之赋值运算符函数/" itemprop="url">剑指offer2笔记之赋值运算符函数</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-20T16:50:19+08:00">2018-03-20</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/03/20/剑指offer2笔记之赋值运算符函数/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/03/20/剑指offer2笔记之赋值运算符函数/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="题目描述-赋值运算符函数"><a href="#题目描述-赋值运算符函数" class="headerlink" title="题目描述(赋值运算符函数)"></a>题目描述(赋值运算符函数)</h1><p>如下为类型 <code>CMyString</code> 的声明，请为该类型添加赋值运算符函数。</p>
-<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpb9bwxj9dj20u106gq30.jpg" alt="">  </p>
-<h1 id="考察的关注点"><a href="#考察的关注点" class="headerlink" title="考察的关注点"></a>考察的关注点</h1><ul>
-<li><strong>返回值的类型</strong>。是否把返回值的类型声明为该类型的引用，并在函数结束前返回实例自身的引用(<code>*this</code>)。只有返回一个引用，才可以允许连续赋值。否则，如果函数返回的类型是 <code>Void</code>,则该赋值运算符将不能连续赋值。比如 <code>str1=str2=str3</code> ,这样的形式将不被允许。</li>
-<li><strong>传入的参数类型</strong>。是否把传入的参数声明为常量引用。如果传入的参数不是引用而是实例，那么从形参到实参会调用一次复制构造函数。把参数声明为引用可以避免这样的无谓消耗，提高代码的效率。同时，在赋值运算符函数内不会改变传入的实例的状态，因此还应该为传入的引用参数加上 <code>const</code> 关键字。</li>
-<li><strong>内存泄漏问题</strong> 。是否释放实例自身已有的内存。如果忘记在分配新内存之前释放掉自身已有的空间，则程序将会出现内存泄漏。</li>
-<li><strong>多情况考虑</strong> 。 判断传入的参数和当前的实例是不是同一个实例。如果是同一个，则不进行赋值操作,直接返回。如果事先不判断就进行赋值，那么在释放实例自身的时候就会导致严重的问题：当 <code>*this</code> 和传入的参数是同一个实例时，一旦释放了自身的内存，传入的参数的内存也同时被释放了，因此再也找不到需要赋值的内容了。<h1 id="经典解法"><a href="#经典解法" class="headerlink" title="经典解法"></a>经典解法</h1><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpbbfvakbyj20u207474g.jpg" alt=""><h1 id="考虑异常安全性的解法"><a href="#考虑异常安全性的解法" class="headerlink" title="考虑异常安全性的解法"></a>考虑异常安全性的解法</h1>要想在赋值运算符函数中实现异常安全性，我们有两种方法。一种简单的办法是我们先用 <code>new</code> 分配新内容，再用 <code>delete</code> 释放已有的内容(考虑到可能内存不足，无法分配问题)。另一种方法是先创建已给临时实例，再交换临时实例和原来的实例。<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpbbu0tpyaj20ua077aa7.jpg" alt=""></li>
-</ul>
-<p>程序主要利用了 <code>C++</code> 的特性以及交换临时实例的方法来实现。关键的是 <code>strTemp</code> 是一个局部的变量，那么在方法执行完毕后，它是会自动调用析构函数而释放内存的，那么就不需要手动释放，而通过交换我们也能拿到要赋值的值。</p>
-<h1 id="考点"><a href="#考点" class="headerlink" title="考点"></a>考点</h1><ul>
-<li>基础语法的理解，如运算符函数、常量引用等；</li>
-<li>内存泄漏的理解；</li>
-<li>代码异常安全性的考虑。</li>
-</ul>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-	<div>
-
-</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1132,7 +1129,7 @@ d=\sqrt {\left( xA_{0}-xB_{0}\right) ^{2}+\left( xA_{1}-xB_{1}\right) ^{2}}</scr
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">38</span>
+                    <span class="site-state-item-count">39</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
