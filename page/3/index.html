@@ -306,6 +306,149 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/27/剑指offer2之表示数值的字符串/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/27/剑指offer2之表示数值的字符串/" itemprop="url">剑指offer2之表示数值的字符串</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-27T19:00:18+08:00">2018-04-27</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/27/剑指offer2之表示数值的字符串/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/27/剑指offer2之表示数值的字符串/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>假如给定一个字符串，如何判断它是数值？即该字符串对应的数必须是整数或者小数。当然，还要考虑科学计数法的加入。所以我们需要知道字符串遵循的模式，即 A[.[B]][e|EC] 或者 .B[e|EC]。其中 A 为数值的整数部分，B 紧跟着小数点为数值的小数部分，C表示指数部分。</p>
+<h1 id="题目-表示数值的字符串"><a href="#题目-表示数值的字符串" class="headerlink" title="题目(表示数值的字符串)"></a>题目(表示数值的字符串)</h1><p>题目：请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。例如，字符串”+100”,”5e2”,”-123”,”3.1416”和”-1E-16”都表示数值。 但是”12e”,”1a3.14”,”1.2.3”,”+-5”和”12e+4.3”都不是。</p>
+<h1 id="算法描述"><a href="#算法描述" class="headerlink" title="算法描述"></a>算法描述</h1><p>在前言提到的字符串是数值时,它所遵循的模式中，A 和 C 是含’+-‘以及’0-9’的字符串，B是仅含 ‘0-9’的字符串。<br>那么我们就需要根据 ‘.’和 ‘e|E’ 的位置判别接下来的字符串所满足的条件。具体分析见代码。  </p>
+<p>另外，我们还可以根据字符串遵循的模式利用正则匹配表示式来匹配。正则表达式为 [+-]\?[0-9]<em>(.[0-9]</em>)\?([eE][+-]?[0-9]*)\?</p>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqmx47zm60j20v60gsgmc.jpg" alt=""></p>
+<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>需要扫描一遍字符串时间复杂度为 O(n)，空间复杂度为 O(1)。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/24/剑指offer2之删除链表结点/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -918,152 +1061,6 @@ a^{\left( n-1\right) /2}\cdot a^{\left( n-1\right) /2}\qquad n为奇数\end{case
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/20/剑指offer2之打印从1到最大的n位数/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="洪荣宣">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rongxuanhong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/20/剑指offer2之打印从1到最大的n位数/" itemprop="url">剑指offer2之打印从1到最大的n位数</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-20T13:03:23+08:00">2018-04-20</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/04/20/剑指offer2之打印从1到最大的n位数/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/20/剑指offer2之打印从1到最大的n位数/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>如果面试题是关于 n 为的整数并且没有限定 n 的取值范围，或者输入任意大小的整数，那么可能需要考虑大数问题。而字符串是一种简单、有效地表示大数的方法。</p>
-<h1 id="题目-打印从-1-到最大的-n-位数"><a href="#题目-打印从-1-到最大的-n-位数" class="headerlink" title="题目(打印从 1 到最大的 n 位数)"></a>题目(打印从 1 到最大的 n 位数)</h1><p>题目:输入数字 n，按顺序打印出从 1 到最大的 n 位十进制数。比如输入 3，则打印出 1、2、3 一直到最大的3 位数即 999。</p>
-<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>本题没有给定 n 的范围，因此需要考虑大数问题。</p>
-<h2 id="算法思路一-字符串模拟"><a href="#算法思路一-字符串模拟" class="headerlink" title="算法思路一(字符串模拟)"></a>算法思路一(字符串模拟)</h2><p>用字符串表示数字的时候，最直观的方法就是字符串里每个字符都是 ‘0’-‘9’ 之间的某一个字符，用来表示数字中的任一位。因为数字最大是 n 位的，因此我们需要一个长度为 n+1 的字符串(<strong>字符串中最后一位是结束符号 ‘\0’</strong>)。并且将字符串的每一位初始化为 ‘0’，但要注意的是，最后打印的时候，前半部分的 0 需要过滤掉。</p>
-<p>接下来，我们就对字符串的最后一位一直加 1 ，然后再判断是否需要进位，如果需要进位，那么就需要把字符串最后一位变为 ‘0’，而前一位的字符也要跟着加 1，然后继续判断是否需要继续进位，一直到直接加 1，不需要进位，或者遇到了最大的 n 位数退出外层循环。</p>
-<h2 id="算法思路二-递归法"><a href="#算法思路二-递归法" class="headerlink" title="算法思路二(递归法)"></a>算法思路二(递归法)</h2><p>将问题转换成按数字排列，也就是所对于字符串的每一位都可以有 10 种选择—-‘0’-‘9’。也就是说，我们把数字的每一位都从 0 到 9 依次排列一遍，就得到所有的十进制数。最后打印的时候只要从第一个非 0 的字符开始打印即可。</p>
-<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><h2 id="字符串模拟"><a href="#字符串模拟" class="headerlink" title="字符串模拟"></a>字符串模拟</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfl5hcjg2j20uy0rdjs9.jpg" alt=""></p>
-<h2 id="递归法"><a href="#递归法" class="headerlink" title="递归法"></a>递归法</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqflaty90rj20v90ksmxs.jpg" alt=""></p>
-<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>算法一的时间消耗主要在 while 循环上，由于需要打印出从 1 到最大的 n 位数，因此若设这些数共有 m 个，那么时间复杂度为 O(m)；而算法二采用递归思想，时间复杂度也为 O(m)，差不多共有 10^n 个组合。空间复杂度都为 O(n)。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-	<div>
-
-</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1115,7 +1112,7 @@ a^{\left( n-1\right) /2}\cdot a^{\left( n-1\right) /2}\qquad n为奇数\end{case
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-count">40</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
