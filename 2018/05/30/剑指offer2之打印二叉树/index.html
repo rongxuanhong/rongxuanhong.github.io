@@ -103,29 +103,29 @@
 
 
 
-  <meta name="description" content="前言树是一种在实际编程中经常遇到的数据结构。它的逻辑结构很简单：除了根节点以外，每个节点只有一个父节点；除叶节点之外所有节点都有一个或多个子节点。父节点和子节点之间用指针链接。由于树会涉及到大量的指针，因此与树有关的面试题成为了面试官的青睐。那么需要掌握哪些？就其中一部分来说，关于树的三大遍历方式：前序遍历、中序遍历、后序遍历都必须掌握，并且由于每种遍历方式都有递归和循环两种实现方式，因此我们需要">
+  <meta name="description" content="前言打印二叉树，实际上就是考察树的遍历算法，其实就是层序遍历或者说树的广度优先搜索(BFS)。而这个遍历算法的实现就是结合队列来实现。那么下面将会以三种展现形式来打印一颗二叉树。 题目一(不分行从上到下打印二叉树—-牛客网)从上往下打印出二叉树的每个节点，同层节点从左至右打印。 算法思路我们可以通过具体的例子模拟输出的过程，那么会发现，它总是拿待输出节点列表的首节点优先输出，而节点总是插入到待输出">
 <meta name="keywords" content="剑指offer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="剑指offer2笔记之重建二叉树">
-<meta property="og:url" content="http://yoursite.com/2018/03/29/剑指offer2笔记之重建二叉树/index.html">
+<meta property="og:title" content="剑指offer2之打印二叉树">
+<meta property="og:url" content="http://yoursite.com/2018/05/30/剑指offer2之打印二叉树/index.html">
 <meta property="og:site_name" content="Rongxuanhong&#39;s Blog">
-<meta property="og:description" content="前言树是一种在实际编程中经常遇到的数据结构。它的逻辑结构很简单：除了根节点以外，每个节点只有一个父节点；除叶节点之外所有节点都有一个或多个子节点。父节点和子节点之间用指针链接。由于树会涉及到大量的指针，因此与树有关的面试题成为了面试官的青睐。那么需要掌握哪些？就其中一部分来说，关于树的三大遍历方式：前序遍历、中序遍历、后序遍历都必须掌握，并且由于每种遍历方式都有递归和循环两种实现方式，因此我们需要">
+<meta property="og:description" content="前言打印二叉树，实际上就是考察树的遍历算法，其实就是层序遍历或者说树的广度优先搜索(BFS)。而这个遍历算法的实现就是结合队列来实现。那么下面将会以三种展现形式来打印一颗二叉树。 题目一(不分行从上到下打印二叉树—-牛客网)从上往下打印出二叉树的每个节点，同层节点从左至右打印。 算法思路我们可以通过具体的例子模拟输出的过程，那么会发现，它总是拿待输出节点列表的首节点优先输出，而节点总是插入到待输出">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://img-blog.csdn.net/20170927101737391?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMTQ3NTIxMA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpr7d95w1ij20v6047wej.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpr7fonarfj20v70lcq4q.jpg">
-<meta property="og:updated_time" content="2018-03-29T12:29:50.493Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1frc9e6dbb5j20v30b8gls.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25ly1frc8zwwx71j20v60gm74o.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1frc979gqagj20v40lumxn.jpg">
+<meta property="og:updated_time" content="2018-05-30T11:56:44.839Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="剑指offer2笔记之重建二叉树">
-<meta name="twitter:description" content="前言树是一种在实际编程中经常遇到的数据结构。它的逻辑结构很简单：除了根节点以外，每个节点只有一个父节点；除叶节点之外所有节点都有一个或多个子节点。父节点和子节点之间用指针链接。由于树会涉及到大量的指针，因此与树有关的面试题成为了面试官的青睐。那么需要掌握哪些？就其中一部分来说，关于树的三大遍历方式：前序遍历、中序遍历、后序遍历都必须掌握，并且由于每种遍历方式都有递归和循环两种实现方式，因此我们需要">
-<meta name="twitter:image" content="https://img-blog.csdn.net/20170927101737391?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMTQ3NTIxMA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta name="twitter:title" content="剑指offer2之打印二叉树">
+<meta name="twitter:description" content="前言打印二叉树，实际上就是考察树的遍历算法，其实就是层序遍历或者说树的广度优先搜索(BFS)。而这个遍历算法的实现就是结合队列来实现。那么下面将会以三种展现形式来打印一颗二叉树。 题目一(不分行从上到下打印二叉树—-牛客网)从上往下打印出二叉树的每个节点，同层节点从左至右打印。 算法思路我们可以通过具体的例子模拟输出的过程，那么会发现，它总是拿待输出节点列表的首节点优先输出，而节点总是插入到待输出">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1frc9e6dbb5j20v30b8gls.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/29/剑指offer2笔记之重建二叉树/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/30/剑指offer2之打印二叉树/"/>
 
 
 
@@ -135,7 +135,7 @@
   };
 </script>
 
-  <title>剑指offer2笔记之重建二叉树 | Rongxuanhong's Blog</title>
+  <title>剑指offer2之打印二叉树 | Rongxuanhong's Blog</title>
   
 
 
@@ -313,7 +313,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/29/剑指offer2笔记之重建二叉树/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/30/剑指offer2之打印二叉树/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="洪荣宣">
@@ -330,7 +330,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">剑指offer2笔记之重建二叉树</h1>
+          <h1 class="post-title" itemprop="name headline">剑指offer2之打印二叉树</h1>
         
 
         <div class="post-meta">
@@ -342,7 +342,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-29T20:29:10+08:00">2018-03-29</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-30T19:56:29+08:00">2018-05-30</time>
             
 
             
@@ -360,8 +360,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/03/29/剑指offer2笔记之重建二叉树/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/03/29/剑指offer2笔记之重建二叉树/" itemprop="commentCount"></span>
+                <a href="/2018/05/30/剑指offer2之打印二叉树/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/05/30/剑指offer2之打印二叉树/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -397,16 +397,22 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>树是一种在实际编程中经常遇到的数据结构。它的逻辑结构很简单：除了根节点以外，每个节点只有一个父节点；除叶节点之外所有节点都有一个或多个子节点。父节点和子节点之间用指针链接。由于树会涉及到大量的指针，因此与树有关的面试题成为了面试官的青睐。<br>那么需要掌握哪些？就其中一部分来说，关于树的三大遍历方式：前序遍历、中序遍历、后序遍历都必须掌握，并且由于每种遍历方式都有递归和循环两种实现方式，因此我们需要<strong>掌握</strong>三种遍历六种实现方式。  </p>
-<p>后期需要掌握的我们后面再提…</p>
-<h1 id="题目描述-重建二叉树"><a href="#题目描述-重建二叉树" class="headerlink" title="题目描述(重建二叉树)"></a>题目描述(重建二叉树)</h1><p>题目：输入某二叉树的前序遍历和中序遍历的结果，请重建该二叉树。(假设输入的前序遍历和中序遍历的结果中都不含重复的数字)  </p>
-<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>首先，重建一棵二叉树，我们可以通过树的两种遍历方式推出树的结构，其中中序遍历是必不可少的序列。<br>题目给定的是前序遍历和中序遍历，我们知道在前序序列中第一个值root 一定是根节点，而这个 root 所在的中序序列中也是根节点,那么根据前序遍历的特性—先根再左再右，我们知道左右子树的序列一定从前序序列的root的下一个位置开始，而中序遍历的特性是—先左再根再右,那么，对于中序序列，左子树的中序序列从第一个位置到 root 的前一位置的范围内，而右子树的中序序列则从 root 的下一位置到末位置。再者，无论是前序序列还是中序序列，前序序列的左子树序列长度一定等于中序序列的左子树序列长度，右子树亦是。最后其实我们分别得到了 root 节点的左子树对应的前序序列和中序序列，以及右子树对应的前序序列和中序序列。</p>
-<p><strong>关键的地方来了</strong>，我们还需要对左子树和右子树进行重建二叉树，我们发现这个过程已经在以根节点为 root 的二叉树上走过了，只是序列长度缩短了，那么我们其实可以再次调用一次这个过程(函数)，只要确定左右子树前序和中序序列的范围即可，那么这个过程其实就是利用树的递归特性。而递归的出口就是处理好叶节点的创建。<br>一个形象的图例:<br><img src="https://img-blog.csdn.net/20170927101737391?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMTQ3NTIxMA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
-<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><h2 id="建立树的数据结构"><a href="#建立树的数据结构" class="headerlink" title="建立树的数据结构"></a>建立树的数据结构</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpr7d95w1ij20v6047wej.jpg" alt="">  </p>
-<h2 id="重建二叉树"><a href="#重建二叉树" class="headerlink" title="重建二叉树"></a>重建二叉树</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpr7fonarfj20v70lcq4q.jpg" alt="">  </p>
-<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>每次在中序遍历序列中找到根节点的位置需要 O(n) 的查找时间。<br>则T(n)=2T(2/n)+O(n),(两个子问题的时间加中序序列上的查找时间)那么T(n)=O(nlogn)。</p>
-<h2 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h2><p>由于每个节点都会被递归到，所以递归栈需要 O(n) 的空间。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>打印二叉树，实际上就是考察树的遍历算法，其实就是层序遍历或者说树的广度优先搜索(BFS)。而这个遍历算法的实现就是结合队列来实现。那么下面将会以三种展现形式来打印一颗二叉树。</p>
+<h1 id="题目一-不分行从上到下打印二叉树—-牛客网"><a href="#题目一-不分行从上到下打印二叉树—-牛客网" class="headerlink" title="题目一(不分行从上到下打印二叉树—-牛客网)"></a>题目一(<a href="https://www.nowcoder.com/questionTerminal/7fe2212963db4790b57431d9ed259701" target="_blank" rel="noopener">不分行从上到下打印二叉树—-牛客网</a>)</h1><p>从上往下打印出二叉树的每个节点，同层节点从左至右打印。</p>
+<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>我们可以通过具体的例子模拟输出的过程，那么会发现，它总是拿待输出节点列表的首节点优先输出，而节点总是插入到待输出节点列表尾部，因此很容易知道这是一个”先进先出”的过程，满足队列的特性。因此需要利用队列进行实现。</p>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p>可以使用普通队列 <code>queue</code> 也可以使用双端队列 <code>deque</code>。</p>
+<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1frc9e6dbb5j20v30b8gls.jpg" alt=""></p>
+<h1 id="题目二-把二叉树打印成多行—牛客网"><a href="#题目二-把二叉树打印成多行—牛客网" class="headerlink" title="题目二(把二叉树打印成多行—牛客网)"></a>题目二(<a href="https://www.nowcoder.com/questionTerminal/445c44d982d04483b04a54f298796288" target="_blank" rel="noopener">把二叉树打印成多行—牛客网</a>)</h1><p>从上到下按层打印二叉树，同一层结点从左至右输出。每一层输出一行。</p>
+<h1 id="算法思路-1"><a href="#算法思路-1" class="headerlink" title="算法思路"></a>算法思路</h1><p>遍历依旧和题目一一样，但是需要存储每一层输出的节点到数组中，那么就要先确定当前层需要输出多少个节点。因此，定义一个变量 <code>tobeoutput</code> 表示当前层待输出的节点数。那么该变量就在遍历二叉树的时候自减，然后当变量为零时，表示该层已全部输出完毕，那么就更新该变量下层需要输出的节点数，这个数刚好就是已经在队列中的节点数。</p>
+<h1 id="算法实现-1"><a href="#算法实现-1" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25ly1frc8zwwx71j20v60gm74o.jpg" alt=""></p>
+<h1 id="题目三-按之字形顺序打印二叉树—牛客网"><a href="#题目三-按之字形顺序打印二叉树—牛客网" class="headerlink" title="题目三(按之字形顺序打印二叉树—牛客网)"></a>题目三(<a href="https://www.nowcoder.com/questionTerminal/91b69814117f4e8097390d107d2efbe0?source=relative" target="_blank" rel="noopener">按之字形顺序打印二叉树—牛客网</a>)</h1><p>请实现一个函数按照之字形打印二叉树，即第一行按照从左到右的顺序打印，第二层按照从右至左的顺序打印，第三行按照从左到右的顺序打印，其他行以此类推。</p>
+<h1 id="算法思路-2"><a href="#算法思路-2" class="headerlink" title="算法思路"></a>算法思路</h1><p>要实现打印之字形的二叉树需要利用一对栈配合操作。自己手动模拟一遍就懂了。不需要分奇数层和偶数层了，因为一个栈输出完毕后，才会输出另一个栈中的元素，因此可以以栈不空为条件判断当前需要从那个栈输出元素就行。</p>
+<h1 id="算法实现-2"><a href="#算法实现-2" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1frc979gqagj20v40lumxn.jpg" alt=""></p>
+<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>由于遍历的时候对二叉树的每个节点仅遍历一次，因此时间复杂度均为 O(n)，空间复杂度主要是由节点值的存储数组所消耗。</p>
+<blockquote>
+<p>注：对根节点 root 需要判空，否则在牛客网上会出现段错误，提示您的程序发生段错误，可能是数组越界，堆栈溢出（比如，递归调用层数太多）等情况引起，一定需要处理特殊值的输入，随时注意空指针的情况。</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
+</blockquote>
 
       
     </div>
@@ -439,7 +445,7 @@
     <strong>Post author: </strong>洪荣宣</li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="http://yoursite.com/2018/03/29/剑指offer2笔记之重建二叉树/" title="剑指offer2笔记之重建二叉树">http://yoursite.com/2018/03/29/剑指offer2笔记之重建二叉树/</a>
+    <a href="http://yoursite.com/2018/05/30/剑指offer2之打印二叉树/" title="剑指offer2之打印二叉树">http://yoursite.com/2018/05/30/剑指offer2之打印二叉树/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>All articles in this blog are licensed under 本文由 rongxuanhong 原创，采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">保留署名-非商业性使用-禁止演绎 4.0-国际许可协议</a></br>转载请保留以上声明信息! unless stating additionally.</li>
@@ -465,8 +471,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/28/剑指offer2笔记之替换空格/" rel="next" title="剑指offer2笔记之替换空格">
-                <i class="fa fa-chevron-left"></i> 剑指offer2笔记之替换空格
+              <a href="/2018/05/26/剑指offer2对称的二叉树/" rel="next" title="剑指offer2对称的二叉树">
+                <i class="fa fa-chevron-left"></i> 剑指offer2对称的二叉树
               </a>
             
           </div>
@@ -474,10 +480,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/31/剑指offer2笔记之从尾到头打印链表/" rel="prev" title="剑指offer2笔记之从尾到头打印链表">
-                剑指offer2笔记之从尾到头打印链表 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -655,7 +657,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目描述-重建二叉树"><span class="nav-number">2.</span> <span class="nav-text">题目描述(重建二叉树)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解题思路"><span class="nav-number">3.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现"><span class="nav-number">4.</span> <span class="nav-text">算法实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#建立树的数据结构"><span class="nav-number">4.1.</span> <span class="nav-text">建立树的数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重建二叉树"><span class="nav-number">4.2.</span> <span class="nav-text">重建二叉树</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂度分析"><span class="nav-number">5.</span> <span class="nav-text">复杂度分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#时间复杂度"><span class="nav-number">5.1.</span> <span class="nav-text">时间复杂度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#空间复杂度"><span class="nav-number">5.2.</span> <span class="nav-text">空间复杂度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目一-不分行从上到下打印二叉树—-牛客网"><span class="nav-number">2.</span> <span class="nav-text">题目一(不分行从上到下打印二叉树—-牛客网)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法思路"><span class="nav-number">3.</span> <span class="nav-text">算法思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现"><span class="nav-number">4.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目二-把二叉树打印成多行—牛客网"><span class="nav-number">5.</span> <span class="nav-text">题目二(把二叉树打印成多行—牛客网)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法思路-1"><span class="nav-number">6.</span> <span class="nav-text">算法思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现-1"><span class="nav-number">7.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目三-按之字形顺序打印二叉树—牛客网"><span class="nav-number">8.</span> <span class="nav-text">题目三(按之字形顺序打印二叉树—牛客网)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法思路-2"><span class="nav-number">9.</span> <span class="nav-text">算法思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现-2"><span class="nav-number">10.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂度分析"><span class="nav-number">11.</span> <span class="nav-text">复杂度分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">12.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
