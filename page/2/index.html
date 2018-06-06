@@ -306,6 +306,323 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/15/剑指offer2之树的结构/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/15/剑指offer2之树的结构/" itemprop="url">剑指offer2之树的结构</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-15T19:44:18+08:00">2018-05-15</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/15/剑指offer2之树的结构/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/05/15/剑指offer2之树的结构/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="题目-树的子结构"><a href="#题目-树的子结构" class="headerlink" title="题目(树的子结构)"></a>题目(<a href="https://www.nowcoder.com/questionTerminal/6e196c44c7004d15b1610b9afca8bd88" target="_blank" rel="noopener">树的子结构</a>)</h1><p>输入两棵二叉树 A 和 B ，判断 B 是不是 A 的子结构。二叉树的定义如下：</p>
+<pre><code>struct TreeNode {
+    int val;
+    struct TreeNode *left;
+    struct TreeNode *right;
+    TreeNode(int x) :
+        val(x), left(nullptr), right(nullptr) {
+    }
+};  
+</code></pre><h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>首先应注意所输入二叉树的特殊值情况，如空指针。<br>算法主要分为两步。<br>第一步，首先应该从二叉树 A 的根节点开始遍历，寻找和二叉树 B 根节点相同的那个节点，设为 节点 C。我们对二叉树 A 遍历的时候可以利用二叉树的递归特性,对其左右子树执行相同操作。<br>第二步，需要判断树 A 中以 C 为根节点的子树的结构是否和树 B 的结构一样，那么仍然可以利用递归的特性。如果他们的根节点值相同，那么对树 A 中 C 的左子树和树 B 中 C 的左子树递归判断结构的一致性，然后对两棵树的 C 的右子树也递归，只有他们的子结构同时相同，那么二叉树 A 中才存在 二叉树 B 的结构，否则不存在。</p>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25ly1fqx8fwjnmtj20v50fn74t.jpg" alt=""></p>
+<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>二叉树 A 利用层序遍历的递归实现，每个结点只需遍历一次，故时间复杂度为 O(n)。而使用了递归，最差情况下递归调用的深度为 O(n)，所以空间复杂度为 O(n)。本题中还需要遍历二叉树 B，因此若设其节点数为 m 个，那么最终的时间复杂度为 O(n+m)，空间复杂度为 O(n+m)。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/08/SVM系列之SMO的Python实现(四)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/08/SVM系列之SMO的Python实现(四)/" itemprop="url">SVM系列之SMO的Python实现(四)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-08T19:02:28+08:00">2018-05-08</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/08/SVM系列之SMO的Python实现(四)/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/05/08/SVM系列之SMO的Python实现(四)/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>经过前面三篇漫长的 SVM 介绍以及 SMO 算法的原理介绍和公式推导，终于到了 SMO 的算法实现以及最终的 SVM 分类实现了。那么现在就先看看 SMO 的 python 实现。</p>
+<h1 id="SMO-python-实现"><a href="#SMO-python-实现" class="headerlink" title="SMO python 实现"></a>SMO python 实现</h1><blockquote>
+<p>代码中的 \(\alpha_{i}\)，\(\alpha_{j}\) 对应了前一篇中的 \(\alpha_{1}\) 和 \(\alpha_{2}\)，并且代码中的计算方式都是套用前一篇中推导出来的公式，请仔细体会。另外，以下我把选出来的 \(\alpha_{i}\)，\(\alpha_{j}\) 分别成为第一个 alpha 值和第二个 alpha 值。</p>
+</blockquote>
+<p>首先定义一个核转换函数用于计算训练集矩阵(X)与任意给定样本矩阵间的核转换结果。</p>
+<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzcfzje9j20uh0dfwf0.jpg" alt=""></p>
+<p>下面定义一个 <code>SVMStruct</code> 类来封装一些属性和方法，以便可以快速构建一个 SVM 模型。</p>
+<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzd2c8hlj20ui0elwf5.jpg" alt=""></p>
+<p>接下来定义一些 <code>SVMStruct</code> 类下的辅助方法。</p>
+<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzdnxcnyj20ui07ddfw.jpg" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzer7h0jj20u90itwf3.jpg" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzfdpksvj20uc08m749.jpg" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqdes6r7xhj211l06b3yn.jpg" alt=""></p>
+<p>接下来，函数 <code>innerL</code>为 SMO 主程序内层循环的代码。</p>
+<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzgsr5vlj20ug16nq5e.jpg" alt="">  </p>
+<p>外层循环的代码：</p>
+<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzi0ojfsj20uf0egq3r.jpg" alt=""></p>
+<p>计算权重 \(w\) 的函数：</p>
+<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzirll6pj20ue0a6mxc.jpg" alt=""></p>
+<p>分类函数的代码：</p>
+<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzlckcb3j20ug0aljrv.jpg" alt=""></p>
+<p>最后是 plot 出样本点，和划分线：</p>
+<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfznm8e9qj20ug0jlwf6.jpg" alt="">  </p>
+<p>那么最后可视化的结果为：</p>
+<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzozi9u9j20g60c3jrk.jpg" alt=""></p>
+<blockquote>
+<ol>
+<li>本例中所用的数据集必须使用线性核才使得样本可分。</li>
+<li>本文代码见个人github repository <a href="https://github.com/rongxuanhong/MLCodeOnTheBlog/tree/master/SVM%E4%B9%8BPython%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81" target="_blank" rel="noopener">MLCodeOnTheBlog</a></li>
+</ol>
+</blockquote>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] &lt;&lt;机器学习实战-中文版&gt;&gt;<br>[2] <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-98-14.pdf" target="_blank" rel="noopener">Sequential Minimal Optimization:<br>A Fast Algorithm for Training Support Vector Machines</a>   by John C. Platt<br>[3] <a href="https://blog.csdn.net/zouxy09/article/details/17292011" target="_blank" rel="noopener">机器学习算法与Python实践之（四）支持向量机（SVM）实现</a>  by zouxy<br>[4] <a href="https://zhuanlan.zhihu.com/p/29212107" target="_blank" rel="noopener">机器学习算法实践-SVM中的SMO算法</a> by PytLab酱</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/08/剑指offer2之合并两个排序的链表/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -722,299 +1039,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/02/剑指offer2之链表中环的入口节点/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="洪荣宣">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rongxuanhong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/02/剑指offer2之链表中环的入口节点/" itemprop="url">剑指offer2之链表中环的入口节点</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-02T19:51:41+08:00">2018-05-02</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/05/02/剑指offer2之链表中环的入口节点/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/05/02/剑指offer2之链表中环的入口节点/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="题目-链表中换的入口节点"><a href="#题目-链表中换的入口节点" class="headerlink" title="题目(链表中换的入口节点)"></a>题目(<a href="https://www.nowcoder.com/questionTerminal/253d2c59ec3e4bc68da16833f79a38e4" target="_blank" rel="noopener">链表中换的入口节点</a>)</h1><p>题目：一个链表中包含环，请找出该链表的环的入口结点。</p>
-<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>算法主要分为两步走。  </p>
-<p>第一步需要判断链表是否有环。首先设置两个指针同时指向头结点，然后一个指针走一步，另一个指针走两步，如果他们能够相遇，那么说明该链表有环，并记录他们相遇的节点(相遇节点一定在环内),如果不存在这样的相遇节点，那么此链表无环。  </p>
-<p>第二步，需要找到链表中环的入口节点。首先需要根据相遇节点计算出此环中包含的节点个数 k，然后需要设置两个指针，其中一个指针先走 k 步，然后另一个指针再指向头结点；之后两个指针同时移动，直到他们相遇即都到达了环的入口节点，此时返回此节点。(后面寻找入口节点其实有点类似前一篇寻找链表中第 k 个节点的算法，仔细体会体会~)</p>
-<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqrenll0pij20v00nedgg.jpg" alt=""></p>
-<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>代码只线性遍历链表，因此时间复杂度为 O(n)，空间复杂度O(1)。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-	<div>
-
-</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/30/剑指offer2之正则表达式匹配/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="洪荣宣">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rongxuanhong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/30/剑指offer2之正则表达式匹配/" itemprop="url">剑指offer2之正则表达式匹配</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-30T16:02:32+08:00">2018-04-30</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/04/30/剑指offer2之正则表达式匹配/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/30/剑指offer2之正则表达式匹配/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>正则表达式匹配也是编程中很常见的技术，那么给定正则表达式匹配的规则，那么对于模式串，如何判断字符串是否与之匹配呢？这就涉及到了字符串的编程能力。字符串的应用也是面试中非常重要的一类。</p>
-<h1 id="题目-正则表达式匹配"><a href="#题目-正则表达式匹配" class="headerlink" title="题目(正则表达式匹配)"></a>题目(<a href="https://blog.csdn.net/u011475210/article/details/78858064" target="_blank" rel="noopener">正则表达式匹配</a>)</h1><p>题目：请实现一个函数用来匹配包括 ‘.’ 和 ‘<em>‘ 的正则表达式。模式中的字符 ‘.’ 表示任意一个字符，而 ‘</em>‘ 表示它前面的字符可以出现任意次（包含0次）。 在本题中，匹配是指字符串的所有字符匹配整个模式。例如，字符串 “aaa” 与模式 “a.a” 和 “ab<em>ac</em>a” 匹配，但是与 “aa.a” 和 “ab*a” 均不匹配。</p>
-<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>很明显需要利用递归。<br>首先考虑下递归的出口。如果字符串与模式串能够匹配，那么此时，他们都匹配到了字符终止标记’\0’；否则，如果字符串还未到达’\0’,而模式串已经到达了 ‘\0’,那么说明此时匹配不成功。</p>
-<p>接下来我们先考虑含 <em> 的情况，**这里要注意含 </em> 的情况有包含一些 . 的情况<strong>，所以我们需要先考虑 <em> 的情况。<br>那么如果模式串的下一个字符是 </em> ，首先分为两种情况。  
-</strong>情况一**：如果字符串和模式串的第一个字符相等或者模式串中第一个字符含 ‘.’而字符串未到达末位，那么又可以分为三种子情况：</p>
-<ul>
-<li>如果字符串的第一个字符和模式串的第一个字符不相等，字符串可以继续和模式串中的下下一个字符判断匹配(忽略 * 本身及其前面的字符)；</li>
-<li>如果字符串的第一个字符和模式串的第一个字符相等，那么字符串继续前进，然后可以和模式串的第一个字符开始匹配。</li>
-<li>如果字符串的第一个字符和模式串的第一个字符相等，那么字符串继续前进，然后可以和模式串中 ‘<em>‘ 的下一个字符开始匹配(忽略 </em> 本身及其前面的字符)。</li>
-</ul>
-<p><strong>情况二</strong>：字符串第一个字符和模式串第一个字符都匹配，或者模式串中含 . 并且字符串第一个字符不是’\0’，那么字符串和模式串继续前进一位匹配。</p>
-<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqlpq02f66j20v20bbwer.jpg" alt=""></p>
-<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>算法需要对每个字符都进行匹配，因此时间复杂度为 O(n)，另外由于采用递归，需要消耗 O(n)的递归工作栈，所以空间复杂度为 O(n)。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-	<div>
-
-</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1066,7 +1090,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
