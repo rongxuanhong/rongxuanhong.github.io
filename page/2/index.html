@@ -306,6 +306,152 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/18/剑指offer2之二叉树的镜像/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/18/剑指offer2之二叉树的镜像/" itemprop="url">剑指offer2之二叉树的镜像</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-18T19:59:51+08:00">2018-05-18</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/18/剑指offer2之二叉树的镜像/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/05/18/剑指offer2之二叉树的镜像/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>画图是在面试过程中应聘者用来帮助自己分析、推理的常用手段。画出一些与题目相关的图形，借以辅助自己观察和思考。比如涉及二叉树、链表、二维数组等问题都可以采用画图的方法来分析。</p>
+<h1 id="题目-二叉树的镜像"><a href="#题目-二叉树的镜像" class="headerlink" title="题目(二叉树的镜像)"></a>题目(<a href="https://www.nowcoder.com/questionTerminal/564f4c26aa584921bc75623e48ca3011" target="_blank" rel="noopener">二叉树的镜像</a>)</h1><p>请完成一个函数，输入一棵二叉树，该函数输出它的镜像。<br>(镜像就是每棵子树的左右节点交换)</p>
+<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>由于我们需要对二叉树的每颗子树进行左右子节点的交换过程，因此，我们利用层序遍历二叉树，然后每棵子树进行操作。  </p>
+<p>而层序遍历二叉树可以使用递归和非递归(循环)的方式。</p>
+<p>对于递归方式，当当前根节点或同时不存在左右子树时递归退出，否则就交换两个子树，若一边子树不存在，也必须交换，接下根节点如果还有右节点或左节点，那么就继续递归下去求解。</p>
+<p>对于非递归方式，主要利用队列(本题栈也形，因为它只要对每个节点下的子树进行交换，而与节点顺序无关)来实现，从上到下，从左到右依次将需要进行交换的节点入栈(根节点先入栈)，对于出栈的是叶节点就跳过循环。</p>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><h2 id="递归版本"><a href="#递归版本" class="headerlink" title="递归版本"></a>递归版本</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqy9mt3kehj20v50a0glo.jpg" alt=""></p>
+<h2 id="非递归-循环-版本"><a href="#非递归-循环-版本" class="headerlink" title="非递归(循环)版本"></a>非递归(循环)版本</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqyc01if95j20va0endg0.jpg" alt=""></p>
+<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>算法主要利用层序遍历，每个结点只需遍历一次，故时间复杂度为 O(n)。而无论是使用了递归还是栈，最差情况下空间复杂度为 O(n)。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/15/剑指offer2之树的结构/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -895,150 +1041,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/03/剑指offer2之链表中倒数第k个节点/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="洪荣宣">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rongxuanhong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/03/剑指offer2之链表中倒数第k个节点/" itemprop="url">剑指offer2之链表中倒数第k个节点</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-03T17:16:34+08:00">2018-05-03</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/05/03/剑指offer2之链表中倒数第k个节点/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/05/03/剑指offer2之链表中倒数第k个节点/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>我们在写代码的时候要注意鲁棒性。那么所谓的鲁棒性是指程序能够判断输入是否合乎规范要求，并对不符合要求的输入予以合理的处理。提高代码的鲁棒性的有效途径是进行防御性编程。防御性编程是一种编程习惯，是指预见在什么地方可能会出现问题，并为这些可能出现的问题制定处理方式。  </p>
-<p>那么在面试时，最简单也是最实用的防御性编程就是在函数入口添加代码以验证用户输入是否符合要求。比如我们常用的输入值的边界值检测和特殊值判断。另外，我们在面对题目的时候，要多问自己几个 “如果不…那么…” 这样的话，比如接下来的这题 “链表中倒数第 k 个节点”，就隐含着的一个条件，如果链表中的节点个数大于 k 呢。那么我们在编写代码的时候就必须把这种情况处理好。</p>
-<h1 id="题目-链表中倒数第-k-个节点"><a href="#题目-链表中倒数第-k-个节点" class="headerlink" title="题目(链表中倒数第 k 个节点)"></a>题目(链表中倒数第 k 个节点)</h1><p>题目:输入一个链表，输出该链表中倒数第 k 个结点。题目从 1 开始计数，头结点为1，以此类推…</p>
-<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>比较直观的思路就是遍历一遍链表，得到链表的节点个数 n，那么倒数第 k 个节点的位置就在 n-k+1 的位置上，因此需要再次遍历链表。</p>
-<p>那么能不能只遍历链表一次呢？可以的。我们可以设置两个指针p1，p2,初始 p1 指向头结点，p2为空。然后，p1 先移动到正向第 k 个节点的位置，然后更新 p2 的指针指向头结点。然后就这样两个指针同时前进，直到前面的 p1 指针指向链表尾节点，此时 p2 所指的节点即为所求。有点类似有个尺子在衡量，然后水平移动尺子，最后尺子的初始位置就是所求。</p>
-<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqnzzvu633j20v50e8wet.jpg" alt=""></p>
-<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>两个算法思路的时间复杂度都为 O(n)，因为都是线性遍历。但是由于后者只需遍历一遍，因而后者的时间效率更优；空间复杂度为 O(n)</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-	<div>
-
-</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1090,7 +1092,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">43</span>
+                    <span class="site-state-item-count">44</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

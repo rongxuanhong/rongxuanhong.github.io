@@ -103,27 +103,27 @@
 
 
 
-  <meta name="description" content="前言在面试编程的时候，代码的规范性和完整性非常重要，可能成为能否拿到 offer 的关键因素。那么代码的规范性如何体现呢？比如清晰的书写、代码布局清晰(如缩进，括号对齐)、变量和函数的命名易懂。而代码的完整性体现在代码基本功能实现的正确性以及在边界值、错误处理等方面的全面考虑。 那么完整的代码需要从功能测试、边界测试以及负面测试来提高鲁棒性。例如，在功能测试中，除了完成基本功能，还需要考虑数值的表">
+  <meta name="description" content="题目(二叉树中和为某一值的路径—牛客网)输入一颗二叉树和一个整数，打印出二叉树中结点值的和为输入整数的所有路径。路径定义为从树的根结点开始往下一直到叶结点所经过的结点形成一条路径。 算法思路首先，处理根节点为空的情况；   接下来，按照前序遍历的思想从根节点开始递归搜索，每次先将节点加入路径，然后更新期望的路径和，即减去当前已加入路径的节点值,利用数组 path 存放当前已加入路径的节点值，然后依">
 <meta name="keywords" content="剑指offer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="剑指offer2之数值的整数次方">
-<meta property="og:url" content="http://yoursite.com/2018/04/22/剑指offer2之数值的整数次方/index.html">
+<meta property="og:title" content="剑指offer2之二叉树中和为某一值的路径">
+<meta property="og:url" content="http://yoursite.com/2018/06/18/剑指offer2之二叉树中和为某一值的路径/index.html">
 <meta property="og:site_name" content="Rongxuanhong&#39;s Blog">
-<meta property="og:description" content="前言在面试编程的时候，代码的规范性和完整性非常重要，可能成为能否拿到 offer 的关键因素。那么代码的规范性如何体现呢？比如清晰的书写、代码布局清晰(如缩进，括号对齐)、变量和函数的命名易懂。而代码的完整性体现在代码基本功能实现的正确性以及在边界值、错误处理等方面的全面考虑。 那么完整的代码需要从功能测试、边界测试以及负面测试来提高鲁棒性。例如，在功能测试中，除了完成基本功能，还需要考虑数值的表">
+<meta property="og:description" content="题目(二叉树中和为某一值的路径—牛客网)输入一颗二叉树和一个整数，打印出二叉树中结点值的和为输入整数的所有路径。路径定义为从树的根结点开始往下一直到叶结点所经过的结点形成一条路径。 算法思路首先，处理根节点为空的情况；   接下来，按照前序遍历的思想从根节点开始递归搜索，每次先将节点加入路径，然后更新期望的路径和，即减去当前已加入路径的节点值,利用数组 path 存放当前已加入路径的节点值，然后依">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqeg3s6edkj20v10iywfl.jpg">
-<meta property="og:updated_time" content="2018-04-27T13:14:30.352Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1frp023uo2bj20zk0g7dgd.jpg">
+<meta property="og:updated_time" content="2018-06-18T12:45:17.439Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="剑指offer2之数值的整数次方">
-<meta name="twitter:description" content="前言在面试编程的时候，代码的规范性和完整性非常重要，可能成为能否拿到 offer 的关键因素。那么代码的规范性如何体现呢？比如清晰的书写、代码布局清晰(如缩进，括号对齐)、变量和函数的命名易懂。而代码的完整性体现在代码基本功能实现的正确性以及在边界值、错误处理等方面的全面考虑。 那么完整的代码需要从功能测试、边界测试以及负面测试来提高鲁棒性。例如，在功能测试中，除了完成基本功能，还需要考虑数值的表">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqeg3s6edkj20v10iywfl.jpg">
+<meta name="twitter:title" content="剑指offer2之二叉树中和为某一值的路径">
+<meta name="twitter:description" content="题目(二叉树中和为某一值的路径—牛客网)输入一颗二叉树和一个整数，打印出二叉树中结点值的和为输入整数的所有路径。路径定义为从树的根结点开始往下一直到叶结点所经过的结点形成一条路径。 算法思路首先，处理根节点为空的情况；   接下来，按照前序遍历的思想从根节点开始递归搜索，每次先将节点加入路径，然后更新期望的路径和，即减去当前已加入路径的节点值,利用数组 path 存放当前已加入路径的节点值，然后依">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1frp023uo2bj20zk0g7dgd.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/22/剑指offer2之数值的整数次方/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/18/剑指offer2之二叉树中和为某一值的路径/"/>
 
 
 
@@ -133,7 +133,7 @@
   };
 </script>
 
-  <title>剑指offer2之数值的整数次方 | Rongxuanhong's Blog</title>
+  <title>剑指offer2之二叉树中和为某一值的路径 | Rongxuanhong's Blog</title>
   
 
 
@@ -311,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/22/剑指offer2之数值的整数次方/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/18/剑指offer2之二叉树中和为某一值的路径/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="洪荣宣">
@@ -328,7 +328,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">剑指offer2之数值的整数次方</h1>
+          <h1 class="post-title" itemprop="name headline">剑指offer2之二叉树中和为某一值的路径</h1>
         
 
         <div class="post-meta">
@@ -340,7 +340,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-22T20:41:01+08:00">2018-04-22</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-18T20:45:01+08:00">2018-06-18</time>
             
 
             
@@ -358,8 +358,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/04/22/剑指offer2之数值的整数次方/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/22/剑指offer2之数值的整数次方/" itemprop="commentCount"></span>
+                <a href="/2018/06/18/剑指offer2之二叉树中和为某一值的路径/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/06/18/剑指offer2之二叉树中和为某一值的路径/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -395,21 +395,12 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在面试编程的时候，代码的规范性和完整性非常重要，可能成为能否拿到 offer 的关键因素。那么代码的规范性如何体现呢？比如清晰的书写、代码布局清晰(如缩进，括号对齐)、变量和函数的命名易懂。而代码的完整性体现在代码基本功能实现的正确性以及在边界值、错误处理等方面的全面考虑。</p>
-<p>那么完整的代码需要从功能测试、边界测试以及负面测试来提高鲁棒性。例如，在功能测试中，除了完成基本功能，还需要考虑数值的表示范围；在边界测试中，需要考虑循环条件和递归终止条件的正确性；在负面测试中，需要考虑边界值和特殊值的输入，以解决一些不合法的情况。</p>
-<p>那么对于错误处理的方式主要有三种，分别是函数用返回值来告知API调用者是否出错，如返回 0 表示出错；当错误发生时设置一个全局变量来记录；对错误情况，采用抛异常的处理方式。</p>
-<h1 id="题目-数值的整数次方"><a href="#题目-数值的整数次方" class="headerlink" title="题目(数值的整数次方)"></a>题目(数值的整数次方)</h1><p>题目：实现函数 double Power(double base,int exponent)，求 base 的 exponent 次方。不得使用库函数，同时不需要考虑大数范围。</p>
-<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>首先我们应该对输入参数的各种情况进行讨论。</p>
-<ol>
-<li>如果基 base 是 0 而且 指数 exponent 是负数，那么情况判为不合法输入；</li>
-<li>注意基 base 是 0 而且 指数 exponent 也是 0 ，这种情况在数学上是无意义的。</li>
-<li>无论指数 exponent 是正还是负都统一先转成无符号的整形类型，方便统一计算整数次方。然后，对于 exponent 为负的情况，只需将结果变为倒数即可。</li>
-</ol>
-<p>优化多次乘方的思路：<br>如果输入的指数 exponent 为 32，那么需要进行 31 次乘法操作。那么，如果我们能先算出数字的 16 次方，然后再平方一次即可；那么假如知道了数字的 16 次方，那么只需要在数字的 16 次方的基础上平方一次即可得到结果，那如果知道了数字的 8 次方，那么就可以在数字的 8 次方基础上平方一次得到数字的 16 次方的结果；那么如果知道数字的 4 次方，就可以在数字 4 此方的基础上平方一次得到数字的 8 次方；一次类推，直到知道了数字的 1 次方。  </p>
-<p>那么可用如下公式表示 a 的 n 次方:</p>
-<script type="math/tex; mode=display">a^{n}=\begin{cases}a^{n/2}\cdot a^{n/2}\qquad n为偶数 \\
-a^{\left( n-1\right) /2}\cdot a^{\left( n-1\right) /2}\qquad n为奇数\end{cases}</script><h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqeg3s6edkj20v10iywfl.jpg" alt=""></p>
-<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>时间主要消耗在求解乘法运算结果上面，而使用递归方法(二分原问题)进行乘法求解的时间复杂度为 O(logn)，空间复杂度为 O(1)。</p>
+        <h1 id="题目-二叉树中和为某一值的路径—牛客网"><a href="#题目-二叉树中和为某一值的路径—牛客网" class="headerlink" title="题目(二叉树中和为某一值的路径—牛客网)"></a>题目(<a href="https://www.nowcoder.com/questionTerminal/b736e784e3e34731af99065031301bca" target="_blank" rel="noopener">二叉树中和为某一值的路径—牛客网</a>)</h1><p>输入一颗二叉树和一个整数，打印出二叉树中结点值的和为输入整数的所有路径。路径定义为从树的根结点开始往下一直到叶结点所经过的结点形成一条路径。</p>
+<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>首先，处理根节点为空的情况；  </p>
+<p>接下来，按照<strong>前序遍历</strong>的思想从根节点开始递归搜索，每次先将节点加入路径，然后<strong>更新期望的路径和</strong>，即减去当前已加入路径的节点值,利用数组 path 存放当前已加入路径的节点值，然后依次判断根节点的左右子树是否存在，存在则继续递归寻找，待<strong>递归返回</strong>后，必须从路径中移除当前节点，以便继续记录其余路径；  </p>
+<p>最后，就是<strong>递归出口</strong>。当遇到了叶节点，并且叶节点的值刚好等于剩余期望的路径和，那么就找到了一条路径；最后依然要从路径中移除当前节点，以便继续记录其余路径，最后再返回。</p>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1frp023uo2bj20zk0g7dgd.jpg" alt=""></p>
+<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>算法遍历了每个节点，时间复杂度为 O(n)，空间复杂度主要在递归栈，大致消耗 O(logn)的空间,还有一些辅助数组空间。</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
 
       
@@ -443,7 +434,7 @@ a^{\left( n-1\right) /2}\cdot a^{\left( n-1\right) /2}\qquad n为奇数\end{case
     <strong>Post author: </strong>洪荣宣</li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="http://yoursite.com/2018/04/22/剑指offer2之数值的整数次方/" title="剑指offer2之数值的整数次方">http://yoursite.com/2018/04/22/剑指offer2之数值的整数次方/</a>
+    <a href="http://yoursite.com/2018/06/18/剑指offer2之二叉树中和为某一值的路径/" title="剑指offer2之二叉树中和为某一值的路径">http://yoursite.com/2018/06/18/剑指offer2之二叉树中和为某一值的路径/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>All articles in this blog are licensed under 本文由 rongxuanhong 原创，采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">保留署名-非商业性使用-禁止演绎 4.0-国际许可协议</a></br>转载请保留以上声明信息! unless stating additionally.</li>
@@ -469,8 +460,8 @@ a^{\left( n-1\right) /2}\cdot a^{\left( n-1\right) /2}\qquad n为奇数\end{case
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/20/剑指offer2之打印从1到最大的n位数/" rel="next" title="剑指offer2之打印从1到最大的n位数">
-                <i class="fa fa-chevron-left"></i> 剑指offer2之打印从1到最大的n位数
+              <a href="/2018/06/06/剑指offer2之二叉搜索树的后序遍历序列/" rel="next" title="剑指offer2之二叉搜索树的后序遍历序列">
+                <i class="fa fa-chevron-left"></i> 剑指offer2之二叉搜索树的后序遍历序列
               </a>
             
           </div>
@@ -478,10 +469,6 @@ a^{\left( n-1\right) /2}\cdot a^{\left( n-1\right) /2}\qquad n为奇数\end{case
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/22/SVM系列之核函数与KKT条件(二)/" rel="prev" title="SVM系列之核函数与KKT条件(二)">
-                SVM系列之核函数与KKT条件(二) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -659,7 +646,7 @@ a^{\left( n-1\right) /2}\cdot a^{\left( n-1\right) /2}\qquad n为奇数\end{case
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目-数值的整数次方"><span class="nav-number">2.</span> <span class="nav-text">题目(数值的整数次方)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法思路"><span class="nav-number">3.</span> <span class="nav-text">算法思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现"><span class="nav-number">4.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂度分析"><span class="nav-number">5.</span> <span class="nav-text">复杂度分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目-二叉树中和为某一值的路径—牛客网"><span class="nav-number">1.</span> <span class="nav-text">题目(二叉树中和为某一值的路径—牛客网)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法思路"><span class="nav-number">2.</span> <span class="nav-text">算法思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现"><span class="nav-number">3.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂度分析"><span class="nav-number">4.</span> <span class="nav-text">复杂度分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
