@@ -113,7 +113,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fq6oh1ovtyj20l008u74k.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25ly1fq7wtuwsxqj20960813yz.jpg">
-<meta property="og:updated_time" content="2018-04-27T13:06:45.553Z">
+<meta property="og:updated_time" content="2018-07-02T06:14:03.812Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SVM系列之核函数与KKT条件(二)">
 <meta name="twitter:description" content="前言在前一篇文章中介绍的 SVM 基本型，其实还可以进行优化。主要是利用核函数对向量内积的计算进行优化。另外，我们还将详细分析拉格朗日乘子法与KKT条件,以及KKT条件对SVM分类的作用。那我们先来看看核函数是什么。 核函数在异或问题中，由于 \(0\oplus 0=0\)、\(1\oplus 1=0\)、\(0\oplus 1=1\)、\(1\oplus 0=1\)，所有只有两类结果，我们将 0">
@@ -398,7 +398,7 @@
       
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在前一篇文章中介绍的 SVM 基本型，其实还可以进行优化。主要是利用核函数对向量内积的计算进行优化。另外，我们还将详细分析拉格朗日乘子法与KKT条件,以及KKT条件对SVM分类的作用。那我们先来看看核函数是什么。</p>
 <h1 id="核函数"><a href="#核函数" class="headerlink" title="核函数"></a>核函数</h1><p>在异或问题中，由于 \(0\oplus 0=0\)、\(1\oplus 1=0\)、\(0\oplus 1=1\)、\(1\oplus 0=1\)，所有只有两类结果，我们将 0 标记为负号，将 1 标记为正号，并且将这四种情况形象地标注在下图左侧中。可以看到，对于这类样本点，我们无法找到线性可分的超平面，而只能绘制一条非线性曲线将他们划分开。那么有什么办法可以将他们划分开呢？这时候，核方法(kernel trick)就出场啦。</p>
-<p>所谓的核方法，其实就是将样本从原始的特征空间映射到一个高维的特征空间，以使得样本在高维特征空间中仍然线性可分。正如下图中所示，我们对 \(x\) 使用一个映射函数 \(\phi\)，得到映射到高维特征空间的特征向量 \(\phi \left( x\right) \)，然后这些样本点在三维空间的确可以找到一个平面将样本点线性可分(黑色实线所画的平面)。幸运的是，如果原始空间是有限维，即属性树有限，那么一定存在一个高维特征空间使样本可分。那么其实我们只要找到映射函数，就可以将线性不可分的样本转为线性可分的情况了。但是，这个映射函数很难寻找，SVM 模型没有直接硬来，而是巧妙的引入核函数来间接地解决实现这种变换。  </p>
+<p>所谓的核方法，其实就是将样本从原始的特征空间映射到一个高维的特征空间，以使得样本在高维特征空间中仍然线性可分。正如下图中所示，我们对 \(x\) 使用一个映射函数 \(\phi\)，得到映射到高维特征空间的特征向量 \(\phi \left( x\right) \)，然后这些样本点在三维空间的确可以找到一个平面将样本点线性可分(黑色实线所画的平面)。幸运的是，如果原始空间是有限维，即属性数有限，那么一定存在一个高维特征空间使样本可分。那么其实我们只要找到映射函数，就可以将线性不可分的样本转为线性可分的情况了。但是，这个映射函数很难寻找，SVM 模型没有直接硬来，而是巧妙的引入核函数来间接地解决实现这种变换。  </p>
 <p>那么接下来我们看看核函数如何应用于模型上。<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fq6oh1ovtyj20l008u74k.jpg" alt="三维上的异或问题分类"></p>
 <p>在前一篇文章中的 SVM 对偶问题为:</p>
 <script type="math/tex; mode=display">\max _{\alpha }\sum ^{m}_{i=1}\alpha _{i}-\dfrac {1}{2}\sum ^{m}_{i=1}\sum ^{m}_{j=1}\alpha _{i}\alpha _{j}y_{i}y_{j} x_{i}^{T}x_{j}\quad \alpha _{i}\geq 0</script><p>可以看到，我们需要计算第 i 和第 j 两个样本的内积。<br>另外，对应的分类决策函数的公式为：</p>
@@ -432,7 +432,7 @@
 <script type="math/tex; mode=display">\begin{cases}\alpha _{i}\geq 0,\quad \mu_{i}\geq 0\\
 y_{i}f\left( x_{i}\right) -1+\xi _{i}\geq 0\\
 \alpha _{i}\left( y_{i}f\left( x_{i}\right) -1+\xi _{i}\right) =0\\
-\xi _{i}\geq 0,u_{i}\xi _{i}=0\end{cases}</script><p>再结合求解出的约束 \(0\leq \alpha _{i}\leq C\) 以及 \(C=\alpha_{i}+\mu_{i}\)。<br>那么，对于任意一个样本 \(\left(x _{i},y _{i}\right)\)，由括号中的第四个条件可知，总有 \(\alpha _{i}=0\) 或者 \(y_{i}f\left( x_{i}\right)=1-\xi _{i}\);<br>那么当 \(\alpha _{i}=0\)，即样本被分类正确，它们处在边界的外面，不会影响到函数 f,即 \(y_{i}\left( w^{T}x_{i}+b\right) \geq 1\);<br>当 \(\alpha_{i}&gt;0\) 时，该样本是支持向量;<br>若 \(0&lt;\alpha _{i}&lt;C\),则 \(\mu_{i}&lt;0\)，推出  \(\xi_{i}=0\),所以 \(y_{i}f\left( x_{i}\right)=1-\xi _{i}\)，即该样本恰好落在最大间隔的边界线上，即 \(y_{i}\left( w^{T}x_{i}+b\right)=1\);<br>若 \(\alpha_{i}=C\)，则有 \(\mu_{i}=0\)，那么此时若 \(\xi_{i}\leq 0\)，则样本落在最大间隔的内部，否则该样本被错误分类了，即它跑到了对面的间隔边界外了，即 \(y_{i}\left( w^{T}x_{i}+b\right) \leq 1\)。<br>总之，软间隔的支持向量可以在边界上，边界内或者错误的边界外。</p>
+\xi _{i}\geq 0,u_{i}\xi _{i}=0\end{cases}</script><p>再结合求解出的约束 \(0\leq \alpha _{i}\leq C\) 以及 \(C=\alpha_{i}+\mu_{i}\)。<br>那么，对于任意一个样本 \(\left(x _{i},y _{i}\right)\)，由括号中的第三个条件可知，总有 \(\alpha _{i}=0\) 或者 \(y_{i}f\left( x_{i}\right)=1-\xi _{i}\);<br>那么当 \(\alpha _{i}=0\)，即样本被分类正确，它们处在边界的外面，不会影响到函数 f,即 \(y_{i}\left( w^{T}x_{i}+b\right) \geq 1\);<br>当 \(\alpha_{i}&gt;0\) 时，该样本是支持向量;<br>若 \(0&lt;\alpha _{i}&lt;C\),则 \(\mu_{i}&lt;0\)，推出  \(\xi_{i}=0\),所以 \(y_{i}f\left( x_{i}\right)=1-\xi _{i}\)，即该样本恰好落在最大间隔的边界线上，即 \(y_{i}\left( w^{T}x_{i}+b\right)=1\);<br>若 \(\alpha_{i}=C\)，则有 \(\mu_{i}=0\)，那么此时若 \(\xi_{i}\leq 1\)，则样本落在最大间隔的内部，否则该样本被错误分类了，即它跑到了对面的间隔边界外了，即 \(y_{i}\left( w^{T}x_{i}+b\right) \leq 1\)。<br>总之，软间隔的支持向量可以在边界上，边界内或者错误的边界外。</p>
 <blockquote>
 <p>注意硬间隔支持向量与软间隔支持向量的区别。</p>
 </blockquote>
