@@ -306,6 +306,414 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/17/DialogFragment源码解析与应用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/17/DialogFragment源码解析与应用/" itemprop="url">DialogFragment源码解析与应用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-17T21:57:23+08:00">2017-08-17</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/08/17/DialogFragment源码解析与应用/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/08/17/DialogFragment源码解析与应用/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>版权声明：本文为博主原创文章，未经博主允许不得转载</strong></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><hr>
+<p><code>DialogFragment</code> 是继承于 <code>Fragment</code> 的子类，因而其具备了 <code>Fragment</code> 的特性，如生命周期。而其内部实际控制了一个 <code>Dialog</code> 对象，并通过当前 <code>DialogFragment</code>所依附的 <code>Activity</code> 的 <code>FragmentManager</code> 来对其进行管理与控制，也即将其当做一个普通的 <code>Fragment</code> 那样来管理。</p>
+<blockquote>
+<p>注:<code>dialog</code> 拥有自己的窗体 <code>window</code>,意味着它可以自己接收输入事件，处理事件，并且决定自己何时消失。</p>
+</blockquote>
+<h1 id="浅谈生命周期"><a href="#浅谈生命周期" class="headerlink" title="浅谈生命周期"></a>浅谈生命周期</h1><hr>
+<p><code>DialogFragment</code> 与 <code>Dialog</code> 同生同死,因为 <code>DialogFragment</code> 需要监听 <code>Dialog</code>的显示与关闭,并做出反映。而这两个操作关联到了 <code>DialogFragment</code> 加入到 <code>FragmentManager</code> 中和从其中移除。这样一来 <code>Dialog</code>的创建与销毁也随着 <code>DialogFragment</code> 的生命周期而走了。</p>
+<h1 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h1><pre><code>public void setStyle(@DialogStyle int style, @StyleRes int theme) {
+    mStyle = style;
+    if (mStyle == STYLE_NO_FRAME || mStyle == STYLE_NO_INPUT) {
+        mTheme = android.R.style.Theme_Panel;
+    }
+    if (theme != 0) {
+        mTheme = theme;
+    }
+} 
+</code></pre><p>此方法为对话框设置样式与主题。其中样式有 <strong>4</strong> 个可选，一般用得比较多的是<code>STYLE_NO_TITLE</code>(指定对话框无标题模式),而主题默认的话可填0，若是自定义主题，可在<code>style</code>文件下新增一个样式，然后继承<code>Theme.Dialog</code>修改你期望的主题即可。</p>
+<blockquote>
+<p>注意: 此方法若要生效一定要在对话框未创建之前设置，否则失效。下面我们还会谈到。</p>
+</blockquote>
+<pre><code> public void show(FragmentManager manager, String tag) {
+    mDismissed = false;
+    mShownByMe = true;
+    FragmentTransaction ft = manager.beginTransaction();
+    ft.add(this, tag);
+    ft.commit();
+}
+</code></pre><p>此方法就是控制对话框的显示，调用即可。其实就是类似普通的 <code>Fragment</code>的显示操作逻辑,获取<code>FragmentManager</code>来管理当前的对话框。是不是似曾相识？ </p>
+<pre><code> public void dismiss() {
+    dismissInternal(false);
+}
+void dismissInternal(boolean allowStateLoss) {
+    if (mDismissed) {
+        return;
+    }
+    mDismissed = true;
+    mShownByMe = false;
+    if (mDialog != null) {
+        mDialog.dismiss();
+        mDialog = null;
+    }
+    mViewDestroyed = true;
+    if (mBackStackId &gt;= 0) {
+        getFragmentManager().popBackStack(mBackStackId,
+                FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        mBackStackId = -1;
+    } else {
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.remove(this);
+        if (allowStateLoss) {
+            ft.commitAllowingStateLoss();
+        } else {
+            ft.commit();
+        }
+    } 
+</code></pre><p>此方法控制<code>DialogFragment</code>的关闭。我们看到在<code>void dismissInternal()</code>方法内会判断当前的<code>Dialog</code>对象 <code>mDialog</code>是否为空，否则就调用<code>Dialog</code> 的 <code>dismiss()</code> 关闭对话框。而剩下的代码都是<code>DialogFragment</code>为了管理自己的后续操作。比如退栈操作,移除 <code>Fragment</code>。</p>
+<pre><code> public Dialog getDialog() {
+    return mDialog;
+}
+</code></pre><p>此方法用于获取 <code>DialogFragment</code> 内的 <code>Dialog</code> 对象。我们之后要对对话框的尺寸改变、去除标题、设置背景、都需要获取该实例。</p>
+<pre><code> public void setCancelable(boolean cancelable) {
+    mCancelable = cancelable;
+    if (mDialog != null) mDialog.setCancelable(cancelable);
+}
+</code></pre><p>望名知义，就是设置对话框是否可以取消。内部还是调用 <code>Dialog</code>的方法  </p>
+<pre><code> public void setShowsDialog(boolean showsDialog) {
+    mShowsDialog = showsDialog;
+}  
+</code></pre><p>此方法控制当前 <code>DialogFragment</code>是否作为对话框而存在，否则视作普通的 <code>Fragment</code>来使用。而如果你把它当前普通的 <code>Fragment</code>加入到关联的 <code>Activity</code>中，那么<code>mShowsDialog</code> 会被初始化为 <strong>true</strong>。 </p>
+<pre><code> @Override
+public void onAttach(Context context) {
+    super.onAttach(context);
+    if (!mShownByMe) {
+        mDismissed = false;
+    }
+}
+
+@Override
+public void onDetach() {
+    super.onDetach();
+    if (!mShownByMe &amp;&amp; !mDismissed) {
+        mDismissed = true;
+    }
+}
+
+@Override
+public void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+
+    mShowsDialog = mContainerId == 0;
+
+    if (savedInstanceState != null) {
+        mStyle = savedInstanceState.getInt(SAVED_STYLE, STYLE_NORMAL);
+        mTheme = savedInstanceState.getInt(SAVED_THEME, 0);
+        mCancelable = savedInstanceState.getBoolean(SAVED_CANCELABLE, true);
+        mShowsDialog = savedInstanceState.getBoolean(SAVED_SHOWS_DIALOG, mShowsDialog);
+        mBackStackId = savedInstanceState.getInt(SAVED_BACK_STACK_ID, -1);
+    }
+}  
+</code></pre><p>以上的三个方法都是 重写 <code>Fragment</code> 中的生命周期方法。前两个主要是设置相应的标志位。<br>而在 <code>onCreate()</code> 中主要是从保存的实例状态中获取相应信息（之前在 <code>onSaveInstanceState()</code> 中设置的）。  </p>
+<pre><code>/** @hide */
+@RestrictTo(LIBRARY_GROUP)
+@Override
+public LayoutInflater getLayoutInflater(Bundle savedInstanceState) {
+    if (!mShowsDialog) {
+        return super.getLayoutInflater(savedInstanceState);
+    }
+
+    mDialog = onCreateDialog(savedInstanceState);
+
+    if (mDialog != null) {
+        setupDialog(mDialog, mStyle);
+
+        return (LayoutInflater) mDialog.getContext().getSystemService(
+                Context.LAYOUT_INFLATER_SERVICE);
+    }
+    return (LayoutInflater) mHost.getContext().getSystemService(
+            Context.LAYOUT_INFLATER_SERVICE);
+}
+
+/** @hide */
+@RestrictTo(LIBRARY_GROUP)
+public void setupDialog(Dialog dialog, int style) {
+    switch (style) {
+        case STYLE_NO_INPUT:
+            dialog.getWindow().addFlags(
+                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE |
+                            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+            // fall through...
+        case STYLE_NO_FRAME:
+        case STYLE_NO_TITLE:
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+    }
+}  
+public Dialog onCreateDialog(Bundle savedInstanceState) {
+    return new Dialog(getActivity(), getTheme());
+}
+</code></pre><p>最上两个方法是被隐藏的。<code>getLayoutInflater()</code> 中首先判断是否显示为一个对话框，若是才来到下面的逻辑。在这里我们发现，方法内调用了<code>onCreateDialog()</code>来获得一个对话框实例。如果实例存在，那么才开始配置对话框<strong>(注意：我们发现此处获取前述的 <code>setStyle()</code>传进来的值，因而该方法的调用必须早于此，也就是说你至少可以在 <code>onCreateDialog()</code>中进行设置)</strong>，此时，方法返回与对话框上下文关联的布局加载器。<br>接下来我们看<code>setupDialog()</code>。方法内根据存入的样式，对对话框实例进行一系列的设置，比如禁止获取焦点、不可触摸、设置无标题。<br>另外，在 <code>onCreateDialog()</code> 返回了一个新的对话框实例。在此，我们注意到，如果你想实现一些Dialog子类的对话框,比如 <code>AlertDialog</code>，那么你就可以重写该方法，返回你要创建的<code>Dialog</code> 子类实例。  </p>
+<pre><code>@Override
+public void onActivityCreated(Bundle savedInstanceState) {
+    super.onActivityCreated(savedInstanceState);
+
+    if (!mShowsDialog) {
+        return;
+    }
+
+    View view = getView();
+    if (view != null) {
+        if (view.getParent() != null) {
+            throw new IllegalStateException(
+                    &quot;DialogFragment can not be attached to a container view&quot;);
+        }
+        mDialog.setContentView(view);
+    }
+    final Activity activity = getActivity();
+    if (activity != null) {
+        mDialog.setOwnerActivity(activity);
+    }
+    mDialog.setCancelable(mCancelable);
+    mDialog.setOnCancelListener(this);
+    mDialog.setOnDismissListener(this);
+    if (savedInstanceState != null) {
+        Bundle dialogState = savedInstanceState.getBundle(SAVED_DIALOG_STATE_TAG);
+        if (dialogState != null) {
+            mDialog.onRestoreInstanceState(dialogState);
+        }
+    }
+}  
+</code></pre><p>当<code>Activity</code>创建完成后回调。若<code>mShowsDialog</code>为<strong>false</strong>，那么以下逻辑不再执行。<br>否则获取当前 <code>DialogFragment</code> 的根布局实例 <code>view</code>,并将其作为对话框的内容，加入其中。接下来把对话框与 <code>Activity</code> 进行绑定。接下来就是对话框的配置，包括注册取消监听，关闭监听。最后保存相关状态到 <code>savedInstanceState</code>,以便重建时利用。</p>
+<pre><code> @Override
+public void onStart() {
+    super.onStart();
+
+    if (mDialog != null) {
+        mViewDestroyed = false;
+        mDialog.show();
+    }
+}  
+</code></pre><p>此方法很重要。对话框真正显示就在此后。内容调用了 <code>mDialog</code> 的<code>show()</code>方法，将对话框显示出来(依附于 <code>Fragment</code>)</p>
+<pre><code>     @Nullable
+public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+        @Nullable Bundle savedInstanceState) {
+    return null;
+}
+</code></pre><p>此方法为 <code>Fragment</code> 中的方法，为空实现，它交给子类去加载一个 <strong>contentView</strong>,再由<code>Fragment</code> 来处理。而我们对话框的内容布局就是在此处进行加载，以便返回一个对话框的布局给 <code>Fragment</code> 去处理。</p>
+<blockquote>
+<p>注意：<code>onCreateDialog()</code>比 <code>onCreateView()</code> 先一步执行。因为在 <code>Fragment</code>中调用<code>onCreateView()</code> 时需要拿到一个布局加载器<code>LayoutInflater</code>,而<code>DialogFragmet</code>中是通过上述的一个方法—<code>getLayoutInflater()</code>来返回一个与对话框有关的上下文布局加载器,<code>onCreateDialog()</code>就在其中被调用，因而我们很容易就可以知道两者的执行次序。  </p>
+</blockquote>
+<h1 id="几类常见应用"><a href="#几类常见应用" class="headerlink" title="几类常见应用"></a>几类常见应用</h1><h2 id="普通对话框"><a href="#普通对话框" class="headerlink" title="普通对话框"></a>普通对话框</h2><pre><code>public class CommonDialogFragment extends DialogFragment {
+
+private static final String TAG = &quot;CommonDialogFragment&quot;;
+
+
+@Nullable
+@Override
+public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+     Dialog dialog = getDialog();
+    DisplayMetrics dm = DensityUtil.getDisplayMetrics(getActivity());
+    int width = dm.widthPixels;
+    if (dialog != null) {
+        dialog.getWindow().setLayout(width * 2 / 3, width / 2);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));//去除多余的padding
+    }
+    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+    View view = inflater.inflate(R.layout.time, container, false);
+    ListView mListView = (ListView) view.findViewById(R.id.listview);
+    mListView.setAdapter(new MyAdapter(getActivity()));
+    return view;
+    }
+}
+</code></pre><p>这类很简单，一般只要重写 <code>onCreateView()</code>，和<code>Fragment</code>中的做法一样。只是需要额外配置对话框的一些设置，我们下面再统一叙述。  </p>
+<h2 id="警告对话框"><a href="#警告对话框" class="headerlink" title="警告对话框"></a>警告对话框</h2><pre><code>public class MyAlerDialog extends DialogFragment {
+
+private static final String TAG = &quot;RoundCornerDialog&quot;;
+
+@Override
+public Dialog onCreateDialog(Bundle savedInstanceState) {
+    return new AlertDialog.Builder(getActivity()).setMessage(&quot;我是对话框&quot;).setTitle(&quot;警告&quot;).setIcon(R.mipmap.ic_launcher).create();
+}
+
+@Nullable
+@Override
+public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    Dialog dialog = getDialog();
+    DisplayMetrics dm = DensityUtil.getDisplayMetrics(getActivity());
+    int width = dm.widthPixels;
+    if (dialog != null) {
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));//去除多余的padding
+        dialog.getWindow().setLayout(width * 2 / 3, width / 2);
+    }
+    return super.onCreateView(inflater, container, savedInstanceState);
+}
+</code></pre><p>}</p>
+<h2 id="圆角对话框"><a href="#圆角对话框" class="headerlink" title="圆角对话框"></a>圆角对话框</h2><p>圆角对话框与上述两张对话框创建流程无异，只需对布局额外加上一层drawable绘制的圆角背景层即可</p>
+<blockquote>
+<p>注意: 若加了圆角背景层仍没有圆角化，那么你需要对圆角背景层再 加上padding属性即可解决。</p>
+</blockquote>
+<h1 id="对话框的配置"><a href="#对话框的配置" class="headerlink" title="对话框的配置"></a>对话框的配置</h1><h2 id="去标题化"><a href="#去标题化" class="headerlink" title="去标题化"></a>去标题化</h2><ol>
+<li>调用<code>setStyle()</code>传入<code>STYLE_NO_TITLE</code>,必须在<code>Dialog</code>创建之前调用方可生效。</li>
+<li>定义自己的主题，设置 <code>windowNoTitle</code>属性为<strong>true</strong></li>
+</ol>
+<h2 id="背景透明化"><a href="#背景透明化" class="headerlink" title="背景透明化"></a>背景透明化</h2><pre><code>getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT)。
+</code></pre><p>我们一般都会加上，没有设置有可能出现多余的padding，它可让整个<code>Window</code>透明化。</p>
+<h2 id="设置Dialog的尺寸"><a href="#设置Dialog的尺寸" class="headerlink" title="设置Dialog的尺寸"></a>设置Dialog的尺寸</h2><p>由于 <code>Dialog</code> 属于 <code>Window</code> 级别，属于独立窗体，因而要改变 <code>Dialog</code> 的尺寸实际上就上改变窗体 <code>Window</code> 的尺寸，而如果你对布局修改尺寸是毫无效果的。<br>我们通过<code>getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)</code>来设置对话框具体宽高或全屏就够了。</p>
+<h2 id="设置对话框方位"><a href="#设置对话框方位" class="headerlink" title="设置对话框方位"></a>设置对话框方位</h2><p>实际还是控制<code>window</code>这个对象，调用它的方法<code>setGravity()</code>即可。  </p>
+<blockquote>
+<p>注意： 但凡涉及到获取对话框所在的<code>window</code>对象时，都必须在对话框已经创建了之后调用。</p>
+</blockquote>
+<h2 id="配置style样式定制主题"><a href="#配置style样式定制主题" class="headerlink" title="配置style样式定制主题"></a>配置style样式定制主题</h2><p>我们查看源码可知道对话框的默认主题基础自<code>Theme.Dialog</code>，那么我们便可以继承整个主题，修改默认主题中的属性值来达到我们想要的效果，下面贴出对话框默认的主题。</p>
+<pre><code>    &lt;style name=&quot;Theme.Dialog&quot;&gt;
+    &lt;!--配置window有无边框--&gt;
+    &lt;item name=&quot;windowFrame&quot;&gt;@null&lt;/item&gt;
+    &lt;!--配置window标题样式--&gt;
+    &lt;item name=&quot;windowTitleStyle&quot;&gt;@style/DialogWindowTitle&lt;/item&gt;
+    &lt;!--配置window背景层--&gt;常用
+    &lt;item name=&quot;windowBackground&quot;&gt;@drawable/panel_background&lt;/item&gt;
+    &lt;!--配置window是否浮在上面--&gt;
+    &lt;item name=&quot;windowIsFloating&quot;&gt;true&lt;/item&gt;
+    &lt;!--配置window是否浮在上面--&gt;
+    &lt;!--配置window有无标题 --&gt; 常用
+    &lt;item name=&quot;windowNoTitle&quot;&gt;true&lt;/item&gt;
+    &lt;!--配置window进入退出动画 --&gt; 常用
+    &lt;item name=&quot;windowAnimationStyle&quot;&gt;@style/Animation.Dialog&lt;/item&gt;
+    &lt;!--配置window外部是否可触摸--&gt;
+    &lt;item name=&quot;windowCloseOnTouchOutside&quot;&gt;@bool/config_closeDialogWhenTouchOutside&lt;/item&gt;
+    ....此处省略部分属性
+    &lt;/style&gt;
+</code></pre><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>首先，介绍了使用<code>DialogFragment</code> 的缘由以及好处，再来谈到了它的生命周期，这也是之所以使用这种方式来呈现对话框的关键所在。再接下来，我们从源码的角度，详细剖析了各个方法的作用、联系，以及调用的时机以及注意事项。再来介绍了<code>DialogFragment</code>的几种常见的应用，也可以说是常用的代码模版了。最后，介绍了配置对话框的一些常用的手段以及注意事项。</p>
+<h1 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h1><p>感谢您看到这里，期望留下您的印迹。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/30/一起看画笔Paint/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2330,446 +2738,11 @@ public static void main(String[] args) throws Throwable {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/巧用设计模式实现Recyclerview各种复杂Item类型/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="洪荣宣">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rongxuanhong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/01/巧用设计模式实现Recyclerview各种复杂Item类型/" itemprop="url">巧用设计模式实现Recyclerview各种复杂Item类型</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-01T21:05:50+08:00">2017-05-01</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/05/01/巧用设计模式实现Recyclerview各种复杂Item类型/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/05/01/巧用设计模式实现Recyclerview各种复杂Item类型/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong>版权声明：本文为博主原创文章，未经博主允许不得转载</strong></p>
-<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>  在实际项目的开发中，首页的布局基本上都是复杂的 UI，而我们的实现思路一般就是利用 <code>RecyclerView</code> 结合 <code>getItemType()</code>，并在适配器里根据不同的 <code>item</code> 类型去创建不同的 <code>ViewHolder</code>,最后在 <code>onBindViewHolder()</code> 中依然是根据 <code>item</code> 类型来绑定对应的数据。这种方法是最基本的方法，相信大家都懂。但是，其缺点也很明显，就是可扩展性太差。</p>
-<p> 接下来，我将介绍另一种更为巧妙的方法来实现，以期大大提高其扩展性。我们将以 <code>item</code> 的布局 <code>id</code> 作为区别<code>item</code>的唯一标志并结合两种设计模式,为大家呈现一种新颖，简洁的方式来实现此类复杂布局。其中如有纰漏，望请悉心指出。  </p>
-<h1 id="必备知识"><a href="#必备知识" class="headerlink" title="必备知识"></a>必备知识</h1><p>本实现方法主要用到了 <code>Java</code> 设计模式中的访问者模式和工厂方法模式，亦涉及到 <code>ViewHolder</code> 的封装技巧。  </p>
-<h1 id="访问者模式"><a href="#访问者模式" class="headerlink" title="访问者模式"></a>访问者模式</h1><ol>
-<li><p><strong>概念</strong><br><code>Java</code> 中的访问者模式属于一种行为型设计模式，核心主要由访问者与被访问者两部分组成。一般对于同一场景来说，被访问者都是由不同类的类型所表示，而不同的访问者可以对被访问者进行不同的访问操作。其中，被访问者常利用集合结构来存储(比如 <code>List</code> )，访问者通过遍历集合实现对其中存储的元素的逐个操作。  </p>
-</li>
-<li><p><strong>UML类图</strong></p>
-</li>
-</ol>
-<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ff5p96ef3lj20dw0e53yz.jpg" alt="访问者模式UML类图"> </p>
-<blockquote>
-<p>出处:<a href="https://zh.wikipedia.org/wiki/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95" target="_blank" rel="noopener">维基百科</a>  </p>
-</blockquote>
-<p><strong>UML解读</strong></p>
-<p>   该<code>UML</code>类图中有两个类：访问者(<code>Visitor</code>)和被访问者(<code>Element</code>),然后有多个具体访问者继承访问者 <code>Visitor</code>（eg: <code>ConcreateVisitor1</code> ），也有多个具体被访问者继承被访问者 <code>Element</code>（eg: <code>ConcreateElementA</code> ） 。首先，<code>Visitor</code> 中为每个具体被访问者定义了一个可访问具体被访问者操作的方法(通过注入具体被访问者的引用)；其次，<code>Element</code> 中定义了一个接受访问的方法 <code>accept</code>，并且依赖注入访问者 <code>visitor</code>，以便访问者可以访问被访问者；然后，<code>Object Structure</code> 对象结构主要用于存储被访问者。因此，对于每个被访问者都应先从该对象结构中取出来。最后，客户端 <code>Client</code> 定义集合对象收集被访问者数据，通过对集合的遍历完成访问者对每一个被访问元素的访问操作。  </p>
-<blockquote>
-<p>具体例子详见推荐博客 <a href="http://blog.csdn.net/janice0529/article/details/41151987" target="_blank" rel="noopener">Java设计模式之 访问者模式【Visitor Pattern】</a>  </p>
-</blockquote>
-<h1 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h1><ol>
-<li><p><strong>概念</strong>  </p>
-<p> 工厂方法模式是一种实现了“工厂”概念的面向对象设计模式 ,是处理在不指定对象具体类型的情况下创建对象的问题。工厂方法模式的实质是“定义一个创建对象的接口，但让实现这个接口的类来决定实例化哪个类。工厂方法让类的实例化推迟到子类中进行。”</p>
-</li>
-<li><p><strong>UML类图</strong></p>
-<p> <img src="http://ww1.sinaimg.cn/large/8992ce25gy1ff5uwck661j209p05qdfq.jpg" alt="工厂模式"></p>
-<blockquote>
-<p>出处:<a href="https://zh.wikipedia.org/wiki/%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F" target="_blank" rel="noopener">维基百科</a>  </p>
-</blockquote>
-</li>
-</ol>
-<p><strong>UML解读</strong>  </p>
-<p>   首先在创建器 <code>Creator</code> 中定义一个工厂方法用于生产未指定具体类型的产品，其次，子类—具体创建器 <code>ConcreteCreator</code> 实现父类工厂方法，给出创建具体产品类型的实现，最后，客户端只需调用具体创建者中的方法即可得到所需的产品。  </p>
-<blockquote>
-<p>具体例子详见推荐博客<a href="http://blog.csdn.net/zhengzhb/article/details/7348707" target="_blank" rel="noopener">工厂方法模式</a></p>
-</blockquote>
-<h1 id="BaseViewHolder的封装"><a href="#BaseViewHolder的封装" class="headerlink" title="BaseViewHolder的封装"></a>BaseViewHolder的封装</h1><pre><code>/**
- * 封装的 viewholder 用于获取各个 item 上的控件 采用集合存储取过的控件
- */
-
-public  class BaseViewHolder extends RecyclerView.ViewHolder {
-protected View itemView;//每个item的布局视图view
-protected SparseArray&lt;View&gt; list;//itemView上所有控件的集合
-
-public BaseViewHolder(View itemView) {
-    super(itemView);
-    this.itemView = itemView;
-    list=new SparseArray&lt;&gt;();
-}
-/**
-*获取 itemView 上控件
-*/
- public &lt;T&gt; T getView(int id) {
-    View view = list.get(id);
-    if (view == null) {
-        view = itemView.findViewById(id);
-        list.put(id, view);
-    }
-    return (T) view;
-}
-</code></pre><p><code>BaseViewHolder</code> 继承至 <code>RecyclerView.ViewHolder</code> ，可作为 <code>Recyclerview</code> 适配器中通用的 <code>ViewHolder</code> 来使用，因此你无需在每个适配器里面再定义内部类 <code>MyViewHolder</code>。<code>BaseViewHolder</code> 可以在构造器中获取到每个 <code>item</code> 的 <code>itemView</code>，然后就可以定义一个快速获取 <code>itemView</code> 上各个子控件的方法 <code>getView</code>,以后在适配器中获取 <code>item</code> 子控件能够随时调用此方法.  </p>
-<h1 id="BetterViewHolder"><a href="#BetterViewHolder" class="headerlink" title="BetterViewHolder"></a>BetterViewHolder</h1><pre><code>public abstract class BetterViewHolder&lt;T&gt; extends BaseViewHolder {
-public BetterViewHolder(View itemView) {
-    super(itemView);
-}
-
-/**
- * 绑定 item 的数据
- * @param t 每个item的实体引用
- */
-public abstract void bindDataToItem(T t,int position);
-}  
-</code></pre><p><code>BetterViewHolder</code> 声明为抽象类型，在 <code>BaseViewHolder</code> 基础上再次封装了一层。主要定义了一个抽象方法用于实现适配器中 <code>onBindViewHolder（T t，int position)</code> 的功能。但由于子类的实体类型不可确定，故需要借助泛型技巧,定义T来表示子类的泛型。因此，子类只需继承该类，并指定子类所需的实体类型即可。  </p>
-<h1 id="实例解析"><a href="#实例解析" class="headerlink" title="实例解析"></a>实例解析</h1><ul>
-<li><p>本例中定义了四种 <code>item</code> 布局类型,如下图所示  </p>
-<p>  <img src="http://ww1.sinaimg.cn/large/8992ce25gy1fjdetu2ltuj20fd0i7gmf.jpg" alt=""></p>
-</li>
-</ul>
-<p><strong>布局代码见底部源码</strong>  </p>
-<ul>
-<li>定义访问者 <code>TypeFactory</code>   </li>
-</ul>
-<pre><code>    public abstract class TypeFactory {  
-
-    public abstract int type(Banner banner);
-
-    public abstract int type(Category category);
-
-    public abstract int type(Item item);
-
-    public abstract int type(Footer footer);
-    //工厂方法模式应用 
-    public  abstract BetterViewHolder onCreateViewHolder(View itemView,int  type);
-    }
-</code></pre><ul>
-<li>定义被访问者 <code>Visitable</code></li>
-</ul>
-<pre><code>    /*
-    *定义抽象的被访问者 type方法，用来接收/引用一个抽象访问者对象,以便利用这个对象进行操作;
-    */
-    public abstract class Visitable {
-    public abstract int type(TypeFactory factory);
-    }  
-</code></pre><ul>
-<li><p>定义四个实体类并继承<code>Visitable</code>  </p>
-<pre><code>  /**
-    * Created by hrx on 2017/4/30.
-   * 具体的被访问者
-    * 实现type抽象方法，通过传入的具体访问者参数、
-    * 调用具体访问者对该对象的访问操作方法实现访问逻辑;
-   * 比如这就是利用抽象访问者 TypeFactory 引用来调用操作方法获取对应该 Banner 关联的布局  id
-   */
-
-  public class Banner extends Visitable{
-       @Override
-      public int type(TypeFactory factory) {
-       return factory.type(this);
-      }
-   }  
-
-  public class Category extends Visitable {
-    @Override
-    public int type(TypeFactory factory) {
-       return factory.type(this);
-    }
-  }  
-  public class Item extends Visitable {
-      private int position;
-      @Override
-      public int type(TypeFactory factory) {
-          return factory.type(this);
-      }
-
-      public int getPosition() {
-          return position;
-      }
-
-      public void setPosition(int position) {
-          this.position = position;
-      }
-  }
-  public class Footer extends Visitable {
-    @Override
-     public int type(TypeFactory factory) {
-        return factory.type(this);
-        }
-   }  
-</code></pre></li>
-<li><p>具体访问者 <code>TypeFactoryList</code>   </p>
-<pre><code>  /*
-   * 具体的访问者实现了抽象访问者的方法
-  * 同时 onCreateViewHolder 也是利用工厂方法模式创建了各个 item 的 viewholder 实例
-  */
-
-  public class TypeFactoryList extends TypeFactory {
-  //声明每个item的布局id
-  public static final int BANNER = R.layout.banner;
-  public static final int CATEGORY = R.layout.category;
-  public static final int ITEM = R.layout.item;
-  public static final int FOOTER = R.layout.footer;
-
-  @Override
-  public int type(Banner banner) {
-      return BANNER;
-  }
-
-  @Override
-  public int type(Category category) {
-      return CATEGORY;
-  }
-
-  @Override
-  public int type(Item item) {
-      return ITEM;
-  }
-
-  @Override
-  public int type(Footer footer) {
-      return FOOTER;
-  }
-
-  @Override
-  public BetterViewHolder onCreateViewHolder(View itemView, int type) {
-      BetterViewHolder viewHolder = null;
-      switch (type) {
-          case BANNER:
-              viewHolder = new BannerViewHolder(itemView);
-              break;
-          case CATEGORY:
-              viewHolder = new CategoryViewHolder(itemView);
-              break;
-          case ITEM:
-              viewHolder = new ItemViewHolder(itemView);
-              break;
-          case FOOTER:
-              viewHolder = new FooterViewHolder(itemView);
-              break;
-          default:
-              break;
-      }
-      return viewHolder;
-   }
-  }  
-</code></pre></li>
-<li><p>定义适配器   </p>
-<pre><code>  public class MainActivityAdapter extends RecyclerView.Adapter&lt;BetterViewHolder&gt; {
-  private List&lt;Visitable&gt; mVisitables;
-  private TypeFactory factory;
-
-  public MainActivityAdapter(List&lt;Visitable&gt; mVisitables) {
-      this.mVisitables = mVisitables;
-      factory = new TypeFactoryList();
-  }
-  //此 ViewHolder 的创建细节已经抽象到 TypeFactoryList 中去实现了 此处等同与获取工厂生产的产品
-  @Override
-  public BetterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-      View itemView = View.inflate(parent.getContext(), viewType, null);
-      return factory.onCreateViewHolder(itemView, viewType);
-  }
-
-  //此处的实现交由 BetterViewHolder 的各个子类去实现，故此处 Java 会根据相应的子类去获取其下实现的 bindDataToItem（）,利用JAVA动态分派而无需进行类型检查
-  @Override
-  public void onBindViewHolder(BetterViewHolder holder, int position) {
-      holder.bindDataToItem(mVisitables.get(position),position);
-  }
-
-  //此处即代表访问者模式中的客户端调用被访问者的 type()，进行访问操作获取其布局 id
-  @Override
-  public int getItemViewType(int position) {
-      return mVisitables.get(position).type(factory);
-  }
-  @Override
-  public int getItemCount() {
-      return mVisitables.size();
-  }
-  }  
-</code></pre><p>该适配器的数据就是得到访问者模式中的对象结构 <code>Object Structure</code> 中存储的被访问者集合，对应到例子中就是 <code>mVisitables</code> 集合。同时需要一个访问者引用,以便该适配器(客户端)能够利用这个引用获取每个被访问者关联到的布局Id(利用该引用执行某些操作)，如<code>mVisitables.ge(position).type(factory)</code>可以获取到每个被访问者关联到的布局 <code>id</code>。  </p>
-</li>
-<li><p>四个 <code>BetterViewHolder</code> 的子类  </p>
-<p>  四个子类代表了其对应 <code>item</code> 的 <code>ViewHolder</code> ,可以在该类上实现 <code>item</code> 上的操作，比如点击事件，设置 <code>item</code> 上子控件的所有数据等。  </p>
-</li>
-</ul>
-<p><strong>代码见底部源码</strong>  </p>
-<ul>
-<li><code>Activity</code> 收集数据并设置适配器  </li>
-</ul>
-<pre><code>    public class MainActivity extends AppCompatActivity {
-
-    private RecyclerView recyclerView;
-    private List&lt;Visitable&gt; mVisitable;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
-        //默认4列
-        final GridLayoutManager manager = new GridLayoutManager(this, 4);
-        //此方法定义每个item占几列,有点类似线性布局的权重属性
-        manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-            @Override
-            public int getSpanSize(int position) {
-                if (position &gt; 2 &amp;&amp; position &lt; 7) {
-                    return 1;
-                }
-                return 4;
-            }
-        });
-        recyclerView.setLayoutManager(manager);
-        initData();
-        recyclerView.setAdapter(new MainActivityAdapter(mVisitable));
-
-    }
-
-    private void initData() {
-        mVisitable = new ArrayList&lt;&gt;();
-        //按布局的顺序依次加入各个被访问者
-        Banner banner = new Banner();
-        mVisitable.add(banner);
-        Category category = new Category();
-        mVisitable.add(category);
-        //加入4个item
-        for (int i = 0; i &lt; 5; i++) {
-            Item item = new Item();
-            item.setPosition(i + 2);
-            mVisitable.add(item);
-        }
-        Footer footer = new Footer();
-        mVisitable.add(footer);
-    }
-}
-</code></pre><blockquote>
-<p>注:<code>mVisitable</code> 集合中被访问者的加入顺序即代表了最终显示出来的顺序，并且集合中的每个元素仅能代表其中一个 <code>item</code>，意味着如果你要重复该 <code>item</code> 就要重复声明一个实体再加入集合中。</p>
-</blockquote>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>利用访问者模式和工厂方法模式大大解耦了上述复杂布局的实现过程，同时可扩展性大大提高。如果往后还需修改布局，只需修改对应 <code>item</code> 的布局文件和数据的绑定。而若是增加 <code>item</code>，那么只需定义新的实体加入被访问者集合中，同时编写布局文件及对应的 <code>ViewHolder</code> 实现即可。这样一来，不同 <code>item</code> 间就不会相互影响，变得易维护和易扩展，相信你学会之后，一定会爱上此法。  </p>
-<p>最后，谢谢你看到这里，欢迎交流意见。   </p>
-<p><a href="https://github.com/rongxuanhong/MultiItemLayout" target="_blank" rel="noopener">源码地址</a></p>
-<h1 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h1><blockquote>
-<p><a href="http://www.jianshu.com/p/c6a44e18badb" target="_blank" rel="noopener">[译]关于 Android Adapter，你的实现方式可能一直都有问题</a><br><a href="http://blog.csdn.net/janice0529/article/details/41151987" target="_blank" rel="noopener">Java设计模式之 访问者模式【Visitor Pattern】</a><br><a href="http://blog.csdn.net/zhengzhb/article/details/7348707" target="_blank" rel="noopener">Java设计模式之 工厂方法模式</a></p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-	<div>
-
-</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span>
+    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -2816,7 +2789,7 @@ public abstract void bindDataToItem(T t,int position);
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">45</span>
+                    <span class="site-state-item-count">46</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
