@@ -306,6 +306,182 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/02/剑指offer2之斐波那契数列/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/02/剑指offer2之斐波那契数列/" itemprop="url">剑指offer2之斐波那契数列</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-02T14:38:03+08:00">2018-04-02</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/02/剑指offer2之斐波那契数列/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/02/剑指offer2之斐波那契数列/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在这之前的题目大多属于考察<strong>数据结构</strong>，然后对于 <strong>算法</strong> 的考查也是很重要的 。    </p>
+<ol>
+<li>有很多的算法都可以通过<strong>递归和循环</strong>两种方式来实现，虽说前者的实现较为简洁，但是在性能上并不占优。但在面试的时候，如果面试官没有不允许使用递归，还是可以优先使用递归来解决问题，毕竟递归实现简单一些。  </li>
+<li>对于排序和查找也是算法考察的两大重点。其中应该 <strong>重点掌握二分查找、归并排序、快速排序</strong> 。  </li>
+<li>如果是对二维数组(可能表现为迷宫或棋盘)搜索路径，那么可以考虑<strong>回溯法</strong> 。  </li>
+<li>如果面试题是求某个问题的最优解，并且问题可以分为多个子问题，且子问题之前存在重叠，那么我们可以使用<strong>动态规划</strong>解决问题，以避免使用递归而带来很多不必要的重复性计算。  </li>
+<li>如果在求最优解的时候，在分解子问题的时候是不是存在某个特殊的选择，如果采用这个特殊的选择将一定能够得到最优解，那么应该考虑一下贪心算法。  </li>
+<li>最后也需要懂得五种位运算：与、或、异或、左移和右移。</li>
+</ol>
+<blockquote>
+<p>递归的缺陷：由于函数调用是有时间和空间消耗的，因此每一次函数调用，都需要在内存栈中分配空间以保存参数、返回地址和临时变量，并且往栈中压栈和弹出数据都耗时，因此递归效率很低。更严重的是，由于每个进程的栈容量是有限的，因此当递归调用的层级过多，就会超出栈的容量而导致栈的溢出问题。</p>
+</blockquote>
+<h1 id="题目一-斐波那契数列"><a href="#题目一-斐波那契数列" class="headerlink" title="题目一(斐波那契数列)"></a>题目一(斐波那契数列)</h1><p>题目:求斐波那契数列的第n项。写一个函数，输入n，求斐波那契(Fibonacci)数列的第 n 项。斐波那契的定义如下：<br>F0=0;F1=1;Fn=Fn-1+Fn-2(n&gt;=2)</p>
+<h2 id="递归实现"><a href="#递归实现" class="headerlink" title="递归实现"></a>递归实现</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpvtc6mpslj20v506xq2x.jpg" alt="">  </p>
+<h2 id="循环实现"><a href="#循环实现" class="headerlink" title="循环实现"></a>循环实现</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpvtq1d2p3j20v709nt8z.jpg" alt="">  </p>
+<p>循环实现的关键在于，我们设置了一个 a和b 变量分别来记录之前计算过的 f(n-2) 的值和 f(n-1) 的值，以便可以在下一次计算 f(n) 时使用，避免了子问题重复计算的问题。<br>其实此题也是动态规划思想的最简单应用。</p>
+<h1 id="题目二-青蛙跳台阶"><a href="#题目二-青蛙跳台阶" class="headerlink" title="题目二(青蛙跳台阶)"></a>题目二(青蛙跳台阶)</h1><p>一指青蛙依次可以跳上 1 级台阶，也可以跳上 2 级台阶。求该青蛙跳上一个 n 级台阶总共有多少种跳法。  </p>
+<h2 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h2><ol>
+<li>最简单的情况，只跳 1 级台阶，只有一种跳法；  </li>
+<li>只跳 2 级台阶，可以先跳 1 级，再跳 1 级，也可以一次跳 2 级，所以共有 2 种跳法；</li>
+<li>那么现在我们考虑跳 n 级台阶的情况，要跳到第 n 级，我们可以从第n-2 级跳一次直接到第 n 级，也可以从 n-1 级开始跳，那么假设 f(n) 表示跳到第 n 级的跳法数，那么f(n)=f(n-1)+f(n-2)。</li>
+<li>诶，我们发现这个思路长得有点像斐波那契数列，只是一些初始条件不太一样而已，其他做法都相似。那么我们只需把上面的代码做简单修改即可。</li>
+</ol>
+<h2 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpvzj4b3d5j20v10asgm3.jpg" alt=""> </p>
+<h1 id="题目三-变态青蛙跳台阶"><a href="#题目三-变态青蛙跳台阶" class="headerlink" title="题目三(变态青蛙跳台阶)"></a>题目三(变态青蛙跳台阶)</h1><p>题目：一只青蛙一次可以跳上 1 级台阶，也可以跳上 2 级……它也可以跳上 n 级台阶，此时青蛙跳上一个 n 级的台阶总共有多少种跳法。</p>
+<h2 id="算法思路-1"><a href="#算法思路-1" class="headerlink" title="算法思路"></a>算法思路</h2><p>假设青蛙跳到 n 级台阶的跳法数为f(n),那么  </p>
+<pre><code>1. 青蛙可以从第n-1级跳到n级，共有f(n-1)种跳法；  
+2. 青蛙也可以从第n-2级跳到n级，共有f(n-2)种跳法;  
+3. 青蛙也可以从第n-3级跳到n级，共有f(n-3)种跳法;  
+4. 依次类推...直到青蛙从第1级跳到n级，共有f(1)种跳法；  
+5. 因此青蛙跳到n级的跳法为以上跳法数之和。  
+</code></pre><p>f(n)=f(n-1)+f(n-2)+…+f(1);又f(n-1)=f(n-2)+…+f(1)<br>因此得到关系：f(n)=2*f(n-1)(n&gt;1),当n=1时，跳法数为1。</p>
+<h2 id="算法实现-1"><a href="#算法实现-1" class="headerlink" title="算法实现"></a>算法实现</h2><h3 id="递归版本"><a href="#递归版本" class="headerlink" title="递归版本"></a>递归版本</h3><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpyap51rrrj20v507x0sr.jpg" alt="">  </p>
+<h3 id="循环版本"><a href="#循环版本" class="headerlink" title="循环版本"></a>循环版本</h3><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpyaqdwn7lj20v909nq37.jpg" alt="">  </p>
+<h3 id="移位版本"><a href="#移位版本" class="headerlink" title="移位版本"></a>移位版本</h3><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpyatme8trj20v207ymxa.jpg" alt=""></p>
+<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><ol>
+<li>对于递归版本的斐波那契，由于每次计算都是将问题分为两个子问题，故 T(n)=T(n-1)+T(n-2)+O(1)，则 T(n)=O(1.618^n);另外由于空间复杂度取决于递归的深度，那么其空间复杂度为 O(n)。 </li>
+<li>对于循环版本的斐波那契，很明显时间复杂度为O(n)，空间复杂度为O(1)。</li>
+</ol>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/31/剑指offer2笔记之从尾到头打印链表/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -878,190 +1054,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/26/决策树的简要理论及其部分python实现/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="洪荣宣">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rongxuanhong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/26/决策树的简要理论及其部分python实现/" itemprop="url">决策树的简要理论及其部分python实现</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-26T11:19:41+08:00">2018-03-26</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/03/26/决策树的简要理论及其部分python实现/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/03/26/决策树的简要理论及其部分python实现/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>决策树是机器学习中非常重要的一类监督学习方法。它可以对数据进行分类和回归学习。我们来看一下一个简单的决策树模型，如下图所示。</p>
-<blockquote>
-<p>注意：本文 python 实现都是基于标签值位于样本的最后一列进行计算。  </p>
-</blockquote>
-<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpnonwvpkjj20fu07jq3f.jpg" alt=""><br>在进行垃圾邮件分类的时候，首先从根节点开始判断，如果发送的邮件域名为:myEmployer.com，那么将其分类为”无聊时需要阅读的邮件”，否则进一步判断是否为包含单词”曲棍”的邮件，如果是则被列入”需要及时处理的朋友邮件”，否则被归入”无需阅读的垃圾邮件”。总之，像这样一步步缩小判断范围，至到找到目标分类的过程就是决策树不断作出决策的机制。  </p>
-<h1 id="决策树的构造"><a href="#决策树的构造" class="headerlink" title="决策树的构造"></a>决策树的构造</h1><h2 id="决策树的优缺点"><a href="#决策树的优缺点" class="headerlink" title="决策树的优缺点"></a>决策树的优缺点</h2><ol>
-<li>优点：计算复杂度不高，输出结果易于理解，对中间值的缺失不敏感，可以处理不相关特征数据。</li>
-<li>缺点：可能会产生过拟合的问题。</li>
-<li>适用数据类型：数值型(回归分析)和标称型(分类任务)</li>
-</ol>
-<h2 id="决策树的一般流程"><a href="#决策树的一般流程" class="headerlink" title="决策树的一般流程"></a>决策树的一般流程</h2><ol>
-<li>收集数据:可以使用任何方法;</li>
-<li>准备数据:树的构造算法只适用于标称型数据，因此数值型的数据需要离散化；</li>
-<li>分析数据：可以使用任何方法，构造树完成之后，需要检查决策树是符合预期；</li>
-<li>训练算法：构造树的数据结构；</li>
-<li>测试算法：使用经验树计算错误率；</li>
-<li>使用算法：使用决策树可以更好地理解数据的内在含义。</li>
-</ol>
-<h2 id="熵的概念及其公式"><a href="#熵的概念及其公式" class="headerlink" title="熵的概念及其公式"></a>熵的概念及其公式</h2><p>熵，也称信息熵，它是度量样本集合纯度的一种指标。也就说，样本集合中越不纯，那么表示信息越杂乱无序(如集合中类别越多,表示这个集合信息越杂乱)，则其含有的信息量就越大。而比较官方的定义是，熵是对不确定性的度量，即越不确定,信息量越大。<br>在衡量样本集合的熵时，单个类别的信息量我们可以定义为  </p>
-<script type="math/tex; mode=display">h\left( x_{i}\right) =-\log p\left( x_{i}\right)</script><p>其中p(x)是类别占比(该类别的数目占总类别数目的概率)<br>而熵是信息(或单个类别所含信息)的期望值,因此最终(香农)熵的公式为:  </p>
-<script type="math/tex; mode=display">H=-\sum ^{N}_{i=1}P\left( x_{i}\right) \log P\left( x_{i}\right)</script><h2 id="计算给定数据的香农熵"><a href="#计算给定数据的香农熵" class="headerlink" title="计算给定数据的香农熵"></a>计算给定数据的香农熵</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fppa1di77qj20wk0dlwf4.jpg" alt=""><br>其实就是把每个类别在样本集合中的占比计算出来,即p(xi),再利用上述公式计算即可。  </p>
-<h2 id="划分数据集"><a href="#划分数据集" class="headerlink" title="划分数据集"></a>划分数据集</h2><p>决策的时候其实也是划分数据集的过程，你需要一个依据来将数据集划分开，一步一步地缩小可选的范围。所以我们此时需要一个依据，也就是能让我们作出最好决策的一个依据。然后根据这个依据将数据集划分开。<br>在决策树算法中，常用的依据主要有三种算法：ID3、C4.5和CART。  </p>
-<h3 id="基于信息增益-ID3"><a href="#基于信息增益-ID3" class="headerlink" title="基于信息增益(ID3)"></a>基于信息增益(ID3)</h3><p>信息增益主要是利用集合的香农熵来计算的。信息增益衡量的是集合划分前的香农熵与划分后各子集香农熵的期望之差。<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fppampx7anj20dj06oaa3.jpg" alt="简单决策树"><br>我们以上图为例。假设样本集合为 D，年龄为每个样本具备的其中一个特征，记作 a，它共有三个属性值(青年、中年、老年)，设 v 为属性值的个数,D^v 为属性值为v的样本集合(被划分为青年的人数)。记 Ent(D) 表示样本集合 D 对应的熵,那么信息增益的计算公式为:  </p>
-<script type="math/tex; mode=display">Gain\left( D,a\right) =Ent\left( D\right) -\sum ^{3}_{v=1}\dfrac {\left| D^{v}\right| }{\left| D\right| }Ent\left( D^{v}\right)</script><p>我们用  Gain(D,a) 表示样本集合 D 依据属性 a 进行划分时的信息增益。那么，在实际中，属性 a 可以有多个，即划分方式有多种，但是我们只取信息增益最大的那个划分方式来划分数据集。  </p>
-<h3 id="基于信息增益率-C4-5"><a href="#基于信息增益率-C4-5" class="headerlink" title="基于信息增益率(C4.5)"></a>基于信息增益率(C4.5)</h3><p>信息增益率为信息增益的改进版本。由于信息增益对可取值数目较多的属性有所偏好，为减少这种偏好所带来的不利影响，信息增益率应运而生。增益率定义为:  </p>
-<script type="math/tex; mode=display">IV\left( a\right) =-\sum ^{V}_{v=1}\dfrac {\left| D^{v}\right| }{\left| D\right| }\log _{2}\dfrac {\left| D^{v}\right| }{\left| D\right| }</script><script type="math/tex; mode=display">Gain\_ ratio\left( D,a\right) =\dfrac {Gain\left( D,a\right) }{IV\left( a\right) }</script><p>这其实比之前的版本多除了一个分母，IV(a)其实表示就是属性 a 的各个属性值对应的香农熵总和。  </p>
-<p>需要注意的是，增益率对可取值数目较少的属性也有所偏好，所以 C4.5 算法并不是取增益率最大的那个最为最佳划分方式，而是先从候选属性中找出信息增益高于平均水平的属性(ID3 算法)，再从中计算出信息增益率最高的那个属性。</p>
-<h3 id="基于基尼指数-CART"><a href="#基于基尼指数-CART" class="headerlink" title="基于基尼指数(CART)"></a>基于基尼指数(CART)</h3><p>在前面介绍的 ID3 和 C4.5 算法其实都是采用熵模型进行计算，并且涉及到大量的对数运算。计算相对复杂。<br>那么，基尼指数呢。它可以也用来衡量数据集的纯度，但是它与前面二者相反，基尼指数越小，数据集的纯度反而是越高的。对于数据集 D 的纯度可用基尼值来衡量(在分类问题中，假设有 k 个类别，第 k 个类别的占比为pk):</p>
-<script type="math/tex; mode=display">Gini\left( D\right) =\sum ^{K}_{k=1}p_{k}\left( 1-p_{k}\right) \\ =1-\sum ^{K}_{k=1}P^{2}_{k}</script><p>对于属性a，我们给出它的基尼系数定义为:  </p>
-<script type="math/tex; mode=display">Gini\_ index\left( D,a\right)=\sum ^{V}_{v=1}\dfrac {\left| D^{v}\right| }{\left| D\right| }Gini\left( D\right)</script><p>最后我们选择基尼指数最小的属性作为最优划分属性。特别注意的是，利用基尼指数来划分数据集只会对数据集二分，不多分。怎样理解?，对于多分类问题，可以利用整体思想，把数据集分成两大类，常见的有一对多，多对多,即一边是正例，一边是反例，因此使用基尼指数进行最优属性划分后得到的树是一颗优雅的二叉树。  </p>
-<h2 id="基于ID3的python代码实现"><a href="#基于ID3的python代码实现" class="headerlink" title="基于ID3的python代码实现"></a>基于ID3的python代码实现</h2><h3 id="根据指定特征的属性值返回数据集的子集"><a href="#根据指定特征的属性值返回数据集的子集" class="headerlink" title="根据指定特征的属性值返回数据集的子集"></a>根据指定特征的属性值返回数据集的子集</h3><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fppz8qd2gvj20wl0b33z0.jpg" alt="">  </p>
-<blockquote>
-<p>注意 extend 与 append 的用法区别,前者为抽取元素加入列表，后者可能会将整个列表作为元素加入列表中。</p>
-</blockquote>
-<h3 id="选择最好的数据集划分"><a href="#选择最好的数据集划分" class="headerlink" title="选择最好的数据集划分"></a>选择最好的数据集划分</h3><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fppze09xvnj212t0ilwg3.jpg" alt="">  </p>
-<pre><code>其实大致步骤可以概括为：  
-1. 遍历每个属性；  
-2. 得到每个属性的属性值集合，并遍历；  
-3. 对每个属性值进行划分，计算各个子集的信息熵期望；  
-4. 计算信息增益；  
-5. 比较不同属性划分下的信息增益，取最大的信息增益对应的特征索引返回。
-</code></pre><h3 id="创建决策树"><a href="#创建决策树" class="headerlink" title="创建决策树"></a>创建决策树</h3><h4 id="根据标签列表”投票”选出最多标签的"><a href="#根据标签列表”投票”选出最多标签的" class="headerlink" title="根据标签列表”投票”选出最多标签的"></a>根据标签列表”投票”选出最多标签的</h4><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fppzm3upfcj212z06ydg6.jpg" alt="">   </p>
-<p>主要使用字典记录类别的个数，然后再按递减排序即可。</p>
-<h4 id="决策树具体算法"><a href="#决策树具体算法" class="headerlink" title="决策树具体算法"></a>决策树具体算法</h4><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpq0f4x6m9j212t0j3t9y.jpg" alt="">  </p>
-<h3 id="使用决策树分类"><a href="#使用决策树分类" class="headerlink" title="使用决策树分类"></a>使用决策树分类</h3><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpq0xt6dk3j212v0cwab6.jpg" alt="">  </p>
-<p>使用决策树分类，就是从根节点开始递归寻找待分类样本所能到达的分类节点位置,然后确定最终的分类。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>决策树分类器就像带有终止块的流程图，终止块表示分类结果。开始处理数据集时，我们需要先衡量数据集中数据的不一致性，即熵，然后寻找最佳特征确定划分方式、分割数据集，直到数据集中的所有数据属于同一分类，或者已无可划分的特征了就停止。其实上述详细介绍的 ID3 算法局限性也比较大，它只能处理标称型的数据，对于连续值、缺失值无法处理，因而后面改进的 C4.5 和 CART 算法都改进了此点，我们下次再详细介绍，就这样了。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;机器学习实战&gt;&gt;<br>&lt;&lt;机器学习&gt;&gt;周志华<br><a href="http://www.cnblogs.com/pinard/p/6050306.html" target="_blank" rel="noopener">决策树算法原理</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-	<div>
-
-</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1113,7 +1105,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">46</span>
+                    <span class="site-state-item-count">47</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
