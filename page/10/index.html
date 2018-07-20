@@ -306,6 +306,602 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/15/一起看画布Canvas/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/15/一起看画布Canvas/" itemprop="url">一起看画布Canvas</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-15T23:39:49+08:00">2017-07-15</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/07/15/一起看画布Canvas/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/07/15/一起看画布Canvas/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>版权声明：本文为博主原创文章，未经博主允许不得转载</strong></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><code>Canvas</code> 本意是画布的意思,然而将它理解为绘制工具一点也不为过。通过 <code>Canvas</code> 提供的  <strong>API</strong>，你可以在画布上绘制出绝大部分图形，再配合上一些操作画布的 <strong>API</strong>，比如旋转剪裁等变换画布的操作，就能够巧妙地画出更加复杂的图形。</p>
+<h1 id="drawXXX系列"><a href="#drawXXX系列" class="headerlink" title="drawXXX系列"></a>drawXXX系列</h1><h2 id="canvas-drawArc"><a href="#canvas-drawArc" class="headerlink" title="canvas.drawArc"></a>canvas.drawArc</h2><ol>
+<li><p>方法:  </p>
+<pre><code> drawArc(RectF oval, float startAngle, float sweepAngle, boolean useCenter,Paint paint)
+ drawArc(float left, float top, float right, float bottom, float startAngle, float sweepAngle, boolean useCenter, Paint paint)
+</code></pre></li>
+<li>画的方向为顺时针</li>
+<li><p>对参数的解释:</p>
+<ul>
+<li><strong>userCenter</strong> 若为true表示此弧会和 <code>RectF</code> 中心相连形成扇形，否则，弧的两头直接相连形成图形。</li>
+<li><strong>startAngle</strong>，负数或大于360则对360模除。</li>
+<li><strong>sweepAngle</strong>，大于360，则画出一圈。</li>
+<li>角度：以 <code>RectF</code> 中心为坐标中心，中心所在直线为水平线，负角度弧斜上走，正角度弧斜下走,或者说以时钟三点钟为0度，顺时针为正，逆时针为负。  </li>
+</ul>
+</li>
+<li><p>例子:  </p>
+<pre><code> mPaint.setAntiAlias(true);
+ mPaint.setColor(Color.RED);
+ RectF mRecF=new RectF(20,20,200,200);
+ canvas.drawArc(mRecF,-45,135,true,mPaint);//以斜上45度为起点，顺时针扫过135度
+</code></pre></li>
+</ol>
+<ul>
+<li><strong>useCenter</strong>=true<br><img src="http://ww1.sinaimg.cn/large/8992ce25ly1fhkdaxydxnj208a09tglg.jpg" alt="">  </li>
+<li><strong>useCenter</strong>=false<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhkddhax22j208g09z0sl.jpg" alt=""></li>
+</ul>
+<h2 id="canvas-drawCircle"><a href="#canvas-drawCircle" class="headerlink" title="canvas.drawCircle"></a>canvas.drawCircle</h2><ol>
+<li><p>方法:  </p>
+<pre><code> drawCircle(float cx, float cy, float radius, Paint paint) 
+</code></pre></li>
+<li>对参数的解释:<ul>
+<li><strong>cx,cy</strong> 为所画圆的中心坐标，<strong>radius</strong> 为圆的半径  </li>
+</ul>
+</li>
+<li><p>例子  </p>
+<pre><code> mPaint.setAntiAlias(true);
+ mPaint.setColor(Color.RED);
+ canvas.drawCircle(100,100,80,mPaint);   
+</code></pre></li>
+</ol>
+<ul>
+<li>圆心为（100，100），半径为80<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhkdl5zl3xj208k08va9x.jpg" alt="">  </li>
+</ul>
+<ol>
+<li><strong>注意：</strong> 当画笔设置了 <code>StrokeWidth</code> 时，圆的半径=内圆的半径+<code>StrokeWidth</code>/2  </li>
+</ol>
+<h2 id="canvas-drawBitmap"><a href="#canvas-drawBitmap" class="headerlink" title="canvas.drawBitmap"></a>canvas.drawBitmap</h2><ol>
+<li><p>方法1: </p>
+<pre><code> drawBitmap(Bitmap bitmap, Matrix matrix, Paint paint) 
+</code></pre><p>对参数的解释:</p>
+<ul>
+<li><strong>bitmap</strong>:要画在画布上的位图</li>
+<li><strong>matrix</strong>：构建的矩阵作用于将要画出的位图  </li>
+</ul>
+</li>
+<li><p>方法2：</p>
+<pre><code> drawBitmap(Bitmap bitmap, Rect src, RectF dst, Paint paint)
+</code></pre><p>对参数的解释:</p>
+<ul>
+<li><strong>src</strong>:可为 <code>null</code>，表示画整个位图，否则只花出位图的一块矩形区域图.<strong>subset of bitmap</strong></li>
+<li><strong>dst</strong>:定义的一个矩形范围，位图会平移或缩放来将自身放入矩形内  </li>
+</ul>
+</li>
+<li><p>方法3:  </p>
+<pre><code> drawBitmap(Bitmap bitmap, float left, float top, Paint paint)  
+</code></pre></li>
+<li><p>方法4： </p>
+<pre><code> drawBitmapMesh(Bitmap bitmap, int meshWidth, int meshHeight, float[] verts, int vertOffset, int[] colors, int colorOffset, Paint paint) 
+</code></pre><p>网格扭曲，水波等的绘制<br>知识：<a href="https://www.zybuluo.com/cxm-2016/note/506317" target="_blank" rel="noopener">https://www.zybuluo.com/cxm-2016/note/506317</a>  </p>
+</li>
+<li><p>例子:</p>
+<ul>
+<li><p>方法1:  </p>
+<pre><code>  mPaint.setAntiAlias(true);
+  mPaint.setColor(Color.RED);
+  Matrix matrix = new Matrix();
+  matrix.postTranslate(100,0);//左移100
+  matrix.postRotate(45);//顺时针旋转45度
+  canvas.drawBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher),matrix,mPaint);  
+</code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25ly1fhkdykl9raj208c08gglj.jpg" alt="">  </p>
+</li>
+<li><p>方法2：  </p>
+<pre><code>  Rect src = new Rect(20, 20, 40, 40);//取bitmap上src区域的部分图像
+  Rect dst = new Rect(100, 100, 200, 200);//绘制的最终区域，一定填满
+  mPaint.setAntiAlias(true);
+  mPaint.setColor(Color.RED);
+  canvas.drawBitmap(BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher),src,dst,mPaint);  
+</code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25ly1fhkemsmvrmj208n0943yc.jpg" alt="">  </p>
+</li>
+<li><p>方法3：  </p>
+<pre><code>   canvas.drawBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher), 100, 100, mPaint);  
+</code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhkiibu7bej208r091a9x.jpg" alt="">  </p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="canvas-drawColor-drawRGB"><a href="#canvas-drawColor-drawRGB" class="headerlink" title="canvas.drawColor,drawRGB"></a>canvas.drawColor,drawRGB</h2><ol>
+<li><p>方法：  </p>
+<pre><code> drawColor(int color, PorterDuff.Mode mode) 
+</code></pre><p>画整个画布的背景,但若区域受到剪裁，则只绘制剪裁区域的背景. 关键类 <code>PorterDuff.Mode</code>  </p>
+</li>
+<li>方法：<code>drawRGB(int r, int g, int b)</code><br>同上</li>
+</ol>
+<h2 id="canvas-drawLine-s"><a href="#canvas-drawLine-s" class="headerlink" title="canvas.drawLine(s)"></a>canvas.drawLine(s)</h2><ol>
+<li><p>方法1： </p>
+<pre><code> drawLine(float startX, float startY, float stopX, float stopY, Paint paint)
+</code></pre><p>对参数的解释:</p>
+<ul>
+<li>前四个参数为直线的起点和终点的 <strong>XY</strong> 轴坐标  </li>
+</ul>
+</li>
+<li><p>方法2：  </p>
+<pre><code> drawLines(float[] pts,Paint paint)
+</code></pre></li>
+<li><p>方法3：</p>
+<pre><code> drawLines(float[] pts, int offset, int count, Paint paint)  
+</code></pre><p>对参数的解释：</p>
+<ul>
+<li><strong>pts</strong>:待画的坐标点数组，格式为(<strong>x1,y1,x2,y2,…</strong>),至少4个值</li>
+<li><strong>offset</strong>:要跳过坐标点数组中几个值才开始画(必须是4的倍数)</li>
+<li><strong>count</strong>:至少为2，<strong>offset</strong> 之后数组的大小。  </li>
+</ul>
+</li>
+<li><p>例子  </p>
+<ul>
+<li><p>方法1:  </p>
+<pre><code>  mPaint.setAntiAlias(true);
+  mPaint.setColor(Color.RED);
+  mPaint.setTextSize(16);
+  canvas.drawText(&quot;起点(20,100)&quot;, 22, 100, mPaint);
+  canvas.drawText(&quot;终点(50,100)&quot;, 52, 150, mPaint);
+  canvas.drawLine(20, 100, 50, 150, mPaint);  
+</code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhkhqxwiugj209u0a5q2u.jpg" alt="">  </p>
+</li>
+<li><p>方法2：  </p>
+<pre><code>  mPaint.setAntiAlias(true);
+  mPaint.setColor(Color.RED);
+  mPaint.setTextSize(16);
+  canvas.drawText(&quot;A1(20,100)&quot;, 0, 90, mPaint);
+  canvas.drawText(&quot;A2(100,350)&quot;, 40, 370, mPaint);
+  canvas.drawText(&quot;B1(100,100)&quot;, 80, 90, mPaint);
+  canvas.drawText(&quot;B2(180,350)&quot;, 150, 370, mPaint);
+  float[] points=new float[]{20,100,100,350,100,350,100,100,100,100,180,350};//至少4个值，即能够绘制一条直线
+  canvas.drawLines(points,mPaint);  
+</code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhki2nfpkqj20930b9dfw.jpg" alt="">  </p>
+</li>
+<li><p>方法3:  </p>
+<pre><code>  mPaint.setAntiAlias(true);
+  mPaint.setColor(Color.RED);
+  mPaint.setTextSize(16);
+  canvas.drawText(&quot;A1(100,350)&quot;, 40, 370, mPaint);
+  canvas.drawText(&quot;B2(100,100)&quot;, 80, 90, mPaint);
+  canvas.drawText(&quot;B3(180,350)&quot;, 150, 370, mPaint);
+  float[] points=new float[]{20,100,100,350,100,350,100,100,100,100,180,350};//至少4个点
+  canvas.drawLines(points,4,8,mPaint);  
+</code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhki5jfgn1j20950aqdft.jpg" alt="">  </p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="canvas-drawRect"><a href="#canvas-drawRect" class="headerlink" title="canvas.drawRect"></a>canvas.drawRect</h2><ol>
+<li><p>方法1：</p>
+<pre><code> void drawRect(float left, float top, float right, float bottom, Paint paint)  
+</code></pre><p>确定矩形四个顶点的位置配上画笔即可  </p>
+</li>
+<li><p>方法2: </p>
+<pre><code> void drawRect(Rect r, Paint paint) 
+</code></pre><p>矩形的四个位置为整型时使用</p>
+</li>
+<li><p>方法3:  </p>
+<pre><code> void drawRect(RectF r, Paint paint)  
+</code></pre><p>方法1的另一简版，矩形的四个位置为浮点型时使用  </p>
+</li>
+<li><p>例子:  </p>
+<pre><code> mPaint.setAntiAlias(true);
+ mPaint.setColor(Color.RED);
+ canvas.drawRect(new RectF(20f, 20f, 120f, 120f), mPaint);
+ //canvas.drawRect(new Rect(20, 20, 120, 120), mPaint);  
+</code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhknan9823j208m07gdfm.jpg" alt="">  </p>
+</li>
+</ol>
+<h2 id="canvas-drawOval"><a href="#canvas-drawOval" class="headerlink" title="canvas.drawOval"></a>canvas.drawOval</h2><p>绘制椭圆<br>类似 <code>drawRect</code>  </p>
+<h2 id="canvas-drawPaint"><a href="#canvas-drawPaint" class="headerlink" title="canvas.drawPaint"></a>canvas.drawPaint</h2><p>方法：<br>        <code>drawPaint(Paint paint)</code><br>自定义的 <code>paint</code> 画在整个画布上,等于用 <code>paint</code> 在画布上画一个无限大的矩形，但当前画布受到剪裁，则染色区域仅限于剪裁部分。</p>
+<h2 id="canvas-drawPoint-s"><a href="#canvas-drawPoint-s" class="headerlink" title="canvas.drawPoint(s)"></a>canvas.drawPoint(s)</h2><p>绘制点，方法基本类似<code>drawLine(s)</code></p>
+<h2 id="canvas-drawRoundRect"><a href="#canvas-drawRoundRect" class="headerlink" title="canvas.drawRoundRect"></a>canvas.drawRoundRect</h2><ol>
+<li><p>方法1：  </p>
+<pre><code> drawRoundRect(RectF rect, float rx, float ry, Paint paint)   
+</code></pre></li>
+<li><p>方法2: </p>
+<pre><code> drawRoundRect(float left, float top, float right, float bottom, float rx, float ry, Paint paint)  
+</code></pre><p>对参数的解释：  </p>
+<ul>
+<li><strong>rx,ry</strong> 表示 <strong>left</strong> 到 <strong>left+rx</strong> 与 <strong>left</strong> 到 <strong>left+ry</strong> 所围区域做弧，其余三个角类似，当 <strong>rx=ry&gt;=(right-left)/2</strong> 时表示画一个半径为 <strong>rx(ry)</strong> 的圆（刚好外接一个矩形） </li>
+</ul>
+</li>
+<li><p>例子  </p>
+<ul>
+<li><p>方法1:  </p>
+<pre><code>  mPaint.setAntiAlias(true);
+  mPaint.setColor(Color.RED);
+  RectF mRecf = new RectF(20, 100, 200, 200);
+  canvas.drawRoundRect(mRecf, 30, 50, mPaint);  
+</code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25ly1fhkir0hoogj208u08qweb.jpg" alt="">  </p>
+</li>
+<li>方法2:API level至少21，做法一样  </li>
+</ul>
+</li>
+</ol>
+<h2 id="canvas-drawText"><a href="#canvas-drawText" class="headerlink" title="canvas.drawText"></a>canvas.drawText</h2><ol>
+<li><p>方法1: </p>
+<pre><code> drawText(String text, float x, float y, Paint paint)  
+</code></pre><p>在 <strong>x,y</strong> 位置开始画 <strong>text</strong><br><strong>注意</strong>：其中 <strong>y</strong> 表示文字的基线(<strong>baseline</strong> )所在的坐标,说白了就是我们小学写字用的那种带有横线的本子(一般都是按照一条基线来写字是吧？)，用于规范你写的字是否成一条直线，否则很多人写着写着就往上飘了。而 <strong>x</strong> 坐标就是文字绘制的起始水平坐标，但是每个文字本身两侧都有一定的间隙，故实际文字的位置会比 <strong>x</strong> 的位置再偏右侧一些。  </p>
+</li>
+<li>图:<br>基线类似下图深绿色的横线<br><img src="http://ww1.sinaimg.cn/large/8992ce25ly1fi1xvfruh0j205101iq30.jpg" alt="">  </li>
+<li><p>方法2：</p>
+<pre><code> drawText(CharSequence text, int start, int end, float x, float y, Paint paint)  
+</code></pre><p>在 <strong>x,y</strong> 位置上画出 <strong>start</strong> 到 <strong>end</strong>(不含 <strong>end</strong>) 之间的字符  <strong>CharSequence charSequence = “charSequence”;</strong></p>
+</li>
+<li><p>方法3： </p>
+<pre><code> drawText(char[] text, int index, int count, float x, float y, Paint paint)  
+</code></pre><p>对参数的解释:</p>
+<ul>
+<li><strong>index</strong>:表示从第几个字符开始，</li>
+<li><strong>count</strong>:表示截取的数组长度</li>
+<li>字符数组的定义: <strong>char[] a=”abc”.toCharArray()</strong> </li>
+</ul>
+</li>
+<li><p>方法4： </p>
+<pre><code> drawTextOnPath(String text, Path path, float hOffset, float vOffset, Paint paint)
+</code></pre><p>对参数的解释:</p>
+<ul>
+<li><strong>path</strong>:文本绘制的路径（关键）</li>
+<li><strong>hOffset</strong>:相对于路径的水平偏移量</li>
+<li><strong>vOffset</strong>:相对于路径的垂直偏移量  </li>
+</ul>
+</li>
+<li><p>方法5：</p>
+<pre><code> drawTextOnPath(char[] text, int index, int count, Path path, float hOffset, float vOffset, Paint paint)  
+</code></pre><p> 方法3和4的合体  </p>
+</li>
+<li><p>方法6： </p>
+<pre><code> drawTextRun(CharSequence text, int start, int end, int contextStart, int contextEnd, float x, float y, boolean isRtl, Paint paint)  
+</code></pre><p>对参数的解释：  </p>
+<ul>
+<li><strong>contextStart</strong>:可选，直接=start</li>
+<li><strong>contextEnd</strong>：可选，直接=end</li>
+<li><strong>x,y</strong>：文字绘制起点</li>
+<li><strong>isRt1(isRightToLeft)</strong>:文字是否支持<strong>rtl</strong></li>
+<li><code>0 &lt;= contextStart &lt;= start &lt;= end &lt;= contextEnd &lt;= text.length</code>  </li>
+</ul>
+</li>
+<li><p>方法7：  </p>
+<pre><code> drawTextRun(char[] text, int index, int count, int contextIndex, int contextCount, float x, float y, boolean isRtl, Paint paint)  
+</code></pre><p>方法3和方法6合体</p>
+<p> <code>count = end - start, contextCount = contextEnd - contextStart.</code> </p>
+</li>
+<li><p>例子:</p>
+<ul>
+<li><p>方法1：  </p>
+<pre><code>  mPaint.setAntiAlias(true);
+  mPaint.setColor(Color.RED);
+  mPaint.setTextSize(20);
+  canvas.drawText(&quot;Canvas学习&quot;,50,100,mPaint);  
+</code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25ly1fhkiz81vydj209808yglg.jpg" alt="">  </p>
+</li>
+<li><p>方法2:  </p>
+<pre><code>  mPaint.setAntiAlias(true);
+  mPaint.setColor(Color.RED);
+  mPaint.setTextSize(20);
+  CharSequence charSequence=&quot;Canvas学习&quot;;
+  canvas.drawText(charSequence,1,charSequence.length(),30,50,mPaint);  
+</code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25ly1fhkj2jak50j20930a2dfo.jpg" alt="">  </p>
+</li>
+<li><p>方法3:  </p>
+<pre><code>  mPaint.setAntiAlias(true);
+  mPaint.setColor(Color.RED);
+  mPaint.setTextSize(20);
+  char[] chars=&quot;Canvas学习&quot;.toCharArray();
+  canvas.drawText(chars,1,chars.length-1,30,50,mPaint);  
+</code></pre><p>效果图同方法2  </p>
+</li>
+<li><p>方法4：  </p>
+<pre><code>  mPaint.setAntiAlias(true);
+  mPaint.setColor(Color.RED);
+  mPaint.setTextSize(20);
+  Path path=new Path();
+  String text=&quot;Canvas学习&quot;;
+  path.addCircle(100,100,50, Path.Direction.CCW);
+  canvas.drawTextOnPath(text,path,0f,0f,mPaint);  
+</code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhkjb2a4jrj209109iwec.jpg" alt=""></p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="canvas-drawPath"><a href="#canvas-drawPath" class="headerlink" title="canvas.drawPath"></a>canvas.drawPath</h2><p>方法:<code>drawPath(Path path, Paint paint)</code><br>根据定义的路径画出图<br>例子:  </p>
+<pre><code>        mPaint.setAntiAlias(true);
+        mPaint.setColor(Color.RED);
+        Path path=new Path();
+        path.addCircle(100,100,50, Path.Direction.CCW);
+        canvas.drawPath(path,mPaint);  
+</code></pre><p>效果等于画一个圆   </p>
+<h1 id="canvas-clipxxx系列"><a href="#canvas-clipxxx系列" class="headerlink" title="canvas.clipxxx系列"></a>canvas.clipxxx系列</h1><h2 id="canvas-clipPath"><a href="#canvas-clipPath" class="headerlink" title="canvas.clipPath"></a>canvas.clipPath</h2><ol>
+<li><p>方法1：</p>
+<pre><code> clipPath(Path path)  
+</code></pre><p>按所定义的路线剪裁,默认Region.Op.INTERSECT表示剪裁出相交的部分</p>
+</li>
+<li><p>方法2：</p>
+<pre><code> clipPath(Path path, Region.Op op)  
+</code></pre><p>解释：用指定的路径 <strong>path</strong> 修改当前的剪裁<br>对op参数的理解:以剪裁两次的区域分别为A，B来区别</p>
+<ul>
+<li><strong>Region.Op.DIFFERENCE</strong>:剪裁出差异的部分，类似 <strong>A-B</strong> 部分</li>
+<li><strong>Region.Op.REPLACE</strong>:后剪裁B的覆盖剪裁的A</li>
+<li><strong>Region.Op.REVERSE_DEFFERENCE</strong>:剪裁出差异的部分，类似 <strong>B-A</strong> 部分</li>
+<li><strong>Region.Op.INTERSECT</strong>:剪裁出相交的部分，类似 <strong>A交B</strong> 部分</li>
+<li><strong>Region.Op.UNION</strong>:剪裁出AB合并的部分，类似<strong> AUB</strong></li>
+<li><strong>Region.Op.XOR</strong>：是<strong> (AUB)-(A交B)</strong> 刚好与<strong> A交B</strong> 相对</li>
+</ul>
+</li>
+<li><p>方法3：</p>
+<pre><code> clipRect(Rect[F] rect, Region.Op op)[]表示可选  
+</code></pre><p>解释：用指定的矩形来修改当前的剪裁  </p>
+</li>
+<li><p>方法4：</p>
+<pre><code> clipRect(Rect rect)  
+</code></pre><p>剪裁一个矩形区域，还有其他能构造矩形的方法不再列出  </p>
+</li>
+<li><p>例子(以剪裁路径为例):<br>首次剪裁  </p>
+<pre><code>     Path path=new Path();
+     path.addCircle(100,100,50, Path.Direction.CCW);
+     canvas.clipPath(path);
+     canvas.clipPath(path);
+     canvas.drawColor(Color.RED);//红色区域即为剪裁的区域  
+</code></pre><p>由于 <strong>clipPath</strong> 方法剪裁模式默认为<strong>Region.Op.INTERSECT</strong>，故当前剪裁部分和整个画布相交即为本身。<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhkm5so2wxj2092091q2r.jpg" alt="">  </p>
+</li>
+<li><p>剪裁模式(绿色区域为最终得到的剪裁部分)  </p>
+<pre><code> mPaint.setAntiAlias(true);
+ mPaint.setColor(Color.RED);
+ canvas.drawColor(Color.BLUE);
+ canvas.drawRect(new RectF(20, 20, 120, 120), mPaint);
+ canvas.drawCircle(120, 70, 50, mPaint);
+ canvas.clipRect(new RectF(20, 20, 120, 120));
+ Path path = new Path();
+ path.addCircle(120, 70, 50, Path.Direction.CCW);
+ canvas.clipPath(path, Region.Op.INTERSECT);
+ canvas.drawColor(Color.GREEN);  
+</code></pre></li>
+</ol>
+<ul>
+<li><strong>Region.Op.INTERSECT</strong><br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhkmtcumfzj208n09f0sk.jpg" alt="">  </li>
+<li><strong>Region.Op.REPLACE</strong><br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhkmunykaaj208f08gweb.jpg" alt="">  </li>
+<li><strong>Region.Op.REVERSE_DEFFERENCE</strong><br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhkmw0yqbrj208g08da9v.jpg" alt="">  </li>
+<li><strong>Region.Op.UNION</strong><br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhkmxdkq2aj208l08la9v.jpg" alt="">  </li>
+<li><strong>Region.Op.XOR</strong><br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhkmylwokrj208a07tt8j.jpg" alt=""></li>
+</ul>
+<h1 id="canvas的保存与恢复"><a href="#canvas的保存与恢复" class="headerlink" title="canvas的保存与恢复"></a>canvas的保存与恢复</h1><ol>
+<li>解释：用来保存或恢复 <code>Canvas</code> 的状态  </li>
+<li>作用：<code>save</code> 之后可以调用 <code>Canvas</code> 的平移、放缩、旋转、错切、裁剪等对当前画布进行操作,再进行相应的绘制，避免影响画布上已绘制的 <code>view</code>，配合 <code>canvas.restore()</code>(将当前画布恢复到初始状态) 使用  </li>
+</ol>
+<h1 id="canvas的变幻操作"><a href="#canvas的变幻操作" class="headerlink" title="canvas的变幻操作"></a>canvas的变幻操作</h1><h2 id="canvas-translate"><a href="#canvas-translate" class="headerlink" title="canvas.translate"></a>canvas.translate</h2><ol>
+<li><p>方法: </p>
+<pre><code> canvas.translate(float dx, float dy)  
+</code></pre><p>作用：移动当前画布水平距离 <strong>dx</strong>，竖直距离 <strong>dy</strong>  </p>
+</li>
+<li><p>例子:  </p>
+<pre><code> mPaint.setAntiAlias(true);
+ mPaint.setColor(Color.RED);
+ canvas.drawColor(Color.BLUE);
+ canvas.translate(100,100);
+ canvas.drawCircle(0,0,50,mPaint);  
+</code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhknou7kvmj2085086web.jpg" alt="">  </p>
+<h2 id="canvas-scale"><a href="#canvas-scale" class="headerlink" title="canvas.scale"></a>canvas.scale</h2></li>
+<li><p>方法1: </p>
+<pre><code> canvas.scale(float sx, float sy)  
+</code></pre><p>作用：<strong>sx、sy</strong> 是 <strong>x、y</strong> 方向上缩放的倍数,画布缩放后，再画出的图片相应的坐标都会进行缩放  </p>
+</li>
+<li><p>例子:  </p>
+<pre><code> mPaint.setAntiAlias(true);
+ mPaint.setColor(Color.RED);
+ canvas.drawColor(Color.BLUE);
+ canvas.save();
+ canvas.scale(0.5f,0.5f);//x,y均缩小一半
+ canvas.drawCircle(100,100,50,mPaint);
+ canvas.restore();
+ mPaint.setColor(Color.WHITE);
+ canvas.drawCircle(100,100,50,mPaint);  
+</code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhkns0kgnjj208k081mx0.jpg" alt="">  </p>
+</li>
+<li><p>方法2: </p>
+<pre><code> canvas.scale (float sx, float sy, float px, float py)  
+</code></pre><p>作用:缩放画布并平移画布到基准点<strong>(px,py) </strong><br>对参数的解释:  </p>
+<ul>
+<li><strong>px,py</strong> 为缩放后画布新的坐标原点(也叫缩放基准点)  </li>
+</ul>
+</li>
+<li><p>例子:  </p>
+<pre><code> mPaint.setAntiAlias(true);
+ canvas.drawColor(Color.BLUE);
+ mPaint.setColor(Color.WHITE);
+ canvas.drawCircle(100,100,50,mPaint);
+ canvas.save();
+ canvas.scale(0.5f,0.5f,100,100);
+ mPaint.setColor(Color.RED);
+ canvas.drawCircle(100,100,50,mPaint);
+ canvas.restore();  
+</code></pre></li>
+</ol>
+<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhknuznikij209408nq2s.jpg" alt=""></p>
+<h2 id="canvas-rotate"><a href="#canvas-rotate" class="headerlink" title="canvas.rotate"></a>canvas.rotate</h2><ol>
+<li><p>方法： </p>
+<pre><code> canvas.rotate(float degrees)  
+</code></pre><p>作用：顺时针旋转当前画布一定角度，也可加入基准点坐标  </p>
+</li>
+<li><p>例子：  </p>
+<pre><code> mPaint.setAntiAlias(true);
+ canvas.drawColor(Color.BLUE);
+ mPaint.setColor(Color.WHITE);
+ canvas.drawRect(new RectF(80,80,180,180),mPaint);
+ canvas.save();
+ canvas.rotate(45);
+ //canvas.rotate(45,200,200);
+ mPaint.setColor(Color.RED);
+ canvas.drawRect(new RectF(80,80,180,180),mPaint);
+ canvas.restore();  
+</code></pre></li>
+</ol>
+<ul>
+<li><p>无基准点  </p>
+<p>  <img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhko1i33kfj208p09gweb.jpg" alt="">  </p>
+</li>
+<li><p>有基准点 (200，200)  </p>
+<p>  <img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhko2cl6xaj208u094mx0.jpg" alt="">  </p>
+<h2 id="canvas-skew"><a href="#canvas-skew" class="headerlink" title="canvas.skew"></a>canvas.skew</h2></li>
+</ul>
+<ol>
+<li><p>方法: </p>
+<pre><code> canvas.skew(float sx, float sy)  
+</code></pre><p>作用:画布的错切</p>
+</li>
+</ol>
+<ul>
+<li><strong>sx</strong>:将画布在 <strong>x</strong> 方向上倾斜相应的角度，<strong>sx</strong> 为倾斜角度的 <strong>tan</strong> 值；</li>
+<li><strong>sy</strong>:将画布在 <strong>y</strong> 轴方向上倾斜相应的角度，<strong>sy</strong> 为倾斜角度的 <strong>tan</strong> 值；<br>比如在 <strong>X</strong> 轴方向上倾斜45度，<strong>tan45=1</strong>;  </li>
+</ul>
+<ol>
+<li><p>例子:  </p>
+<pre><code> mPaint.setAntiAlias(true);
+ canvas.drawColor(Color.BLUE);
+ mPaint.setColor(Color.WHITE);
+ canvas.drawRect(new RectF(0,0,180,180),mPaint);
+ canvas.save();
+ canvas.skew(1,0);//画布X轴倾斜45度
+ mPaint.setColor(Color.RED);
+ canvas.drawRect(new RectF(0,0,180,180),mPaint);
+ canvas.restore();  
+</code></pre><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fhkpi1m3d6j209907xa9x.jpg" alt=""></p>
+</li>
+</ol>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>以上大致介绍了 <strong>Canvas</strong> 类中众多绘制方法。首先，先对方法进行解析；其次，给出相应的示例代码并结合运行效果，旨在帮助读者更好地理解诸如上述绘制方法的基本使用；最后，对于方法的理解如有纰漏，欢迎指正。</p>
+<h1 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h1><p><a href="https://developer.android.google.cn/reference/android/graphics/Canvas.html" target="_blank" rel="noopener">官方Canvas类API</a><br><a href="http://blog.csdn.net/tianjian4592/article/details/45234419" target="_blank" rel="noopener">Canvas之translate、scale、rotate、skew方法讲解</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/15/Java代理模式与Android的情结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1465,7 +2061,7 @@ public abstract void bindDataToItem(T t,int position);
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">48</span>
+                    <span class="site-state-item-count">49</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -1783,6 +2379,8 @@ public abstract void bindDataToItem(T t,int position);
 
   
   
+    
+      
     
       
     

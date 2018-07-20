@@ -103,27 +103,28 @@
 
 
 
-  <meta name="description" content="前言不同排序算法适用的场合也不尽相同。例如，对于数组有序的情况，使用快速排序算法将达到最坏的时间复杂度O(n^2)，那么此种场合下，快速排序算法就不是最优的选择。因此，选择一个排序算法，应当考虑到排序应用的环境、哪些约束条件(比如数据的范围)，最后综合考虑后选择相应的排序算法解决。 题目(年龄排序)请实现一个按年龄排序的算法，其中最大年龄为99岁，要求时间效率为 O(n)(可以使用不超过O(n)的">
+  <meta name="description" content="前言编写算法，不仅需要正确实现，还需要考虑到时间效率的问题。比如采用更好的解法，养成更好的编程习惯。说到编程习惯，其实如果采用 C/C++ 编程时，在进行传递复杂类型参数的时，需要采用引用(或指针)，而要避免使用值传递，因为从形参到实参会产生一次多余的复制操作。用 Java、C# 等做多次字符串的拼接操作时，也不要多次使用 String 的 + 运算符来拼接字符串，因为这样会产生很多 String">
 <meta name="keywords" content="剑指offer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="剑指offer2之按年龄排序">
-<meta property="og:url" content="http://yoursite.com/2018/04/03/剑指offer2之按年龄排序/index.html">
+<meta property="og:title" content="剑指offer2之数组中出现次数超过一半的数字">
+<meta property="og:url" content="http://yoursite.com/2018/07/20/剑指offer2之数组中出现次数超过一半的数字/index.html">
 <meta property="og:site_name" content="Rongxuanhong&#39;s Blog">
-<meta property="og:description" content="前言不同排序算法适用的场合也不尽相同。例如，对于数组有序的情况，使用快速排序算法将达到最坏的时间复杂度O(n^2)，那么此种场合下，快速排序算法就不是最优的选择。因此，选择一个排序算法，应当考虑到排序应用的环境、哪些约束条件(比如数据的范围)，最后综合考虑后选择相应的排序算法解决。 题目(年龄排序)请实现一个按年龄排序的算法，其中最大年龄为99岁，要求时间效率为 O(n)(可以使用不超过O(n)的">
+<meta property="og:description" content="前言编写算法，不仅需要正确实现，还需要考虑到时间效率的问题。比如采用更好的解法，养成更好的编程习惯。说到编程习惯，其实如果采用 C/C++ 编程时，在进行传递复杂类型参数的时，需要采用引用(或指针)，而要避免使用值传递，因为从形参到实参会产生一次多余的复制操作。用 Java、C# 等做多次字符串的拼接操作时，也不要多次使用 String 的 + 运算符来拼接字符串，因为这样会产生很多 String">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpy4rnfjbmj20v60c9aam.jpg">
-<meta property="og:updated_time" content="2018-04-03T07:12:58.800Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1ftatchf3bmj20zn0lddg9.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1ftbyjsnzt1j20zc0y2q3z.jpg">
+<meta property="og:updated_time" content="2018-07-20T12:11:19.332Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="剑指offer2之按年龄排序">
-<meta name="twitter:description" content="前言不同排序算法适用的场合也不尽相同。例如，对于数组有序的情况，使用快速排序算法将达到最坏的时间复杂度O(n^2)，那么此种场合下，快速排序算法就不是最优的选择。因此，选择一个排序算法，应当考虑到排序应用的环境、哪些约束条件(比如数据的范围)，最后综合考虑后选择相应的排序算法解决。 题目(年龄排序)请实现一个按年龄排序的算法，其中最大年龄为99岁，要求时间效率为 O(n)(可以使用不超过O(n)的">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpy4rnfjbmj20v60c9aam.jpg">
+<meta name="twitter:title" content="剑指offer2之数组中出现次数超过一半的数字">
+<meta name="twitter:description" content="前言编写算法，不仅需要正确实现，还需要考虑到时间效率的问题。比如采用更好的解法，养成更好的编程习惯。说到编程习惯，其实如果采用 C/C++ 编程时，在进行传递复杂类型参数的时，需要采用引用(或指针)，而要避免使用值传递，因为从形参到实参会产生一次多余的复制操作。用 Java、C# 等做多次字符串的拼接操作时，也不要多次使用 String 的 + 运算符来拼接字符串，因为这样会产生很多 String">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1ftatchf3bmj20zn0lddg9.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/03/剑指offer2之按年龄排序/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/20/剑指offer2之数组中出现次数超过一半的数字/"/>
 
 
 
@@ -133,7 +134,7 @@
   };
 </script>
 
-  <title>剑指offer2之按年龄排序 | Rongxuanhong's Blog</title>
+  <title>剑指offer2之数组中出现次数超过一半的数字 | Rongxuanhong's Blog</title>
   
 
 
@@ -311,7 +312,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/03/剑指offer2之按年龄排序/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/20/剑指offer2之数组中出现次数超过一半的数字/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="洪荣宣">
@@ -328,7 +329,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">剑指offer2之按年龄排序</h1>
+          <h1 class="post-title" itemprop="name headline">剑指offer2之数组中出现次数超过一半的数字</h1>
         
 
         <div class="post-meta">
@@ -340,7 +341,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-03T15:12:25+08:00">2018-04-03</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-20T20:11:03+08:00">2018-07-20</time>
             
 
             
@@ -358,8 +359,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/04/03/剑指offer2之按年龄排序/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/03/剑指offer2之按年龄排序/" itemprop="commentCount"></span>
+                <a href="/2018/07/20/剑指offer2之数组中出现次数超过一半的数字/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/07/20/剑指offer2之数组中出现次数超过一半的数字/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -395,11 +396,14 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>不同排序算法适用的场合也不尽相同。例如，对于数组有序的情况，使用快速排序算法将达到最坏的时间复杂度O(n^2)，那么此种场合下，快速排序算法就不是最优的选择。因此，选择一个排序算法，应当考虑到排序应用的环境、哪些约束条件(比如数据的范围)，最后综合考虑后选择相应的排序算法解决。</p>
-<h1 id="题目-年龄排序"><a href="#题目-年龄排序" class="headerlink" title="题目(年龄排序)"></a>题目(年龄排序)</h1><p>请实现一个按年龄排序的算法，其中最大年龄为99岁，要求时间效率为 O(n)(<strong>可以使用不超过O(n)的辅助内存</strong>)</p>
-<h1 id="算法思路-排序对象有范围限制"><a href="#算法思路-排序对象有范围限制" class="headerlink" title="算法思路 (排序对象有范围限制)"></a>算法思路 (排序对象有范围限制)</h1><p>我们看到题目要求的排序时间复杂度要达到 O(n),而那些常见排序算法的最坏时间复杂度基本都达不到 O(n)。我们注意到排序的对象是年龄，它是有约束的，即年龄只能在0-99岁之间。那么，我们可以利用辅助数组来记录每个年龄有多少人次(数组的下标即年龄)，那么我们对年龄进行排序的时候，只需要遍历所有年龄，得到相应的人次，然后给年龄数组重新赋值即可。  </p>
-<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpy4rnfjbmj20v60c9aam.jpg" alt="">  </p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>编写算法，不仅需要正确实现，还需要考虑到时间效率的问题。比如采用更好的解法，养成更好的编程习惯。说到编程习惯，其实如果采用 C/C++ 编程时，在进行传递复杂类型参数的时，需要采用引用(或指针)，而要避免使用值传递，因为从形参到实参会产生一次多余的复制操作。用 Java、C# 等做多次字符串的拼接操作时，也不要多次使用 String 的 + 运算符来拼接字符串，因为这样会产生很多 String 临时实例，造成时间和空间的浪费。更好的办法是用 StringBuild 的 Append 方法来完成字符串的拼接。</p>
+<h1 id="题目-数组中出现次数超过一半的数字—牛客网"><a href="#题目-数组中出现次数超过一半的数字—牛客网" class="headerlink" title="题目(数组中出现次数超过一半的数字—牛客网)"></a>题目(<a href="https://www.nowcoder.com/questionTerminal/e8a1b01a2df14cb2b228b30ee6a92163" target="_blank" rel="noopener">数组中出现次数超过一半的数字—牛客网</a>)</h1><p>数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。例如输入一个长度为 9 的数组{1,2,3,2,2,2,5,4,2}。由于数字 2 在数组中出现了 5 次，超过数组长度的一半，因此输出 2。如果不存在则输出 0。</p>
+<h1 id="算法思路一"><a href="#算法思路一" class="headerlink" title="算法思路一"></a>算法思路一</h1><p>本题最简单的做法是先排序再求解，但是时间效率最低需要 O(nlogn)，以下思路时间效率都只需要 O(n)。</p>
+<p>根据数组的特点：数组中有一个数字出现的次数超过数组长度的一半，也就是它出现的次数比其他所有数字出现的次数之和还要多。那么我们采用采用阵地攻守的思想：第一个数字作为第一个士兵，守阵地，计数为 1。 如果遇到相同的数字，计数加 1，如果遇到不相同元素，即为敌人，同归于尽,计数减 1；当计数值为 0 时，表示没有士兵了，又以新的 i 值作为守阵地的士兵。最后一个留在阵地的士兵有可能就是主元素，即所求，所以只需验证即可，可再加一次循环，记录这个士兵的个数看是否大于数组一半即可。</p>
+<h1 id="算法思路二"><a href="#算法思路二" class="headerlink" title="算法思路二"></a>算法思路二</h1><p>根据数组的特点：数组中有一个数字出现的次数超过数组长度的一半，那么当数字有序的时候，所求的数字一定在有序数组的中位数上。假设中位数的索引为 k，那么现在问题就转为为求数组中第 k 大的数字了，而这个转换问题可利用快速排序的思想，在线性时间内得到解决。</p>
+<h1 id="算法实现一"><a href="#算法实现一" class="headerlink" title="算法实现一"></a>算法实现一</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ftatchf3bmj20zn0lddg9.jpg" alt=""></p>
+<h1 id="算法实现二"><a href="#算法实现二" class="headerlink" title="算法实现二"></a>算法实现二</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ftbyjsnzt1j20zc0y2q3z.jpg" alt=""></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] &lt;&lt;剑指offer2&gt;&gt;<br>[2] 牛客网</p>
 
       
     </div>
@@ -432,7 +436,7 @@
     <strong>Post author: </strong>洪荣宣</li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="http://yoursite.com/2018/04/03/剑指offer2之按年龄排序/" title="剑指offer2之按年龄排序">http://yoursite.com/2018/04/03/剑指offer2之按年龄排序/</a>
+    <a href="http://yoursite.com/2018/07/20/剑指offer2之数组中出现次数超过一半的数字/" title="剑指offer2之数组中出现次数超过一半的数字">http://yoursite.com/2018/07/20/剑指offer2之数组中出现次数超过一半的数字/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>All articles in this blog are licensed under 本文由 rongxuanhong 原创，采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">保留署名-非商业性使用-禁止演绎 4.0-国际许可协议</a></br>转载请保留以上声明信息! unless stating additionally.</li>
@@ -458,8 +462,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/02/剑指offer2之斐波那契数列/" rel="next" title="剑指offer2之斐波那契数列">
-                <i class="fa fa-chevron-left"></i> 剑指offer2之斐波那契数列
+              <a href="/2018/07/17/剑指offer2之字符串的排列/" rel="next" title="剑指offer2之字符串的排列">
+                <i class="fa fa-chevron-left"></i> 剑指offer2之字符串的排列
               </a>
             
           </div>
@@ -467,10 +471,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/09/剑指offer2之旋转数组/" rel="prev" title="剑指offer2之旋转数组">
-                剑指offer2之旋转数组 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -648,7 +648,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目-年龄排序"><span class="nav-number">2.</span> <span class="nav-text">题目(年龄排序)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法思路-排序对象有范围限制"><span class="nav-number">3.</span> <span class="nav-text">算法思路 (排序对象有范围限制)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现"><span class="nav-number">4.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目-数组中出现次数超过一半的数字—牛客网"><span class="nav-number">2.</span> <span class="nav-text">题目(数组中出现次数超过一半的数字—牛客网)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法思路一"><span class="nav-number">3.</span> <span class="nav-text">算法思路一</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法思路二"><span class="nav-number">4.</span> <span class="nav-text">算法思路二</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现一"><span class="nav-number">5.</span> <span class="nav-text">算法实现一</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现二"><span class="nav-number">6.</span> <span class="nav-text">算法实现二</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
