@@ -103,27 +103,29 @@
 
 
 
-  <meta name="description" content="题目(二叉搜索树的后序遍历序列—牛客网)输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果。如果是则输出Yes,否则输出No。假设输入的数组的任意两个数字都互不相同。 算法思路首先应该考虑两种特殊情况。只有一个节点和空树的情况时，也符合要求。那么对于一个序列 S，它的最后一个元素就是根节点的值 x，除掉根之后，留下序列 T，再结合二叉搜索树(BST)的特性，可以将 T 分成两段，前一段">
+  <meta name="description" content="题目(最小的k个数—牛客网)输入 n 个整数，找出其中最小的 K 个数。例如输入 4,5,1,6,2,7,3,8 这 8 个数字，则最小的 4 个数字是 1,2,3,4,。 算法思路一题目为最小的 k 个数，它是未知数，所以首先应该分类讨论 k 的各种特殊值。如果 k&amp;lt;=0,或者大于数组大小，则无意义。另外，当 k 刚好就是数组长度时，输入数组即为所求。对于输入数组的大小也该判断。   我们">
 <meta name="keywords" content="剑指offer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="剑指offer2之二叉搜索树的后序遍历序列">
-<meta property="og:url" content="http://yoursite.com/2018/06/06/剑指offer2之二叉搜索树的后序遍历序列/index.html">
+<meta property="og:title" content="剑指offer2之最小的k个数">
+<meta property="og:url" content="http://yoursite.com/2018/07/21/剑指offer2之最小的k个数/index.html">
 <meta property="og:site_name" content="Rongxuanhong&#39;s Blog">
-<meta property="og:description" content="题目(二叉搜索树的后序遍历序列—牛客网)输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果。如果是则输出Yes,否则输出No。假设输入的数组的任意两个数字都互不相同。 算法思路首先应该考虑两种特殊情况。只有一个节点和空树的情况时，也符合要求。那么对于一个序列 S，它的最后一个元素就是根节点的值 x，除掉根之后，留下序列 T，再结合二叉搜索树(BST)的特性，可以将 T 分成两段，前一段">
+<meta property="og:description" content="题目(最小的k个数—牛客网)输入 n 个整数，找出其中最小的 K 个数。例如输入 4,5,1,6,2,7,3,8 这 8 个数字，则最小的 4 个数字是 1,2,3,4,。 算法思路一题目为最小的 k 个数，它是未知数，所以首先应该分类讨论 k 的各种特殊值。如果 k&amp;lt;=0,或者大于数组大小，则无意义。另外，当 k 刚好就是数组长度时，输入数组即为所求。对于输入数组的大小也该判断。   我们">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1frfqgiutz6j20v80cw3ys.jpg">
-<meta property="og:updated_time" content="2018-06-06T11:15:23.558Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1ftd4qe6370j20zn0thjs5.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1ftd4qpbdbcj20zp0fgt99.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1ftd4r07ovpj20zk0feq3d.jpg">
+<meta property="og:updated_time" content="2018-07-21T12:02:55.456Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="剑指offer2之二叉搜索树的后序遍历序列">
-<meta name="twitter:description" content="题目(二叉搜索树的后序遍历序列—牛客网)输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果。如果是则输出Yes,否则输出No。假设输入的数组的任意两个数字都互不相同。 算法思路首先应该考虑两种特殊情况。只有一个节点和空树的情况时，也符合要求。那么对于一个序列 S，它的最后一个元素就是根节点的值 x，除掉根之后，留下序列 T，再结合二叉搜索树(BST)的特性，可以将 T 分成两段，前一段">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1frfqgiutz6j20v80cw3ys.jpg">
+<meta name="twitter:title" content="剑指offer2之最小的k个数">
+<meta name="twitter:description" content="题目(最小的k个数—牛客网)输入 n 个整数，找出其中最小的 K 个数。例如输入 4,5,1,6,2,7,3,8 这 8 个数字，则最小的 4 个数字是 1,2,3,4,。 算法思路一题目为最小的 k 个数，它是未知数，所以首先应该分类讨论 k 的各种特殊值。如果 k&amp;lt;=0,或者大于数组大小，则无意义。另外，当 k 刚好就是数组长度时，输入数组即为所求。对于输入数组的大小也该判断。   我们">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1ftd4qe6370j20zn0thjs5.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/06/06/剑指offer2之二叉搜索树的后序遍历序列/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/21/剑指offer2之最小的k个数/"/>
 
 
 
@@ -133,7 +135,7 @@
   };
 </script>
 
-  <title>剑指offer2之二叉搜索树的后序遍历序列 | Rongxuanhong's Blog</title>
+  <title>剑指offer2之最小的k个数 | Rongxuanhong's Blog</title>
   
 
 
@@ -311,7 +313,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/06/剑指offer2之二叉搜索树的后序遍历序列/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/21/剑指offer2之最小的k个数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="洪荣宣">
@@ -328,7 +330,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">剑指offer2之二叉搜索树的后序遍历序列</h1>
+          <h1 class="post-title" itemprop="name headline">剑指offer2之最小的k个数</h1>
         
 
         <div class="post-meta">
@@ -340,7 +342,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-06T19:14:06+08:00">2018-06-06</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-21T20:02:37+08:00">2018-07-21</time>
             
 
             
@@ -358,8 +360,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/06/06/剑指offer2之二叉搜索树的后序遍历序列/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/06/06/剑指offer2之二叉搜索树的后序遍历序列/" itemprop="commentCount"></span>
+                <a href="/2018/07/21/剑指offer2之最小的k个数/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/07/21/剑指offer2之最小的k个数/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -395,11 +397,17 @@
       
 
       
-        <h1 id="题目-二叉搜索树的后序遍历序列—牛客网"><a href="#题目-二叉搜索树的后序遍历序列—牛客网" class="headerlink" title="题目(二叉搜索树的后序遍历序列—牛客网)"></a>题目(<a href="https://www.nowcoder.com/questionTerminal/a861533d45854474ac791d90e447bafd" target="_blank" rel="noopener">二叉搜索树的后序遍历序列—牛客网</a>)</h1><p>输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果。如果是则输出Yes,否则输出No。假设输入的数组的任意两个数字都互不相同。</p>
-<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>首先应该考虑两种特殊情况。只有一个节点和空树的情况时，也符合要求。<br>那么对于一个序列 S，它的最后一个元素就是根节点的值 x，除掉根之后，留下序列 T，再结合二叉搜索树(BST)的特性，可以将 T 分成两段，前一段（左子树）小于 x，后一段（右子树）大于 x，并且这两段依然也是合法的 BST 后序遍历，那么完美地满足递归的定义。</p>
-<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1frfqgiutz6j20v80cw3ys.jpg" alt=""></p>
-<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>对于时间复杂度可以表示为T(n)=2xT(n-1)+O(n) ，O(n)是 for 循环占用的时间，两个子问题各占 T(n-1)，那么解出的时间复杂度为 O(nlogn)，空间复杂度取决于递归深度，为 O(logn)。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
+        <h1 id="题目-最小的k个数—牛客网"><a href="#题目-最小的k个数—牛客网" class="headerlink" title="题目(最小的k个数—牛客网)"></a>题目(<a href="https://www.nowcoder.com/questionTerminal/6a296eb82cf844ca8539b57c23e6e9bf" target="_blank" rel="noopener">最小的k个数—牛客网</a>)</h1><p>输入 n 个整数，找出其中最小的 K 个数。例如输入 4,5,1,6,2,7,3,8 这 8 个数字，则最小的 4 个数字是 1,2,3,4,。</p>
+<h1 id="算法思路一"><a href="#算法思路一" class="headerlink" title="算法思路一"></a>算法思路一</h1><p>题目为最小的 k 个数，它是未知数，所以首先应该分类讨论 k 的各种特殊值。<br>如果 k&lt;=0,或者大于数组大小，则无意义。另外，当 k 刚好就是数组长度时，输入数组即为所求。<br>对于输入数组的大小也该判断。  </p>
+<p>我们从求数组任意第 k 个大的数字的问题中得到启发，此问题的相似版本在上一篇文章，采用快速排序的基础思想partition 函数。它既是快速排序的基础，同时也可以用来查找 n 个数中第 k 大的数字。<br>我们利用快速排序中的分割算法找到那个在 k 位置上的划分点即可，因为划分算法会使得数组中的左半部分数小于划分位置上的数，后半部分的数大于划分位置上的数，那么此时我们的所求就是这左半部分数。(<strong>ps:此法会修改原数组，如不需要原数组可使用下述思路，他们适合于处理海量数据的，不需要一次性处理</strong>。)</p>
+<h1 id="算法思路二"><a href="#算法思路二" class="headerlink" title="算法思路二"></a>算法思路二</h1><p>我们利用最大堆来存储这个 k 个数。首先初始将数组前 k 个数送入堆中。然后将其余的数字都和堆顶元素(最大元素)比较,只要比堆顶元素小，我们就删除堆顶元素，将新的元素加入堆中，继续维护堆。最后，堆刚好就维护了最小的 k 个数。  </p>
+<p>另外为什么不用最小堆呢？因为如果用最小堆，那么我们需要将所有元素送入堆中，那么需要对 n 个元素调堆，而对每个元素的调整时间增加到了O(logn)，最后的总时间复杂度为 O(nlogn)。而使用最大堆进行求解，只需要要 O(nlogk)，关键就在于用于建堆的元素总数。</p>
+<h1 id="算法思路三"><a href="#算法思路三" class="headerlink" title="算法思路三"></a>算法思路三</h1><p>利用优先队列，其实思想和二类似，但是它比二代码上更简洁。优先队列默认优先值大的排在前面，其实是最大堆实现出来的。</p>
+<h1 id="算法实现一"><a href="#算法实现一" class="headerlink" title="算法实现一"></a>算法实现一</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ftd4qe6370j20zn0thjs5.jpg" alt=""></p>
+<h1 id="算法实现二"><a href="#算法实现二" class="headerlink" title="算法实现二"></a>算法实现二</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ftd4qpbdbcj20zp0fgt99.jpg" alt=""></p>
+<h1 id="算法实现三"><a href="#算法实现三" class="headerlink" title="算法实现三"></a>算法实现三</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ftd4r07ovpj20zk0feq3d.jpg" alt=""></p>
+<h1 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h1><p>算法实现一，时间复杂度为O(n)，其余时间复杂度均为O(nlogk)。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] &lt;&lt;剑指offer2&gt;&gt;<br>[2] 牛客网</p>
 
       
     </div>
@@ -432,7 +440,7 @@
     <strong>Post author: </strong>洪荣宣</li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="http://yoursite.com/2018/06/06/剑指offer2之二叉搜索树的后序遍历序列/" title="剑指offer2之二叉搜索树的后序遍历序列">http://yoursite.com/2018/06/06/剑指offer2之二叉搜索树的后序遍历序列/</a>
+    <a href="http://yoursite.com/2018/07/21/剑指offer2之最小的k个数/" title="剑指offer2之最小的k个数">http://yoursite.com/2018/07/21/剑指offer2之最小的k个数/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>All articles in this blog are licensed under 本文由 rongxuanhong 原创，采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">保留署名-非商业性使用-禁止演绎 4.0-国际许可协议</a></br>转载请保留以上声明信息! unless stating additionally.</li>
@@ -458,8 +466,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/06/剑指offer2之顺时针打印矩阵/" rel="next" title="剑指offer2之顺时针打印矩阵">
-                <i class="fa fa-chevron-left"></i> 剑指offer2之顺时针打印矩阵
+              <a href="/2018/07/20/剑指offer2之数组中出现次数超过一半的数字/" rel="next" title="剑指offer2之数组中出现次数超过一半的数字">
+                <i class="fa fa-chevron-left"></i> 剑指offer2之数组中出现次数超过一半的数字
               </a>
             
           </div>
@@ -467,10 +475,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/06/18/剑指offer2之二叉树中和为某一值的路径/" rel="prev" title="剑指offer2之二叉树中和为某一值的路径">
-                剑指offer2之二叉树中和为某一值的路径 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -648,7 +652,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目-二叉搜索树的后序遍历序列—牛客网"><span class="nav-number">1.</span> <span class="nav-text">题目(二叉搜索树的后序遍历序列—牛客网)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法思路"><span class="nav-number">2.</span> <span class="nav-text">算法思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现"><span class="nav-number">3.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂度分析"><span class="nav-number">4.</span> <span class="nav-text">复杂度分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目-最小的k个数—牛客网"><span class="nav-number">1.</span> <span class="nav-text">题目(最小的k个数—牛客网)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法思路一"><span class="nav-number">2.</span> <span class="nav-text">算法思路一</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法思路二"><span class="nav-number">3.</span> <span class="nav-text">算法思路二</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法思路三"><span class="nav-number">4.</span> <span class="nav-text">算法思路三</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现一"><span class="nav-number">5.</span> <span class="nav-text">算法实现一</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现二"><span class="nav-number">6.</span> <span class="nav-text">算法实现二</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现三"><span class="nav-number">7.</span> <span class="nav-text">算法实现三</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#时间复杂度"><span class="nav-number">8.</span> <span class="nav-text">时间复杂度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">9.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
