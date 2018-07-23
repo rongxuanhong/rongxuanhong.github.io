@@ -103,27 +103,27 @@
 
 
 
-  <meta name="description" content="前言回溯法可以看成蛮力法的升级版。它会搜遍问题的解空间，试图找到一个符合约束条件的解决方案。回溯法非常适合由多个步骤组成的问题，并且每个步骤都有多个选项。当我们在某一步选择了一中一个选项时，就进入下一步，然后有面临新的选项。我们就这样重复选择，直至到达最终的状态。 而这样的选择过程非常适合用树结构来表示。在某一步有 n 个可能的选项，那么把该步骤看出树状结构中的一个节点，每个选项就看出树中节点连接">
+  <meta name="description" content="题目(数据流中的中位数—牛客网)如何得到一个数据流中的中位数？如果从数据流中读出奇数个数值，那么中位数就是所有数值排序之后位于中间的数值。如果从数据流中读出偶数个数值，那么中位数就是所有数值排序之后中间两个数的平均值。我们使用 Insert() 方法读取数据流，使用 GetMedian() 方法获取当前读取数据的中位数。 算法思路本题解法有很多，比如如果数组无序，那么使用快速排序中的 Partit">
 <meta name="keywords" content="剑指offer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="剑指offer2之回溯法(矩阵中的路径)">
-<meta property="og:url" content="http://yoursite.com/2018/04/11/剑指offer2之回溯法-矩阵中的路径/index.html">
+<meta property="og:title" content="剑指offer2之数据流中的中位数">
+<meta property="og:url" content="http://yoursite.com/2018/07/23/剑指offer2之数据流中的中位数/index.html">
 <meta property="og:site_name" content="Rongxuanhong&#39;s Blog">
-<meta property="og:description" content="前言回溯法可以看成蛮力法的升级版。它会搜遍问题的解空间，试图找到一个符合约束条件的解决方案。回溯法非常适合由多个步骤组成的问题，并且每个步骤都有多个选项。当我们在某一步选择了一中一个选项时，就进入下一步，然后有面临新的选项。我们就这样重复选择，直至到达最终的状态。 而这样的选择过程非常适合用树结构来表示。在某一步有 n 个可能的选项，那么把该步骤看出树状结构中的一个节点，每个选项就看出树中节点连接">
+<meta property="og:description" content="题目(数据流中的中位数—牛客网)如何得到一个数据流中的中位数？如果从数据流中读出奇数个数值，那么中位数就是所有数值排序之后位于中间的数值。如果从数据流中读出偶数个数值，那么中位数就是所有数值排序之后中间两个数的平均值。我们使用 Insert() 方法读取数据流，使用 GetMedian() 方法获取当前读取数据的中位数。 算法思路本题解法有很多，比如如果数组无序，那么使用快速排序中的 Partit">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fq6b0g2zb4j20v70laabw.jpg">
-<meta property="og:updated_time" content="2018-04-11T06:49:33.121Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1ftgl35hygaj20zd0lrmxp.jpg">
+<meta property="og:updated_time" content="2018-07-23T11:49:00.200Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="剑指offer2之回溯法(矩阵中的路径)">
-<meta name="twitter:description" content="前言回溯法可以看成蛮力法的升级版。它会搜遍问题的解空间，试图找到一个符合约束条件的解决方案。回溯法非常适合由多个步骤组成的问题，并且每个步骤都有多个选项。当我们在某一步选择了一中一个选项时，就进入下一步，然后有面临新的选项。我们就这样重复选择，直至到达最终的状态。 而这样的选择过程非常适合用树结构来表示。在某一步有 n 个可能的选项，那么把该步骤看出树状结构中的一个节点，每个选项就看出树中节点连接">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fq6b0g2zb4j20v70laabw.jpg">
+<meta name="twitter:title" content="剑指offer2之数据流中的中位数">
+<meta name="twitter:description" content="题目(数据流中的中位数—牛客网)如何得到一个数据流中的中位数？如果从数据流中读出奇数个数值，那么中位数就是所有数值排序之后位于中间的数值。如果从数据流中读出偶数个数值，那么中位数就是所有数值排序之后中间两个数的平均值。我们使用 Insert() 方法读取数据流，使用 GetMedian() 方法获取当前读取数据的中位数。 算法思路本题解法有很多，比如如果数组无序，那么使用快速排序中的 Partit">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1ftgl35hygaj20zd0lrmxp.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/11/剑指offer2之回溯法-矩阵中的路径/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/23/剑指offer2之数据流中的中位数/"/>
 
 
 
@@ -133,7 +133,7 @@
   };
 </script>
 
-  <title>剑指offer2之回溯法(矩阵中的路径) | Rongxuanhong's Blog</title>
+  <title>剑指offer2之数据流中的中位数 | Rongxuanhong's Blog</title>
   
 
 
@@ -311,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/11/剑指offer2之回溯法-矩阵中的路径/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/23/剑指offer2之数据流中的中位数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="洪荣宣">
@@ -328,7 +328,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">剑指offer2之回溯法(矩阵中的路径)</h1>
+          <h1 class="post-title" itemprop="name headline">剑指offer2之数据流中的中位数</h1>
         
 
         <div class="post-meta">
@@ -340,7 +340,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-11T14:49:00+08:00">2018-04-11</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-23T19:48:22+08:00">2018-07-23</time>
             
 
             
@@ -358,8 +358,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/04/11/剑指offer2之回溯法-矩阵中的路径/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/11/剑指offer2之回溯法-矩阵中的路径/" itemprop="commentCount"></span>
+                <a href="/2018/07/23/剑指offer2之数据流中的中位数/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/07/23/剑指offer2之数据流中的中位数/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -395,17 +395,12 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>回溯法可以看成蛮力法的升级版。它会搜遍问题的解空间，试图找到一个符合约束条件的解决方案。回溯法非常适合由多个步骤组成的问题，并且每个步骤都有多个选项。当我们在某一步选择了一中一个选项时，就进入下一步，然后有面临新的选项。我们就这样重复选择，直至到达最终的状态。</p>
-<p>而这样的选择过程非常适合用树结构来表示。在某一步有 n 个可能的选项，那么把该步骤看出树状结构中的一个节点，每个选项就看出树中节点连接线，经过这些连接线到达该节点的 n 个子节点，再选定符合的子节点到达下一步骤。树的叶节点对应着终结状态。如果叶节点的状态满足题目的约束条件，那么我们找到了一个可行的解决方案。</p>
-<p>如果在叶节点的状态不满足约束条件，那么需要回溯到上一节点再尝试其他的选项。如果上一节点所有可能的选项都已经尝试过，仍满足不了题目的约束条件，则再次回溯到上一节点。如果所有选项都已经尝试过仍然不能到达满足约束条件的终结状态，则该问题无解。</p>
-<h1 id="题目-矩阵中的路径）"><a href="#题目-矩阵中的路径）" class="headerlink" title="题目(矩阵中的路径）"></a>题目(矩阵中的路径）</h1><p>题目：请设计一个函数，用来判断在一个矩阵中是否存在一条包含某字符串所有字符的路径。路径可以从矩阵中的任意一个格子开始，每一步可以在矩阵中向左，向右，向上，向下移动一个格子。如果一条路径经过了矩阵中的某一个格子，则该路径不能再进入该格子。 例如 a b c e s f c s a d e e 矩阵中包含一条字符串”bcced”的路径，但是矩阵中不包含”abcb”路径，因为字符串的第一个字符b占据了矩阵中的第一行第二个格子之后，路径不能再次进入该格子。</p>
-<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>首先，由于可以在矩阵中任意选择一个格子作为路径的起点，因此首先应该遍历矩阵的每个位置作为可能的起点。然后，假设矩阵中的某个格子上的字符为ch，并且字符串的第 i 个位置也为字符 ch，那么就到相邻的格子寻找字符串中第 i+1 位置上的字符。如果该格子上的字符与字符串的第i个路径上的字符不同，则跳过该格子。重复以上过程，直至字符串中的字符都在矩阵中相应位置出现。另外，需要定义 bool 矩阵标识路径是否已经进过每个格子。   </p>
-<p>当矩阵中坐标为(row,col)的格子和路径字符串中下标为pathLength的字符一样时，从4个相邻的格子(row,col-1),(row-1,col),(row,col+1)和(row+1,col)中去定位字符串中下标为pathLength+1的字符。<br>如果都没有匹配到，则需要回到前一个字符(pathLength-1)，重新定位。</p>
-<p>重复这个过程，直到遇到’\0’。</p>
-<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fq6b0g2zb4j20v70laabw.jpg" alt=""></p>
-<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>首先hasPath中有两层循环，耗时O(rowsxcols),接着每个格子最多需要判断周围 4 个格子是否为路径的下一个字符，时间复杂度O(4xrowsxcols)。因此最后的时间复杂度为O(rows^2xcols^2)。可能分析的不是很对，请指教。</p>
-<h2 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h2><p>建立了一个辅助空间布尔矩阵，空间复杂度为O(rowsxcols)。假设字符长度为n，则递归栈需要O(n)的空间，但最大的复杂度还是O(rowsxcols)。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
+        <h1 id="题目-数据流中的中位数—牛客网"><a href="#题目-数据流中的中位数—牛客网" class="headerlink" title="题目(数据流中的中位数—牛客网)"></a>题目(<a href="https://www.nowcoder.com/questionTerminal/9be0172896bd43948f8a32fb954e1be1" target="_blank" rel="noopener">数据流中的中位数—牛客网</a>)</h1><p>如何得到一个数据流中的中位数？如果从数据流中读出奇数个数值，那么中位数就是所有数值排序之后位于中间的数值。如果从数据流中读出偶数个数值，那么中位数就是所有数值排序之后中间两个数的平均值。我们使用 Insert() 方法读取数据流，使用 GetMedian() 方法获取当前读取数据的中位数。</p>
+<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>本题解法有很多，比如如果数组无序，那么使用快速排序中的 Partition 函数可在 O(n) 时间内找到中位数，O(1)时间内插入无序数组;还可以每插入一个元素保持数组有序，那么插入元素需要 O(n) 的时间，而找到中位数只需要 O(1) 的时间(此情况同链表实现)；最后一种，也是下面的实现，即利用最大堆和最小堆，那么怎么操作呢？  </p>
+<p>首先我们定义一个计数变量 count，然后将第奇数个数插入最大堆，第偶数个数插入最小堆，这是为了保证两个堆的大小之差为 1。注意，插入并不是无条件的，当插入最大堆时，若待插入的元素比最小堆堆顶元素还大，那么先将其插入最小堆后取其新堆顶元素加入最大堆；同理，当插入最小堆时，若待插入的元素比最大堆堆顶元素还小，那么先将其插入最大堆后取其新堆顶元素加入最小堆。这样既保证了将数字平均分配到了两个堆中，也保证了最大堆中的数字都比最小堆中的数字小，以便快速找到中位数。那么此时，很容易得到中位数，如果输入了奇数个数，那么最大堆堆顶元素即中位数，否则中位数为两堆顶元素的平均值。</p>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ftgl35hygaj20zd0lrmxp.jpg" alt=""></p>
+<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><p>本算法实现的时间复杂度为：插入时间为 O(logn)，获取中位数的时间为 O(1)。空间复杂度为两个堆的大小。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] &lt;&lt;剑指offer2&gt;&gt;<br>[2] 牛客网 </p>
 
       
     </div>
@@ -438,7 +433,7 @@
     <strong>Post author: </strong>洪荣宣</li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="http://yoursite.com/2018/04/11/剑指offer2之回溯法-矩阵中的路径/" title="剑指offer2之回溯法(矩阵中的路径)">http://yoursite.com/2018/04/11/剑指offer2之回溯法-矩阵中的路径/</a>
+    <a href="http://yoursite.com/2018/07/23/剑指offer2之数据流中的中位数/" title="剑指offer2之数据流中的中位数">http://yoursite.com/2018/07/23/剑指offer2之数据流中的中位数/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>All articles in this blog are licensed under 本文由 rongxuanhong 原创，采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">保留署名-非商业性使用-禁止演绎 4.0-国际许可协议</a></br>转载请保留以上声明信息! unless stating additionally.</li>
@@ -464,8 +459,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/09/剑指offer2之旋转数组/" rel="next" title="剑指offer2之旋转数组">
-                <i class="fa fa-chevron-left"></i> 剑指offer2之旋转数组
+              <a href="/2018/07/21/剑指offer2之最小的k个数/" rel="next" title="剑指offer2之最小的k个数">
+                <i class="fa fa-chevron-left"></i> 剑指offer2之最小的k个数
               </a>
             
           </div>
@@ -473,10 +468,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/13/剑指offer2之机器人的运动范围/" rel="prev" title="剑指offer2之机器人的运动范围">
-                剑指offer2之机器人的运动范围 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -654,7 +645,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目-矩阵中的路径）"><span class="nav-number">2.</span> <span class="nav-text">题目(矩阵中的路径）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解题思路"><span class="nav-number">3.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现"><span class="nav-number">4.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂度分析"><span class="nav-number">5.</span> <span class="nav-text">复杂度分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#时间复杂度"><span class="nav-number">5.1.</span> <span class="nav-text">时间复杂度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#空间复杂度"><span class="nav-number">5.2.</span> <span class="nav-text">空间复杂度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目-数据流中的中位数—牛客网"><span class="nav-number">1.</span> <span class="nav-text">题目(数据流中的中位数—牛客网)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法思路"><span class="nav-number">2.</span> <span class="nav-text">算法思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现"><span class="nav-number">3.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂度"><span class="nav-number">4.</span> <span class="nav-text">复杂度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
