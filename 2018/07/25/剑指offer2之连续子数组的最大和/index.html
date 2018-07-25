@@ -103,23 +103,28 @@
 
 
 
-  <meta name="description" content="Rongxuanhong&apos;s Blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Rongxuanhong&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/tags/算法/index.html">
+  <meta name="description" content="题目(数组中连续子数组的最大和)输入一个整数数组，数组里有正数也有负数。数组中的一个或连续多个整数组成一个子数组。求所有子数组的和的最大值。要求时间复杂度为 O(n)。例如输入的数组为 {1,-2,3,10,-4,7,2,-5}，最大的连续子数组为 {3,10,-4,7,2}，因此输出为该子数组的和 18。 算法思路本题是经典的动态规划题目之一,所以我们利用动态规划的思路分析。首先以函数 f(i)">
+<meta name="keywords" content="剑指offer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="剑指offer2之连续子数组的最大和">
+<meta property="og:url" content="http://yoursite.com/2018/07/25/剑指offer2之连续子数组的最大和/index.html">
 <meta property="og:site_name" content="Rongxuanhong&#39;s Blog">
-<meta property="og:description" content="Rongxuanhong&apos;s Blog">
+<meta property="og:description" content="题目(数组中连续子数组的最大和)输入一个整数数组，数组里有正数也有负数。数组中的一个或连续多个整数组成一个子数组。求所有子数组的和的最大值。要求时间复杂度为 O(n)。例如输入的数组为 {1,-2,3,10,-4,7,2,-5}，最大的连续子数组为 {3,10,-4,7,2}，因此输出为该子数组的和 18。 算法思路本题是经典的动态规划题目之一,所以我们利用动态规划的思路分析。首先以函数 f(i)">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fthqbgrv7ej20om041q36.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fthqh5j1gaj20ze0fkmxk.jpg">
+<meta property="og:updated_time" content="2018-07-25T12:01:41.506Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Rongxuanhong&#39;s Blog">
-<meta name="twitter:description" content="Rongxuanhong&apos;s Blog">
+<meta name="twitter:title" content="剑指offer2之连续子数组的最大和">
+<meta name="twitter:description" content="题目(数组中连续子数组的最大和)输入一个整数数组，数组里有正数也有负数。数组中的一个或连续多个整数组成一个子数组。求所有子数组的和的最大值。要求时间复杂度为 O(n)。例如输入的数组为 {1,-2,3,10,-4,7,2,-5}，最大的连续子数组为 {3,10,-4,7,2}，因此输出为该子数组的和 18。 算法思路本题是经典的动态规划题目之一,所以我们利用动态规划的思路分析。首先以函数 f(i)">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fthqbgrv7ej20om041q36.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/算法/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/25/剑指offer2之连续子数组的最大和/"/>
 
 
 
@@ -129,7 +134,7 @@
   };
 </script>
 
-  <title>Tag: 算法 | Rongxuanhong's Blog</title>
+  <title>剑指offer2之连续子数组的最大和 | Rongxuanhong's Blog</title>
   
 
 
@@ -176,7 +181,7 @@
     
   
 
-  <div class="container sidebar-position-right ">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -285,84 +290,214 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>算法<small>Tag</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/25/剑指offer2之连续子数组的最大和/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/03/20/剑指offer2笔记之赋值运算符函数/" itemprop="url">
-              
-                <span itemprop="name">剑指offer2笔记之赋值运算符函数</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">剑指offer2之连续子数组的最大和</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-20T16:50:19+08:00"
-              content="2018-03-20" >
-          03-20
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-25T20:00:44+08:00">2018-07-25</time>
+            
 
-    </header>
-  </article>
+            
+            
 
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/07/25/剑指offer2之连续子数组的最大和/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/07/25/剑指offer2之连续子数组的最大和/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             Views: 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="题目-数组中连续子数组的最大和"><a href="#题目-数组中连续子数组的最大和" class="headerlink" title="题目(数组中连续子数组的最大和)"></a>题目(数组中连续子数组的最大和)</h1><p>输入一个整数数组，数组里有正数也有负数。数组中的一个或连续多个整数组成一个子数组。求所有子数组的和的最大值。要求时间复杂度为 O(n)。例如输入的数组为 {1,-2,3,10,-4,7,2,-5}，最大的连续子数组为 {3,10,-4,7,2}，因此输出为该子数组的和 18。</p>
+<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>本题是经典的动态规划题目之一,所以我们利用动态规划的思路分析。首先以函数 f(i) 表示以第 i 个数字结尾的子数组的最大和，那么求解目标就是max(f(i))，(0&lt;=i&lt;=n)。那么如果以第 i-1 个数字结尾的子数组的和小于等于 0，那么我们所求的子数组只能从第 i 个数字开始了;如果以第 i-1 个数字结尾的子数组的和大于 0，那么我们再将第 i 个数字累积进去，得到新的子数组的和，最后只需要和已有最大值比较即可。据此很容易得到状态转移方程为：<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fthqbgrv7ej20om041q36.jpg" alt=""></p>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fthqh5j1gaj20ze0fkmxk.jpg" alt=""></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] &lt;&lt;剑指offer2&gt;&gt;<br>[2]  <a href="https://www.nowcoder.com/questionTerminal/459bd355da1549fa8a49e350bf3df484" target="_blank" rel="noopener">牛客网</a></p>
 
       
     </div>
 
+    
+
+    
+    
+    
+	<div>
+
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+
+        
+-------------本文结束感谢您的阅读-------------
+
+    
+</div>
+  	
+</div>
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author: </strong>洪荣宣</li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="http://yoursite.com/2018/07/25/剑指offer2之连续子数组的最大和/" title="剑指offer2之连续子数组的最大和">http://yoursite.com/2018/07/25/剑指offer2之连续子数组的最大和/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>All articles in this blog are licensed under 本文由 rongxuanhong 原创，采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">保留署名-非商业性使用-禁止演绎 4.0-国际许可协议</a></br>转载请保留以上声明信息! unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/剑指offer/" rel="tag"><i class="fa fa-tag"></i> 剑指offer</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/23/剑指offer2之数据流中的中位数/" rel="next" title="剑指offer2之数据流中的中位数">
+                <i class="fa fa-chevron-left"></i> 剑指offer2之数据流中的中位数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -383,8 +518,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -490,6 +634,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目-数组中连续子数组的最大和"><span class="nav-number">1.</span> <span class="nav-text">题目(数组中连续子数组的最大和)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法思路"><span class="nav-number">2.</span> <span class="nav-text">算法思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现"><span class="nav-number">3.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -645,6 +805,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.6"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.6"></script>
+
+
 
   
 
