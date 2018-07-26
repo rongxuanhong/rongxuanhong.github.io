@@ -306,6 +306,149 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/02/剑指offer2之链表中环的入口节点/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/02/剑指offer2之链表中环的入口节点/" itemprop="url">剑指offer2之链表中环的入口节点</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-02T19:51:41+08:00">2018-05-02</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/02/剑指offer2之链表中环的入口节点/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/05/02/剑指offer2之链表中环的入口节点/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="题目-链表中换的入口节点"><a href="#题目-链表中换的入口节点" class="headerlink" title="题目(链表中换的入口节点)"></a>题目(<a href="https://www.nowcoder.com/questionTerminal/253d2c59ec3e4bc68da16833f79a38e4" target="_blank" rel="noopener">链表中换的入口节点</a>)</h1><p>题目：一个链表中包含环，请找出该链表的环的入口结点。</p>
+<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>算法主要分为两步走。  </p>
+<p>第一步需要判断链表是否有环。首先设置两个指针同时指向头结点，然后一个指针走一步，另一个指针走两步，如果他们能够相遇，那么说明该链表有环，并记录他们相遇的节点(相遇节点一定在环内),如果不存在这样的相遇节点，那么此链表无环。  </p>
+<p>第二步，需要找到链表中环的入口节点。首先需要根据相遇节点计算出此环中包含的节点个数 k，然后需要设置两个指针，其中一个指针先走 k 步，然后另一个指针再指向头结点；之后两个指针同时移动，直到他们相遇即都到达了环的入口节点，此时返回此节点。(后面寻找入口节点其实有点类似前一篇寻找链表中第 k 个节点的算法，仔细体会体会~)</p>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqrenll0pij20v00nedgg.jpg" alt=""></p>
+<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>代码只线性遍历链表，因此时间复杂度为 O(n)，空间复杂度O(1)。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/30/剑指offer2之正则表达式匹配/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -924,152 +1067,6 @@ void DeleteNode(ListNode** head, ListNode* pToBeDeleted);
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/23/剑指offer2之调整数组顺序使奇数位于偶数前面/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="洪荣宣">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rongxuanhong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/23/剑指offer2之调整数组顺序使奇数位于偶数前面/" itemprop="url">剑指offer2之调整数组顺序使奇数位于偶数前面</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-23T21:41:04+08:00">2018-04-23</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/04/23/剑指offer2之调整数组顺序使奇数位于偶数前面/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/23/剑指offer2之调整数组顺序使奇数位于偶数前面/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>书上的题目相对简单，没有要求相对位置不改变，而在牛客网上的题目有要求。以牛客网的为准。</p>
-<h1 id="题目-调整数组顺序使奇数位于偶数前面"><a href="#题目-调整数组顺序使奇数位于偶数前面" class="headerlink" title="题目(调整数组顺序使奇数位于偶数前面)"></a>题目(<a href="https://www.nowcoder.com/questionTerminal/beb5aa231adc45b2a5dcc5b62c93f593" target="_blank" rel="noopener">调整数组顺序使奇数位于偶数前面</a>)</h1><p>输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，所有的偶数位于位于数组的后半部分，并保证奇数和奇数，偶数和偶数之间的相对位置不变。</p>
-<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><h2 id="算法思路一"><a href="#算法思路一" class="headerlink" title="算法思路一"></a>算法思路一</h2><p>利用冒泡排序的思想，此时我们比较的是只要遇到奇数和偶数，那么就交换元素。</p>
-<h2 id="算法思路二"><a href="#算法思路二" class="headerlink" title="算法思路二"></a>算法思路二</h2><p>借助辅助数组。我们从前往后扫描数组将奇数放入数组中，再扫描一遍将偶数放入数组中，最后对数组赋值辅助数组。</p>
-<h2 id="算法思路三"><a href="#算法思路三" class="headerlink" title="算法思路三"></a>算法思路三</h2><p>利用双向队列的特性，即可以高效的在头尾两段插入和删除元素，我们可以从后往前扫描数组，将奇数依次往前插到队列，然后从后往前扫描数组，将偶数往后插入队列中，在保证顺序不变的同时得到所求。</p>
-<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><h2 id="算法实现一"><a href="#算法实现一" class="headerlink" title="算法实现一"></a>算法实现一</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqj0ws71c2j20v70783yj.jpg" alt=""></p>
-<h2 id="算法实现二"><a href="#算法实现二" class="headerlink" title="算法实现二"></a>算法实现二</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqj0wyelasj20v30an74e.jpg" alt=""></p>
-<h2 id="算法实现三"><a href="#算法实现三" class="headerlink" title="算法实现三"></a>算法实现三</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqj0x20xjdj20v708p3yp.jpg" alt=""></p>
-<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>算法一中，使用的过程类似冒泡排序，时间复杂度为 O(n^2)，空间复杂度为 O(1)；算法二中，对数组只有遍历，所以时间复杂度为 O(n)，另外使用了辅助数组，所以空间复杂度为 O(n)；算法三也是遍历一遍数组，时间复杂度为 O(n)，另外使用了双端队列，空间复杂度为 O(n)。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;  </p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-	<div>
-
-</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1121,7 +1118,7 @@ void DeleteNode(ListNode** head, ListNode* pToBeDeleted);
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">52</span>
+                    <span class="site-state-item-count">53</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -1443,9 +1440,9 @@ void DeleteNode(ListNode** head, ListNode* pToBeDeleted);
       
     
       
-        
-      
     
+      
+        
       
     
       
