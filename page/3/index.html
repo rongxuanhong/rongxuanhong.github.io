@@ -306,6 +306,149 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/18/剑指offer2之二叉树中和为某一值的路径/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/18/剑指offer2之二叉树中和为某一值的路径/" itemprop="url">剑指offer2之二叉树中和为某一值的路径</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-18T20:45:01+08:00">2018-06-18</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/18/剑指offer2之二叉树中和为某一值的路径/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/06/18/剑指offer2之二叉树中和为某一值的路径/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="题目-二叉树中和为某一值的路径—牛客网"><a href="#题目-二叉树中和为某一值的路径—牛客网" class="headerlink" title="题目(二叉树中和为某一值的路径—牛客网)"></a>题目(<a href="https://www.nowcoder.com/questionTerminal/b736e784e3e34731af99065031301bca" target="_blank" rel="noopener">二叉树中和为某一值的路径—牛客网</a>)</h1><p>输入一颗二叉树和一个整数，打印出二叉树中结点值的和为输入整数的所有路径。路径定义为从树的根结点开始往下一直到叶结点所经过的结点形成一条路径。</p>
+<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>首先，处理根节点为空的情况；  </p>
+<p>接下来，按照<strong>前序遍历</strong>的思想从根节点开始递归搜索，每次先将节点加入路径，然后<strong>更新期望的路径和</strong>，即减去当前已加入路径的节点值,利用数组 path 存放当前已加入路径的节点值，然后依次判断根节点的左右子树是否存在，存在则继续递归寻找，待<strong>递归返回</strong>后，必须从路径中移除当前节点，以便继续记录其余路径；  </p>
+<p>最后，就是<strong>递归出口</strong>。当遇到了叶节点，并且叶节点的值刚好等于剩余期望的路径和，那么就找到了一条路径；最后依然要从路径中移除当前节点，以便继续记录其余路径，最后再返回。</p>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1frp023uo2bj20zk0g7dgd.jpg" alt=""></p>
+<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>算法遍历了每个节点，时间复杂度为 O(n)，空间复杂度主要在递归栈，大致消耗 O(logn)的空间,还有一些辅助数组空间。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/06/剑指offer2之二叉搜索树的后序遍历序列/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -868,152 +1011,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/18/剑指offer2之二叉树的镜像/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="洪荣宣">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rongxuanhong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/18/剑指offer2之二叉树的镜像/" itemprop="url">剑指offer2之二叉树的镜像</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-18T19:59:51+08:00">2018-05-18</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/05/18/剑指offer2之二叉树的镜像/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/05/18/剑指offer2之二叉树的镜像/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>画图是在面试过程中应聘者用来帮助自己分析、推理的常用手段。画出一些与题目相关的图形，借以辅助自己观察和思考。比如涉及二叉树、链表、二维数组等问题都可以采用画图的方法来分析。</p>
-<h1 id="题目-二叉树的镜像"><a href="#题目-二叉树的镜像" class="headerlink" title="题目(二叉树的镜像)"></a>题目(<a href="https://www.nowcoder.com/questionTerminal/564f4c26aa584921bc75623e48ca3011" target="_blank" rel="noopener">二叉树的镜像</a>)</h1><p>请完成一个函数，输入一棵二叉树，该函数输出它的镜像。<br>(镜像就是每棵子树的左右节点交换)</p>
-<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>由于我们需要对二叉树的每颗子树进行左右子节点的交换过程，因此，我们利用层序遍历二叉树，然后每棵子树进行操作。  </p>
-<p>而层序遍历二叉树可以使用递归和非递归(循环)的方式。</p>
-<p>对于递归方式，当当前根节点或同时不存在左右子树时递归退出，否则就交换两个子树，若一边子树不存在，也必须交换，接下根节点如果还有右节点或左节点，那么就继续递归下去求解。</p>
-<p>对于非递归方式，主要利用队列(本题栈也形，因为它只要对每个节点下的子树进行交换，而与节点顺序无关)来实现，从上到下，从左到右依次将需要进行交换的节点入栈(根节点先入栈)，对于出栈的是叶节点就跳过循环。</p>
-<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><h2 id="递归版本"><a href="#递归版本" class="headerlink" title="递归版本"></a>递归版本</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqy9mt3kehj20v50a0glo.jpg" alt=""></p>
-<h2 id="非递归-循环-版本"><a href="#非递归-循环-版本" class="headerlink" title="非递归(循环)版本"></a>非递归(循环)版本</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqyc01if95j20va0endg0.jpg" alt=""></p>
-<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>算法主要利用层序遍历，每个结点只需遍历一次，故时间复杂度为 O(n)。而无论是使用了递归还是栈，最差情况下空间复杂度为 O(n)。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-	<div>
-
-</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1065,7 +1062,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">53</span>
+                    <span class="site-state-item-count">54</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
