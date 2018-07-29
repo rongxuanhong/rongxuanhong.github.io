@@ -103,29 +103,27 @@
 
 
 
-  <meta name="description" content="前言位运算是把数字用二进制表示之后，对每一位上 0 或 1 的运算。二进制及其位运算非常重要，在很多底层技术中频繁出现。那么面试题更不例外了。 位运算总共有 5 种运算，与、或、异或、左移和右移。关于与 (&amp;amp;)、或 (|)和异或 (\(\oplus\)) 的规律可总结为:  与：只要有  0就是 0，否则为 1； 或：只要有 1 就是 1，否则为 0； 异或：两个二进制位不同为 1，相同为">
+  <meta name="description" content="题目(把数字翻译成字符串)给定一个数字，我们按照如下的规则把它翻译为字符串：将0-25分别对应翻译到a-z字符，如 0 翻译成 a，以此类推。一个数字可能有多少种翻译。例如，12258 有 5 种不同的翻译，分别是 “bccfi”、”bwfi”、”bczi”、”mcfi”、”mzi”。请编程实现一个函数，用来计算一个数字有多少种不同的翻译方法。 算法思路以 12258 为例，显然，从 1 开始翻译">
 <meta name="keywords" content="剑指offer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="剑指offer2之二进制中的1">
-<meta property="og:url" content="http://yoursite.com/2018/04/18/剑指offer2之二进制中的1/index.html">
+<meta property="og:title" content="剑指offer2之把数字翻译成字符串">
+<meta property="og:url" content="http://yoursite.com/2018/07/29/剑指offer2之把数字翻译成字符串/index.html">
 <meta property="og:site_name" content="Rongxuanhong&#39;s Blog">
-<meta property="og:description" content="前言位运算是把数字用二进制表示之后，对每一位上 0 或 1 的运算。二进制及其位运算非常重要，在很多底层技术中频繁出现。那么面试题更不例外了。 位运算总共有 5 种运算，与、或、异或、左移和右移。关于与 (&amp;amp;)、或 (|)和异或 (\(\oplus\)) 的规律可总结为:  与：只要有  0就是 0，否则为 1； 或：只要有 1 就是 1，否则为 0； 异或：两个二进制位不同为 1，相同为">
+<meta property="og:description" content="题目(把数字翻译成字符串)给定一个数字，我们按照如下的规则把它翻译为字符串：将0-25分别对应翻译到a-z字符，如 0 翻译成 a，以此类推。一个数字可能有多少种翻译。例如，12258 有 5 种不同的翻译，分别是 “bccfi”、”bwfi”、”bczi”、”mcfi”、”mzi”。请编程实现一个函数，用来计算一个数字有多少种不同的翻译方法。 算法思路以 12258 为例，显然，从 1 开始翻译">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqasm4ejtfj20va07xt8q.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqasn2htksj20v408ft8w.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqaso4kg5qj20v306u0st.jpg">
-<meta property="og:updated_time" content="2018-04-18T11:13:15.899Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1ftnjgpq5cpj20zn0ozdgu.jpg">
+<meta property="og:updated_time" content="2018-07-29T05:08:21.756Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="剑指offer2之二进制中的1">
-<meta name="twitter:description" content="前言位运算是把数字用二进制表示之后，对每一位上 0 或 1 的运算。二进制及其位运算非常重要，在很多底层技术中频繁出现。那么面试题更不例外了。 位运算总共有 5 种运算，与、或、异或、左移和右移。关于与 (&amp;amp;)、或 (|)和异或 (\(\oplus\)) 的规律可总结为:  与：只要有  0就是 0，否则为 1； 或：只要有 1 就是 1，否则为 0； 异或：两个二进制位不同为 1，相同为">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqasm4ejtfj20va07xt8q.jpg">
+<meta name="twitter:title" content="剑指offer2之把数字翻译成字符串">
+<meta name="twitter:description" content="题目(把数字翻译成字符串)给定一个数字，我们按照如下的规则把它翻译为字符串：将0-25分别对应翻译到a-z字符，如 0 翻译成 a，以此类推。一个数字可能有多少种翻译。例如，12258 有 5 种不同的翻译，分别是 “bccfi”、”bwfi”、”bczi”、”mcfi”、”mzi”。请编程实现一个函数，用来计算一个数字有多少种不同的翻译方法。 算法思路以 12258 为例，显然，从 1 开始翻译">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1ftnjgpq5cpj20zn0ozdgu.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/18/剑指offer2之二进制中的1/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/29/剑指offer2之把数字翻译成字符串/"/>
 
 
 
@@ -135,7 +133,7 @@
   };
 </script>
 
-  <title>剑指offer2之二进制中的1 | Rongxuanhong's Blog</title>
+  <title>剑指offer2之把数字翻译成字符串 | Rongxuanhong's Blog</title>
   
 
 
@@ -313,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/18/剑指offer2之二进制中的1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/29/剑指offer2之把数字翻译成字符串/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="洪荣宣">
@@ -330,7 +328,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">剑指offer2之二进制中的1</h1>
+          <h1 class="post-title" itemprop="name headline">剑指offer2之把数字翻译成字符串</h1>
         
 
         <div class="post-meta">
@@ -342,7 +340,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-18T16:40:12+08:00">2018-04-18</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-29T13:07:58+08:00">2018-07-29</time>
             
 
             
@@ -360,8 +358,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/04/18/剑指offer2之二进制中的1/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/18/剑指offer2之二进制中的1/" itemprop="commentCount"></span>
+                <a href="/2018/07/29/剑指offer2之把数字翻译成字符串/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/07/29/剑指offer2之把数字翻译成字符串/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -397,26 +395,14 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>位运算是把数字用二进制表示之后，对每一位上 0 或 1 的运算。二进制及其位运算非常重要，在很多底层技术中频繁出现。那么面试题更不例外了。</p>
-<p>位运算总共有 5 种运算，与、或、异或、左移和右移。关于与 (&amp;)、或 (|)和异或 (\(\oplus\)) 的规律可总结为:</p>
-<ol>
-<li>与：只要有  0就是 0，否则为 1；</li>
-<li>或：只要有 1 就是 1，否则为 0；</li>
-<li>异或：两个二进制位不同为 1，相同为 0。</li>
-</ol>
-<p>左移运算符 m&lt;<n 表示把="" m="" 左移="" n="" 位。若为正数，则低位补="" 0，否则低位补="" 1。右移运算符="">&gt;n，表示把 m 右移 n 位。若为负数，则高位补 0，否则高位补 1。</n></p>
-<h1 id="题目-二进制中1的个数"><a href="#题目-二进制中1的个数" class="headerlink" title="题目(二进制中1的个数)"></a>题目(二进制中1的个数)</h1><p>题目：请实现一个函数，输入一个整数，输出该数二进制表示中 1 的个数。例如把 9 表示成二进制 1001，有 2 位是 1 。因此，如果输入 9，则该函数输出 2。</p>
-<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><h2 id="算法思路一"><a href="#算法思路一" class="headerlink" title="算法思路一"></a>算法思路一</h2><p>我们把输入的二进制数的最后一位与 1 进行位与运算，如果是 1，就计数；然后将二进制数右移一位，再进行同样的操作，直到整数为 0 退出循环。此思路只能针对输入的整数是正整数，否则会陷入死循环。</p>
-<h2 id="算法思路二"><a href="#算法思路二" class="headerlink" title="算法思路二"></a>算法思路二</h2><p>由于正数和负数的二进制数 n 移位规律不同，因此采用右移来计数较为麻烦。那现在我们就不移动输入整数的二进制表示，而是利用一个无符号的数 1，然后先和 n 的最低位相与，判断最低位是否为 1；然后接着把 1 左移一位，再和 n 做与运算，就能判断 n 的次低位是不是1，这样一直操作，直到循环 n 的二进制位数次。</p>
-<h2 id="算法思路三"><a href="#算法思路三" class="headerlink" title="算法思路三"></a>算法思路三</h2><p>我们发现将 n 减去 1 再和 n 位与可以去掉 n 中最右的 1，那么 n 中有几个这样的 1 ，就需要去掉几次。</p>
-<blockquote>
-<p>注：把一个整数减去 1 之后再和原来的整数做位与运算，得到的结果相当于把整数的二进制表示中最右边的 1 变成 0。很多二进制的问题都可以用这种思路解决。</p>
-<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><h2 id="算法实现一"><a href="#算法实现一" class="headerlink" title="算法实现一"></a>算法实现一</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqasm4ejtfj20va07xt8q.jpg" alt="">  </p>
-<h2 id="算法实现二"><a href="#算法实现二" class="headerlink" title="算法实现二"></a>算法实现二</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqasn2htksj20v408ft8w.jpg" alt=""></p>
-<h2 id="算法实现三"><a href="#算法实现三" class="headerlink" title="算法实现三"></a>算法实现三</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqaso4kg5qj20v306u0st.jpg" alt=""></p>
-<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>算法一的时间主要消耗在对二进制的移位上，时间复杂度为 O(logn)；算法二需要进行循环 n 次(输入的二进制有 n 位)，因此时间复杂度为 O(n);若输入数的二进制表示中 1 的个数为 n，那么算法三仅需循环 n 次，时间复杂度最好达到 O(1)，最坏达到 O(n)。另外空间复杂度均为 O(1)。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
-</blockquote>
+        <h1 id="题目-把数字翻译成字符串"><a href="#题目-把数字翻译成字符串" class="headerlink" title="题目(把数字翻译成字符串)"></a>题目(把数字翻译成字符串)</h1><p>给定一个数字，我们按照如下的规则把它翻译为字符串：将0-25分别对应翻译到a-z字符，如 0 翻译成 a，以此类推。一个数字可能有多少种翻译。例如，12258 有 5 种不同的翻译，分别是 “bccfi”、”bwfi”、”bczi”、”mcfi”、”mzi”。请编程实现一个函数，用来计算一个数字有多少种不同的翻译方法。</p>
+<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>以 12258 为例，显然，从 1 开始翻译的种数包括了从第二个 2开始翻译的种数，以及从第三个 2 开始翻译的总数，但是后者是有条件的，如果此例子中的 12 所在的位置是其他两位不再10-25之间的数字，那么此种情况无法翻译，那么后者的总数就不加入统计。显示，对于从 1 开始翻译，包含了两个递归子问题。那么对子问题的分析以此类推。这其实就是自顶向上分析问题。<br>那么既然是递归有无重叠子问题呢？从上述例子中，如果先翻译1，再翻译2，最后要翻译 258，如果先翻译 12，最后还是要翻译 258，这里就出现了重叠的子问题，即对 258 进行翻译的总数。</p>
+<p>那么为了避免重叠子问题的计算，我们可以采用自底向上的计算方式，从后面开始翻译，因为前面的翻译总数可以由后面的翻译情况得到。</p>
+<p>那么动态转移方程就是：<br>f(i)=f(i+1)+g(i,i+1)*f(i+2); g(i,i+1) 表示 i 和 i+1 位置上拼接的数字是否在 10-25 之内，因此其取值为 0 或者 1。</p>
+<p>本题其实也是动态规划的一种，类似动态规划经典题青蛙跳台阶。</p>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ftnjgpq5cpj20zn0ozdgu.jpg" alt=""></p>
+<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><p>算法仅遍历一次输入数字对应的字符串，因此时间复杂度为 O(n)；定义了记录翻译总数的数组，空间复杂度也为 O(n)。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] &lt;&lt;剑指offer2&gt;&gt;   </p>
 
       
     </div>
@@ -449,7 +435,7 @@
     <strong>Post author: </strong>洪荣宣</li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="http://yoursite.com/2018/04/18/剑指offer2之二进制中的1/" title="剑指offer2之二进制中的1">http://yoursite.com/2018/04/18/剑指offer2之二进制中的1/</a>
+    <a href="http://yoursite.com/2018/07/29/剑指offer2之把数字翻译成字符串/" title="剑指offer2之把数字翻译成字符串">http://yoursite.com/2018/07/29/剑指offer2之把数字翻译成字符串/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>All articles in this blog are licensed under 本文由 rongxuanhong 原创，采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">保留署名-非商业性使用-禁止演绎 4.0-国际许可协议</a></br>转载请保留以上声明信息! unless stating additionally.</li>
@@ -475,8 +461,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/16/剑指offer2之剪绳子/" rel="next" title="剑指offer2之剪绳子">
-                <i class="fa fa-chevron-left"></i> 剑指offer2之剪绳子
+              <a href="/2018/07/27/剑指offer2之把数组排成最小的数/" rel="next" title="剑指offer2之把数组排成最小的数">
+                <i class="fa fa-chevron-left"></i> 剑指offer2之把数组排成最小的数
               </a>
             
           </div>
@@ -484,10 +470,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/18/SVM系列之初识SVM(一)/" rel="prev" title="SVM系列之初识SVM(一)">
-                SVM系列之初识SVM(一) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -665,7 +647,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目-二进制中1的个数"><span class="nav-number">2.</span> <span class="nav-text">题目(二进制中1的个数)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法思路"><span class="nav-number">3.</span> <span class="nav-text">算法思路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法思路一"><span class="nav-number">3.1.</span> <span class="nav-text">算法思路一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法思路二"><span class="nav-number">3.2.</span> <span class="nav-text">算法思路二</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法思路三"><span class="nav-number">3.3.</span> <span class="nav-text">算法思路三</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现"><span class="nav-number">4.</span> <span class="nav-text">算法实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法实现一"><span class="nav-number">4.1.</span> <span class="nav-text">算法实现一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法实现二"><span class="nav-number">4.2.</span> <span class="nav-text">算法实现二</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法实现三"><span class="nav-number">4.3.</span> <span class="nav-text">算法实现三</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂度分析"><span class="nav-number">5.</span> <span class="nav-text">复杂度分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目-把数字翻译成字符串"><span class="nav-number">1.</span> <span class="nav-text">题目(把数字翻译成字符串)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法思路"><span class="nav-number">2.</span> <span class="nav-text">算法思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现"><span class="nav-number">3.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂度"><span class="nav-number">4.</span> <span class="nav-text">复杂度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
