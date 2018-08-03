@@ -306,6 +306,149 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/03/剑指offer2之丑数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/03/剑指offer2之丑数/" itemprop="url">剑指offer2之丑数</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-03T19:51:25+08:00">2018-08-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/08/03/剑指offer2之丑数/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/08/03/剑指offer2之丑数/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="题目-丑数"><a href="#题目-丑数" class="headerlink" title="题目(丑数)"></a>题目(丑数)</h1><p>把只包含质因子 2、3 和 5 的数称作丑数（Ugly Number）。例如 6、8 都是丑数，但 14 不是，因为它包含质因子 7。 习惯上我们把  1当做是第一个丑数。求按从小到大的顺序的第 N 个丑数。 </p>
+<h1 id="算法思路一"><a href="#算法思路一" class="headerlink" title="算法思路一"></a>算法思路一</h1><p>逐个判断数是不是丑数，如果是丑数就计数，直到达到第 N 个丑数。而丑数是只含质因子 2，3，5的数。</p>
+<h1 id="算法思路二"><a href="#算法思路二" class="headerlink" title="算法思路二"></a>算法思路二</h1><p>算法实现二基于用前一个丑数求解下一个丑数的思想。即，对于一个有序的丑数数组，后面的丑数一定是前面的某个丑数乘以 2、3 或 5 的结果。<br>那么如何保证丑数数组有序呢？假设对于丑数 a，b，c(a,b,c 可相同)，下一个丑数可能为 2a、3b 或 5c 三种之一，那么我们就选取这三个数的最小丑数存入数组中，但是为了要继续更新下一个可能的丑数，我们必须记录这三种丑数对应的前一个丑数的位置(ps:每一种就是用前一个丑数乘以相应的质因子得到下一个丑数)，所以在我们将最小的那种丑数存入丑数数组时，还需要对那种丑数对应的指示器执行加 1 操作，即更新当前这种丑数的位置，以便继续求解下一个丑数。</p>
+<h1 id="算法实现一"><a href="#算法实现一" class="headerlink" title="算法实现一"></a>算法实现一</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ftrt8iw1gtj20zq0itjry.jpg" alt=""></p>
+<h1 id="算法实现二-优化版"><a href="#算法实现二-优化版" class="headerlink" title="算法实现二(优化版)"></a>算法实现二(优化版)</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ftrt8q8nbjj20zj0e0t9c.jpg" alt=""></p>
+<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><p>算法思路一，尽管空间复杂度小，但由于需要对每个数判断丑数，因此浪费了很多时间再非丑数的判别上；而算法思路二，虽然额外建立了一个动态数组，但是它不需要对每个数判别丑数，大大提高了时间效率，也就是以空间换时间的解法。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] &lt;&lt;剑指offer2&gt;&gt;<br>[2] <a href="https://www.nowcoder.com/questionTerminal/6aa9e04fc3794f68acf8778237ba065b" target="_blank" rel="noopener">牛客网</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/01/剑指offer2之最长不含重复字的子字符串/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -873,155 +1016,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/26/剑指offer2之从1到n整数中1出现的次数/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="洪荣宣">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rongxuanhong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/26/剑指offer2之从1到n整数中1出现的次数/" itemprop="url">剑指offer2之从1到n整数中1出现的次数</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-26T20:33:15+08:00">2018-07-26</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/07/26/剑指offer2之从1到n整数中1出现的次数/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/07/26/剑指offer2之从1到n整数中1出现的次数/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="题目-从1到n整数中1出现的次数—牛客网"><a href="#题目-从1到n整数中1出现的次数—牛客网" class="headerlink" title="题目(从1到n整数中1出现的次数—牛客网)"></a>题目(<a href="https://www.nowcoder.com/questionTerminal/bd7f978302044eee894445e244c7eee6" target="_blank" rel="noopener">从1到n整数中1出现的次数—牛客网</a>)</h1><p>输入一个整数 n，求 1-n 这 n 个整数的十进制表示中 1 出现的次数。 例如，输入12，1-12 这些整数中包含 1 的数字有1、10、11 和 12，1 一共出现了 5 次。</p>
-<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>最简单的思路就是遍历所有整数，然后对每一个整数再遍历出每一个数位(通过 /、% 运算即可)，最后统计所有整数中含 1 的次数。但是此情况下的时间复杂度达到了 O(nlogn)，能不能降到 O(logn)？。  </p>
-<p>可以滴！！接下来，提出一个高效算法，它利用了数字的规律，挺不容易想到的。<br>既然时间复杂度这么低，那么就不可能去单独计算每个整数中 1 出现的次数了，所以就只能研究 1 出现的规律了。<br>由于我们可以计算出所有整数中 1 出现在每个数位(个位、十位、百位…)的总次数，因此最后 1 到 n 整数中 1 出现的次数=所有整数中含个位且其个位为 1 的总数 + 所有整数中含十位且其十位为 1 的总数+所有整数中含百位且其百位为 1 的总数<br>+…(项总数取决了 n 含的数位数,共 logn 项)。  </p>
-<p>下面以百位为例进行分析。 我们以百位 i(i=100) 将整数 n 分割为两部分。设a=n/i;b=n%i。   </p>
-<ol>
-<li>如果 n 的百位上为 0，例如 n=31056，a=310,b=56。那么 1-31056 中百位含 1 的整数必然以 100-199 之间的数字作为后缀(共有100个)。而前缀的范围在 00-30 之间(不包括31的是因为31056中百位不是 1，忽略)，共31个，它等于a/10，因此此情况总的个数就是 a/10*i；  </li>
-<li>如果 n 的百位上为 1，例如 n=31156，a=311,b=56。那么 1-31156 中百位含 1 的整数必然以 100-199 之间的数字作为后缀(共有100个)。而前缀的范围在 00-30 之间，共31个，但前缀为 31 时，百位含 1 的个数为 (b+1)个，即31100-31156 之间的数，因此此情况总的个数就是 a/10 *i+(b+1)；  </li>
-<li>如果 n 的百位上数字大于等于2 ，例如 n=31256，a=312,b=56。那么 1-31256 中百位含 1 的整数必然以 100-199 之间的数字作为后缀(共有100个)。而前缀的范围在 00-31 之间，共32个,因此此情况总的个数就是 (a/10 +1) *i。      </li>
-</ol>
-<p>最后，将三种情况进行整合，得 (a+8)/10 *i，当百位大于等于 2 时，a多加了8就会进1，此时等价于情况 3 中的式子。最后利用 a%10判断整数 n 的百位是否为1，若为 1 ，则总次数还要多加上(b+1)。</p>
-<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ftl5qa1njtj20zo0cn0sv.jpg" alt=""></p>
-<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><p>由于算法只遍历了整数 n 的每个数位(共 logn 位)，所以算法的时间复杂度仅为 O(logn)。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] &lt;&lt;剑指offer2&gt;&gt;<br>[2] 牛客网</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-	<div>
-
-</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1073,7 +1067,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">57</span>
+                    <span class="site-state-item-count">58</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
