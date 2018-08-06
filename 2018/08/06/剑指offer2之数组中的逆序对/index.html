@@ -103,28 +103,27 @@
 
 
 
-  <meta name="description" content="前言如果面试题是关于 n 为的整数并且没有限定 n 的取值范围，或者输入任意大小的整数，那么可能需要考虑大数问题。而字符串是一种简单、有效地表示大数的方法。 题目(打印从 1 到最大的 n 位数)题目:输入数字 n，按顺序打印出从 1 到最大的 n 位十进制数。比如输入 3，则打印出 1、2、3 一直到最大的3 位数即 999。 算法思路本题没有给定 n 的范围，因此需要考虑大数问题。 算法思路一">
-<meta name="keywords" content="剑指offer">
+  <meta name="description" content="题目(数组中的逆序对)有一组数，对于其中任意两个数组，若前面一个大于后面一个数字，则这两个数字组成一个逆序对。请设计一个高效的算法，计算给定数组中的逆序对个数。给定一个 int 数组 A 和它的大小 n，请返回A中的逆序对个数。保证 n 小于等于 5000。 算法思路算法思想主要利用归并排序，唯一不同的主要在：当左边 i 位置所在的数大于右边 j 位置所在的数时，需要多算一步，即算出逆序对的个数，">
+<meta name="keywords" content="剑指offer2">
 <meta property="og:type" content="article">
-<meta property="og:title" content="剑指offer2之打印从1到最大的n位数">
-<meta property="og:url" content="http://yoursite.com/2018/04/20/剑指offer2之打印从1到最大的n位数/index.html">
+<meta property="og:title" content="剑指offer2之数组中的逆序对">
+<meta property="og:url" content="http://yoursite.com/2018/08/06/剑指offer2之数组中的逆序对/index.html">
 <meta property="og:site_name" content="Rongxuanhong&#39;s Blog">
-<meta property="og:description" content="前言如果面试题是关于 n 为的整数并且没有限定 n 的取值范围，或者输入任意大小的整数，那么可能需要考虑大数问题。而字符串是一种简单、有效地表示大数的方法。 题目(打印从 1 到最大的 n 位数)题目:输入数字 n，按顺序打印出从 1 到最大的 n 位十进制数。比如输入 3，则打印出 1、2、3 一直到最大的3 位数即 999。 算法思路本题没有给定 n 的范围，因此需要考虑大数问题。 算法思路一">
+<meta property="og:description" content="题目(数组中的逆序对)有一组数，对于其中任意两个数组，若前面一个大于后面一个数字，则这两个数字组成一个逆序对。请设计一个高效的算法，计算给定数组中的逆序对个数。给定一个 int 数组 A 和它的大小 n，请返回A中的逆序对个数。保证 n 小于等于 5000。 算法思路算法思想主要利用归并排序，唯一不同的主要在：当左边 i 位置所在的数大于右边 j 位置所在的数时，需要多算一步，即算出逆序对的个数，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqfl5hcjg2j20uy0rdjs9.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqflaty90rj20v90ksmxs.jpg">
-<meta property="og:updated_time" content="2018-04-20T05:04:05.013Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1ftwrlt99waj20ze0xlta9.jpg">
+<meta property="og:updated_time" content="2018-08-06T12:36:35.992Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="剑指offer2之打印从1到最大的n位数">
-<meta name="twitter:description" content="前言如果面试题是关于 n 为的整数并且没有限定 n 的取值范围，或者输入任意大小的整数，那么可能需要考虑大数问题。而字符串是一种简单、有效地表示大数的方法。 题目(打印从 1 到最大的 n 位数)题目:输入数字 n，按顺序打印出从 1 到最大的 n 位十进制数。比如输入 3，则打印出 1、2、3 一直到最大的3 位数即 999。 算法思路本题没有给定 n 的范围，因此需要考虑大数问题。 算法思路一">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqfl5hcjg2j20uy0rdjs9.jpg">
+<meta name="twitter:title" content="剑指offer2之数组中的逆序对">
+<meta name="twitter:description" content="题目(数组中的逆序对)有一组数，对于其中任意两个数组，若前面一个大于后面一个数字，则这两个数字组成一个逆序对。请设计一个高效的算法，计算给定数组中的逆序对个数。给定一个 int 数组 A 和它的大小 n，请返回A中的逆序对个数。保证 n 小于等于 5000。 算法思路算法思想主要利用归并排序，唯一不同的主要在：当左边 i 位置所在的数大于右边 j 位置所在的数时，需要多算一步，即算出逆序对的个数，">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1ftwrlt99waj20ze0xlta9.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/20/剑指offer2之打印从1到最大的n位数/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/08/06/剑指offer2之数组中的逆序对/"/>
 
 
 
@@ -134,7 +133,7 @@
   };
 </script>
 
-  <title>剑指offer2之打印从1到最大的n位数 | Rongxuanhong's Blog</title>
+  <title>剑指offer2之数组中的逆序对 | Rongxuanhong's Blog</title>
   
 
 
@@ -312,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/20/剑指offer2之打印从1到最大的n位数/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/06/剑指offer2之数组中的逆序对/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="洪荣宣">
@@ -329,7 +328,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">剑指offer2之打印从1到最大的n位数</h1>
+          <h1 class="post-title" itemprop="name headline">剑指offer2之数组中的逆序对</h1>
         
 
         <div class="post-meta">
@@ -341,7 +340,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-20T13:03:23+08:00">2018-04-20</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-06T20:36:03+08:00">2018-08-06</time>
             
 
             
@@ -359,8 +358,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/04/20/剑指offer2之打印从1到最大的n位数/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/20/剑指offer2之打印从1到最大的n位数/" itemprop="commentCount"></span>
+                <a href="/2018/08/06/剑指offer2之数组中的逆序对/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/08/06/剑指offer2之数组中的逆序对/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -396,16 +395,11 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>如果面试题是关于 n 为的整数并且没有限定 n 的取值范围，或者输入任意大小的整数，那么可能需要考虑大数问题。而字符串是一种简单、有效地表示大数的方法。</p>
-<h1 id="题目-打印从-1-到最大的-n-位数"><a href="#题目-打印从-1-到最大的-n-位数" class="headerlink" title="题目(打印从 1 到最大的 n 位数)"></a>题目(打印从 1 到最大的 n 位数)</h1><p>题目:输入数字 n，按顺序打印出从 1 到最大的 n 位十进制数。比如输入 3，则打印出 1、2、3 一直到最大的3 位数即 999。</p>
-<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>本题没有给定 n 的范围，因此需要考虑大数问题。</p>
-<h2 id="算法思路一-字符串模拟"><a href="#算法思路一-字符串模拟" class="headerlink" title="算法思路一(字符串模拟)"></a>算法思路一(字符串模拟)</h2><p>用字符串表示数字的时候，最直观的方法就是字符串里每个字符都是 ‘0’-‘9’ 之间的某一个字符，用来表示数字中的任一位。因为数字最大是 n 位的，因此我们需要一个长度为 n+1 的字符串(<strong>字符串中最后一位是结束符号 ‘\0’</strong>)。并且将字符串的每一位初始化为 ‘0’，但要注意的是，最后打印的时候，前半部分的 0 需要过滤掉。</p>
-<p>接下来，我们就对字符串的最后一位一直加 1 ，然后再判断是否需要进位，如果需要进位，那么就需要把字符串最后一位变为 ‘0’，而前一位的字符也要跟着加 1，然后继续判断是否需要继续进位，一直到直接加 1，不需要进位，或者遇到了最大的 n 位数退出外层循环。</p>
-<h2 id="算法思路二-递归法"><a href="#算法思路二-递归法" class="headerlink" title="算法思路二(递归法)"></a>算法思路二(递归法)</h2><p>将问题转换成按数字排列，也就是所对于字符串的每一位都可以有 10 种选择—-‘0’-‘9’。也就是说，我们把数字的每一位都从 0 到 9 依次排列一遍，就得到所有的十进制数。最后打印的时候只要从第一个非 0 的字符开始打印即可。</p>
-<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><h2 id="字符串模拟"><a href="#字符串模拟" class="headerlink" title="字符串模拟"></a>字符串模拟</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfl5hcjg2j20uy0rdjs9.jpg" alt=""></p>
-<h2 id="递归法"><a href="#递归法" class="headerlink" title="递归法"></a>递归法</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqflaty90rj20v90ksmxs.jpg" alt=""></p>
-<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>算法一的时间消耗主要在 while 循环上，由于需要打印出从 1 到最大的 n 位数，因此若设这些数共有 m 个，那么时间复杂度为 O(m)；而算法二采用递归思想，时间复杂度也为 O(m)，差不多共有 10^n 个组合。空间复杂度都为 O(n)。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
+        <h1 id="题目-数组中的逆序对"><a href="#题目-数组中的逆序对" class="headerlink" title="题目(数组中的逆序对)"></a>题目(数组中的逆序对)</h1><p>有一组数，对于其中任意两个数组，若前面一个大于后面一个数字，则这两个数字组成一个逆序对。请设计一个高效的算法，计算给定数组中的逆序对个数。<br>给定一个 int 数组 A 和它的大小 n，请返回A中的逆序对个数。保证 n 小于等于 5000。</p>
+<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>算法思想主要利用归并排序，唯一不同的主要在：当左边 i 位置所在的数大于右边 j 位置所在的数时，需要多算一步，即算出逆序对的个数，个数为 i 到 mid 之间的数字个数(i 为当前指向左部分的指针，j 为当前指向右部分的指针，mid 为两部分的中间位置)。</p>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ftwrlt99waj20ze0xlta9.jpg" alt=""></p>
+<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><p>复杂度和归并排序相同。时间复杂度为 O(nlogn)，空间复杂度为 O(n)。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] &lt;&lt;剑指offer2&gt;&gt;<br>[2] <a href="https://www.nowcoder.com/questionTerminal/bb06495cc0154e90bbb18911fd581df6" target="_blank" rel="noopener">牛客网</a></p>
 
       
     </div>
@@ -438,7 +432,7 @@
     <strong>Post author: </strong>洪荣宣</li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="http://yoursite.com/2018/04/20/剑指offer2之打印从1到最大的n位数/" title="剑指offer2之打印从1到最大的n位数">http://yoursite.com/2018/04/20/剑指offer2之打印从1到最大的n位数/</a>
+    <a href="http://yoursite.com/2018/08/06/剑指offer2之数组中的逆序对/" title="剑指offer2之数组中的逆序对">http://yoursite.com/2018/08/06/剑指offer2之数组中的逆序对/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>All articles in this blog are licensed under 本文由 rongxuanhong 原创，采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">保留署名-非商业性使用-禁止演绎 4.0-国际许可协议</a></br>转载请保留以上声明信息! unless stating additionally.</li>
@@ -451,7 +445,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/剑指offer/" rel="tag"><i class="fa fa-tag"></i> 剑指offer</a>
+            <a href="/tags/剑指offer2/" rel="tag"><i class="fa fa-tag"></i> 剑指offer2</a>
           
         </div>
       
@@ -464,8 +458,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/18/SVM系列之初识SVM(一)/" rel="next" title="SVM系列之初识SVM(一)">
-                <i class="fa fa-chevron-left"></i> SVM系列之初识SVM(一)
+              <a href="/2018/08/05/剑指offer2之第一次只出现一次的字符/" rel="next" title="剑指offer2之第一次只出现一次的字符">
+                <i class="fa fa-chevron-left"></i> 剑指offer2之第一次只出现一次的字符
               </a>
             
           </div>
@@ -473,10 +467,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/22/剑指offer2之数值的整数次方/" rel="prev" title="剑指offer2之数值的整数次方">
-                剑指offer2之数值的整数次方 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -654,7 +644,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目-打印从-1-到最大的-n-位数"><span class="nav-number">2.</span> <span class="nav-text">题目(打印从 1 到最大的 n 位数)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法思路"><span class="nav-number">3.</span> <span class="nav-text">算法思路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法思路一-字符串模拟"><span class="nav-number">3.1.</span> <span class="nav-text">算法思路一(字符串模拟)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法思路二-递归法"><span class="nav-number">3.2.</span> <span class="nav-text">算法思路二(递归法)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现"><span class="nav-number">4.</span> <span class="nav-text">算法实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串模拟"><span class="nav-number">4.1.</span> <span class="nav-text">字符串模拟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#递归法"><span class="nav-number">4.2.</span> <span class="nav-text">递归法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂度分析"><span class="nav-number">5.</span> <span class="nav-text">复杂度分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目-数组中的逆序对"><span class="nav-number">1.</span> <span class="nav-text">题目(数组中的逆序对)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法思路"><span class="nav-number">2.</span> <span class="nav-text">算法思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现"><span class="nav-number">3.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂度"><span class="nav-number">4.</span> <span class="nav-text">复杂度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
