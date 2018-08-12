@@ -306,6 +306,183 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/22/SVM系列之核函数与KKT条件(二)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/22/SVM系列之核函数与KKT条件(二)/" itemprop="url">SVM系列之核函数与KKT条件(二)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-22T20:42:07+08:00">2018-04-22</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/22/SVM系列之核函数与KKT条件(二)/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/22/SVM系列之核函数与KKT条件(二)/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在前一篇文章中介绍的 SVM 基本型，其实还可以进行优化。主要是利用核函数对向量内积的计算进行优化。另外，我们还将详细分析拉格朗日乘子法与KKT条件,以及KKT条件对SVM分类的作用。那我们先来看看核函数是什么。</p>
+<h1 id="核函数"><a href="#核函数" class="headerlink" title="核函数"></a>核函数</h1><p>在异或问题中，由于 \(0\oplus 0=0\)、\(1\oplus 1=0\)、\(0\oplus 1=1\)、\(1\oplus 0=1\)，所有只有两类结果，我们将 0 标记为负号，将 1 标记为正号，并且将这四种情况形象地标注在下图左侧中。可以看到，对于这类样本点，我们无法找到线性可分的超平面，而只能绘制一条非线性曲线将他们划分开。那么有什么办法可以将他们划分开呢？这时候，核方法(kernel trick)就出场啦。</p>
+<p>所谓的核方法，其实就是将样本从原始的特征空间映射到一个高维的特征空间，以使得样本在高维特征空间中仍然线性可分。正如下图中所示，我们对 \(x\) 使用一个映射函数 \(\phi\)，得到映射到高维特征空间的特征向量 \(\phi \left( x\right) \)，然后这些样本点在三维空间的确可以找到一个平面将样本点线性可分(黑色实线所画的平面)。幸运的是，如果原始空间是有限维，即属性数有限，那么一定存在一个高维特征空间使样本可分。那么其实我们只要找到映射函数，就可以将线性不可分的样本转为线性可分的情况了。但是，这个映射函数很难寻找，SVM 模型没有直接硬来，而是巧妙的引入核函数来间接地解决实现这种变换。  </p>
+<p>那么接下来我们看看核函数如何应用于模型上。<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fq6oh1ovtyj20l008u74k.jpg" alt="三维上的异或问题分类"></p>
+<p>在前一篇文章中的 SVM 对偶问题为:</p>
+<script type="math/tex; mode=display">\max _{\alpha }\sum ^{m}_{i=1}\alpha _{i}-\dfrac {1}{2}\sum ^{m}_{i=1}\sum ^{m}_{j=1}\alpha _{i}\alpha _{j}y_{i}y_{j} x_{i}^{T}x_{j}\quad \alpha _{i}\geq 0</script><p>可以看到，我们需要计算第 i 和第 j 两个样本的内积。<br>另外，对应的分类决策函数的公式为：</p>
+<script type="math/tex; mode=display">\begin{aligned}f\left( x\right) =w^{T}x+b\\
+=\sum ^{m}_{i=1}\alpha _{i}y_{i}x_{i}^{T}x+b\end{aligned}</script><p>我们也需要计算总样本 X 和样本 i 之间的内积。我们发现，这里其实存在着重复的内积计算，并且在高维中内积计算非常耗时，可不可以只算一次？事实上，是可以的，我们完全可以提前将两两样本间以及样本与自身的内积都算出来并存储下来，下次使用时只需直接取出使用即可，这大大提高了计算效率。但是，现在问题是当样本点映射到高维空间中内积计算的问题。这里，就巧妙引入了核函数,替代了向量内积。它可表示为:</p>
+<script type="math/tex; mode=display">k\left( x_{i},x_{j}\right) =\phi \left( x_{i}\right) ^{T}\phi \left( x_{j}\right)</script><p>那么引入核函数后，对偶问题变为:</p>
+<script type="math/tex; mode=display">\max _{\alpha }\sum ^{m}_{i=1}\alpha _{i}-\dfrac {1}{2}\sum ^{m}_{i=1}\sum ^{m}_{j=1}\alpha _{i}\alpha _{j}y_{i}y_{j}\phi \left( x_{i}\right)^{T}\phi \left( x_{j}\right)=\max _{\alpha }\sum ^{m}_{i=1}\alpha _{i}-\dfrac {1}{2}\sum ^{m}_{i=1}\sum ^{m}_{j=1}\alpha _{i}\alpha _{j}y_{i}y_{j}k\left( x_{i},x_{j}\right)\quad \alpha _{i}\geq 0</script><p>分类决策函数变为:</p>
+<script type="math/tex; mode=display">\begin{aligned}f\left( x\right) =w^{T}x+b\\
+=\sum ^{m}_{i=1}\alpha _{i}y_{i}\phi \left( x_{i}\right)^{T}\phi \left( x_{j}\right)+b\end{aligned}=\sum ^{m}_{i=i}\alpha _{i}y_{i}k\left( x,x_{i}\right)+b</script><p>所以我们只需要计算核函数的值即可，而核函数的计算只需套用公式。常用的核函数有线性核(\(k\left( x_{i},x_{j}\right) =x_{i}^{T}x_{j}\))以及高斯核(\(k\left( x_{i},x_{j}\right) =\exp \left( -\dfrac {\left| x_{i}-x_{j}\right| ^{2}}{2\sigma ^{2}}\right) \))</p>
+<p>注意到大部分的拉格朗日乘子 \(\alpha_{i}\) 都是0。因为大部分的样本都会被分类正确，只有少部分的样本被误分类，也就说只要被分类正确，\(\alpha_{i}=0\)，该样本不会出现在分类决策函数的求和公式中，自然不会对最终的决策结果产生任何影响。</p>
+<p>最后，支持向量机的决策过程也可以看做一种相似性比较的过程。首先，输入样本与一系列模板样本进行相似性比较，模板样本就是训练过程决定的支持向量，而采用的相似性度量就是核函数。样本与各支持向量比较后的得分进行加权后求和，权值就是训练时得到的各支持向量的系数 \(\alpha_{i}\) 和类别标号的成绩。最后根据加权求和值大小来进行决策。而采用不同的核函数，就相当于采用不同的相似度的衡量方法。</p>
+<p>到这里，SVM 的理论基础基本都介绍完了。总的来说，首先进行特征空间的非线性映射，然后在这个新的空间中求最优分类面即最大间隔分类面，而这种非线性映射是通过定义适当的内积核函数来巧妙实现的。  </p>
+<p>接下来，我们介绍下凸优化问题中涉及的KKT条件。</p>
+<h1 id="KKT-条件（Karush–Kuhn–Tucker-conditions）"><a href="#KKT-条件（Karush–Kuhn–Tucker-conditions）" class="headerlink" title="KKT 条件（Karush–Kuhn–Tucker conditions）"></a>KKT 条件（Karush–Kuhn–Tucker conditions）</h1><h2 id="什么是-KKT"><a href="#什么是-KKT" class="headerlink" title="什么是 KKT"></a>什么是 KKT</h2><p>KKT 是一组不等式约束，主要应用在凸优化问题上。其实大家在高数中曾使用过拉格朗日乘子法求解带等式约束的优化问题，而KKT条件解优化问题就是升级版啦。</p>
+<h2 id="拉格朗日乘子法"><a href="#拉格朗日乘子法" class="headerlink" title="拉格朗日乘子法"></a>拉格朗日乘子法</h2><p>假设有如下带等式约束的优化问题：</p>
+<script type="math/tex; mode=display">\min f\left( x\right) \quad s.t.h_{i}\left( x\right) =0\quad i=1,2,\ldots ,m</script><p>我们使用拉格朗日乘子法通过引入拉格朗日乘子将等式约束的优化问题转化为无等式约束的优化问题。<br>所以我们通过一个拉格朗日乘子组成的行向量 \(\alpha\)(其中 \(\alpha=\left[ \alpha _{1},\alpha_{2},\ldots ,\alpha_{n}\right] \))，将目标函数和等式约束组合成 \(L\left( \alpha ,x\right) =f\left( x\right) +\alpha^{T} \cdot h\),其中\(h\left( x\right) =\left[ h_{1}\left( x\right),h_{2}\left( x\right),\ldots ,h_{m}\left( x\right)\right] ^{T}\)。然后就可以求最优值，也就是利用<a href="https://zh.wikipedia.org/wiki/%E8%B4%B9%E9%A9%AC%E5%BC%95%E7%90%86" target="_blank" rel="noopener">费马引理</a>，将函数 L 对各个参数求导取零，然后等式联立进行求解。</p>
+<h2 id="KKT条件"><a href="#KKT条件" class="headerlink" title="KKT条件"></a>KKT条件</h2><p>假设有如下带不等式约束的优化问题:</p>
+<script type="math/tex; mode=display">\min f\left( x\right) \quad s.t.g_{i}\left( x\right) \leq0\quad i=1,2,\ldots ,n\quad h_{j}\left( x\right)=0\quad j=1,2,\ldots ,m</script><p>我们同样先将约束问题转化为无约束的优化问题，得到函数:  </p>
+<script type="math/tex; mode=display">L\left( \alpha ,\beta ,x\right) =f\left( x\right) +\alpha g\left( x\right) +\beta h\left( x\right)</script><p>其中\(\alpha\)、\(\beta\)为行向量，\(g\left( x\right)\)、\(h\left( x\right)\)均为列向量。那么 KKT 条件的作用就是，该问题的最优解必须满足以下条件:  </p>
+<ol>
+<li>\(L\left( \alpha ,\beta ,x\right)\) 对 \(x\) 的导数为零；</li>
+<li>\(h\left(x\right)=0\)；</li>
+<li>\(\alpha g\left( x\right)\leq 0\)。</li>
+</ol>
+<p>这样之后就能求得最优值。其中第三个式子比较有意思。由于 \(g\left(x\right) \leq0\)，因此只有 \(\alpha=0\) 或 \(g\left(x\right)=0\) 时，等式才成立。而这里是 SVM 中很多重要性质的来源，比如支持向量的概念。后面我们在介绍KKT条件与 SVM 的关系时再具体解释。那为什么拉格朗日乘子法和KKT条件能够得到最优值?</p>
+<h2 id="拉格朗日乘子法和KKT条件能够得到最优值的原因"><a href="#拉格朗日乘子法和KKT条件能够得到最优值的原因" class="headerlink" title="拉格朗日乘子法和KKT条件能够得到最优值的原因"></a>拉格朗日乘子法和KKT条件能够得到最优值的原因</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25ly1fq7wtuwsxqj20960813yz.jpg" alt="拉格朗日求最优的几何分析"></p>
+<p>对于拉格朗日乘子法，假设目标函数为 \(f\left(x,y\right)\),要求其极值，且满足 \(g\left(x,y\right)=c\) (c为常数)。假设 \(d_{n}=f\left(x,y\right)\)，其中 \(d_{n}\) 可以取不同的值。不难看出，当\(d_{n}\)取不同的值时，我们可以得到不同的等高线(如上图所示)。(其实等高线主要针对二维输入而只有一维输出的，由于三维曲面难以分析，因此，我们利用水平横切面将切面投影到 xoy 平面上而形成等高线)。<br>而对于方程 \(g\left(x,y\right)=c\) 的可行集，假设他们构成了一条曲线。由于在无解的时候这条曲线和等高线是不会相交的，只有有解的时候，曲线和等高线就会相交。由于等高线可以变大或变小，所以只有等高线与曲线相切的时候，等高线才能确定下来，也才能找到最优解。否则相交的时候会存在多个等高线，那么便无法找到最优解。那么，相切意味者切线必须平行，同时也意味着两者的梯度平行。此时引入一个未知标量 \(\lambda \)。有：</p>
+<script type="math/tex; mode=display">\nabla \left[ f\left( x,y\right) +\lambda \left( g\left( x,y\right) -c\right) \right] =0 \quad \lambda\neq0</script><p>到这里，其实这个式子就对应到了 \(L\left( \alpha ,x\right)\)对 \(x\) 的导数为零；</p>
+<p>对于KKT条件，它是解决凸优化问题的必要条件。我们以上文提到的带不等式约束的优化问题为例。其实，\(f\left( x\right) =\max _{\alpha,\beta}L\left( \alpha ,\beta ,x\right)\)。为什么呢？由于有约束条件\(h_{j}\left(x\right)=0\) 且 \(\alpha g\left(x\right)\leq 0\)，所以只有当\(g_{j}\left(x\right)=0\) 时，函数L 才会在满足约束条件下取得最大值。诶？刚好这个最大值是 \(f\left(x\right)\)。所以现在我们要最小化的 \(f\left(x\right)\) 就可以写为 \(\min_{x}\max _{\alpha,\beta}L\left( \alpha ,\beta ,x\right)\) 。然后，由于我们的优化是满足强对偶的,即可以利用对偶式子来求解原问题的最优解，所以式子又可以写为 \(\max_{\alpha,\beta}\min _{x}L\left( \alpha ,\beta ,x\right)\)。那么当式子在 \(x_{0}\) 处取得最小值的时候，根据费马引理，有\(L\left( \alpha ,\beta ,x\right)\)对 \(x\) 的导数必须为零，这就是 KKT 的第一个条件,而  \(h\left(x\right)=0\) 为已知条件作为 KKT 的第二个条件，接着 \(\alpha g\left( x\right)=0\)为必须满足的 KKT 的第三个条件，另外 KKT 乘子\(\alpha _{i}\)、\(\beta _{i}\)均需要大于等于零。所有上述说明，满足强对偶条件的优化问题的最优值都必须满足 KKT 条件。</p>
+<h1 id="SVM-与-KKT-条件分析"><a href="#SVM-与-KKT-条件分析" class="headerlink" title="SVM 与 KKT 条件分析"></a>SVM 与 KKT 条件分析</h1><p>在 SVM 软间隔基本型的优化问题中，要满足的 KKT 条件为：</p>
+<script type="math/tex; mode=display">\begin{cases}\alpha _{i}\geq 0,\quad \mu_{i}\geq 0\\
+y_{i}f\left( x_{i}\right) -1+\xi _{i}\geq 0\\
+\alpha _{i}\left( y_{i}f\left( x_{i}\right) -1+\xi _{i}\right) =0\\
+\xi _{i}\geq 0,u_{i}\xi _{i}=0\end{cases}</script><p>再结合求解出的约束 \(0\leq \alpha _{i}\leq C\) 以及 \(C=\alpha_{i}+\mu_{i}\)。<br>那么，对于任意一个样本 \(\left(x _{i},y _{i}\right)\)，由括号中的第三个条件可知，总有 \(\alpha _{i}=0\) 或者 \(y_{i}f\left( x_{i}\right)=1-\xi _{i}\);<br>那么当 \(\alpha _{i}=0\)，即样本被分类正确，它们处在边界的外面，不会影响到函数 f,即 \(y_{i}\left( w^{T}x_{i}+b\right) \geq 1\);<br>当 \(\alpha_{i}&gt;0\) 时，该样本是支持向量;<br>若 \(0&lt;\alpha _{i}&lt;C\),则 \(\mu_{i}&lt;0\)，推出  \(\xi_{i}=0\),所以 \(y_{i}f\left( x_{i}\right)=1-\xi _{i}\)，即该样本恰好落在最大间隔的边界线上，即 \(y_{i}\left( w^{T}x_{i}+b\right)=1\);<br>若 \(\alpha_{i}=C\)，则有 \(\mu_{i}=0\)，那么此时若 \(\xi_{i}\leq 1\)，则样本落在最大间隔的内部，否则该样本被错误分类了，即它跑到了对面的间隔边界外了，即 \(y_{i}\left( w^{T}x_{i}+b\right) \leq 1\)。<br>总之，软间隔的支持向量可以在边界上，边界内或者错误的边界外。</p>
+<blockquote>
+<p>注意硬间隔支持向量与软间隔支持向量的区别。</p>
+</blockquote>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] &lt;&lt;机器学习&gt;&gt; by 周志华<br>[2] &lt;&lt;统计学习方法&gt;&gt; by 李航<br>[3] <a href="https://blog.csdn.net/zouxy09/article/details/17291805" target="_blank" rel="noopener">机器学习算法与Python实践之（三）支持向量机（SVM）进阶</a><br>[4] <a href="https://blog.csdn.net/xianlingmao/article/details/7919597" target="_blank" rel="noopener">深入理解拉格朗日乘子法（Lagrange Multiplier) 和KKT条件</a><br>[5] <a href="https://zhuanlan.zhihu.com/p/26514613" target="_blank" rel="noopener">浅谈最优化问题的KKT条件</a><br>[6] <a href="https://zh.wikipedia.org/wiki/%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E4%B9%98%E6%95%B0" target="_blank" rel="noopener">拉格朗日乘数Wiki</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/22/剑指offer2之数值的整数次方/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -922,160 +1099,6 @@ $$ L\left(w,\alpha \right) =\dfrac {1}{2}\left\| w\right\| ^{2}+\sum ^{m}\_{i=1}
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/16/剑指offer2之剪绳子/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="洪荣宣">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rongxuanhong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/16/剑指offer2之剪绳子/" itemprop="url">剑指offer2之剪绳子</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-16T14:40:41+08:00">2018-04-16</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/04/16/剑指offer2之剪绳子/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/16/剑指offer2之剪绳子/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>动态规划也是编程面试中的常考题。如果所求问题是求最优解，而且问题能够分解为若干个子问题，并且<strong>子问题之间还有重叠的更小的子问题</strong>，那么应该考虑应用动态规划思想求解。</p>
-<p>在应用动态规划之前要分析能否把大问题分解成小问题，分解的每个小问题也存在最优解。如果把小问题的最优解组合起来能够得到这个问题的最优解，那么我们就可以应用动态规划解决这个问题。</p>
-<p>总之，动态规划存在以下几个特点：  </p>
-<ol>
-<li>目标问题是求最优解；</li>
-<li>整体的最优解可以由子问题的最优解参与或组合得到；</li>
-<li>大问题可以分成若干个子问题，且子问题之间还有相互重叠的更小的子问题；</li>
-<li>为避免重复求解子问题(后面求大问题的时候可能多次用到)，采用自下而上的顺序先计算小问题的最优解并记录到一维或二维数组中，再根据已经解出的小问题来求出大问题的最优解。简而言之，就是自上而下分析问题，自下而上求解问题。</li>
-</ol>
-<h1 id="题目-剪绳子"><a href="#题目-剪绳子" class="headerlink" title="题目(剪绳子)"></a>题目(剪绳子)</h1><p>题目：给定一根长度为n的绳子，请把绳子剪成 m 段(m,n 都是整数且均大于 1，至少剪一刀)，每段绳子的长度记为 k[0],k[1],…,k[m]。请问 k[0]xk[k1]x…xk[m] 可能的最大乘积是多少？例如，绳子长度为 8，可分成 2，3，3，三段，最大乘积为 18。</p>
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><h3 id="动态规划法"><a href="#动态规划法" class="headerlink" title="动态规划法"></a>动态规划法</h3><p>首先定义函数 f(n) 为把长度为 n 的绳子剪成若干段后的最大乘积值。<br>剪绳子求的是最大乘积值满足特点 1；如果在绳子的 i 处剪一刀，那么 f(n) 要达到乘积最大，则 f(i)与 f(n-i) 也要达到乘积最大，满足特点 2；假设 n=6，那么 f(2) 和 f(4) 都是问题的子问题，但其实 f(2)  也是 f(4) 的子问题，那么就出现了重叠的更小的子问题，满足特点 3；所以，我们为了求解目标问题，都是先从小问题开始求解，即自下而上求解，并将每个子问题的乘积最大值记录到数组中备查，满足特点4。因此，本题的确适合采用动态规划求解。</p>
-<p>当绳子长度为 2 的时候，只能剪成两段长度为 1，所以 f(2)=1；当绳子长度为 3 的时候，有两种剪法，其中最大的 f(3)=2。</p>
-<p>那么当 n&gt;4 的时候，我们要求出把长度为 i 的绳子剪成若干段之后各段长度乘积的最大值，即求 f(i)，而4&lt;=i&lt;=n，即要求出所有子问题的最优解。那么对于每个子问题 f(i)，由于可以有 i/2 种切法，所以我们应该遍历每种切法，并计算出乘积最大的那种切法。当切点在 j(1&lt;=j&lt;=i/2) 处时，子问题 f(i)=max(f(j)xf(i-j)),其中 f(j),f(i-j)，都可以从备忘数组中查询得到。</p>
-<h3 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a>贪心算法</h3><p>即选择一个能够得到乘积最大值的策略进行。当 n&gt;=5 时，我们尽可能的剪出长度为 3 的小绳子；当剩下的绳子长度为 4 时，改为把绳子剪成两段。<br>证明 :首先，当 n&gt;=5 时，我们可以证明 2(n-2)&gt;n 并且 3(n-3)&gt;n。也就是说，当绳子剩下的长度大于或者等于 5 的时候，我们就把它剪成长度为 3 或者 2 的绳子段。另外，当 n&gt;=5 时，3(n-3)&gt;=2(n-2)，因此我们应该尽可能地多剪长度为3的绳子段。而当 n=4 时，由于 2x2&gt;1x3 所以应该剪成两条长度分别为 2 的绳子段。</p>
-<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><h2 id="动态规划实现"><a href="#动态规划实现" class="headerlink" title="动态规划实现"></a>动态规划实现</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fq8pbk8btdj20v50hct9s.jpg" alt=""></p>
-<h2 id="贪心算法实现"><a href="#贪心算法实现" class="headerlink" title="贪心算法实现"></a>贪心算法实现</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fq8par1k9fj20v60audgj.jpg" alt=""></p>
-<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>对于动态规划法，两层循环，时间复杂度为 O(n^2)，另外，建立了辅助容器，空间复杂度为 O(n)；对于贪心算法，复杂度均为 O(1)。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-	<div>
-
-</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1127,7 +1150,7 @@ $$ L\left(w,\alpha \right) =\dfrac {1}{2}\left\| w\right\| ^{2}+\sum ^{m}\_{i=1}
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">61</span>
+                    <span class="site-state-item-count">62</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

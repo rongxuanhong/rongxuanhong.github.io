@@ -103,32 +103,29 @@
 
 
 
-  <meta name="description" content="前言在这之前的题目大多属于考察数据结构，然后对于 算法 的考查也是很重要的 。      有很多的算法都可以通过递归和循环两种方式来实现，虽说前者的实现较为简洁，但是在性能上并不占优。但在面试的时候，如果面试官没有不允许使用递归，还是可以优先使用递归来解决问题，毕竟递归实现简单一些。   对于排序和查找也是算法考察的两大重点。其中应该 重点掌握二分查找、归并排序、快速排序 。   如果是对二维数组">
+  <meta name="description" content="题目一(数字在排序数组中出现的次数)统计一个数字在排序数组中出现的次数。(默认递增) 算法思路由于数组是递增有序的，那么数字如果重复一定都在一块，那么只需查找这个数字在数组中第一次出现的位置和最后一次出现的位置。接下来只要查找位置到，然后算出两位置间的距离即得所求。   那么对于有序数组要查找位置，什么方法最快呢？毫无疑问是二分查找，因为它可以在 O(logn) 时间内快速找到查找位置。   首先">
 <meta name="keywords" content="剑指offer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="剑指offer2之斐波那契数列">
-<meta property="og:url" content="http://yoursite.com/2018/04/02/剑指offer2之斐波那契数列/index.html">
+<meta property="og:title" content="剑指offer2之数字在排序数组中出现的次数">
+<meta property="og:url" content="http://yoursite.com/2018/08/12/剑指offer2之数字在排序数组中出现的次数/index.html">
 <meta property="og:site_name" content="Rongxuanhong&#39;s Blog">
-<meta property="og:description" content="前言在这之前的题目大多属于考察数据结构，然后对于 算法 的考查也是很重要的 。      有很多的算法都可以通过递归和循环两种方式来实现，虽说前者的实现较为简洁，但是在性能上并不占优。但在面试的时候，如果面试官没有不允许使用递归，还是可以优先使用递归来解决问题，毕竟递归实现简单一些。   对于排序和查找也是算法考察的两大重点。其中应该 重点掌握二分查找、归并排序、快速排序 。   如果是对二维数组">
+<meta property="og:description" content="题目一(数字在排序数组中出现的次数)统计一个数字在排序数组中出现的次数。(默认递增) 算法思路由于数组是递增有序的，那么数字如果重复一定都在一块，那么只需查找这个数字在数组中第一次出现的位置和最后一次出现的位置。接下来只要查找位置到，然后算出两位置间的距离即得所求。   那么对于有序数组要查找位置，什么方法最快呢？毫无疑问是二分查找，因为它可以在 O(logn) 时间内快速找到查找位置。   首先">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpvtc6mpslj20v506xq2x.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpvtq1d2p3j20v709nt8z.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpvzj4b3d5j20v10asgm3.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpyap51rrrj20v507x0sr.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpyaqdwn7lj20v909nq37.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpyatme8trj20v207ymxa.jpg">
-<meta property="og:updated_time" content="2018-04-02T06:42:20.995Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fu090qlow3j20zd15adh6.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fu1e32g7oaj20zi0irgm3.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fu1e5cipb0j20zk0gedg1.jpg">
+<meta property="og:updated_time" content="2018-08-12T12:52:57.659Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="剑指offer2之斐波那契数列">
-<meta name="twitter:description" content="前言在这之前的题目大多属于考察数据结构，然后对于 算法 的考查也是很重要的 。      有很多的算法都可以通过递归和循环两种方式来实现，虽说前者的实现较为简洁，但是在性能上并不占优。但在面试的时候，如果面试官没有不允许使用递归，还是可以优先使用递归来解决问题，毕竟递归实现简单一些。   对于排序和查找也是算法考察的两大重点。其中应该 重点掌握二分查找、归并排序、快速排序 。   如果是对二维数组">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpvtc6mpslj20v506xq2x.jpg">
+<meta name="twitter:title" content="剑指offer2之数字在排序数组中出现的次数">
+<meta name="twitter:description" content="题目一(数字在排序数组中出现的次数)统计一个数字在排序数组中出现的次数。(默认递增) 算法思路由于数组是递增有序的，那么数字如果重复一定都在一块，那么只需查找这个数字在数组中第一次出现的位置和最后一次出现的位置。接下来只要查找位置到，然后算出两位置间的距离即得所求。   那么对于有序数组要查找位置，什么方法最快呢？毫无疑问是二分查找，因为它可以在 O(logn) 时间内快速找到查找位置。   首先">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fu090qlow3j20zd15adh6.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/02/剑指offer2之斐波那契数列/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/08/12/剑指offer2之数字在排序数组中出现的次数/"/>
 
 
 
@@ -138,7 +135,7 @@
   };
 </script>
 
-  <title>剑指offer2之斐波那契数列 | Rongxuanhong's Blog</title>
+  <title>剑指offer2之数字在排序数组中出现的次数 | Rongxuanhong's Blog</title>
   
 
 
@@ -316,7 +313,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/02/剑指offer2之斐波那契数列/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/12/剑指offer2之数字在排序数组中出现的次数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="洪荣宣">
@@ -333,7 +330,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">剑指offer2之斐波那契数列</h1>
+          <h1 class="post-title" itemprop="name headline">剑指offer2之数字在排序数组中出现的次数</h1>
         
 
         <div class="post-meta">
@@ -345,7 +342,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-02T14:38:03+08:00">2018-04-02</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-12T20:52:36+08:00">2018-08-12</time>
             
 
             
@@ -363,8 +360,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/04/02/剑指offer2之斐波那契数列/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/02/剑指offer2之斐波那契数列/" itemprop="commentCount"></span>
+                <a href="/2018/08/12/剑指offer2之数字在排序数组中出现的次数/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/08/12/剑指offer2之数字在排序数组中出现的次数/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -400,46 +397,23 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在这之前的题目大多属于考察<strong>数据结构</strong>，然后对于 <strong>算法</strong> 的考查也是很重要的 。    </p>
-<ol>
-<li>有很多的算法都可以通过<strong>递归和循环</strong>两种方式来实现，虽说前者的实现较为简洁，但是在性能上并不占优。但在面试的时候，如果面试官没有不允许使用递归，还是可以优先使用递归来解决问题，毕竟递归实现简单一些。  </li>
-<li>对于排序和查找也是算法考察的两大重点。其中应该 <strong>重点掌握二分查找、归并排序、快速排序</strong> 。  </li>
-<li>如果是对二维数组(可能表现为迷宫或棋盘)搜索路径，那么可以考虑<strong>回溯法</strong> 。  </li>
-<li>如果面试题是求某个问题的最优解，并且问题可以分为多个子问题，且子问题之前存在重叠，那么我们可以使用<strong>动态规划</strong>解决问题，以避免使用递归而带来很多不必要的重复性计算。  </li>
-<li>如果在求最优解的时候，在分解子问题的时候是不是存在某个特殊的选择，如果采用这个特殊的选择将一定能够得到最优解，那么应该考虑一下贪心算法。  </li>
-<li>最后也需要懂得五种位运算：与、或、异或、左移和右移。</li>
-</ol>
+        <h1 id="题目一-数字在排序数组中出现的次数"><a href="#题目一-数字在排序数组中出现的次数" class="headerlink" title="题目一(数字在排序数组中出现的次数)"></a>题目一(数字在排序数组中出现的次数)</h1><p>统计一个数字在排序数组中出现的次数。(默认递增)</p>
+<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>由于数组是递增有序的，那么数字如果重复一定都在一块，那么只需查找这个数字在数组中第一次出现的位置和最后一次出现的位置。接下来只要查找位置到，然后算出两位置间的距离即得所求。  </p>
+<p>那么对于有序数组要查找位置，什么方法最快呢？毫无疑问是二分查找，因为它可以在 O(logn) 时间内快速找到查找位置。  </p>
+<p>首先对于数字 k 第一次出现进行位置查找。如果中间的数大于 k，那么该位置在数组的前半段；如果中间的数小于 k，那么该位置在数组的后半段；如果中间的数等于 k，那么如果中间的数恰好是数组的<strong>起始位置</strong>，或者中间的数的<strong>前一个</strong>数字不是 k，也就是说，已经找到了目标位置，返回即可，否则该位置出现在数组的 <strong>前半段</strong>。  </p>
+<p>同理，对于数字 k 最后一次出现进行位置查找。如果中间的数大于 k，那么该位置在数组的前半段；如果中间的数小于 k，那么该位置在数组的后半段；如果中间的数等于 k，那么如果中间的数恰好是数组的<strong>末位位置</strong>，或者中间的数的<strong>下一个</strong>数字不是 k，也就是说，已经找到了目标位置，返回即可，否则该位置出现在数组 <strong>后半段</strong>。  </p>
 <blockquote>
-<p>递归的缺陷：由于函数调用是有时间和空间消耗的，因此每一次函数调用，都需要在内存栈中分配空间以保存参数、返回地址和临时变量，并且往栈中压栈和弹出数据都耗时，因此递归效率很低。更严重的是，由于每个进程的栈容量是有限的，因此当递归调用的层级过多，就会超出栈的容量而导致栈的溢出问题。</p>
+<p>注意：算法要鲁棒性好，要考虑功能测试、边界值测试和特殊输入测试。例如本题功能测试为数组中包含(不包含)要查找的数字，要查找的数字在数组中出现一次或多次；边界值测试如查找数组中的最大值和最小值，数组中只有一个数字；特殊值测试如输入数组为空。</p>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fu090qlow3j20zd15adh6.jpg" alt=""></p>
+<h1 id="题目二-0-n-1-中缺失的数字"><a href="#题目二-0-n-1-中缺失的数字" class="headerlink" title="题目二(0-n-1 中缺失的数字)"></a>题目二(0-n-1 中缺失的数字)</h1><p>一个长度为 n-1 的递增排序数组中的所有数字都是唯一的，并且每个数字都在范围 0-n-1 之内。在范围 0-n-1 内的 n 个数字中有且只有一个数字不在该数组中，请找出这个数字。</p>
+<h1 id="算法思路-1"><a href="#算法思路-1" class="headerlink" title="算法思路"></a>算法思路</h1><p>数组递增且查找元素，依然考虑二分查找思路。<br>首先，如果不存在缺失值，那么数组中的每个元素和它的下标是一一对应的。那么利用二分查找，如果中间元素的值和下标相等，那么下一轮只要查找右半边(前面元素均满足下标和元素值一一对应)；如果中间的元素值和下标不相等时，如果中间的位置在首位或者它的前一个元素和前一个元素的下标相等，那么中间的数字为所求；反之，它的前一个元素和前一个元素的下标不相等，那么下一轮只要查找左半边即可。</p>
+<h1 id="算法实现-1"><a href="#算法实现-1" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fu1e32g7oaj20zi0irgm3.jpg" alt=""></p>
+<h1 id="题目三-数组中数组和下标相等的元素"><a href="#题目三-数组中数组和下标相等的元素" class="headerlink" title="题目三(数组中数组和下标相等的元素)"></a>题目三(数组中数组和下标相等的元素)</h1><p>假设一个<strong>单调递增</strong>的数组中的每个元素都是整数并且是唯一的。请编写程序实现一个函数，找出数组中任意一个数值等于其下标的元素。例如，在数组{-3,-1,1,3,5} 中，数字 3 和它的下标相等。</p>
+<h1 id="算法思路-2"><a href="#算法思路-2" class="headerlink" title="算法思路"></a>算法思路</h1><p>依然使用二分查找。<br>如果中间的元素刚好等于中间位置，那么立即返回所求；如果中间的元素小于中间位置，那么只需在右半段查找；否则在左半段查找即可。</p>
+<h1 id="算法实现-2"><a href="#算法实现-2" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fu1e5cipb0j20zk0gedg1.jpg" alt=""></p>
+<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><p>题目一：由于算法都是通过二分查找两个位置，各自所需的时间复杂度均为 O(logn)，因而总的时间复杂度还是 O(logn)。空间复杂度为 O(1)。<br>题目二和三的时间复杂度均为 O(logn)，空间复杂度为 O(1)。 </p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] &lt;&lt;剑指offer2&gt;&gt;<br>[2] <a href="https://www.nowcoder.com/questionTerminal/70610bf967994b22bb1c26f9ae901fa2" target="_blank" rel="noopener">牛客网</a></p>
 </blockquote>
-<h1 id="题目一-斐波那契数列"><a href="#题目一-斐波那契数列" class="headerlink" title="题目一(斐波那契数列)"></a>题目一(斐波那契数列)</h1><p>题目:求斐波那契数列的第n项。写一个函数，输入n，求斐波那契(Fibonacci)数列的第 n 项。斐波那契的定义如下：<br>F0=0;F1=1;Fn=Fn-1+Fn-2(n&gt;=2)</p>
-<h2 id="递归实现"><a href="#递归实现" class="headerlink" title="递归实现"></a>递归实现</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpvtc6mpslj20v506xq2x.jpg" alt="">  </p>
-<h2 id="循环实现"><a href="#循环实现" class="headerlink" title="循环实现"></a>循环实现</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpvtq1d2p3j20v709nt8z.jpg" alt="">  </p>
-<p>循环实现的关键在于，我们设置了一个 a和b 变量分别来记录之前计算过的 f(n-2) 的值和 f(n-1) 的值，以便可以在下一次计算 f(n) 时使用，避免了子问题重复计算的问题。<br>其实此题也是动态规划思想的最简单应用。</p>
-<h1 id="题目二-青蛙跳台阶"><a href="#题目二-青蛙跳台阶" class="headerlink" title="题目二(青蛙跳台阶)"></a>题目二(青蛙跳台阶)</h1><p>一指青蛙依次可以跳上 1 级台阶，也可以跳上 2 级台阶。求该青蛙跳上一个 n 级台阶总共有多少种跳法。  </p>
-<h2 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h2><ol>
-<li>最简单的情况，只跳 1 级台阶，只有一种跳法；  </li>
-<li>只跳 2 级台阶，可以先跳 1 级，再跳 1 级，也可以一次跳 2 级，所以共有 2 种跳法；</li>
-<li>那么现在我们考虑跳 n 级台阶的情况，要跳到第 n 级，我们可以从第n-2 级跳一次直接到第 n 级，也可以从 n-1 级开始跳，那么假设 f(n) 表示跳到第 n 级的跳法数，那么f(n)=f(n-1)+f(n-2)。</li>
-<li>诶，我们发现这个思路长得有点像斐波那契数列，只是一些初始条件不太一样而已，其他做法都相似。那么我们只需把上面的代码做简单修改即可。</li>
-</ol>
-<h2 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpvzj4b3d5j20v10asgm3.jpg" alt=""> </p>
-<h1 id="题目三-变态青蛙跳台阶"><a href="#题目三-变态青蛙跳台阶" class="headerlink" title="题目三(变态青蛙跳台阶)"></a>题目三(变态青蛙跳台阶)</h1><p>题目：一只青蛙一次可以跳上 1 级台阶，也可以跳上 2 级……它也可以跳上 n 级台阶，此时青蛙跳上一个 n 级的台阶总共有多少种跳法。</p>
-<h2 id="算法思路-1"><a href="#算法思路-1" class="headerlink" title="算法思路"></a>算法思路</h2><p>假设青蛙跳到 n 级台阶的跳法数为f(n),那么  </p>
-<pre><code>1. 青蛙可以从第n-1级跳到n级，共有f(n-1)种跳法；  
-2. 青蛙也可以从第n-2级跳到n级，共有f(n-2)种跳法;  
-3. 青蛙也可以从第n-3级跳到n级，共有f(n-3)种跳法;  
-4. 依次类推...直到青蛙从第1级跳到n级，共有f(1)种跳法；  
-5. 因此青蛙跳到n级的跳法为以上跳法数之和。  
-</code></pre><p>f(n)=f(n-1)+f(n-2)+…+f(1);又f(n-1)=f(n-2)+…+f(1)<br>因此得到关系：f(n)=2*f(n-1)(n&gt;1),当n=1时，跳法数为1。</p>
-<h2 id="算法实现-1"><a href="#算法实现-1" class="headerlink" title="算法实现"></a>算法实现</h2><h3 id="递归版本"><a href="#递归版本" class="headerlink" title="递归版本"></a>递归版本</h3><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpyap51rrrj20v507x0sr.jpg" alt="">  </p>
-<h3 id="循环版本"><a href="#循环版本" class="headerlink" title="循环版本"></a>循环版本</h3><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpyaqdwn7lj20v909nq37.jpg" alt="">  </p>
-<h3 id="移位版本"><a href="#移位版本" class="headerlink" title="移位版本"></a>移位版本</h3><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpyatme8trj20v207ymxa.jpg" alt=""></p>
-<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><ol>
-<li>对于递归版本的斐波那契，由于每次计算都是将问题分为两个子问题，故 T(n)=T(n-1)+T(n-2)+O(1)，则 T(n)=O(1.618^n);另外由于空间复杂度取决于递归的深度，那么其空间复杂度为 O(n)。 </li>
-<li>对于循环版本的斐波那契，很明显时间复杂度为O(n)，空间复杂度为O(1)。</li>
-</ol>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
 
       
     </div>
@@ -472,7 +446,7 @@
     <strong>Post author: </strong>洪荣宣</li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="http://yoursite.com/2018/04/02/剑指offer2之斐波那契数列/" title="剑指offer2之斐波那契数列">http://yoursite.com/2018/04/02/剑指offer2之斐波那契数列/</a>
+    <a href="http://yoursite.com/2018/08/12/剑指offer2之数字在排序数组中出现的次数/" title="剑指offer2之数字在排序数组中出现的次数">http://yoursite.com/2018/08/12/剑指offer2之数字在排序数组中出现的次数/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>All articles in this blog are licensed under 本文由 rongxuanhong 原创，采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">保留署名-非商业性使用-禁止演绎 4.0-国际许可协议</a></br>转载请保留以上声明信息! unless stating additionally.</li>
@@ -498,8 +472,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/31/剑指offer2笔记之从尾到头打印链表/" rel="next" title="剑指offer2笔记之从尾到头打印链表">
-                <i class="fa fa-chevron-left"></i> 剑指offer2笔记之从尾到头打印链表
+              <a href="/2018/08/09/剑指offer2之两个链表的第一个公共结点/" rel="next" title="剑指offer2之两个链表的第一个公共结点">
+                <i class="fa fa-chevron-left"></i> 剑指offer2之两个链表的第一个公共结点
               </a>
             
           </div>
@@ -507,10 +481,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/03/剑指offer2之按年龄排序/" rel="prev" title="剑指offer2之按年龄排序">
-                剑指offer2之按年龄排序 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -688,7 +658,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目一-斐波那契数列"><span class="nav-number">2.</span> <span class="nav-text">题目一(斐波那契数列)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#递归实现"><span class="nav-number">2.1.</span> <span class="nav-text">递归实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#循环实现"><span class="nav-number">2.2.</span> <span class="nav-text">循环实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目二-青蛙跳台阶"><span class="nav-number">3.</span> <span class="nav-text">题目二(青蛙跳台阶)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法思路"><span class="nav-number">3.1.</span> <span class="nav-text">算法思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法实现"><span class="nav-number">3.2.</span> <span class="nav-text">算法实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目三-变态青蛙跳台阶"><span class="nav-number">4.</span> <span class="nav-text">题目三(变态青蛙跳台阶)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法思路-1"><span class="nav-number">4.1.</span> <span class="nav-text">算法思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法实现-1"><span class="nav-number">4.2.</span> <span class="nav-text">算法实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#递归版本"><span class="nav-number">4.2.1.</span> <span class="nav-text">递归版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#循环版本"><span class="nav-number">4.2.2.</span> <span class="nav-text">循环版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移位版本"><span class="nav-number">4.2.3.</span> <span class="nav-text">移位版本</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂度分析"><span class="nav-number">5.</span> <span class="nav-text">复杂度分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目一-数字在排序数组中出现的次数"><span class="nav-number">1.</span> <span class="nav-text">题目一(数字在排序数组中出现的次数)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法思路"><span class="nav-number">2.</span> <span class="nav-text">算法思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现"><span class="nav-number">3.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目二-0-n-1-中缺失的数字"><span class="nav-number">4.</span> <span class="nav-text">题目二(0-n-1 中缺失的数字)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法思路-1"><span class="nav-number">5.</span> <span class="nav-text">算法思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现-1"><span class="nav-number">6.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目三-数组中数组和下标相等的元素"><span class="nav-number">7.</span> <span class="nav-text">题目三(数组中数组和下标相等的元素)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法思路-2"><span class="nav-number">8.</span> <span class="nav-text">算法思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现-2"><span class="nav-number">9.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂度"><span class="nav-number">10.</span> <span class="nav-text">复杂度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">11.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>

@@ -306,6 +306,155 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/15/剑指offer2之序列化二叉树/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/15/剑指offer2之序列化二叉树/" itemprop="url">剑指offer2之序列化二叉树</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-15T20:23:07+08:00">2018-07-15</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/07/15/剑指offer2之序列化二叉树/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/07/15/剑指offer2之序列化二叉树/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="题目-序列化二叉树—牛客网"><a href="#题目-序列化二叉树—牛客网" class="headerlink" title="题目(序列化二叉树—牛客网)"></a>题目(<a href="https://www.nowcoder.com/questionTerminal/cf7e25aa97c04cc1a68c8f040e71fb84" target="_blank" rel="noopener">序列化二叉树—牛客网</a>)</h1><p>请实现两个函数，分别用来序列化和反序列化二叉树。</p>
+<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>总体思路是利用前序遍历进行序列化和反序列化，但是我们知道仅有前序遍历是无法确定一颗二叉树的，所以我们还需要要给叶节点的空指针赋予特殊的标记 ‘#’，这样一来，当递归遇到’#’时，我们就知道了该跳出递归了，回溯完之后就进入右子树处理了。另外，二叉树的节点值可能有两位数，这样就不能单靠指针的移动就能确定二叉树的节点值，还需要加入分割标记，因此我们序列化的时候，需额外追加逗号，分割开不同的二叉树节点值，方便反序列化取出节点值。</p>
+<h2 id="处理思路一"><a href="#处理思路一" class="headerlink" title="处理思路一"></a>处理思路一</h2><ol>
+<li>借助整形类型的vector数组存储二叉树节点值，所以我们进行序列化的时候，对二叉树进行前序遍历(或称DFS)将节点加入数组，当节点为空的时候，加入特殊值 0x23333，并退出递归。但由于函数需要返回字符数组类型，因此还需要将vector数组中的元素一一复制到动态整形数组中，<strong>最后对整形数组强制类型转为字符类型</strong>。</li>
+<li>反序列化时，先将字符数组类型强制类型转为整形数组，然后二叉树节点的值就可以直接从整形数组中得到。首先，处理递归出口，如果遇到 ox23333，则指针移动一个单位并退出递归。否则构造二叉树根节点，并继续移动指针，连接递归得到的左子树，以及右子树。</li>
+</ol>
+<h2 id="处理思路二"><a href="#处理思路二" class="headerlink" title="处理思路二"></a>处理思路二</h2><ol>
+<li>借助string类型的变量来拼接序列化的字符串。只需前序遍历二叉树，当遇到根节点为空时，追加 ‘#’，并退出递归，否则追加二叉树的根节点值，接着追加逗号。接下只需递归实现左子树和右子树的序列化。那么，序列化之后得到了string类型的字符串，最后构造动态字符数组，将字符串的每一个字符复制到字符数组中，结尾加入’\0’标记结束。</li>
+<li>进行反序列化时，如果遇到 ‘#’ ，那么指针移动一个单位，退出递归。否则，找到字符数组中的一个二叉树节点值，然后构造根节点，如果此时到达字符末尾，直接返回根节点，否则指针继续移动一个单位。接下来根节点的左右指针分别连接左子树的递归实现结果和右子树的递归实现结果。</li>
+</ol>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><h2 id="算法实现一"><a href="#算法实现一" class="headerlink" title="算法实现一"></a>算法实现一</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25ly1fsfm7l4f5cj20zb0qt755.jpg" alt=""></p>
+<h2 id="算法实现二"><a href="#算法实现二" class="headerlink" title="算法实现二"></a>算法实现二</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25ly1fsfm7zr82fj20zc0zdwfw.jpg" alt=""></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1]. &lt;&lt;剑指offer2&gt;&gt;<br>[2]. &lt;&lt;牛客网&gt;&gt;</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/13/剑指offer2之二叉搜索树与双向链表/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -870,147 +1019,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/06/剑指offer2之顺时针打印矩阵/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="洪荣宣">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rongxuanhong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/06/剑指offer2之顺时针打印矩阵/" itemprop="url">剑指offer2之顺时针打印矩阵</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-06T19:12:53+08:00">2018-06-06</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/06/06/剑指offer2之顺时针打印矩阵/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/06/06/剑指offer2之顺时针打印矩阵/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="题目-顺时针打印矩阵"><a href="#题目-顺时针打印矩阵" class="headerlink" title="题目(顺时针打印矩阵)"></a>题目(<a href="https://www.nowcoder.com/questionTerminal/97e7a475d2a84eacb60ee545597a8407?source=relative" target="_blank" rel="noopener">顺时针打印矩阵</a>)</h1><p>对于一个矩阵，请设计一个算法从左上角(mat[0][0])开始，顺时针打印矩阵元素。<br>给定 int 矩阵 mat,以及它的维数 nxm，请返回一个数组，数组中的元素为矩阵元素的顺时针输出。</p>
-<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>先进行边界检查。<br>顺时针打印矩阵需要好几圈，那么自然需要循环去打印每一圈。所以首先确定循环结束的条件，这里可以由两种方式来判断结束。第一种是根据输出数组的元素个数是否达到了 n*m 个，第二个是假设每一圈的起点是(start,start)，那么存在以下不等式 colums&gt;startx2 并且 rows&gt;startx2 使得循环成立。<br>接下来就需要打印每一圈，但是打印每一圈有可能分为需要打印一步，两步，三步，四步。那么第一步从左到右是都需要打印的情况，只要确定起始列号和终止列号即可；如果有必要打印第二步，那么需要保证起始行号要小于终止列号，否则该步没有元素可打印。如果有必要打印第三步，那么此时矩阵至少需要两行两列，所以除了终止行号大于起始行号，终止列号也要大于起始列号。同理，如果需要打印第四步，矩阵至少需要三行两列，因此要求终止行号大于起始行号，终止列号大于起始列号。</p>
-<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fr44qoqrg1j20v20htaam.jpg" alt=""></p>
-<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>算法需要线性遍历每个矩阵元素，因而时间复杂度为 O(nxm)，建立了一个输出数组，空间复杂度为 O(nxm)。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-	<div>
-
-</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1062,7 +1070,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">61</span>
+                    <span class="site-state-item-count">62</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

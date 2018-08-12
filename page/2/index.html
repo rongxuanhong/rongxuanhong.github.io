@@ -306,6 +306,151 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/01/剑指offer2之最长不含重复字的子字符串/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/01/剑指offer2之最长不含重复字的子字符串/" itemprop="url">剑指offer2之最长不含重复字的子字符串</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-01T20:12:52+08:00">2018-08-01</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/08/01/剑指offer2之最长不含重复字的子字符串/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/08/01/剑指offer2之最长不含重复字的子字符串/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="题目-最长不含重复字符的子字符串"><a href="#题目-最长不含重复字符的子字符串" class="headerlink" title="题目(最长不含重复字符的子字符串)"></a>题目(最长不含重复字符的子字符串)</h1><p>请从字符串中找出一个最长的不包含重复字符的子字符串，计算该最长子字符串的长度。假设字符串中只包含 ‘a’-‘z’的字符。例如，在字符串 “arabcacfr” 中，最长的不含重复字符的子字符串是 “acfr”，长度为 4。</p>
+<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>主要采用动态规划的思想。先自顶向下分析问题，首先定义函数 f(i) 表示以第 i 个字符为结尾的不包含重复字符的子字符串的最长长度。那么从左往右扫描字符，在求 f(i) 时，我们可以从已知的 f(i-1) 推得 f(i) 的大小。 那么下面分两种情况进行讨论：  </p>
+<ol>
+<li>如果第 i 个字符之前未出现过，那么 f(i)=f(i-1)+1，也就是直接算进以第 i 个字符为结尾的不包含重复字符的子字符串中。  </li>
+<li>如果第 i 个字符之前已出现过，那么又需要分两种情况：先设第 i 个字符和它上次出现在字符串中的位置距离为 d。<br> a)、当距离 d 小于等于 f(i-1)时，即第 i 个字符出现在了 f(i-1) 对应的最长字符串之中了，那么 f(i)=d,那么 f(i) 对应的最长字符串长度一定不会超过 f(i) 对应的最长字符串长度；<br> b)、若这个距离 d 大于了 f(i-1) ，意味着第 i 位置上的字符出现在了 f(i-1) 对应的最长字符串的前面，则第 i 位置上的字符可以加入当前最长的字符串中，所以，f(i)=f(i-1)+1。</li>
+</ol>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p>算法自底向上逐步求解问题<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ftqnfo22zsj20zn0l2aax.jpg" alt=""></p>
+<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><p>算法仅遍历一次字符串，因此时间复杂度为 O(n)；定义了长度为 26 的数组，空间复杂度也为 O(26)。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] &lt;&lt;剑指offer2&gt;&gt;   </p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/30/剑指offer2之最大礼物/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -877,146 +1022,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/25/剑指offer2之连续子数组的最大和/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="洪荣宣">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rongxuanhong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/25/剑指offer2之连续子数组的最大和/" itemprop="url">剑指offer2之连续子数组的最大和</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-25T20:00:44+08:00">2018-07-25</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/07/25/剑指offer2之连续子数组的最大和/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/07/25/剑指offer2之连续子数组的最大和/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="题目-数组中连续子数组的最大和"><a href="#题目-数组中连续子数组的最大和" class="headerlink" title="题目(数组中连续子数组的最大和)"></a>题目(数组中连续子数组的最大和)</h1><p>输入一个整数数组，数组里有正数也有负数。数组中的一个或连续多个整数组成一个子数组。求所有子数组的和的最大值。要求时间复杂度为 O(n)。例如输入的数组为 {1,-2,3,10,-4,7,2,-5}，最大的连续子数组为 {3,10,-4,7,2}，因此输出为该子数组的和 18。</p>
-<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>本题是经典的动态规划题目之一,所以我们利用动态规划的思路分析。首先以函数 f(i) 表示以第 i 个数字结尾的子数组的最大和，那么求解目标就是max(f(i))，(0&lt;=i&lt;=n)。那么如果以第 i-1 个数字结尾的子数组的和小于等于 0，那么我们所求的子数组只能从第 i 个数字开始了;如果以第 i-1 个数字结尾的子数组的和大于 0，那么我们再将第 i 个数字累积进去，得到新的子数组的和，最后只需要和已有最大值比较即可。据此很容易得到状态转移方程为：<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fthqbgrv7ej20om041q36.jpg" alt=""></p>
-<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fthqh5j1gaj20ze0fkmxk.jpg" alt=""></p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] &lt;&lt;剑指offer2&gt;&gt;<br>[2]  <a href="https://www.nowcoder.com/questionTerminal/459bd355da1549fa8a49e350bf3df484" target="_blank" rel="noopener">牛客网</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-	<div>
-
-</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1068,7 +1073,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">61</span>
+                    <span class="site-state-item-count">62</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
