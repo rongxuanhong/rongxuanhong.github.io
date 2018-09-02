@@ -306,6 +306,147 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/06/剑指offer2之二叉搜索树的后序遍历序列/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/06/剑指offer2之二叉搜索树的后序遍历序列/" itemprop="url">剑指offer2之二叉搜索树的后序遍历序列</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-06T19:14:06+08:00">2018-06-06</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/06/剑指offer2之二叉搜索树的后序遍历序列/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/06/06/剑指offer2之二叉搜索树的后序遍历序列/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="题目-二叉搜索树的后序遍历序列—牛客网"><a href="#题目-二叉搜索树的后序遍历序列—牛客网" class="headerlink" title="题目(二叉搜索树的后序遍历序列—牛客网)"></a>题目(<a href="https://www.nowcoder.com/questionTerminal/a861533d45854474ac791d90e447bafd" target="_blank" rel="noopener">二叉搜索树的后序遍历序列—牛客网</a>)</h1><p>输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果。如果是则输出Yes,否则输出No。假设输入的数组的任意两个数字都互不相同。</p>
+<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>首先应该考虑两种特殊情况。只有一个节点和空树的情况时，也符合要求。<br>那么对于一个序列 S，它的最后一个元素就是根节点的值 x，除掉根之后，留下序列 T，再结合二叉搜索树(BST)的特性，可以将 T 分成两段，前一段（左子树）小于 x，后一段（右子树）大于 x，并且这两段依然也是合法的 BST 后序遍历，那么完美地满足递归的定义。</p>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1frfqgiutz6j20v80cw3ys.jpg" alt=""></p>
+<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>对于时间复杂度可以表示为T(n)=2xT(n-1)+O(n) ，O(n)是 for 循环占用的时间，两个子问题各占 T(n-1)，那么解出的时间复杂度为 O(nlogn)，空间复杂度取决于递归深度，为 O(logn)。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/06/剑指offer2之顺时针打印矩阵/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -873,155 +1014,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/15/剑指offer2之树的结构/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="洪荣宣">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rongxuanhong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/15/剑指offer2之树的结构/" itemprop="url">剑指offer2之树的结构</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-15T19:44:18+08:00">2018-05-15</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/05/15/剑指offer2之树的结构/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/05/15/剑指offer2之树的结构/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="题目-树的子结构"><a href="#题目-树的子结构" class="headerlink" title="题目(树的子结构)"></a>题目(<a href="https://www.nowcoder.com/questionTerminal/6e196c44c7004d15b1610b9afca8bd88" target="_blank" rel="noopener">树的子结构</a>)</h1><p>输入两棵二叉树 A 和 B ，判断 B 是不是 A 的子结构。二叉树的定义如下：</p>
-<pre><code>struct TreeNode {
-    int val;
-    struct TreeNode *left;
-    struct TreeNode *right;
-    TreeNode(int x) :
-        val(x), left(nullptr), right(nullptr) {
-    }
-};  
-</code></pre><h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>首先应注意所输入二叉树的特殊值情况，如空指针。<br>算法主要分为两步。<br>第一步，首先应该从二叉树 A 的根节点开始遍历，寻找和二叉树 B 根节点相同的那个节点，设为 节点 C。我们对二叉树 A 遍历的时候可以利用二叉树的递归特性,对其左右子树执行相同操作。<br>第二步，需要判断树 A 中以 C 为根节点的子树的结构是否和树 B 的结构一样，那么仍然可以利用递归的特性。如果他们的根节点值相同，那么对树 A 中 C 的左子树和树 B 中 C 的左子树递归判断结构的一致性，然后对两棵树的 C 的右子树也递归，只有他们的子结构同时相同，那么二叉树 A 中才存在 二叉树 B 的结构，否则不存在。</p>
-<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25ly1fqx8fwjnmtj20v50fn74t.jpg" alt=""></p>
-<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>二叉树 A 利用层序遍历的递归实现，每个结点只需遍历一次，故时间复杂度为 O(n)。而使用了递归，最差情况下递归调用的深度为 O(n)，所以空间复杂度为 O(n)。本题中还需要遍历二叉树 B，因此若设其节点数为 m 个，那么最终的时间复杂度为 O(n+m)，空间复杂度为 O(n+m)。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-	<div>
-
-</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1073,7 +1065,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">62</span>
+                    <span class="site-state-item-count">63</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
