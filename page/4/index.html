@@ -306,6 +306,150 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/20/剑指offer2之数组中出现次数超过一半的数字/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/20/剑指offer2之数组中出现次数超过一半的数字/" itemprop="url">剑指offer2之数组中出现次数超过一半的数字</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-20T20:11:03+08:00">2018-07-20</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/07/20/剑指offer2之数组中出现次数超过一半的数字/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/07/20/剑指offer2之数组中出现次数超过一半的数字/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>编写算法，不仅需要正确实现，还需要考虑到时间效率的问题。比如采用更好的解法，养成更好的编程习惯。说到编程习惯，其实如果采用 C/C++ 编程时，在进行传递复杂类型参数的时，需要采用引用(或指针)，而要避免使用值传递，因为从形参到实参会产生一次多余的复制操作。用 Java、C# 等做多次字符串的拼接操作时，也不要多次使用 String 的 + 运算符来拼接字符串，因为这样会产生很多 String 临时实例，造成时间和空间的浪费。更好的办法是用 StringBuild 的 Append 方法来完成字符串的拼接。</p>
+<h1 id="题目-数组中出现次数超过一半的数字—牛客网"><a href="#题目-数组中出现次数超过一半的数字—牛客网" class="headerlink" title="题目(数组中出现次数超过一半的数字—牛客网)"></a>题目(<a href="https://www.nowcoder.com/questionTerminal/e8a1b01a2df14cb2b228b30ee6a92163" target="_blank" rel="noopener">数组中出现次数超过一半的数字—牛客网</a>)</h1><p>数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。例如输入一个长度为 9 的数组{1,2,3,2,2,2,5,4,2}。由于数字 2 在数组中出现了 5 次，超过数组长度的一半，因此输出 2。如果不存在则输出 0。</p>
+<h1 id="算法思路一"><a href="#算法思路一" class="headerlink" title="算法思路一"></a>算法思路一</h1><p>本题最简单的做法是先排序再求解，但是时间效率最低需要 O(nlogn)，以下思路时间效率都只需要 O(n)。</p>
+<p>根据数组的特点：数组中有一个数字出现的次数超过数组长度的一半，也就是它出现的次数比其他所有数字出现的次数之和还要多。那么我们采用采用阵地攻守的思想：第一个数字作为第一个士兵，守阵地，计数为 1。 如果遇到相同的数字，计数加 1，如果遇到不相同元素，即为敌人，同归于尽,计数减 1；当计数值为 0 时，表示没有士兵了，又以新的 i 值作为守阵地的士兵。最后一个留在阵地的士兵有可能就是主元素，即所求，所以只需验证即可，可再加一次循环，记录这个士兵的个数看是否大于数组一半即可。</p>
+<h1 id="算法思路二"><a href="#算法思路二" class="headerlink" title="算法思路二"></a>算法思路二</h1><p>根据数组的特点：数组中有一个数字出现的次数超过数组长度的一半，那么当数字有序的时候，所求的数字一定在有序数组的中位数上。假设中位数的索引为 k，那么现在问题就转为为求数组中第 k 大的数字了，而这个转换问题可利用快速排序的思想，在线性时间内得到解决。</p>
+<h1 id="算法实现一"><a href="#算法实现一" class="headerlink" title="算法实现一"></a>算法实现一</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ftatchf3bmj20zn0lddg9.jpg" alt=""></p>
+<h1 id="算法实现二"><a href="#算法实现二" class="headerlink" title="算法实现二"></a>算法实现二</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ftbyjsnzt1j20zc0y2q3z.jpg" alt=""></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] &lt;&lt;剑指offer2&gt;&gt;<br>[2] 牛客网</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/17/剑指offer2之字符串的排列/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -883,149 +1027,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/18/剑指offer2之二叉树中和为某一值的路径/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="洪荣宣">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rongxuanhong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/18/剑指offer2之二叉树中和为某一值的路径/" itemprop="url">剑指offer2之二叉树中和为某一值的路径</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-18T20:45:01+08:00">2018-06-18</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/06/18/剑指offer2之二叉树中和为某一值的路径/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/06/18/剑指offer2之二叉树中和为某一值的路径/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="题目-二叉树中和为某一值的路径—牛客网"><a href="#题目-二叉树中和为某一值的路径—牛客网" class="headerlink" title="题目(二叉树中和为某一值的路径—牛客网)"></a>题目(<a href="https://www.nowcoder.com/questionTerminal/b736e784e3e34731af99065031301bca" target="_blank" rel="noopener">二叉树中和为某一值的路径—牛客网</a>)</h1><p>输入一颗二叉树和一个整数，打印出二叉树中结点值的和为输入整数的所有路径。路径定义为从树的根结点开始往下一直到叶结点所经过的结点形成一条路径。</p>
-<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>首先，处理根节点为空的情况；  </p>
-<p>接下来，按照<strong>前序遍历</strong>的思想从根节点开始递归搜索，每次先将节点加入路径，然后<strong>更新期望的路径和</strong>，即减去当前已加入路径的节点值,利用数组 path 存放当前已加入路径的节点值，然后依次判断根节点的左右子树是否存在，存在则继续递归寻找，待<strong>递归返回</strong>后，必须从路径中移除当前节点，以便继续记录其余路径；  </p>
-<p>最后，就是<strong>递归出口</strong>。当遇到了叶节点，并且叶节点的值刚好等于剩余期望的路径和，那么就找到了一条路径；最后依然要从路径中移除当前节点，以便继续记录其余路径，最后再返回。</p>
-<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1frp023uo2bj20zk0g7dgd.jpg" alt=""></p>
-<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>算法遍历了每个节点，时间复杂度为 O(n)，空间复杂度主要在递归栈，大致消耗 O(logn)的空间,还有一些辅助数组空间。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-	<div>
-
-</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1077,7 +1078,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">63</span>
+                    <span class="site-state-item-count">64</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
