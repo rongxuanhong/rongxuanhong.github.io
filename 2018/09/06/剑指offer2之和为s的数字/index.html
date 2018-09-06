@@ -103,27 +103,29 @@
 
 
 
-  <meta name="description" content="前言不同排序算法适用的场合也不尽相同。例如，对于数组有序的情况，使用快速排序算法将达到最坏的时间复杂度O(n^2)，那么此种场合下，快速排序算法就不是最优的选择。因此，选择一个排序算法，应当考虑到排序应用的环境、哪些约束条件(比如数据的范围)，最后综合考虑后选择相应的排序算法解决。 题目(年龄排序)请实现一个按年龄排序的算法，其中最大年龄为99岁，要求时间效率为 O(n)(可以使用不超过O(n)的">
+  <meta name="description" content="题目一(和为 s 的两个数字)输入一个递增排序的数组和一个数字S，在数组中查找两个数，使得他们的和正好是S，如果有多对数字的和等于S，输出两个数的乘积最小的。  算法思路由于给定的数组是递增有序的，那么我们设置左右指针分别指向数组的首尾，然后从两端向中间夹逼。如果当前指针指向的两个数之和大于 S，那么说明右指针指向的数大了，应该后退一位；如果当前指针指向的两个数之和小于 S，那么说明左指针指向的数">
 <meta name="keywords" content="剑指offer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="剑指offer2之按年龄排序">
-<meta property="og:url" content="http://yoursite.com/2018/04/03/剑指offer2之按年龄排序/index.html">
+<meta property="og:title" content="剑指offer2之和为s的数字">
+<meta property="og:url" content="http://yoursite.com/2018/09/06/剑指offer2之和为s的数字/index.html">
 <meta property="og:site_name" content="Rongxuanhong&#39;s Blog">
-<meta property="og:description" content="前言不同排序算法适用的场合也不尽相同。例如，对于数组有序的情况，使用快速排序算法将达到最坏的时间复杂度O(n^2)，那么此种场合下，快速排序算法就不是最优的选择。因此，选择一个排序算法，应当考虑到排序应用的环境、哪些约束条件(比如数据的范围)，最后综合考虑后选择相应的排序算法解决。 题目(年龄排序)请实现一个按年龄排序的算法，其中最大年龄为99岁，要求时间效率为 O(n)(可以使用不超过O(n)的">
+<meta property="og:description" content="题目一(和为 s 的两个数字)输入一个递增排序的数组和一个数字S，在数组中查找两个数，使得他们的和正好是S，如果有多对数字的和等于S，输出两个数的乘积最小的。  算法思路由于给定的数组是递增有序的，那么我们设置左右指针分别指向数组的首尾，然后从两端向中间夹逼。如果当前指针指向的两个数之和大于 S，那么说明右指针指向的数大了，应该后退一位；如果当前指针指向的两个数之和小于 S，那么说明左指针指向的数">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpy4rnfjbmj20v60c9aam.jpg">
-<meta property="og:updated_time" content="2018-04-03T07:12:58.800Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fuvgitk70vj20zk0i00t3.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fuvgj06n5ij20zd0r9mxz.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fuvgj8b53vj20zg0k5dg9.jpg">
+<meta property="og:updated_time" content="2018-09-06T11:37:42.656Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="剑指offer2之按年龄排序">
-<meta name="twitter:description" content="前言不同排序算法适用的场合也不尽相同。例如，对于数组有序的情况，使用快速排序算法将达到最坏的时间复杂度O(n^2)，那么此种场合下，快速排序算法就不是最优的选择。因此，选择一个排序算法，应当考虑到排序应用的环境、哪些约束条件(比如数据的范围)，最后综合考虑后选择相应的排序算法解决。 题目(年龄排序)请实现一个按年龄排序的算法，其中最大年龄为99岁，要求时间效率为 O(n)(可以使用不超过O(n)的">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpy4rnfjbmj20v60c9aam.jpg">
+<meta name="twitter:title" content="剑指offer2之和为s的数字">
+<meta name="twitter:description" content="题目一(和为 s 的两个数字)输入一个递增排序的数组和一个数字S，在数组中查找两个数，使得他们的和正好是S，如果有多对数字的和等于S，输出两个数的乘积最小的。  算法思路由于给定的数组是递增有序的，那么我们设置左右指针分别指向数组的首尾，然后从两端向中间夹逼。如果当前指针指向的两个数之和大于 S，那么说明右指针指向的数大了，应该后退一位；如果当前指针指向的两个数之和小于 S，那么说明左指针指向的数">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fuvgitk70vj20zk0i00t3.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/03/剑指offer2之按年龄排序/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/09/06/剑指offer2之和为s的数字/"/>
 
 
 
@@ -133,7 +135,7 @@
   };
 </script>
 
-  <title>剑指offer2之按年龄排序 | Rongxuanhong's Blog</title>
+  <title>剑指offer2之和为s的数字 | Rongxuanhong's Blog</title>
   
 
 
@@ -311,7 +313,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/03/剑指offer2之按年龄排序/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/06/剑指offer2之和为s的数字/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="洪荣宣">
@@ -328,7 +330,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">剑指offer2之按年龄排序</h1>
+          <h1 class="post-title" itemprop="name headline">剑指offer2之和为s的数字</h1>
         
 
         <div class="post-meta">
@@ -340,7 +342,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-03T15:12:25+08:00">2018-04-03</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-06T19:37:16+08:00">2018-09-06</time>
             
 
             
@@ -358,8 +360,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/04/03/剑指offer2之按年龄排序/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/03/剑指offer2之按年龄排序/" itemprop="commentCount"></span>
+                <a href="/2018/09/06/剑指offer2之和为s的数字/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/09/06/剑指offer2之和为s的数字/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -395,11 +397,17 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>不同排序算法适用的场合也不尽相同。例如，对于数组有序的情况，使用快速排序算法将达到最坏的时间复杂度O(n^2)，那么此种场合下，快速排序算法就不是最优的选择。因此，选择一个排序算法，应当考虑到排序应用的环境、哪些约束条件(比如数据的范围)，最后综合考虑后选择相应的排序算法解决。</p>
-<h1 id="题目-年龄排序"><a href="#题目-年龄排序" class="headerlink" title="题目(年龄排序)"></a>题目(年龄排序)</h1><p>请实现一个按年龄排序的算法，其中最大年龄为99岁，要求时间效率为 O(n)(<strong>可以使用不超过O(n)的辅助内存</strong>)</p>
-<h1 id="算法思路-排序对象有范围限制"><a href="#算法思路-排序对象有范围限制" class="headerlink" title="算法思路 (排序对象有范围限制)"></a>算法思路 (排序对象有范围限制)</h1><p>我们看到题目要求的排序时间复杂度要达到 O(n),而那些常见排序算法的最坏时间复杂度基本都达不到 O(n)。我们注意到排序的对象是年龄，它是有约束的，即年龄只能在0-99岁之间。那么，我们可以利用辅助数组来记录每个年龄有多少人次(数组的下标即年龄)，那么我们对年龄进行排序的时候，只需要遍历所有年龄，得到相应的人次，然后给年龄数组重新赋值即可。  </p>
-<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpy4rnfjbmj20v60c9aam.jpg" alt="">  </p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
+        <h1 id="题目一-和为-s-的两个数字"><a href="#题目一-和为-s-的两个数字" class="headerlink" title="题目一(和为 s 的两个数字)"></a>题目一(和为 s 的两个数字)</h1><p>输入一个递增排序的数组和一个数字S，在数组中查找两个数，使得他们的和正好是S，如果有多对数字的和等于S，输出两个数的乘积最小的。 </p>
+<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>由于给定的数组是递增有序的，那么我们设置左右指针分别指向数组的首尾，然后从两端向中间夹逼。如果当前指针指向的两个数之和大于 S，那么说明右指针指向的数大了，应该后退一位；如果当前指针指向的两个数之和小于 S，那么说明左指针指向的数小了，应该前进一位。直到<strong>首次</strong>遇到两数之和恰好等于 S，即所求。 由于数组递增有序，那么首次遇到的两数之积必然最小。</p>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fuvgitk70vj20zk0i00t3.jpg" alt=""></p>
+<h1 id="题目二"><a href="#题目二" class="headerlink" title="题目二"></a>题目二</h1><p>如果题目一去掉递增有序呢？</p>
+<h1 id="算法思路-1"><a href="#算法思路-1" class="headerlink" title="算法思路"></a>算法思路</h1><p>那么题目一的思路便失效了。<br>我们取可能的一对数分析，我们发现对于这对数 a,b，用 S 减去 a 所得的数字 b 其实也在原数组中，那么当 S 减去 b 时又得到了 a，也就是当他们都被减的时候，a 一定会重复出现。而非所求的数字不会有此情况。那么我们可以利用哈希表，以原数组的值为键，以 S 与数组元素的差值为值，构造哈希表。如果新的差值是哈希表中的键，那么就可以确定这对数(哈希表中的键和值)是候选解，记录下来。最后从候选解中选出乘积最小的那对即可。</p>
+<h1 id="算法实现-1"><a href="#算法实现-1" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fuvgj06n5ij20zd0r9mxz.jpg" alt=""></p>
+<h1 id="题目三-和为-s-的连续正数序列"><a href="#题目三-和为-s-的连续正数序列" class="headerlink" title="题目三(和为 s 的连续正数序列)"></a>题目三(和为 s 的连续正数序列)</h1><p>输入一个正数 s，打印出所有和为 s 的连续正数序列(至少含有两个数)。例如，输入 15，由于 1+2+3+4+5=4+5+6=7+8=15，所以打印出 3 个连续序列 1~5、4~6 和 7~8。</p>
+<h1 id="算法思路-2"><a href="#算法思路-2" class="headerlink" title="算法思路"></a>算法思路</h1><p>题目意思就是从 1~s 的正数序列中，找到可能的连续序列，其和为 s。那么正数序列仍然可看成递增排序的，借鉴于题目一，我们仍然设置左右指针，左指针仍然指向第一个正数，右指针指向末位正数？我们发现，左指针的活动范围显然一定不会超过 (1+s)/2。那么其实最简单的思路是左指针每确定一个位置，右指针就移动到可能的位置进行判断，然后下一次左指针移动一位，右指针就后退到可能的位置进行判断，依次类推，直到左指针走到边界。那么这样必然需要重复计算两指针范围内的数之和。<br>其实，我们可以将右指针指向第二个正数，从最小的范围开始判断连续序列之和是否为 s，然后右指针不断前进，并随时统计连续序列之和。如果连续序列大于 s，并且左指针在合法范围内，那么连续序列之和先减去左指针指向的数字，然后左指针前进。如果此时情况满足，那么立即打印。否则右指针继续前进判断。</p>
+<h1 id="算法实现-2"><a href="#算法实现-2" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fuvgj8b53vj20zg0k5dg9.jpg" alt=""></p>
+<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><p>题目的时间复杂度为均为 O(n)复杂度，除了题目二的空间复杂度为O(n)，其他均为 O(1)。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] &lt;&lt;剑指offer2&gt;&gt;<br>[2] <a href="https://www.nowcoder.com/questionTerminal/390da4f7a00f44bea7c2f3d19491311b" target="_blank" rel="noopener">牛客网</a></p>
 
       
     </div>
@@ -432,7 +440,7 @@
     <strong>Post author: </strong>洪荣宣</li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="http://yoursite.com/2018/04/03/剑指offer2之按年龄排序/" title="剑指offer2之按年龄排序">http://yoursite.com/2018/04/03/剑指offer2之按年龄排序/</a>
+    <a href="http://yoursite.com/2018/09/06/剑指offer2之和为s的数字/" title="剑指offer2之和为s的数字">http://yoursite.com/2018/09/06/剑指offer2之和为s的数字/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>All articles in this blog are licensed under 本文由 rongxuanhong 原创，采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">保留署名-非商业性使用-禁止演绎 4.0-国际许可协议</a></br>转载请保留以上声明信息! unless stating additionally.</li>
@@ -458,8 +466,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/02/剑指offer2之斐波那契数列/" rel="next" title="剑指offer2之斐波那契数列">
-                <i class="fa fa-chevron-left"></i> 剑指offer2之斐波那契数列
+              <a href="/2018/09/04/剑指offer2之数组中数字出现的次数/" rel="next" title="剑指offer2之数组中数字出现的次数">
+                <i class="fa fa-chevron-left"></i> 剑指offer2之数组中数字出现的次数
               </a>
             
           </div>
@@ -467,10 +475,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/09/剑指offer2之旋转数组/" rel="prev" title="剑指offer2之旋转数组">
-                剑指offer2之旋转数组 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -648,7 +652,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目-年龄排序"><span class="nav-number">2.</span> <span class="nav-text">题目(年龄排序)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法思路-排序对象有范围限制"><span class="nav-number">3.</span> <span class="nav-text">算法思路 (排序对象有范围限制)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现"><span class="nav-number">4.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目一-和为-s-的两个数字"><span class="nav-number">1.</span> <span class="nav-text">题目一(和为 s 的两个数字)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法思路"><span class="nav-number">2.</span> <span class="nav-text">算法思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现"><span class="nav-number">3.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目二"><span class="nav-number">4.</span> <span class="nav-text">题目二</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法思路-1"><span class="nav-number">5.</span> <span class="nav-text">算法思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现-1"><span class="nav-number">6.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目三-和为-s-的连续正数序列"><span class="nav-number">7.</span> <span class="nav-text">题目三(和为 s 的连续正数序列)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法思路-2"><span class="nav-number">8.</span> <span class="nav-text">算法思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现-2"><span class="nav-number">9.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂度"><span class="nav-number">10.</span> <span class="nav-text">复杂度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">11.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>

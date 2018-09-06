@@ -306,6 +306,153 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/06/剑指offer2之和为s的数字/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/06/剑指offer2之和为s的数字/" itemprop="url">剑指offer2之和为s的数字</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-06T19:37:16+08:00">2018-09-06</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/06/剑指offer2之和为s的数字/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/09/06/剑指offer2之和为s的数字/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="题目一-和为-s-的两个数字"><a href="#题目一-和为-s-的两个数字" class="headerlink" title="题目一(和为 s 的两个数字)"></a>题目一(和为 s 的两个数字)</h1><p>输入一个递增排序的数组和一个数字S，在数组中查找两个数，使得他们的和正好是S，如果有多对数字的和等于S，输出两个数的乘积最小的。 </p>
+<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>由于给定的数组是递增有序的，那么我们设置左右指针分别指向数组的首尾，然后从两端向中间夹逼。如果当前指针指向的两个数之和大于 S，那么说明右指针指向的数大了，应该后退一位；如果当前指针指向的两个数之和小于 S，那么说明左指针指向的数小了，应该前进一位。直到<strong>首次</strong>遇到两数之和恰好等于 S，即所求。 由于数组递增有序，那么首次遇到的两数之积必然最小。</p>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fuvgitk70vj20zk0i00t3.jpg" alt=""></p>
+<h1 id="题目二"><a href="#题目二" class="headerlink" title="题目二"></a>题目二</h1><p>如果题目一去掉递增有序呢？</p>
+<h1 id="算法思路-1"><a href="#算法思路-1" class="headerlink" title="算法思路"></a>算法思路</h1><p>那么题目一的思路便失效了。<br>我们取可能的一对数分析，我们发现对于这对数 a,b，用 S 减去 a 所得的数字 b 其实也在原数组中，那么当 S 减去 b 时又得到了 a，也就是当他们都被减的时候，a 一定会重复出现。而非所求的数字不会有此情况。那么我们可以利用哈希表，以原数组的值为键，以 S 与数组元素的差值为值，构造哈希表。如果新的差值是哈希表中的键，那么就可以确定这对数(哈希表中的键和值)是候选解，记录下来。最后从候选解中选出乘积最小的那对即可。</p>
+<h1 id="算法实现-1"><a href="#算法实现-1" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fuvgj06n5ij20zd0r9mxz.jpg" alt=""></p>
+<h1 id="题目三-和为-s-的连续正数序列"><a href="#题目三-和为-s-的连续正数序列" class="headerlink" title="题目三(和为 s 的连续正数序列)"></a>题目三(和为 s 的连续正数序列)</h1><p>输入一个正数 s，打印出所有和为 s 的连续正数序列(至少含有两个数)。例如，输入 15，由于 1+2+3+4+5=4+5+6=7+8=15，所以打印出 3 个连续序列 1~5、4~6 和 7~8。</p>
+<h1 id="算法思路-2"><a href="#算法思路-2" class="headerlink" title="算法思路"></a>算法思路</h1><p>题目意思就是从 1~s 的正数序列中，找到可能的连续序列，其和为 s。那么正数序列仍然可看成递增排序的，借鉴于题目一，我们仍然设置左右指针，左指针仍然指向第一个正数，右指针指向末位正数？我们发现，左指针的活动范围显然一定不会超过 (1+s)/2。那么其实最简单的思路是左指针每确定一个位置，右指针就移动到可能的位置进行判断，然后下一次左指针移动一位，右指针就后退到可能的位置进行判断，依次类推，直到左指针走到边界。那么这样必然需要重复计算两指针范围内的数之和。<br>其实，我们可以将右指针指向第二个正数，从最小的范围开始判断连续序列之和是否为 s，然后右指针不断前进，并随时统计连续序列之和。如果连续序列大于 s，并且左指针在合法范围内，那么连续序列之和先减去左指针指向的数字，然后左指针前进。如果此时情况满足，那么立即打印。否则右指针继续前进判断。</p>
+<h1 id="算法实现-2"><a href="#算法实现-2" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fuvgj8b53vj20zg0k5dg9.jpg" alt=""></p>
+<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><p>题目的时间复杂度为均为 O(n)复杂度，除了题目二的空间复杂度为O(n)，其他均为 O(1)。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] &lt;&lt;剑指offer2&gt;&gt;<br>[2] <a href="https://www.nowcoder.com/questionTerminal/390da4f7a00f44bea7c2f3d19491311b" target="_blank" rel="noopener">牛客网</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/04/剑指offer2之数组中数字出现的次数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -874,147 +1021,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/06/剑指offer2之数组中的逆序对/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="洪荣宣">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rongxuanhong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/06/剑指offer2之数组中的逆序对/" itemprop="url">剑指offer2之数组中的逆序对</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-06T20:36:03+08:00">2018-08-06</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/08/06/剑指offer2之数组中的逆序对/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/08/06/剑指offer2之数组中的逆序对/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="题目-数组中的逆序对"><a href="#题目-数组中的逆序对" class="headerlink" title="题目(数组中的逆序对)"></a>题目(数组中的逆序对)</h1><p>有一组数，对于其中任意两个数组，若前面一个大于后面一个数字，则这两个数字组成一个逆序对。请设计一个高效的算法，计算给定数组中的逆序对个数。<br>给定一个 int 数组 A 和它的大小 n，请返回A中的逆序对个数。保证 n 小于等于 5000。</p>
-<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>算法思想主要利用归并排序，唯一不同的主要在：当左边 i 位置所在的数大于右边 j 位置所在的数时，需要多算一步，即算出逆序对的个数，个数为 i 到 mid 之间的数字个数(i 为当前指向左部分的指针，j 为当前指向右部分的指针，mid 为两部分的中间位置)。</p>
-<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ftwrlt99waj20ze0xlta9.jpg" alt=""></p>
-<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><p>复杂度和归并排序相同。时间复杂度为 O(nlogn)，空间复杂度为 O(n)。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] &lt;&lt;剑指offer2&gt;&gt;<br>[2] <a href="https://www.nowcoder.com/questionTerminal/bb06495cc0154e90bbb18911fd581df6" target="_blank" rel="noopener">牛客网</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-	<div>
-
-</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1066,7 +1072,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">64</span>
+                    <span class="site-state-item-count">65</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
