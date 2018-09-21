@@ -103,24 +103,29 @@
 
 
 
-  <meta name="description" content="title: 目前共计 2 个标签date: 2017-05-13 17:16:45comments: falsetype: tags RecyclerView、Hexo">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Rongxuanhong&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/tags/index.html">
+  <meta name="description" content="题目一(翻转单词顺序列)输入一个英文句子，翻转句子中单词的顺序，但单词内字符的顺序不变。为简单起见，标点符号和普通字母一样处理。例如输入字符串 “I am a student.”，则输出 “student. a am I”。 算法思路下面介绍两种思路，分为翻转法和后追加法。翻转法：显然，我们可以先对整个句子翻转，然后再对每个单词进行翻转就可得到所求。单词的边界就通过空格来判断即可。后追加法：从输出">
+<meta name="keywords" content="剑指offer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="剑指offer2之翻转字符串">
+<meta property="og:url" content="http://yoursite.com/2018/09/21/剑指offer2之翻转字符串/index.html">
 <meta property="og:site_name" content="Rongxuanhong&#39;s Blog">
-<meta property="og:description" content="title: 目前共计 2 个标签date: 2017-05-13 17:16:45comments: falsetype: tags RecyclerView、Hexo">
+<meta property="og:description" content="题目一(翻转单词顺序列)输入一个英文句子，翻转句子中单词的顺序，但单词内字符的顺序不变。为简单起见，标点符号和普通字母一样处理。例如输入字符串 “I am a student.”，则输出 “student. a am I”。 算法思路下面介绍两种思路，分为翻转法和后追加法。翻转法：显然，我们可以先对整个句子翻转，然后再对每个单词进行翻转就可得到所求。单词的边界就通过空格来判断即可。后追加法：从输出">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-05-13T09:29:44.000Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fuxqslegzdj20zn0ezjrs.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fuxqsreoxtj20zj0cmdg0.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fuxqswc5pdj20zi0f13yw.jpg">
+<meta property="og:updated_time" content="2018-09-21T12:23:22.858Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Rongxuanhong&#39;s Blog">
-<meta name="twitter:description" content="title: 目前共计 2 个标签date: 2017-05-13 17:16:45comments: falsetype: tags RecyclerView、Hexo">
+<meta name="twitter:title" content="剑指offer2之翻转字符串">
+<meta name="twitter:description" content="题目一(翻转单词顺序列)输入一个英文句子，翻转句子中单词的顺序，但单词内字符的顺序不变。为简单起见，标点符号和普通字母一样处理。例如输入字符串 “I am a student.”，则输出 “student. a am I”。 算法思路下面介绍两种思路，分为翻转法和后追加法。翻转法：显然，我们可以先对整个句子翻转，然后再对每个单词进行翻转就可得到所求。单词的边界就通过空格来判断即可。后追加法：从输出">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fuxqslegzdj20zn0ezjrs.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/09/21/剑指offer2之翻转字符串/"/>
 
 
 
@@ -130,7 +135,7 @@
   };
 </script>
 
-  <title> | Rongxuanhong's Blog</title>
+  <title>剑指offer2之翻转字符串 | Rongxuanhong's Blog</title>
   
 
 
@@ -286,74 +291,207 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/21/剑指offer2之翻转字符串/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-<h1 class="post-title" itemprop="name headline"></h1>
-
-<div class="post-meta">
-  
-  
-
-
-
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body han-init-context">
         
         
-          <hr>
-<p>title: 目前共计 2 个标签<br>date: 2017-05-13 17:16:45<br>comments: false<br>type: tags</p>
-<p><a href="https://rongxuanhong.github.io/2017/05/01/%E5%B7%A7%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%AE%9E%E7%8E%B0Recyclerview%E5%90%84%E7%A7%8D%E5%A4%8D%E6%9D%82Item%E7%B1%BB%E5%9E%8B/" target="_blank" rel="noopener">RecyclerView</a>、<a href="https://rongxuanhong.github.io/2017/05/13/Hexo%E4%B8%8EDisqus%E5%BC%95%E5%85%A5%E7%9A%84%E6%95%85%E4%BA%8B/" target="_blank" rel="noopener">Hexo</a></p>
-
+          <h1 class="post-title" itemprop="name headline">剑指offer2之翻转字符串</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-21T20:22:39+08:00">2018-09-21</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/21/剑指offer2之翻转字符串/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/09/21/剑指offer2之翻转字符串/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             Views: 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
       
       
+
+      
+        <h1 id="题目一-翻转单词顺序列"><a href="#题目一-翻转单词顺序列" class="headerlink" title="题目一(翻转单词顺序列)"></a>题目一(翻转单词顺序列)</h1><p>输入一个英文句子，翻转句子中单词的顺序，但单词内字符的顺序不变。为简单起见，标点符号和普通字母一样处理。例如输入字符串 “I am a student.”，则输出 “student. a am I”。</p>
+<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>下面介绍两种思路，分为<strong>翻转法</strong>和<strong>后追加法</strong>。<br><strong>翻转法</strong>：显然，我们可以先对整个句子翻转，然后再对每个单词进行翻转就可得到所求。单词的边界就通过空格来判断即可。<br><strong>后追加法</strong>：从输出结果，可以看出这么一个规律。前一个单词需要追加到后一个单词的后面。因此，我们可以遍历字符串，通过空格，找出每个单词(除了最后一个)，然后将空格和单词进行拼接后的结果再和之前的结果顺序拼接得到新的结果。最后，还剩下最后尾巴的部分尚未拼接，将其这部分拼接到当前结果的前面即可。这样子，遍历依次就完成了整个单词顺序翻转的过程，整个过程没有采用翻转，而关键在于单词拼接顺序的改变。</p>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><h2 id="翻转法"><a href="#翻转法" class="headerlink" title="翻转法"></a>翻转法</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fuxqslegzdj20zn0ezjrs.jpg" alt=""></p>
+<h2 id="后追加法"><a href="#后追加法" class="headerlink" title="后追加法"></a>后追加法</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fuxqsreoxtj20zj0cmdg0.jpg" alt=""></p>
+<h1 id="题目二-左旋转字符串"><a href="#题目二-左旋转字符串" class="headerlink" title="题目二(左旋转字符串)"></a>题目二(左旋转字符串)</h1><p>在题目一的基础上，如果定义字符串的左旋转操作是把字符串的若干个字符转移到字符串的尾部。那么请实现一个函数实现此功能。比如，输入字符串 “abcdefg” 和 2，该函数将返回左旋转两位得到的结果 “cdefgab”。</p>
+<h1 id="算法思路-1"><a href="#算法思路-1" class="headerlink" title="算法思路"></a>算法思路</h1><p>本题最简单的思路就是直接将前若干个数字拼接到后面的子串的后方即可。但本题实际考察的是字符串翻转的使用。<br>那么通过例子，我们发现对整个字符串翻转之后，得到 “gfedcba”，如果再对前5个字符和后两个字符分别进行字符串翻转之后，那么结果显而易见。总之，借助三次字符串翻转便可达到目的。</p>
+<h1 id="算法实现-1"><a href="#算法实现-1" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fuxqswc5pdj20zi0f13yw.jpg" alt=""></p>
+<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><p>算法的时间复杂度均为 O(n)，空间复杂度为 O(1)。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] &lt;&lt;剑指offer2&gt;&gt;<br>[2] <a href="https://www.nowcoder.com/questionTerminal/3194a4f4cf814f63919d0790578d51f3" target="_blank" rel="noopener">牛客网1</a><br>[3] <a href="https://www.nowcoder.com/questionTerminal/12d959b108cb42b1ab72cef4d36af5ec" target="_blank" rel="noopener">牛客网2</a></p>
+
       
     </div>
+
     
+
+    
+    
+    
+	<div>
+
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+
+        
+-------------本文结束感谢您的阅读-------------
+
+    
+</div>
+  	
+</div>
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author: </strong>洪荣宣</li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="http://yoursite.com/2018/09/21/剑指offer2之翻转字符串/" title="剑指offer2之翻转字符串">http://yoursite.com/2018/09/21/剑指offer2之翻转字符串/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>All articles in this blog are licensed under 本文由 rongxuanhong 原创，采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">保留署名-非商业性使用-禁止演绎 4.0-国际许可协议</a></br>转载请保留以上声明信息! unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/剑指offer/" rel="tag"><i class="fa fa-tag"></i> 剑指offer</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/06/剑指offer2之和为s的数字/" rel="next" title="剑指offer2之和为s的数字">
+                <i class="fa fa-chevron-left"></i> 剑指offer2之和为s的数字
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
 
 
 
-    
-    
-    
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -386,8 +524,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -493,6 +640,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目一-翻转单词顺序列"><span class="nav-number">1.</span> <span class="nav-text">题目一(翻转单词顺序列)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法思路"><span class="nav-number">2.</span> <span class="nav-text">算法思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现"><span class="nav-number">3.</span> <span class="nav-text">算法实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#翻转法"><span class="nav-number">3.1.</span> <span class="nav-text">翻转法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后追加法"><span class="nav-number">3.2.</span> <span class="nav-text">后追加法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目二-左旋转字符串"><span class="nav-number">4.</span> <span class="nav-text">题目二(左旋转字符串)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法思路-1"><span class="nav-number">5.</span> <span class="nav-text">算法思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现-1"><span class="nav-number">6.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂度"><span class="nav-number">7.</span> <span class="nav-text">复杂度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
