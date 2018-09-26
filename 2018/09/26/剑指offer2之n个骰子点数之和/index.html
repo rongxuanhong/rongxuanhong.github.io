@@ -103,23 +103,28 @@
 
 
 
-  <meta name="description" content="Rongxuanhong&apos;s Blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Rongxuanhong&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/tags/机器学习/index.html">
+  <meta name="description" content="题目(n 个骰子点数之和)把 n 个骰子仍在地上，所有骰子朝上一面的点数之和为 s。输入 n，打印出 s 的所有可能的值出现的概率。 算法思路首先，剑指offer上的本题题解过于晦涩，作者未明确指出其实这道题是一题dp(动态规划)题。首先，扔 n 个骰子的解可以由扔 n-1 骰子的解推出，即原问题包含了子问题的解(状态转移)；其次，对于如果使用递归的话，那么必定存在重复的子问题；因此，本题适用于动">
+<meta name="keywords" content="剑指offer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="剑指offer2之n个骰子点数之和">
+<meta property="og:url" content="http://yoursite.com/2018/09/26/剑指offer2之n个骰子点数之和/index.html">
 <meta property="og:site_name" content="Rongxuanhong&#39;s Blog">
-<meta property="og:description" content="Rongxuanhong&apos;s Blog">
+<meta property="og:description" content="题目(n 个骰子点数之和)把 n 个骰子仍在地上，所有骰子朝上一面的点数之和为 s。输入 n，打印出 s 的所有可能的值出现的概率。 算法思路首先，剑指offer上的本题题解过于晦涩，作者未明确指出其实这道题是一题dp(动态规划)题。首先，扔 n 个骰子的解可以由扔 n-1 骰子的解推出，即原问题包含了子问题的解(状态转移)；其次，对于如果使用递归的话，那么必定存在重复的子问题；因此，本题适用于动">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fvhfgpyd1sj20zl0kcmxv.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fvhfmyu6x9j20zr0o90to.jpg">
+<meta property="og:updated_time" content="2018-09-26T11:32:33.322Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Rongxuanhong&#39;s Blog">
-<meta name="twitter:description" content="Rongxuanhong&apos;s Blog">
+<meta name="twitter:title" content="剑指offer2之n个骰子点数之和">
+<meta name="twitter:description" content="题目(n 个骰子点数之和)把 n 个骰子仍在地上，所有骰子朝上一面的点数之和为 s。输入 n，打印出 s 的所有可能的值出现的概率。 算法思路首先，剑指offer上的本题题解过于晦涩，作者未明确指出其实这道题是一题dp(动态规划)题。首先，扔 n 个骰子的解可以由扔 n-1 骰子的解推出，即原问题包含了子问题的解(状态转移)；其次，对于如果使用递归的话，那么必定存在重复的子问题；因此，本题适用于动">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fvhfgpyd1sj20zl0kcmxv.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/机器学习/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/09/26/剑指offer2之n个骰子点数之和/"/>
 
 
 
@@ -129,7 +134,7 @@
   };
 </script>
 
-  <title>Tag: 机器学习 | Rongxuanhong's Blog</title>
+  <title>剑指offer2之n个骰子点数之和 | Rongxuanhong's Blog</title>
   
 
 
@@ -176,7 +181,7 @@
     
   
 
-  <div class="container sidebar-position-right ">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -285,196 +290,215 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block tag">
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>机器学习<small>Tag</small>
-        </h1>
-      </div>
-
-      
-        
+  
+    <div class="reading-progress-bar"></div>
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/26/剑指offer2之n个骰子点数之和/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/05/08/SVM系列之SMO的Python实现(四)/" itemprop="url">
-              
-                <span itemprop="name">SVM系列之SMO的Python实现(四)</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">剑指offer2之n个骰子点数之和</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-08T19:02:28+08:00"
-              content="2018-05-08" >
-          05-08
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-26T19:32:19+08:00">2018-09-26</time>
+            
 
-    </header>
-  </article>
+            
+            
 
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/26/剑指offer2之n个骰子点数之和/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/09/26/剑指offer2之n个骰子点数之和/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             Views: 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/27/SVM系列之最小序列算法SMO(三)/" itemprop="url">
-              
-                <span itemprop="name">SVM系列之最小序列算法SMO(三)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-27T19:01:41+08:00"
-              content="2018-04-27" >
-          04-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/22/SVM系列之核函数与KKT条件(二)/" itemprop="url">
-              
-                <span itemprop="name">SVM系列之核函数与KKT条件(二)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-22T20:42:07+08:00"
-              content="2018-04-22" >
-          04-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/18/SVM系列之初识SVM(一)/" itemprop="url">
-              
-                <span itemprop="name">SVM系列之初识SVM(一)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-18T19:04:21+08:00"
-              content="2018-04-18" >
-          04-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/21/k-近邻学习的简要理论及其python实现/" itemprop="url">
-              
-                <span itemprop="name">k-近邻学习的简要理论及其python实现</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-21T22:00:08+08:00"
-              content="2018-03-21" >
-          03-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <h1 id="题目-n-个骰子点数之和"><a href="#题目-n-个骰子点数之和" class="headerlink" title="题目(n 个骰子点数之和)"></a>题目(n 个骰子点数之和)</h1><p>把 n 个骰子仍在地上，所有骰子朝上一面的点数之和为 s。输入 n，打印出 s 的所有可能的值出现的概率。</p>
+<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>首先，剑指offer上的本题题解过于晦涩，作者未明确指出其实这道题是一题dp(动态规划)题。<br>首先，扔 n 个骰子的解可以由扔 n-1 骰子的解推出，即原问题包含了子问题的解(状态转移)；其次，对于如果使用递归的话，那么必定存在重复的子问题；因此，本题适用于动态规划的解法。<br>那么，首先构造状态转移方程：设扔 n 个骰子时排列数之和为 s 的函数为f(n,s)，那么如果先扔了 n-1 个骰子，则扔最后一个骰子就有 6 种情况(最后一个投出1、2、3、4、5、6)来得到排列数之和 s(前面的 6 种状态(解)可以推出当前状态(解))。即，f(n,s)=f(n-1,s-1)+f(n-1,s-2)+f(n-1,s-3)+f(n-1,s-4)+f(n-1,s-5)+f(n-1,s-6),n&lt;=s&lt;=6n。而当 s<n 或者="" s="">6n，则f(n,s)=0。初始状态位 n=1，f(1,1)=f(1,2)=f(1,3)=f(1,4)=f(1,5)=f(1,6)=1。</n></p>
+<h1 id="算法实现-递归版"><a href="#算法实现-递归版" class="headerlink" title="算法实现(递归版)"></a>算法实现(递归版)</h1><p>递归版的实现只需要对 N 个骰子遍历每种可能的排列数即可。(自顶向上递归下去，自底向上回溯到顶得解)<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fvhfgpyd1sj20zl0kcmxv.jpg" alt=""></p>
+<h1 id="算法实现-循环版"><a href="#算法实现-循环版" class="headerlink" title="算法实现(循环版)"></a>算法实现(循环版)</h1><p>循环版首先需要遍历每个骰子的情况，然后针对每个骰子的，再遍历其可能的排列数范围。(自底向上求出所有解)<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fvhfmyu6x9j20zr0o90to.jpg" alt=""></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] &lt;&lt;剑指offer2&gt;&gt; </p>
 
       
     </div>
 
+    
+
+    
+    
+    
+	<div>
+
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+
+        
+-------------本文结束感谢您的阅读-------------
+
+    
+</div>
+  	
+</div>
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author: </strong>洪荣宣</li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="http://yoursite.com/2018/09/26/剑指offer2之n个骰子点数之和/" title="剑指offer2之n个骰子点数之和">http://yoursite.com/2018/09/26/剑指offer2之n个骰子点数之和/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>All articles in this blog are licensed under 本文由 rongxuanhong 原创，采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">保留署名-非商业性使用-禁止演绎 4.0-国际许可协议</a></br>转载请保留以上声明信息! unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/剑指offer/" rel="tag"><i class="fa fa-tag"></i> 剑指offer</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/24/剑指offer2之队列的最大值/" rel="next" title="剑指offer2之队列的最大值">
+                <i class="fa fa-chevron-left"></i> 剑指offer2之队列的最大值
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -495,8 +519,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -602,6 +635,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目-n-个骰子点数之和"><span class="nav-number">1.</span> <span class="nav-text">题目(n 个骰子点数之和)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法思路"><span class="nav-number">2.</span> <span class="nav-text">算法思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现-递归版"><span class="nav-number">3.</span> <span class="nav-text">算法实现(递归版)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现-循环版"><span class="nav-number">4.</span> <span class="nav-text">算法实现(循环版)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -757,6 +806,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.6"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.6"></script>
+
+
 
   
 

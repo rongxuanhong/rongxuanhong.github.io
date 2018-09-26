@@ -306,6 +306,155 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/26/剑指offer2之从1到n整数中1出现的次数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/26/剑指offer2之从1到n整数中1出现的次数/" itemprop="url">剑指offer2之从1到n整数中1出现的次数</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-26T20:33:15+08:00">2018-07-26</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/07/26/剑指offer2之从1到n整数中1出现的次数/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/07/26/剑指offer2之从1到n整数中1出现的次数/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="题目-从1到n整数中1出现的次数—牛客网"><a href="#题目-从1到n整数中1出现的次数—牛客网" class="headerlink" title="题目(从1到n整数中1出现的次数—牛客网)"></a>题目(<a href="https://www.nowcoder.com/questionTerminal/bd7f978302044eee894445e244c7eee6" target="_blank" rel="noopener">从1到n整数中1出现的次数—牛客网</a>)</h1><p>输入一个整数 n，求 1-n 这 n 个整数的十进制表示中 1 出现的次数。 例如，输入12，1-12 这些整数中包含 1 的数字有1、10、11 和 12，1 一共出现了 5 次。</p>
+<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>最简单的思路就是遍历所有整数，然后对每一个整数再遍历出每一个数位(通过 /、% 运算即可)，最后统计所有整数中含 1 的次数。但是此情况下的时间复杂度达到了 O(nlogn)，能不能降到 O(logn)？。  </p>
+<p>可以滴！！接下来，提出一个高效算法，它利用了数字的规律，挺不容易想到的。<br>既然时间复杂度这么低，那么就不可能去单独计算每个整数中 1 出现的次数了，所以就只能研究 1 出现的规律了。<br>由于我们可以计算出所有整数中 1 出现在每个数位(个位、十位、百位…)的总次数，因此最后 1 到 n 整数中 1 出现的次数=所有整数中含个位且其个位为 1 的总数 + 所有整数中含十位且其十位为 1 的总数+所有整数中含百位且其百位为 1 的总数<br>+…(项总数取决了 n 含的数位数,共 logn 项)。  </p>
+<p>下面以百位为例进行分析。 我们以百位 i(i=100) 将整数 n 分割为两部分。设a=n/i;b=n%i。   </p>
+<ol>
+<li>如果 n 的百位上为 0，例如 n=31056，a=310,b=56。那么 1-31056 中百位含 1 的整数必然以 100-199 之间的数字作为后缀(共有100个)。而前缀的范围在 00-30 之间(不包括31的是因为31056中百位不是 1，忽略)，共31个，它等于a/10，因此此情况总的个数就是 a/10*i；  </li>
+<li>如果 n 的百位上为 1，例如 n=31156，a=311,b=56。那么 1-31156 中百位含 1 的整数必然以 100-199 之间的数字作为后缀(共有100个)。而前缀的范围在 00-30 之间，共31个，但前缀为 31 时，百位含 1 的个数为 (b+1)个，即31100-31156 之间的数，因此此情况总的个数就是 a/10 *i+(b+1)；  </li>
+<li>如果 n 的百位上数字大于等于2 ，例如 n=31256，a=312,b=56。那么 1-31256 中百位含 1 的整数必然以 100-199 之间的数字作为后缀(共有100个)。而前缀的范围在 00-31 之间，共32个,因此此情况总的个数就是 (a/10 +1) *i。      </li>
+</ol>
+<p>最后，将三种情况进行整合，得 (a+8)/10 *i，当百位大于等于 2 时，a多加了8就会进1，此时等价于情况 3 中的式子。最后利用 a%10判断整数 n 的百位是否为1，若为 1 ，则总次数还要多加上(b+1)。</p>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ftl5qa1njtj20zo0cn0sv.jpg" alt=""></p>
+<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><p>由于算法只遍历了整数 n 的每个数位(共 logn 位)，所以算法的时间复杂度仅为 O(logn)。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] &lt;&lt;剑指offer2&gt;&gt;<br>[2] 牛客网</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/25/剑指offer2之连续子数组的最大和/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -864,154 +1013,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/17/剑指offer2之字符串的排列/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="洪荣宣">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rongxuanhong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/17/剑指offer2之字符串的排列/" itemprop="url">剑指offer2之字符串的排列</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-17T20:31:56+08:00">2018-07-17</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/07/17/剑指offer2之字符串的排列/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/07/17/剑指offer2之字符串的排列/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="题目-字符串的排列—牛客网"><a href="#题目-字符串的排列—牛客网" class="headerlink" title="题目(字符串的排列—牛客网)"></a>题目(<a href="https://www.nowcoder.com/questionTerminal/fe6b651b66ae47d7acce78ffdd9a96c7" target="_blank" rel="noopener">字符串的排列—牛客网</a>)</h1><p>输入一个字符串,按<strong>字典序</strong>打印出该字符串中字符的<strong>所有排列(不重复)</strong>。例如输入字符串 abc,则打印出由字符 a,b,c 所能排列出来的所有字符串 abc,acb,bac,bca,ca b和 cba。 </p>
-<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>本题为经典的全排列问题，但是要处理一些细节问题。<br>全排列的思路分为两步：第一步是求所有可能出现在第一个位置上的字符，即把第一个字符和后面所有的字符(包括第一个字符)交换。第二步就是，在固定第一个位置上的字符时，求后面所有字符的全排列，即得到了原问题的子问题，我们利用递归求解即可。<br>本题中还需要使得输出的字符排列符合<strong>字典序</strong>，那么我们只要保证在全排列开始前，字符串符合字典序即可，即对字符进行升序即可。另外，这里还可能涉及到<strong>排列重复</strong>的问题，比如输入字符串 “aa”，那么将会出现重复的排列，解决办法就是在第一个字符和后面的所有字符交换前判断，交换的那对字符是否相同(需排除与自身交换)，若相同可跳过对该元素的交换。</p>
-<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ft664um2quj20zv0g0q3f.jpg" alt=""></p>
-<h1 id="拓展：字符串的组合"><a href="#拓展：字符串的组合" class="headerlink" title="拓展：字符串的组合"></a>拓展：字符串的组合</h1><p>输入一个字符串，输出该字符串中字符的所有组合。举个例子，如果输入abc，它的组合有a、b、c、ab、ac、bc、abc。</p>
-<h2 id="算法思路一-递归法"><a href="#算法思路一-递归法" class="headerlink" title="算法思路一(递归法)"></a>算法思路一(递归法)</h2><p>对于长度为 n 的字符串，我们需要从中选择 m 个字符进行组合，其中 1&lt;=m&lt;=n。我们需要遍历这 m 的可能值，对应于输出含 m 个元素的字符串组合。那么对于每一个组合，如果我们选中了字符串的第一个位置，那么只要递归求解子问题：从长度为 n-1 的字符串中选择 m-1 个字符进行组合，而如果字符串的第一个位置不选，那么只要递归求解子问题：从长度为 n-1 的字符串中选择 m 个字符进行组合。</p>
-<h2 id="算法思路二-位操作"><a href="#算法思路二-位操作" class="headerlink" title="算法思路二(位操作)"></a>算法思路二(位操作)</h2><p>假设字符串长度为 n，那么恰好它的所有组合均可由 1 到 (1&lt;&lt;n)二进制数表示得到，例如 001 对应于组合 a，111对应于组合 abc 等。因此，我们只要把二进制中的 1 对应到所求组合即可。这里我们利用掩码即与操作转换。</p>
-<h2 id="算法实现-递归法"><a href="#算法实现-递归法" class="headerlink" title="算法实现(递归法)"></a>算法实现(递归法)</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ft66l4xbidj20zo0kpmxu.jpg" alt="">  </p>
-<h2 id="算法实现-位操作"><a href="#算法实现-位操作" class="headerlink" title="算法实现(位操作)"></a>算法实现(位操作)</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ft66o6uns7j20zm0dg0sw.jpg" alt=""></p>
-<h1 id="字符全排列拓展之八皇后问题"><a href="#字符全排列拓展之八皇后问题" class="headerlink" title="字符全排列拓展之八皇后问题"></a>字符全排列拓展之八皇后问题</h1><p>在 8×8 的国际象棋上摆放八个皇后，使其不能相互攻击，即<strong>任意两个皇后不得处在同一行、同一列或者同一对角斜线</strong>上。下图中的每个黑色格子表示一个皇后，这就是一种符合条件的摆放方法。请求出总共有多少种摆法。</p>
-<h2 id="算法思路-1"><a href="#算法思路-1" class="headerlink" title="算法思路"></a>算法思路</h2><p>由于八个皇后的任意两个不能处在同一行，那么这肯定是每一个皇后占据一行。于是我们可以定义一个数组 ColumnIndex[8]，数组中第 i 个数字表示位于第 i 行的皇后的列号。先把 ColumnIndex 的八个数字分别用 0-7 初始化，接下来我们要做的事情就是对数组ColumnIndex做全排列。由于我们是用不同的数字初始化数组中的数字，因此任意两个皇后肯定不同列。我们只需要判断得到的每一个排列对应的八个皇后是不是在<strong>同一对角斜线</strong>上(正对角线和副对角线)，也就是数组的两个下标 i 和 j，是不是 i-j==ColumnIndex[i]-Column[j] 或者 j-i==ColumnIndex[i]-ColumnIndex[j]，即行差==列差。</p>
-<h2 id="算法实现-1"><a href="#算法实现-1" class="headerlink" title="算法实现"></a>算法实现</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ft8gen7zb0j20zn0pg3z8.jpg" alt=""></p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] &lt;&lt;剑指offer2&gt;&gt;<br>[2] <a href="https://blog.csdn.net/hackbuteer1/article/details/7462447" target="_blank" rel="noopener">字符串的全排列和组合算法</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-	<div>
-
-</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1063,7 +1064,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">67</span>
+                    <span class="site-state-item-count">68</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
