@@ -306,6 +306,150 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/29/剑指offer2之把数字翻译成字符串/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/29/剑指offer2之把数字翻译成字符串/" itemprop="url">剑指offer2之把数字翻译成字符串</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-29T13:07:58+08:00">2018-07-29</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/07/29/剑指offer2之把数字翻译成字符串/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/07/29/剑指offer2之把数字翻译成字符串/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="题目-把数字翻译成字符串"><a href="#题目-把数字翻译成字符串" class="headerlink" title="题目(把数字翻译成字符串)"></a>题目(把数字翻译成字符串)</h1><p>给定一个数字，我们按照如下的规则把它翻译为字符串：将 0-25 分别对应翻译到 a-z 字符，如 0 翻译成 a，以此类推。一个数字可能有多少种翻译。例如，12258 有 5 种不同的翻译,分别是 “bccfi”、”bwfi”、”bczi”、”mcfi”、”mzi”。请编程实现一个函数，用来计算一个数字有多少种不同的翻译方法。</p>
+<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>以 12258 为例，显然，从 1 开始翻译的种数包括了从第二个 2 开始翻译的种数，以及从第三个 2 开始翻译的总数，但是后者是有条件的，如果此例子中的 12 所在的位置是其他两位不在 10-25 之间的数字，那么此种情况无法翻译，那么该翻译方式就不统计了。显然，对于从 1 开始翻译，包含了两个递归子问题。那么对子问题的分析以此类推。这其实就是自顶向上分析问题。<br>那么既然是递归有无重叠子问题呢？从上述例子中，如果先翻译 1，再翻译 2，最后要翻译 258；如果先翻译 12，最后还是要翻译 258，这里就出现了重叠的子问题。</p>
+<p>那么为了避免重叠子问题的计算，我们可以采用自底向上的计算方式，从后面开始翻译，因为从前面开始翻译的翻译总数可以由从后面开始翻译的翻译总数得到。</p>
+<p>那么动态转移方程就是：<br>f(i)=f(i+1)+g(i,i+1)*f(i+2); g(i,i+1) 表示 i 和 i+1 位置上拼接的数字是否在 10-25 之内，因此其取值为 0 或者 1。</p>
+<p>本题其实也是动态规划的一种，类似动态规划经典题青蛙跳台阶。</p>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ftnjgpq5cpj20zn0ozdgu.jpg" alt=""></p>
+<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><p>算法仅遍历一次输入数字对应的字符串，因此时间复杂度为 O(n)；定义了记录翻译总数的数组，空间复杂度也为 O(n)。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] &lt;&lt;剑指offer2&gt;&gt;   </p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/27/剑指offer2之把数组排成最小的数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -864,153 +1008,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/21/剑指offer2之最小的k个数/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="洪荣宣">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rongxuanhong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/21/剑指offer2之最小的k个数/" itemprop="url">剑指offer2之最小的k个数</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-21T20:02:37+08:00">2018-07-21</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/07/21/剑指offer2之最小的k个数/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/07/21/剑指offer2之最小的k个数/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="题目-最小的k个数—牛客网"><a href="#题目-最小的k个数—牛客网" class="headerlink" title="题目(最小的k个数—牛客网)"></a>题目(<a href="https://www.nowcoder.com/questionTerminal/6a296eb82cf844ca8539b57c23e6e9bf" target="_blank" rel="noopener">最小的k个数—牛客网</a>)</h1><p>输入 n 个整数，找出其中最小的 K 个数。例如输入 4,5,1,6,2,7,3,8 这 8 个数字，则最小的 4 个数字是 1,2,3,4,。</p>
-<h1 id="算法思路一"><a href="#算法思路一" class="headerlink" title="算法思路一"></a>算法思路一</h1><p>题目为最小的 k 个数，它是未知数，所以首先应该分类讨论 k 的各种特殊值。<br>如果 k&lt;=0,或者大于数组大小，则无意义。另外，当 k 刚好就是数组长度时，输入数组即为所求。<br>对于输入数组的大小也该判断。  </p>
-<p>我们从求数组任意第 k 个大的数字的问题中得到启发，此问题的相似版本在上一篇文章，采用快速排序的基础思想partition 函数。它既是快速排序的基础，同时也可以用来查找 n 个数中第 k 大的数字。<br>我们利用快速排序中的分割算法找到那个在 k 位置上的划分点即可，因为划分算法会使得数组中的左半部分数小于划分位置上的数，后半部分的数大于划分位置上的数，那么此时我们的所求就是这左半部分数。(<strong>ps:此法会修改原数组，如不需要原数组可使用下述思路，他们适合于处理海量数据的，不需要一次性处理</strong>。)</p>
-<h1 id="算法思路二"><a href="#算法思路二" class="headerlink" title="算法思路二"></a>算法思路二</h1><p>我们利用最大堆来存储这个 k 个数。首先初始将数组前 k 个数送入堆中。然后将其余的数字都和堆顶元素(最大元素)比较,只要比堆顶元素小，我们就删除堆顶元素，将新的元素加入堆中，继续维护堆。最后，堆刚好就维护了最小的 k 个数。  </p>
-<p>另外为什么不用最小堆呢？因为如果用最小堆，那么我们需要将所有元素送入堆中，那么需要对 n 个元素调堆，而对每个元素的调整时间增加到了O(logn)，最后的总时间复杂度为 O(nlogn)。而使用最大堆进行求解，只需要要 O(nlogk)，关键就在于用于建堆的元素总数。</p>
-<h1 id="算法思路三"><a href="#算法思路三" class="headerlink" title="算法思路三"></a>算法思路三</h1><p>利用优先队列，其实思想和二类似，但是它比二代码上更简洁。优先队列默认优先值大的排在前面，其实是最大堆实现出来的。</p>
-<h1 id="算法实现一"><a href="#算法实现一" class="headerlink" title="算法实现一"></a>算法实现一</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ftd4qe6370j20zn0thjs5.jpg" alt=""></p>
-<h1 id="算法实现二"><a href="#算法实现二" class="headerlink" title="算法实现二"></a>算法实现二</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ftd4qpbdbcj20zp0fgt99.jpg" alt=""></p>
-<h1 id="算法实现三"><a href="#算法实现三" class="headerlink" title="算法实现三"></a>算法实现三</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ftd4r07ovpj20zk0feq3d.jpg" alt=""></p>
-<h1 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h1><p>算法实现一，时间复杂度为O(n)，其余时间复杂度均为O(nlogk)。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] &lt;&lt;剑指offer2&gt;&gt;<br>[2] 牛客网</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-	<div>
-
-</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1062,7 +1059,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-count">70</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
