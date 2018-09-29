@@ -306,6 +306,151 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/21/剑指offer2之翻转字符串/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/21/剑指offer2之翻转字符串/" itemprop="url">剑指offer2之翻转字符串</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-21T20:22:39+08:00">2018-09-21</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/21/剑指offer2之翻转字符串/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/09/21/剑指offer2之翻转字符串/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="题目一-翻转单词顺序列"><a href="#题目一-翻转单词顺序列" class="headerlink" title="题目一(翻转单词顺序列)"></a>题目一(翻转单词顺序列)</h1><p>输入一个英文句子，翻转句子中单词的顺序，但单词内字符的顺序不变。为简单起见，标点符号和普通字母一样处理。例如输入字符串 “I am a student.”，则输出 “student. a am I”。</p>
+<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>下面介绍两种思路，分为<strong>翻转法</strong>和<strong>后追加法</strong>。<br><strong>翻转法</strong>：显然，我们可以先对整个句子翻转，然后再对每个单词进行翻转就可得到所求。单词的边界就通过空格来判断即可。<br><strong>后追加法</strong>：从输出结果，可以看出这么一个规律。前一个单词需要追加到后一个单词的后面。因此，我们可以遍历字符串，通过空格，找出每个单词(除了最后一个)，然后将空格和单词进行拼接后的结果再和之前的结果顺序拼接得到新的结果。最后，还剩下最后尾巴的部分尚未拼接，将其这部分拼接到当前结果的前面即可。这样子，遍历依次就完成了整个单词顺序翻转的过程，整个过程没有采用翻转，而关键在于单词拼接顺序的改变。</p>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><h2 id="翻转法"><a href="#翻转法" class="headerlink" title="翻转法"></a>翻转法</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fuxqslegzdj20zn0ezjrs.jpg" alt=""></p>
+<h2 id="后追加法"><a href="#后追加法" class="headerlink" title="后追加法"></a>后追加法</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fuxqsreoxtj20zj0cmdg0.jpg" alt=""></p>
+<h1 id="题目二-左旋转字符串"><a href="#题目二-左旋转字符串" class="headerlink" title="题目二(左旋转字符串)"></a>题目二(左旋转字符串)</h1><p>在题目一的基础上，如果定义字符串的左旋转操作是把字符串的若干个字符转移到字符串的尾部。那么请实现一个函数实现此功能。比如，输入字符串 “abcdefg” 和 2，该函数将返回左旋转两位得到的结果 “cdefgab”。</p>
+<h1 id="算法思路-1"><a href="#算法思路-1" class="headerlink" title="算法思路"></a>算法思路</h1><p>本题最简单的思路就是直接将前若干个数字拼接到后面的子串的后方即可。但本题实际考察的是字符串翻转的使用。<br>那么通过例子，我们发现对整个字符串翻转之后，得到 “gfedcba”，如果再对前5个字符和后两个字符分别进行字符串翻转之后，那么结果显而易见。总之，借助三次字符串翻转便可达到目的。</p>
+<h1 id="算法实现-1"><a href="#算法实现-1" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fuxqswc5pdj20zi0f13yw.jpg" alt=""></p>
+<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><p>算法的时间复杂度均为 O(n)，空间复杂度为 O(1)。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] &lt;&lt;剑指offer2&gt;&gt;<br>[2] <a href="https://www.nowcoder.com/questionTerminal/3194a4f4cf814f63919d0790578d51f3" target="_blank" rel="noopener">牛客网1</a><br>[3] <a href="https://www.nowcoder.com/questionTerminal/12d959b108cb42b1ab72cef4d36af5ec" target="_blank" rel="noopener">牛客网2</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/06/剑指offer2之和为s的数字/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -877,155 +1022,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/09/剑指offer2之两个链表的第一个公共结点/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="洪荣宣">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rongxuanhong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/09/剑指offer2之两个链表的第一个公共结点/" itemprop="url">剑指offer2之两个链表的第一个公共结点</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-09T20:32:26+08:00">2018-08-09</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/08/09/剑指offer2之两个链表的第一个公共结点/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/08/09/剑指offer2之两个链表的第一个公共结点/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="题目-两个链表的第一个公共结点"><a href="#题目-两个链表的第一个公共结点" class="headerlink" title="题目(两个链表的第一个公共结点)"></a>题目(两个链表的第一个公共结点)</h1><p>输入两个链表，找出它们的第一个公共结点。</p>
-<h1 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h1><p>两个链表的公共节点，即这个节点为两个链表的交汇点，而其两个链表的公共节点之后的所有节点均相同。那么这两个链表的拓扑形状看起来像一个 Y，那么现在问题就转成了如何找到这个交汇点。</p>
-<h1 id="算法思路一"><a href="#算法思路一" class="headerlink" title="算法思路一"></a>算法思路一</h1><p>可以利用两个栈分别存储两个链表的节点。然后，对这两个栈，两两出栈比较，并记录当前栈顶节点，比较直到顶底节点不同，停止算法。  </p>
-<h1 id="算法思路二"><a href="#算法思路二" class="headerlink" title="算法思路二"></a>算法思路二</h1><p>对于两个不等长的链表，我们在长度较长的链表上让其工作指针先走两链表长度之差的步子，然后，两个链表的工作指针同时前进，直到遇到第一个公共节点即可。这个方法在前面的求链表是否有环的题目其实也有类似的应用。</p>
-<h1 id="算法实现一"><a href="#算法实现一" class="headerlink" title="算法实现一"></a>算法实现一</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ftz1fcdg0dj20zi0iq0t7.jpg" alt=""></p>
-<h1 id="算法实现二"><a href="#算法实现二" class="headerlink" title="算法实现二"></a>算法实现二</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ftz1fu8v1aj20zi0stwf5.jpg" alt=""></p>
-<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><p>两个思路由于只对链表线性遍历，所以时间复杂度为O(m+n)。但思路一由于用到了两个栈，因而空间复杂度为O(n+m)，而后者为 O(1)，因此，算法思路二更优，但前者也是一个很好理解的思路。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] &lt;&lt;剑指offer2&gt;&gt;<br>[2] <a href="https://www.nowcoder.com/questionTerminal/6ab1d9a29e88450685099d45c9e31e46" target="_blank" rel="noopener">牛客网</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-	<div>
-
-</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1072,7 +1073,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">70</span>
+                    <span class="site-state-item-count">71</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

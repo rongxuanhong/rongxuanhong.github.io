@@ -306,6 +306,157 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/30/剑指offer2之最大礼物/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/30/剑指offer2之最大礼物/" itemprop="url">剑指offer2之最大礼物</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-30T13:45:13+08:00">2018-07-30</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/07/30/剑指offer2之最大礼物/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/07/30/剑指offer2之最大礼物/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="题目-礼物的最大价值或年终奖"><a href="#题目-礼物的最大价值或年终奖" class="headerlink" title="题目(礼物的最大价值或年终奖)"></a>题目(礼物的最大价值或年终奖)</h1><p>小东所在公司要发年终奖，而小东恰好获得了最高福利，他要在公司年会上参与一个抽奖游戏，游戏在一个 6*6 的棋盘上进行，上面放着 36 个价值不等的礼物，每个小的棋盘上面放置着一个礼物，他需要从左上角开始游戏，每次只能向下或者向右移动一步，到达右下角停止，一路上的格子里的礼物小东都能拿到，请设计一个算法使小东拿到价值最高的礼物。</p>
+<p>给定一个 6*6 的矩阵board，其中每个元素为对应格子的礼物价值,左上角为 [0,0],请返回能获得的最大价值，保证每个礼物价值大于 100 小于 1000。</p>
+<blockquote>
+<p>注：剑指 offer 上的题目和牛客网上的题目有点小区别，仅在棋盘大小的区别，我们以牛客网的为准。  </p>
+</blockquote>
+<h1 id="算法思路一"><a href="#算法思路一" class="headerlink" title="算法思路一"></a>算法思路一</h1><p>本题是经典的类似走迷宫，求最优解的问题，采用的方法是<a href="https://blog.csdn.net/qq_30241305/article/details/52198780" target="_blank" rel="noopener">填表法</a>，还有另一种叫刷表法，感兴趣可以了解一下。  </p>
+<p>这是经典的动态规划之填表法的应用。我们先定义函数 f(i,j) 表示到达坐标为 (i,j) 的位置时小东能拿到的最大礼物价值总和。根据题目要求，我们有两种可能的路径到达坐标 (i,j) 的位置：通过位置 (i-1,j) 或者  (i,j-1),所以可得到等式 <strong>f(i,j)=max(f(i-1,j),f(i,j-1))+board[i][j]</strong>,其中 board[i][j] 为当前位置上的礼物价值。  </p>
+<p>但是，这里要特殊处理的是，除了第一个位置，第一行和第一列的每个位置只有一种到达路径，所以我们先对第一行和第一列进行填表。  </p>
+<p>其实本题，由于输入数组是由题目给定的，因此，我们不改动输入数组,否则我们可以给输入数组的第一行和第一列之前全补0，那么就把所有情况统一了，意味着不需要上述的特殊处理了，请注意此处的补 0 技巧。  </p>
+<p><strong>填表法</strong>：所谓的填表法就是我们每达到表中的一个位置，就确定下该位置的最优解，然后走遍整个表，即填完整张表。</p>
+<h1 id="算法实现二"><a href="#算法实现二" class="headerlink" title="算法实现二"></a>算法实现二</h1><p>由于到达坐标为 (i,j) 的位置时，能够拿到的礼物的最大价值只依赖坐标为 (i-1,j)和 (i,j-1) 的两个位置，因此此第 i-2 行及更上面的所有位置上的礼物的最大价值实际上没有必要存储下来。我们用一维数组来记录足以。</p>
+<h1 id="算法实现一"><a href="#算法实现一" class="headerlink" title="算法实现一"></a>算法实现一</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ftopne7da6j20zk0jhaaj.jpg" alt=""></p>
+<h1 id="算法实现二-优化版"><a href="#算法实现二-优化版" class="headerlink" title="算法实现二(优化版)"></a>算法实现二(优化版)</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ftoq0qah06j20zl0mpdgm.jpg" alt=""></p>
+<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><p>算法一的时间复杂度和空间复杂度均为O(n^2)，优化后的算法，时间复杂度降为 O(n)。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] &lt;&lt;剑指offer2&gt;&gt;<br>[2] <a href="https://www.nowcoder.com/questionTerminal/72a99e28381a407991f2c96d8cb238ab" target="_blank" rel="noopener">牛客网</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/29/剑指offer2之把数字翻译成字符串/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -866,153 +1017,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/23/剑指offer2之数据流中的中位数/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="洪荣宣">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rongxuanhong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/23/剑指offer2之数据流中的中位数/" itemprop="url">剑指offer2之数据流中的中位数</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-23T19:48:22+08:00">2018-07-23</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/07/23/剑指offer2之数据流中的中位数/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/07/23/剑指offer2之数据流中的中位数/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="题目-数据流中的中位数—牛客网"><a href="#题目-数据流中的中位数—牛客网" class="headerlink" title="题目(数据流中的中位数—牛客网)"></a>题目(<a href="https://www.nowcoder.com/questionTerminal/9be0172896bd43948f8a32fb954e1be1" target="_blank" rel="noopener">数据流中的中位数—牛客网</a>)</h1><p>如何得到一个数据流中的中位数？如果从数据流中读出奇数个数值，那么中位数就是所有数值排序之后位于中间的数值。如果从数据流中读出偶数个数值，那么中位数就是所有数值排序之后中间两个数的平均值。我们使用 Insert() 方法读取数据流，使用 GetMedian() 方法获取当前读取数据的中位数。</p>
-<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>本题解法有很多，比如如果数组无序，那么使用快速排序中的 Partition 函数可在 O(n) 时间内找到中位数，O(1)时间内插入无序数组;还可以每插入一个元素保持数组有序，那么插入元素需要 O(n) 的时间，而找到中位数只需要 O(1) 的时间(此情况同链表实现)；最后一种，也是下面的实现，即利用最大堆和最小堆，那么怎么操作呢？  </p>
-<p>首先我们定义一个计数变量 count，然后将第奇数个数插入最大堆，第偶数个数插入最小堆，这是为了保证两个堆的大小之差为 1。注意，插入并不是无条件的，当插入最大堆时，若待插入的元素比最小堆堆顶元素还大，那么先将其插入最小堆后取其新堆顶元素加入最大堆；同理，当插入最小堆时，若待插入的元素比最大堆堆顶元素还小，那么先将其插入最大堆后取其新堆顶元素加入最小堆。这样既保证了将数字平均分配到了两个堆中，也保证了最大堆中的数字都比最小堆中的数字小，以便快速找到中位数。那么此时，很容易得到中位数，如果输入了奇数个数，那么最大堆堆顶元素即中位数，否则中位数为两堆顶元素的平均值。</p>
-<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1ftgl35hygaj20zd0lrmxp.jpg" alt=""></p>
-<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><p>本算法实现的时间复杂度为：插入时间为 O(logn)，获取中位数的时间为 O(1)。空间复杂度为两个堆的大小。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] &lt;&lt;剑指offer2&gt;&gt;<br>[2] 牛客网 </p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-	<div>
-
-</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1059,7 +1068,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">70</span>
+                    <span class="site-state-item-count">71</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

@@ -306,6 +306,168 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/23/剑指offer2笔记之数组/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/23/剑指offer2笔记之数组/" itemprop="url">剑指offer2笔记之数组</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-23T11:15:10+08:00">2018-03-23</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/23/剑指offer2笔记之数组/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/03/23/剑指offer2笔记之数组/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>数组是一种最基本的数据结构，它占据一块连续的内存，并按照顺序存储的方式存储数据。<br>为了解决数组空间效率不高的问题，动态数组出现了，典型的代表是 <code>vector</code>。思想是先为动态数组预先分配一块内存空间，等到数组容量不足时重新开辟一块内存空间，并复制原数组到新空间，最后释放旧内存空间。对于<code>Vector</code> 来说，每次扩容为之前的 2 倍。由于该操作对时间性能影响较大，因此使用动态数组应该尽量避免改变数组容量大小的次数。</p>
+<h1 id="数组和指针的区别"><a href="#数组和指针的区别" class="headerlink" title="数组和指针的区别"></a>数组和指针的区别</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpg06dz0tlj20v608ujrq.jpg" alt="数组和指针的区别"> </p>
+<ul>
+<li>使用指针访问数组中的元素时，需要确保不越界；</li>
+<li>对数组求 <code>sizeof</code> ，还需要考虑元素所占的字节，比如在 32 位的机器上，每个整数占4字节，那么例子中 <code>data1</code> 就是 5*4=20；</li>
+<li>在 32 位系统上，对任意类型的指针求 <code>sizeof</code> 得到的结果都是 4；</li>
+<li>当数组作为函数的参数进行传递时，自动退化为指针，因此求 <code>sizeof</code> 结果同上条。</li>
+</ul>
+<h1 id="题目描述-数组中重复的数字"><a href="#题目描述-数组中重复的数字" class="headerlink" title="题目描述(数组中重复的数字)"></a>题目描述(数组中重复的数字)</h1><h2 id="题目一-找出数组中重复的数字"><a href="#题目一-找出数组中重复的数字" class="headerlink" title="题目一(找出数组中重复的数字)"></a>题目一(找出数组中重复的数字)</h2><p>在一个长度 n 的数组里的所有数字都在 0-n-1 的范围内。数组中的某些数字是重复的，但不知道有几个数字重复了，也不知道每个数组重复了几次。请找出数组中任意一个重复的数字。例如，如果输入长度为 7 的数组｛2，3，1，0，2，5，3｝，那么对应的输出是重复的数字 2 或者 3。</p>
+<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><ol>
+<li>排序。对数组排序后，依次比较前后元素是否重复即可。但时间复杂度为O(nlogn),空间复杂度为 O(1)。</li>
+<li>利用哈希表。利用键值对映射，可以将数组中的元素依次插入插入哈希表中，但是插入之前需要判断是否已存在该值，如果存在则说明该位置的元素重复了，算法的缺点是空间复杂度为 O(n)。</li>
+<li>下标定位法。</li>
+</ol>
+<p>接下来详细介绍下下标定位法。<br>注意到题目中数字的范围都在 0-n-1 范围内，假如不存在重复的元素，那么对数组进行重新排序后，数组的索引 i 一定可以对应到单个数字i,否则数字i存在多个。</p>
+<p>我们先依次遍历数组中的每个元素，当扫描到索引为 i 的数字 m 时，先比较数字 m 是否等于 i，如果等于则接着扫描下一个数组元素；如果不等，则将数字 m 和数组中索引为 m 的数字 n 进行比较，如果重复(m=n)，则找到了一个重复的数字；如果不重复(m!=n)，那么交换 m 与 n。交换后，此时索引 i 上的数字 m 再和索引 i 进行下一轮的比较，重复上面的步骤，直至数字 m 与索引 i 相同。那么我们就在这个比较交换的过程中寻找重复的元素。</p>
+<h3 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h3><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpg04orfkcj20v90fx74y.jpg" alt="算法实现"></p>
+<h3 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><p>代码中虽有两次循环，但每个数字最多只要交换两次就能找到属于它子集的位置，因此总的时间复杂度为 O(n)。另外，所有操作都在原数组上进行，所以空间复杂度为 O(1)。</p>
+<h2 id="题目二-不修改数组找出重复的元素"><a href="#题目二-不修改数组找出重复的元素" class="headerlink" title="题目二 (不修改数组找出重复的元素)"></a>题目二 (不修改数组找出重复的元素)</h2><p>在一个长度为 n+1 的数组里的所有数字都在 1-n 的范围内，所以数组中至少有一个数字是重复的。请找出数组中任意一个重复的数字，但不能修改输入的数组。例如，如果输入长度为 8 的数组 {2,3,5,4,3,2,6,7},<br>那么对应的输出是重复的数字 2 或者 3。</p>
+<h3 id="解题思路-1"><a href="#解题思路-1" class="headerlink" title="解题思路"></a>解题思路</h3><ol>
+<li>辅助数组法。依然是按一个下标对应一个数字的思路，先构建一个长度为 n+1 的数组，然后将原数组中的元素依次插入到辅助数组中相应的下标位置上。这样就能发现那个数字重复了。方法的缺点就是空间复杂度为 O(n)。</li>
+<li>二分查找法。若 1-n 的范围里只有 n 个数字则一定不会重复，否则必定存在重复的元素。那现在我们把 1-n 的数字从中间的数字 m 分为两部分，那么前一半为 1-m，后一半为 m+1-n，假如前半部分中介于 1-m 中的数字个数超过了 m，那么这一半的区间必定存在重复的元素。接下来可以继续在这一半空间的二分查找，直至找到重复的元素。</li>
+</ol>
+<h3 id="算法实现-1"><a href="#算法实现-1" class="headerlink" title="算法实现"></a>算法实现</h3><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fpg0rzit2fj20vb0ktwfa.jpg" alt="算法实现"></p>
+<h3 id="复杂度分析-1"><a href="#复杂度分析-1" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><p>算法中使用二分查找的思想，复杂度 O(logn),在计数的时候使用了一个循环复杂度为 O(n),因此，总的时间复杂度为 O(nlogn),操作在原数组上进行，时间复杂度为 O(1)。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer第二版&gt;&gt;</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/21/k-近邻学习的简要理论及其python实现/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1306,419 +1468,11 @@ private void setMeasuredDimensionRaw(int measuredWidth, int measuredHeight) {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/17/DialogFragment源码解析与应用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="洪荣宣">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rongxuanhong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/17/DialogFragment源码解析与应用/" itemprop="url">DialogFragment源码解析与应用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-17T21:57:23+08:00">2017-08-17</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/08/17/DialogFragment源码解析与应用/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/08/17/DialogFragment源码解析与应用/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong>版权声明：本文为博主原创文章，未经博主允许不得转载</strong></p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><hr>
-<p><code>DialogFragment</code> 是继承于 <code>Fragment</code> 的子类，因而其具备了 <code>Fragment</code> 的特性，如生命周期。而其内部实际控制了一个 <code>Dialog</code> 对象，并通过当前 <code>DialogFragment</code>所依附的 <code>Activity</code> 的 <code>FragmentManager</code> 来对其进行管理与控制，也即将其当做一个普通的 <code>Fragment</code> 那样来管理。</p>
-<blockquote>
-<p>注:<code>dialog</code> 拥有自己的窗体 <code>window</code>,意味着它可以自己接收输入事件，处理事件，并且决定自己何时消失。</p>
-</blockquote>
-<h1 id="浅谈生命周期"><a href="#浅谈生命周期" class="headerlink" title="浅谈生命周期"></a>浅谈生命周期</h1><hr>
-<p><code>DialogFragment</code> 与 <code>Dialog</code> 同生同死,因为 <code>DialogFragment</code> 需要监听 <code>Dialog</code>的显示与关闭,并做出反映。而这两个操作关联到了 <code>DialogFragment</code> 加入到 <code>FragmentManager</code> 中和从其中移除。这样一来 <code>Dialog</code>的创建与销毁也随着 <code>DialogFragment</code> 的生命周期而走了。</p>
-<h1 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h1><pre><code>public void setStyle(@DialogStyle int style, @StyleRes int theme) {
-    mStyle = style;
-    if (mStyle == STYLE_NO_FRAME || mStyle == STYLE_NO_INPUT) {
-        mTheme = android.R.style.Theme_Panel;
-    }
-    if (theme != 0) {
-        mTheme = theme;
-    }
-} 
-</code></pre><p>此方法为对话框设置样式与主题。其中样式有 <strong>4</strong> 个可选，一般用得比较多的是<code>STYLE_NO_TITLE</code>(指定对话框无标题模式),而主题默认的话可填0，若是自定义主题，可在<code>style</code>文件下新增一个样式，然后继承<code>Theme.Dialog</code>修改你期望的主题即可。</p>
-<blockquote>
-<p>注意: 此方法若要生效一定要在对话框未创建之前设置，否则失效。下面我们还会谈到。</p>
-</blockquote>
-<pre><code> public void show(FragmentManager manager, String tag) {
-    mDismissed = false;
-    mShownByMe = true;
-    FragmentTransaction ft = manager.beginTransaction();
-    ft.add(this, tag);
-    ft.commit();
-}
-</code></pre><p>此方法就是控制对话框的显示，调用即可。其实就是类似普通的 <code>Fragment</code>的显示操作逻辑,获取<code>FragmentManager</code>来管理当前的对话框。是不是似曾相识？ </p>
-<pre><code> public void dismiss() {
-    dismissInternal(false);
-}
-void dismissInternal(boolean allowStateLoss) {
-    if (mDismissed) {
-        return;
-    }
-    mDismissed = true;
-    mShownByMe = false;
-    if (mDialog != null) {
-        mDialog.dismiss();
-        mDialog = null;
-    }
-    mViewDestroyed = true;
-    if (mBackStackId &gt;= 0) {
-        getFragmentManager().popBackStack(mBackStackId,
-                FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        mBackStackId = -1;
-    } else {
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.remove(this);
-        if (allowStateLoss) {
-            ft.commitAllowingStateLoss();
-        } else {
-            ft.commit();
-        }
-    } 
-</code></pre><p>此方法控制<code>DialogFragment</code>的关闭。我们看到在<code>void dismissInternal()</code>方法内会判断当前的<code>Dialog</code>对象 <code>mDialog</code>是否为空，否则就调用<code>Dialog</code> 的 <code>dismiss()</code> 关闭对话框。而剩下的代码都是<code>DialogFragment</code>为了管理自己的后续操作。比如退栈操作,移除 <code>Fragment</code>。</p>
-<pre><code> public Dialog getDialog() {
-    return mDialog;
-}
-</code></pre><p>此方法用于获取 <code>DialogFragment</code> 内的 <code>Dialog</code> 对象。我们之后要对对话框的尺寸改变、去除标题、设置背景、都需要获取该实例。</p>
-<pre><code> public void setCancelable(boolean cancelable) {
-    mCancelable = cancelable;
-    if (mDialog != null) mDialog.setCancelable(cancelable);
-}
-</code></pre><p>望名知义，就是设置对话框是否可以取消。内部还是调用 <code>Dialog</code>的方法  </p>
-<pre><code> public void setShowsDialog(boolean showsDialog) {
-    mShowsDialog = showsDialog;
-}  
-</code></pre><p>此方法控制当前 <code>DialogFragment</code>是否作为对话框而存在，否则视作普通的 <code>Fragment</code>来使用。而如果你把它当前普通的 <code>Fragment</code>加入到关联的 <code>Activity</code>中，那么<code>mShowsDialog</code> 会被初始化为 <strong>true</strong>。 </p>
-<pre><code> @Override
-public void onAttach(Context context) {
-    super.onAttach(context);
-    if (!mShownByMe) {
-        mDismissed = false;
-    }
-}
-
-@Override
-public void onDetach() {
-    super.onDetach();
-    if (!mShownByMe &amp;&amp; !mDismissed) {
-        mDismissed = true;
-    }
-}
-
-@Override
-public void onCreate(@Nullable Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-
-    mShowsDialog = mContainerId == 0;
-
-    if (savedInstanceState != null) {
-        mStyle = savedInstanceState.getInt(SAVED_STYLE, STYLE_NORMAL);
-        mTheme = savedInstanceState.getInt(SAVED_THEME, 0);
-        mCancelable = savedInstanceState.getBoolean(SAVED_CANCELABLE, true);
-        mShowsDialog = savedInstanceState.getBoolean(SAVED_SHOWS_DIALOG, mShowsDialog);
-        mBackStackId = savedInstanceState.getInt(SAVED_BACK_STACK_ID, -1);
-    }
-}  
-</code></pre><p>以上的三个方法都是 重写 <code>Fragment</code> 中的生命周期方法。前两个主要是设置相应的标志位。<br>而在 <code>onCreate()</code> 中主要是从保存的实例状态中获取相应信息（之前在 <code>onSaveInstanceState()</code> 中设置的）。  </p>
-<pre><code>/** @hide */
-@RestrictTo(LIBRARY_GROUP)
-@Override
-public LayoutInflater getLayoutInflater(Bundle savedInstanceState) {
-    if (!mShowsDialog) {
-        return super.getLayoutInflater(savedInstanceState);
-    }
-
-    mDialog = onCreateDialog(savedInstanceState);
-
-    if (mDialog != null) {
-        setupDialog(mDialog, mStyle);
-
-        return (LayoutInflater) mDialog.getContext().getSystemService(
-                Context.LAYOUT_INFLATER_SERVICE);
-    }
-    return (LayoutInflater) mHost.getContext().getSystemService(
-            Context.LAYOUT_INFLATER_SERVICE);
-}
-
-/** @hide */
-@RestrictTo(LIBRARY_GROUP)
-public void setupDialog(Dialog dialog, int style) {
-    switch (style) {
-        case STYLE_NO_INPUT:
-            dialog.getWindow().addFlags(
-                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE |
-                            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-            // fall through...
-        case STYLE_NO_FRAME:
-        case STYLE_NO_TITLE:
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-    }
-}  
-public Dialog onCreateDialog(Bundle savedInstanceState) {
-    return new Dialog(getActivity(), getTheme());
-}
-</code></pre><p>最上两个方法是被隐藏的。<code>getLayoutInflater()</code> 中首先判断是否显示为一个对话框，若是才来到下面的逻辑。在这里我们发现，方法内调用了<code>onCreateDialog()</code>来获得一个对话框实例。如果实例存在，那么才开始配置对话框<strong>(注意：我们发现此处获取前述的 <code>setStyle()</code>传进来的值，因而该方法的调用必须早于此，也就是说你至少可以在 <code>onCreateDialog()</code>中进行设置)</strong>，此时，方法返回与对话框上下文关联的布局加载器。<br>接下来我们看<code>setupDialog()</code>。方法内根据存入的样式，对对话框实例进行一系列的设置，比如禁止获取焦点、不可触摸、设置无标题。<br>另外，在 <code>onCreateDialog()</code> 返回了一个新的对话框实例。在此，我们注意到，如果你想实现一些Dialog子类的对话框,比如 <code>AlertDialog</code>，那么你就可以重写该方法，返回你要创建的<code>Dialog</code> 子类实例。  </p>
-<pre><code>@Override
-public void onActivityCreated(Bundle savedInstanceState) {
-    super.onActivityCreated(savedInstanceState);
-
-    if (!mShowsDialog) {
-        return;
-    }
-
-    View view = getView();
-    if (view != null) {
-        if (view.getParent() != null) {
-            throw new IllegalStateException(
-                    &quot;DialogFragment can not be attached to a container view&quot;);
-        }
-        mDialog.setContentView(view);
-    }
-    final Activity activity = getActivity();
-    if (activity != null) {
-        mDialog.setOwnerActivity(activity);
-    }
-    mDialog.setCancelable(mCancelable);
-    mDialog.setOnCancelListener(this);
-    mDialog.setOnDismissListener(this);
-    if (savedInstanceState != null) {
-        Bundle dialogState = savedInstanceState.getBundle(SAVED_DIALOG_STATE_TAG);
-        if (dialogState != null) {
-            mDialog.onRestoreInstanceState(dialogState);
-        }
-    }
-}  
-</code></pre><p>当<code>Activity</code>创建完成后回调。若<code>mShowsDialog</code>为<strong>false</strong>，那么以下逻辑不再执行。<br>否则获取当前 <code>DialogFragment</code> 的根布局实例 <code>view</code>,并将其作为对话框的内容，加入其中。接下来把对话框与 <code>Activity</code> 进行绑定。接下来就是对话框的配置，包括注册取消监听，关闭监听。最后保存相关状态到 <code>savedInstanceState</code>,以便重建时利用。</p>
-<pre><code> @Override
-public void onStart() {
-    super.onStart();
-
-    if (mDialog != null) {
-        mViewDestroyed = false;
-        mDialog.show();
-    }
-}  
-</code></pre><p>此方法很重要。对话框真正显示就在此后。内容调用了 <code>mDialog</code> 的<code>show()</code>方法，将对话框显示出来(依附于 <code>Fragment</code>)</p>
-<pre><code>     @Nullable
-public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-        @Nullable Bundle savedInstanceState) {
-    return null;
-}
-</code></pre><p>此方法为 <code>Fragment</code> 中的方法，为空实现，它交给子类去加载一个 <strong>contentView</strong>,再由<code>Fragment</code> 来处理。而我们对话框的内容布局就是在此处进行加载，以便返回一个对话框的布局给 <code>Fragment</code> 去处理。</p>
-<blockquote>
-<p>注意：<code>onCreateDialog()</code>比 <code>onCreateView()</code> 先一步执行。因为在 <code>Fragment</code>中调用<code>onCreateView()</code> 时需要拿到一个布局加载器<code>LayoutInflater</code>,而<code>DialogFragmet</code>中是通过上述的一个方法—<code>getLayoutInflater()</code>来返回一个与对话框有关的上下文布局加载器,<code>onCreateDialog()</code>就在其中被调用，因而我们很容易就可以知道两者的执行次序。  </p>
-</blockquote>
-<h1 id="几类常见应用"><a href="#几类常见应用" class="headerlink" title="几类常见应用"></a>几类常见应用</h1><h2 id="普通对话框"><a href="#普通对话框" class="headerlink" title="普通对话框"></a>普通对话框</h2><pre><code>public class CommonDialogFragment extends DialogFragment {
-
-private static final String TAG = &quot;CommonDialogFragment&quot;;
-
-
-@Nullable
-@Override
-public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-     Dialog dialog = getDialog();
-    DisplayMetrics dm = DensityUtil.getDisplayMetrics(getActivity());
-    int width = dm.widthPixels;
-    if (dialog != null) {
-        dialog.getWindow().setLayout(width * 2 / 3, width / 2);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));//去除多余的padding
-    }
-    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-    View view = inflater.inflate(R.layout.time, container, false);
-    ListView mListView = (ListView) view.findViewById(R.id.listview);
-    mListView.setAdapter(new MyAdapter(getActivity()));
-    return view;
-    }
-}
-</code></pre><p>这类很简单，一般只要重写 <code>onCreateView()</code>，和<code>Fragment</code>中的做法一样。只是需要额外配置对话框的一些设置，我们下面再统一叙述。  </p>
-<h2 id="警告对话框"><a href="#警告对话框" class="headerlink" title="警告对话框"></a>警告对话框</h2><pre><code>public class MyAlerDialog extends DialogFragment {
-
-private static final String TAG = &quot;RoundCornerDialog&quot;;
-
-@Override
-public Dialog onCreateDialog(Bundle savedInstanceState) {
-    return new AlertDialog.Builder(getActivity()).setMessage(&quot;我是对话框&quot;).setTitle(&quot;警告&quot;).setIcon(R.mipmap.ic_launcher).create();
-}
-
-@Nullable
-@Override
-public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-    Dialog dialog = getDialog();
-    DisplayMetrics dm = DensityUtil.getDisplayMetrics(getActivity());
-    int width = dm.widthPixels;
-    if (dialog != null) {
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));//去除多余的padding
-        dialog.getWindow().setLayout(width * 2 / 3, width / 2);
-    }
-    return super.onCreateView(inflater, container, savedInstanceState);
-}
-</code></pre><p>}</p>
-<h2 id="圆角对话框"><a href="#圆角对话框" class="headerlink" title="圆角对话框"></a>圆角对话框</h2><p>圆角对话框与上述两张对话框创建流程无异，只需对布局额外加上一层drawable绘制的圆角背景层即可</p>
-<blockquote>
-<p>注意: 若加了圆角背景层仍没有圆角化，那么你需要对圆角背景层再 加上padding属性即可解决。</p>
-</blockquote>
-<h1 id="对话框的配置"><a href="#对话框的配置" class="headerlink" title="对话框的配置"></a>对话框的配置</h1><h2 id="去标题化"><a href="#去标题化" class="headerlink" title="去标题化"></a>去标题化</h2><ol>
-<li>调用<code>setStyle()</code>传入<code>STYLE_NO_TITLE</code>,必须在<code>Dialog</code>创建之前调用方可生效。</li>
-<li>定义自己的主题，设置 <code>windowNoTitle</code>属性为<strong>true</strong></li>
-</ol>
-<h2 id="背景透明化"><a href="#背景透明化" class="headerlink" title="背景透明化"></a>背景透明化</h2><pre><code>getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT)。
-</code></pre><p>我们一般都会加上，没有设置有可能出现多余的padding，它可让整个<code>Window</code>透明化。</p>
-<h2 id="设置Dialog的尺寸"><a href="#设置Dialog的尺寸" class="headerlink" title="设置Dialog的尺寸"></a>设置Dialog的尺寸</h2><p>由于 <code>Dialog</code> 属于 <code>Window</code> 级别，属于独立窗体，因而要改变 <code>Dialog</code> 的尺寸实际上就上改变窗体 <code>Window</code> 的尺寸，而如果你对布局修改尺寸是毫无效果的。<br>我们通过<code>getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)</code>来设置对话框具体宽高或全屏就够了。</p>
-<h2 id="设置对话框方位"><a href="#设置对话框方位" class="headerlink" title="设置对话框方位"></a>设置对话框方位</h2><p>实际还是控制<code>window</code>这个对象，调用它的方法<code>setGravity()</code>即可。  </p>
-<blockquote>
-<p>注意： 但凡涉及到获取对话框所在的<code>window</code>对象时，都必须在对话框已经创建了之后调用。</p>
-</blockquote>
-<h2 id="配置style样式定制主题"><a href="#配置style样式定制主题" class="headerlink" title="配置style样式定制主题"></a>配置style样式定制主题</h2><p>我们查看源码可知道对话框的默认主题基础自<code>Theme.Dialog</code>，那么我们便可以继承整个主题，修改默认主题中的属性值来达到我们想要的效果，下面贴出对话框默认的主题。</p>
-<pre><code>    &lt;style name=&quot;Theme.Dialog&quot;&gt;
-    &lt;!--配置window有无边框--&gt;
-    &lt;item name=&quot;windowFrame&quot;&gt;@null&lt;/item&gt;
-    &lt;!--配置window标题样式--&gt;
-    &lt;item name=&quot;windowTitleStyle&quot;&gt;@style/DialogWindowTitle&lt;/item&gt;
-    &lt;!--配置window背景层--&gt;常用
-    &lt;item name=&quot;windowBackground&quot;&gt;@drawable/panel_background&lt;/item&gt;
-    &lt;!--配置window是否浮在上面--&gt;
-    &lt;item name=&quot;windowIsFloating&quot;&gt;true&lt;/item&gt;
-    &lt;!--配置window是否浮在上面--&gt;
-    &lt;!--配置window有无标题 --&gt; 常用
-    &lt;item name=&quot;windowNoTitle&quot;&gt;true&lt;/item&gt;
-    &lt;!--配置window进入退出动画 --&gt; 常用
-    &lt;item name=&quot;windowAnimationStyle&quot;&gt;@style/Animation.Dialog&lt;/item&gt;
-    &lt;!--配置window外部是否可触摸--&gt;
-    &lt;item name=&quot;windowCloseOnTouchOutside&quot;&gt;@bool/config_closeDialogWhenTouchOutside&lt;/item&gt;
-    ....此处省略部分属性
-    &lt;/style&gt;
-</code></pre><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>首先，介绍了使用<code>DialogFragment</code> 的缘由以及好处，再来谈到了它的生命周期，这也是之所以使用这种方式来呈现对话框的关键所在。再接下来，我们从源码的角度，详细剖析了各个方法的作用、联系，以及调用的时机以及注意事项。再来介绍了<code>DialogFragment</code>的几种常见的应用，也可以说是常用的代码模版了。最后，介绍了配置对话框的一些常用的手段以及注意事项。</p>
-<h1 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h1><p>感谢您看到这里，期望留下您的印迹。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-	<div>
-
-</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/12/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/14/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/12/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/14/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1765,7 +1519,7 @@ public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">70</span>
+                    <span class="site-state-item-count">71</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

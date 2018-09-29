@@ -306,6 +306,158 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/30/剑指offer2之打印二叉树/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/30/剑指offer2之打印二叉树/" itemprop="url">剑指offer2之打印二叉树</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-30T19:56:29+08:00">2018-05-30</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/30/剑指offer2之打印二叉树/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/05/30/剑指offer2之打印二叉树/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>打印二叉树，实际上就是考察树的遍历算法，其实就是层序遍历或者说树的广度优先搜索(BFS)。而这个遍历算法的实现就是结合队列来实现。那么下面将会以三种展现形式来打印一颗二叉树。</p>
+<h1 id="题目一-不分行从上到下打印二叉树—-牛客网"><a href="#题目一-不分行从上到下打印二叉树—-牛客网" class="headerlink" title="题目一(不分行从上到下打印二叉树—-牛客网)"></a>题目一(<a href="https://www.nowcoder.com/questionTerminal/7fe2212963db4790b57431d9ed259701" target="_blank" rel="noopener">不分行从上到下打印二叉树—-牛客网</a>)</h1><p>从上往下打印出二叉树的每个节点，同层节点从左至右打印。</p>
+<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>我们可以通过具体的例子模拟输出的过程，那么会发现，它总是拿待输出节点列表的首节点优先输出，而节点总是插入到待输出节点列表尾部，因此很容易知道这是一个”先进先出”的过程，满足队列的特性。因此需要利用队列进行实现。</p>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p>可以使用普通队列 <code>queue</code> 也可以使用双端队列 <code>deque</code>。</p>
+<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1frc9e6dbb5j20v30b8gls.jpg" alt=""></p>
+<h1 id="题目二-把二叉树打印成多行—牛客网"><a href="#题目二-把二叉树打印成多行—牛客网" class="headerlink" title="题目二(把二叉树打印成多行—牛客网)"></a>题目二(<a href="https://www.nowcoder.com/questionTerminal/445c44d982d04483b04a54f298796288" target="_blank" rel="noopener">把二叉树打印成多行—牛客网</a>)</h1><p>从上到下按层打印二叉树，同一层结点从左至右输出。每一层输出一行。</p>
+<h1 id="算法思路-1"><a href="#算法思路-1" class="headerlink" title="算法思路"></a>算法思路</h1><p>遍历依旧和题目一一样，但是需要存储每一层输出的节点到数组中，那么就要先确定当前层需要输出多少个节点。因此，定义一个变量 <code>tobeoutput</code> 表示当前层待输出的节点数。那么该变量就在遍历二叉树的时候自减，然后当变量为零时，表示该层已全部输出完毕，那么就更新该变量下层需要输出的节点数，这个数刚好就是已经在队列中的节点数。</p>
+<h1 id="算法实现-1"><a href="#算法实现-1" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25ly1frc8zwwx71j20v60gm74o.jpg" alt=""></p>
+<h1 id="题目三-按之字形顺序打印二叉树—牛客网"><a href="#题目三-按之字形顺序打印二叉树—牛客网" class="headerlink" title="题目三(按之字形顺序打印二叉树—牛客网)"></a>题目三(<a href="https://www.nowcoder.com/questionTerminal/91b69814117f4e8097390d107d2efbe0?source=relative" target="_blank" rel="noopener">按之字形顺序打印二叉树—牛客网</a>)</h1><p>请实现一个函数按照之字形打印二叉树，即第一行按照从左到右的顺序打印，第二层按照从右至左的顺序打印，第三行按照从左到右的顺序打印，其他行以此类推。</p>
+<h1 id="算法思路-2"><a href="#算法思路-2" class="headerlink" title="算法思路"></a>算法思路</h1><p>要实现打印之字形的二叉树需要利用一对栈配合操作。自己手动模拟一遍就懂了。不需要分奇数层和偶数层了，因为一个栈输出完毕后，才会输出另一个栈中的元素，因此可以以栈不空为条件判断当前需要从那个栈输出元素就行。</p>
+<h1 id="算法实现-2"><a href="#算法实现-2" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1frc979gqagj20v40lumxn.jpg" alt=""></p>
+<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>由于遍历的时候对二叉树的每个节点仅遍历一次，因此时间复杂度均为 O(n)，空间复杂度主要是由节点值的存储数组所消耗。</p>
+<blockquote>
+<p>注：对根节点 root 需要判空，否则在牛客网上会出现段错误，提示您的程序发生段错误，可能是数组越界，堆栈溢出（比如，递归调用层数太多）等情况引起，一定需要处理特殊值的输入，随时注意空指针的情况。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/26/剑指offer2对称的二叉树/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -897,157 +1049,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/08/剑指offer2之合并两个排序的链表/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="洪荣宣">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rongxuanhong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/08/剑指offer2之合并两个排序的链表/" itemprop="url">剑指offer2之合并两个排序的链表</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-08T18:59:20+08:00">2018-05-08</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/05/08/剑指offer2之合并两个排序的链表/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/05/08/剑指offer2之合并两个排序的链表/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="题目-合并两个排序的链表"><a href="#题目-合并两个排序的链表" class="headerlink" title="题目(合并两个排序的链表)"></a>题目(<a href="https://www.nowcoder.com/questionTerminal/d8b6b4358f774294a89de2a6ac4d9337" target="_blank" rel="noopener">合并两个排序的链表</a>)</h1><p>输入两个递增排序的链表，合并这两个链表并使得新链表中的节点仍然是递增排序的。</p>
-<h2 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h2><p>首先应考虑代码鲁棒性，如果输入的链表 1 为空，那么链表 2 就是合并链表；如果输入的链表 2 为空，那么链表 1 就是合并的链表。</p>
-<h1 id="非递归版本"><a href="#非递归版本" class="headerlink" title="非递归版本"></a>非递归版本</h1><p>首先应该先确定合并链表的头结点,由指针 mergedHead 表示。然后定义合并链表的工作指针 p(初始指向头结点) 来完成合并链表的连接工作。   </p>
-<p>那么有了合并链表的工作指针 p，我们只要确定连接到 p 的下一个节点就行。因此只需要比较链表 1 和链表 2 的工作指针所指向的节点大小即可。那么重复以上操作，循环条件为链表 1 和链表 2 不空。</p>
-<p>最后一步还需要检查是否还有剩余节点未完全连接完，因此需要对链表 1 或 链表 2 判空，若有剩余节点，择全部连接到工作指针 p 的后面即可，最后的最后将合并链表的尾节点指针置空。</p>
-<h1 id="递归版本"><a href="#递归版本" class="headerlink" title="递归版本"></a>递归版本</h1><p>递归版本只要一个表示合并链表的头指针，然后依次递归比较两个链表中对应位置上节点的大小，然后递归连接到合并链表的指针上去即可。这里不再需要一个合并链表的工作指针，合并链表的指针自己就可以完成连接工作，它的下一个节点都是递归返回的。需要注意的是，递归版本没有移动这个指针，非递归版本中需要移动这个指针，因此设置了一个工作指针 p 代替合并链表指针来移动，原因在于我们最终返回的是合并链表的头结点指针，所以不能移动它，而所以就利用工作指针来移动并完成连接操作。</p>
-<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><h2 id="非递归版本-1"><a href="#非递归版本-1" class="headerlink" title="非递归版本"></a>非递归版本</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqupv21ssij20v60kpdgg.jpg" alt=""></p>
-<h2 id="非递归版本-2"><a href="#非递归版本-2" class="headerlink" title="非递归版本"></a>非递归版本</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqupv7owjvj20v70a4q32.jpg" alt=""></p>
-<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>假设链表 1 有 m 个节点，链表 2 有 n 个节点。对非递归版本，算法需要遍历两个链表的节点，因此时间复杂度为 O(m+n)，算法仅改变指针指向，没有消耗额外空间，空间复杂度为 O(1)；对递归版本，时间复杂度相同，但由于使用递归，需要消耗递归工作栈，因此空间复杂度为 O(min(m,n))。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-	<div>
-
-</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1094,7 +1100,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">70</span>
+                    <span class="site-state-item-count">71</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
