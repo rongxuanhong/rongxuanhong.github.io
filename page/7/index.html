@@ -306,6 +306,147 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/06/剑指offer2之顺时针打印矩阵/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/06/剑指offer2之顺时针打印矩阵/" itemprop="url">剑指offer2之顺时针打印矩阵</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-06T19:12:53+08:00">2018-06-06</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/06/剑指offer2之顺时针打印矩阵/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/06/06/剑指offer2之顺时针打印矩阵/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="题目-顺时针打印矩阵"><a href="#题目-顺时针打印矩阵" class="headerlink" title="题目(顺时针打印矩阵)"></a>题目(<a href="https://www.nowcoder.com/questionTerminal/97e7a475d2a84eacb60ee545597a8407?source=relative" target="_blank" rel="noopener">顺时针打印矩阵</a>)</h1><p>对于一个矩阵，请设计一个算法从左上角(mat[0][0])开始，顺时针打印矩阵元素。<br>给定 int 矩阵 mat,以及它的维数 nxm，请返回一个数组，数组中的元素为矩阵元素的顺时针输出。</p>
+<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>先进行边界检查。<br>顺时针打印矩阵需要好几圈，那么自然需要循环去打印每一圈。所以首先确定循环结束的条件，这里可以由两种方式来判断结束。第一种是根据输出数组的元素个数是否达到了 n*m 个，第二个是假设每一圈的起点是(start,start)，那么存在以下不等式 colums&gt;startx2 并且 rows&gt;startx2 使得循环成立。<br>接下来就需要打印每一圈，但是打印每一圈有可能分为需要打印一步，两步，三步，四步。那么第一步从左到右是都需要打印的情况，只要确定起始列号和终止列号即可；如果有必要打印第二步，那么需要保证起始行号要小于终止列号，否则该步没有元素可打印。如果有必要打印第三步，那么此时矩阵至少需要两行两列，所以除了终止行号大于起始行号，终止列号也要大于起始列号。同理，如果需要打印第四步，矩阵至少需要三行两列，因此要求终止行号大于起始行号，终止列号大于起始列号。</p>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fr44qoqrg1j20v20htaam.jpg" alt=""></p>
+<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>算法需要线性遍历每个矩阵元素，因而时间复杂度为 O(nxm)，建立了一个输出数组，空间复杂度为 O(nxm)。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/30/剑指offer2之打印二叉树/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -881,174 +1022,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/08/SVM系列之SMO的Python实现(四)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="洪荣宣">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rongxuanhong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/08/SVM系列之SMO的Python实现(四)/" itemprop="url">SVM系列之SMO的Python实现(四)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-08T19:02:28+08:00">2018-05-08</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/05/08/SVM系列之SMO的Python实现(四)/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/05/08/SVM系列之SMO的Python实现(四)/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>经过前面三篇漫长的 SVM 介绍以及 SMO 算法的原理介绍和公式推导，终于到了 SMO 的算法实现以及最终的 SVM 分类实现了。那么现在就先看看 SMO 的 python 实现。</p>
-<h1 id="SMO-python-实现"><a href="#SMO-python-实现" class="headerlink" title="SMO python 实现"></a>SMO python 实现</h1><blockquote>
-<p>代码中的 \(\alpha_{i}\)，\(\alpha_{j}\) 对应了前一篇中的 \(\alpha_{1}\) 和 \(\alpha_{2}\)，并且代码中的计算方式都是套用前一篇中推导出来的公式，请仔细体会。另外，以下我把选出来的 \(\alpha_{i}\)，\(\alpha_{j}\) 分别成为第一个 alpha 值和第二个 alpha 值。</p>
-</blockquote>
-<p>首先定义一个核转换函数用于计算训练集矩阵(X)与任意给定样本矩阵间的核转换结果。</p>
-<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzcfzje9j20uh0dfwf0.jpg" alt=""></p>
-<p>下面定义一个 <code>SVMStruct</code> 类来封装一些属性和方法，以便可以快速构建一个 SVM 模型。</p>
-<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzd2c8hlj20ui0elwf5.jpg" alt=""></p>
-<p>接下来定义一些 <code>SVMStruct</code> 类下的辅助方法。</p>
-<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzdnxcnyj20ui07ddfw.jpg" alt=""></p>
-<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzer7h0jj20u90itwf3.jpg" alt=""></p>
-<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzfdpksvj20uc08m749.jpg" alt=""></p>
-<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqdes6r7xhj211l06b3yn.jpg" alt=""></p>
-<p>接下来，函数 <code>innerL</code>为 SMO 主程序内层循环的代码。</p>
-<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzgsr5vlj20ug16nq5e.jpg" alt="">  </p>
-<p>外层循环的代码：</p>
-<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzi0ojfsj20uf0egq3r.jpg" alt=""></p>
-<p>计算权重 \(w\) 的函数：</p>
-<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzirll6pj20ue0a6mxc.jpg" alt=""></p>
-<p>分类函数的代码：</p>
-<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzlckcb3j20ug0aljrv.jpg" alt=""></p>
-<p>最后是 plot 出样本点，和划分线：</p>
-<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfznm8e9qj20ug0jlwf6.jpg" alt="">  </p>
-<p>那么最后可视化的结果为：</p>
-<p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqfzozi9u9j20g60c3jrk.jpg" alt=""></p>
-<blockquote>
-<ol>
-<li>本例中所用的数据集必须使用线性核才使得样本可分。</li>
-<li>本文代码见个人github repository <a href="https://github.com/rongxuanhong/MLCodeOnTheBlog/tree/master/SVM%E4%B9%8BPython%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81" target="_blank" rel="noopener">MLCodeOnTheBlog</a></li>
-</ol>
-</blockquote>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] &lt;&lt;机器学习实战-中文版&gt;&gt;<br>[2] <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-98-14.pdf" target="_blank" rel="noopener">Sequential Minimal Optimization:<br>A Fast Algorithm for Training Support Vector Machines</a>   by John C. Platt<br>[3] <a href="https://blog.csdn.net/zouxy09/article/details/17292011" target="_blank" rel="noopener">机器学习算法与Python实践之（四）支持向量机（SVM）实现</a>  by zouxy<br>[4] <a href="https://zhuanlan.zhihu.com/p/29212107" target="_blank" rel="noopener">机器学习算法实践-SVM中的SMO算法</a> by PytLab酱</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-	<div>
-
-</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1100,7 +1073,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">71</span>
+                    <span class="site-state-item-count">72</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
