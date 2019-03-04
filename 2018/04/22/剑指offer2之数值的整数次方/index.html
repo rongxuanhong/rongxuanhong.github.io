@@ -104,17 +104,17 @@
 
 
   <meta name="description" content="前言在面试编程的时候，代码的规范性和完整性非常重要，可能成为能否拿到 offer 的关键因素。那么代码的规范性如何体现呢？比如清晰的书写、代码布局清晰(如缩进，括号对齐)、变量和函数的命名易懂。而代码的完整性体现在代码基本功能实现的正确性以及在边界值、错误处理等方面的全面考虑。 那么完整的代码需要从功能测试、边界测试以及负面测试来提高鲁棒性。例如，在功能测试中，除了完成基本功能，还需要考虑数值的表">
-<meta name="keywords" content="剑指offer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="剑指offer2之数值的整数次方">
+<meta property="og:title" content="Rongxuanhong&#39;s Blog">
 <meta property="og:url" content="http://yoursite.com/2018/04/22/剑指offer2之数值的整数次方/index.html">
 <meta property="og:site_name" content="Rongxuanhong&#39;s Blog">
 <meta property="og:description" content="前言在面试编程的时候，代码的规范性和完整性非常重要，可能成为能否拿到 offer 的关键因素。那么代码的规范性如何体现呢？比如清晰的书写、代码布局清晰(如缩进，括号对齐)、变量和函数的命名易懂。而代码的完整性体现在代码基本功能实现的正确性以及在边界值、错误处理等方面的全面考虑。 那么完整的代码需要从功能测试、边界测试以及负面测试来提高鲁棒性。例如，在功能测试中，除了完成基本功能，还需要考虑数值的表">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqeg3s6edkj20v10iywfl.jpg">
-<meta property="og:updated_time" content="2018-04-27T13:14:30.352Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1g0r432ys3lj20v80i2aaj.jpg">
+<meta property="og:updated_time" content="2019-03-04T14:04:33.377Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="剑指offer2之数值的整数次方">
+<meta name="twitter:title" content="Rongxuanhong&#39;s Blog">
 <meta name="twitter:description" content="前言在面试编程的时候，代码的规范性和完整性非常重要，可能成为能否拿到 offer 的关键因素。那么代码的规范性如何体现呢？比如清晰的书写、代码布局清晰(如缩进，括号对齐)、变量和函数的命名易懂。而代码的完整性体现在代码基本功能实现的正确性以及在边界值、错误处理等方面的全面考虑。 那么完整的代码需要从功能测试、边界测试以及负面测试来提高鲁棒性。例如，在功能测试中，除了完成基本功能，还需要考虑数值的表">
 <meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fqeg3s6edkj20v10iywfl.jpg">
 
@@ -133,7 +133,7 @@
   };
 </script>
 
-  <title>剑指offer2之数值的整数次方 | Rongxuanhong's Blog</title>
+  <title> | Rongxuanhong's Blog</title>
   
 
 
@@ -328,7 +328,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">剑指offer2之数值的整数次方</h1>
+          <h1 class="post-title" itemprop="name headline"></h1>
         
 
         <div class="post-meta">
@@ -408,7 +408,8 @@
 <p>优化多次乘方的思路：<br>如果输入的指数 exponent 为 32，那么需要进行 31 次乘法操作。那么，如果我们能先算出数字的 16 次方，然后再平方一次即可；那么假如知道了数字的 16 次方，那么只需要在数字的 16 次方的基础上平方一次即可得到结果，那如果知道了数字的 8 次方，那么就可以在数字的 8 次方基础上平方一次得到数字的 16 次方的结果；那么如果知道数字的 4 次方，就可以在数字 4 此方的基础上平方一次得到数字的 8 次方；一次类推，直到知道了数字的 1 次方。  </p>
 <p>那么可用如下公式表示 a 的 n 次方:</p>
 <script type="math/tex; mode=display">a^{n}=\begin{cases}a^{n/2}\cdot a^{n/2}\qquad n为偶数 \\
-a^{\left( n-1\right) /2}\cdot a^{\left( n-1\right) /2}\qquad n为奇数\end{cases}</script><h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqeg3s6edkj20v10iywfl.jpg" alt=""></p>
+a^{\left( n-1\right) /2}\cdot a^{\left( n-1\right) /2}\qquad n为奇数\end{cases}</script><h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><h2 id="剑指offer版"><a href="#剑指offer版" class="headerlink" title="剑指offer版"></a>剑指offer版</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqeg3s6edkj20v10iywfl.jpg" alt=""></p>
+<h2 id="个人写法"><a href="#个人写法" class="headerlink" title="个人写法"></a>个人写法</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1g0r432ys3lj20v80i2aaj.jpg" alt=""></p>
 <h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>时间主要消耗在求解乘法运算结果上面，而使用递归方法(二分原问题)进行乘法求解的时间复杂度为 O(logn)，空间复杂度为 O(1)。</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
 
@@ -443,7 +444,7 @@ a^{\left( n-1\right) /2}\cdot a^{\left( n-1\right) /2}\qquad n为奇数\end{case
     <strong>Post author: </strong>洪荣宣</li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="http://yoursite.com/2018/04/22/剑指offer2之数值的整数次方/" title="剑指offer2之数值的整数次方">http://yoursite.com/2018/04/22/剑指offer2之数值的整数次方/</a>
+    <a href="http://yoursite.com/2018/04/22/剑指offer2之数值的整数次方/" title="">http://yoursite.com/2018/04/22/剑指offer2之数值的整数次方/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>All articles in this blog are licensed under 本文由 rongxuanhong 原创，采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">保留署名-非商业性使用-禁止演绎 4.0-国际许可协议</a></br>转载请保留以上声明信息! unless stating additionally.</li>
@@ -453,12 +454,6 @@ a^{\left( n-1\right) /2}\cdot a^{\left( n-1\right) /2}\qquad n为奇数\end{case
     
 
     <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/剑指offer/" rel="tag"><i class="fa fa-tag"></i> 剑指offer</a>
-          
-        </div>
       
 
       
@@ -659,7 +654,7 @@ a^{\left( n-1\right) /2}\cdot a^{\left( n-1\right) /2}\qquad n为奇数\end{case
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目-数值的整数次方"><span class="nav-number">2.</span> <span class="nav-text">题目(数值的整数次方)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法思路"><span class="nav-number">3.</span> <span class="nav-text">算法思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现"><span class="nav-number">4.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂度分析"><span class="nav-number">5.</span> <span class="nav-text">复杂度分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目-数值的整数次方"><span class="nav-number">2.</span> <span class="nav-text">题目(数值的整数次方)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法思路"><span class="nav-number">3.</span> <span class="nav-text">算法思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法实现"><span class="nav-number">4.</span> <span class="nav-text">算法实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#剑指offer版"><span class="nav-number">4.1.</span> <span class="nav-text">剑指offer版</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#个人写法"><span class="nav-number">4.2.</span> <span class="nav-text">个人写法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂度分析"><span class="nav-number">5.</span> <span class="nav-text">复杂度分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -679,7 +674,7 @@ a^{\left( n-1\right) /2}\cdot a^{\left( n-1\right) /2}\qquad n为奇数\end{case
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
