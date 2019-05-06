@@ -114,7 +114,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fpxh9a9gh3j20ca089glx.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fq5j5ay7uxj20dc09p3yw.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fq5gpc8pa0j20ce08o0t3.jpg">
-<meta property="og:updated_time" content="2019-05-06T07:35:41.106Z">
+<meta property="og:updated_time" content="2019-05-06T07:42:15.331Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SVM系列之初识SVM(一)">
 <meta name="twitter:description" content="前言支持向量机 SVM 是一种可以进行二分类、多分类以及回归分析的强大工具，并且 SVM 可以称得上表现较出色的监督学习算法，因此，我们一定得好好分析其原理，为啥它能够表现出色呢?   可视化的二分类问题我们来看看下面这张图：假设红色的圈表示样本正例，绿色的圈表示样本反例。此时我们需要找到一条直线将这两类样本划分开(先忽略新样本点)。从图中可以看出我们可以有很多条直线可以划分样本。但是，究竟要选择">
@@ -414,7 +414,7 @@
 </blockquote>
 <h1 id="对偶问题"><a href="#对偶问题" class="headerlink" title="对偶问题"></a>对偶问题</h1><p>首先我们将上述支持向量机的基本型中的每个约束条件加上拉格朗日乘子 \(\alpha _{i}\),且 \(\alpha _{i}\geq 0\) ，那么我们得到的拉格朗日函数可写为:  </p>
 <script type="math/tex; mode=display">L\left(w,b, \alpha \right) =\dfrac {1}{2}\left\| w\right\| ^{2}+\sum ^{m}_{i=1}\alpha _{i}\left( 1-y_{i}\left( w^{T}x_{i}+b\right) \right)</script><p>其中 \(\alpha =\left( \alpha _{1};\alpha _{2};\ldots ;\alpha _{m}\right)\)。<br>此时令目标函数 \(L\) 对 \(w\) 和 \(b\) 的偏导均为零可得:  </p>
-<p>\(w=\sum ^{m}_{i=1}\alpha _{i}y_{i}x_{i}\quad,\quad0=\sum ^{m}_{i=1}\alpha _{i}y_{i}\)<br>接下来带入 \(0=\sum ^{m}_{i=1}\alpha _{i}y_{i}\(，消去 \(b\) 后得:  </p>
+<p>\(w=\sum ^{m}_{i=1}\alpha _{i}y_{i}x_{i}\quad,\quad0=\sum ^{m}_{i=1}\alpha _{i}y_{i}\)<br>接下来带入 \(0=\sum ^{m}_{i=1}\alpha _{i}y_{i}\)，消去 \(b\) 后得:  </p>
 <script type="math/tex; mode=display">L\left(w,\alpha \right) =\dfrac {1}{2}\left\| w\right\| ^{2}+\sum ^{m}_{i=1}\alpha _{i}\left( 1-y_{i}w^{T}x_{i}\right)</script><p>再带入\(w=\sum ^{m}_{i=1}\alpha _{i}y_{i}x_{i}\)，消去 w，即：</p>
 <script type="math/tex; mode=display">\begin{aligned}L\left( \alpha \right) =\dfrac {1}{2}\left\| w\right\| ^{2}+\sum ^{m}_{i=1}\alpha _{i}-\sum ^{m}_{i=1}w^{T}\alpha _{i}y_{i}x_{i}\\
 =\dfrac {1}{2}w^{T}w+\sum ^{m}_{i=1}\alpha _{i}-w^{T}w\\
