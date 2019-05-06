@@ -877,13 +877,10 @@ a^{\left( n-1\right) /2}\cdot a^{\left( n-1\right) /2}\qquad n为奇数\end{case
 <blockquote>
 <p>注：为了更好优化||w||，我们对式子进行变形以方便计算，但不会影响最后的优化结果。  </p>
 </blockquote>
-<h1 id="对偶问题"><a href="#对偶问题" class="headerlink" title="对偶问题"></a>对偶问题</h1><p>首先我们将上述支持向量机的基本型中的每个约束条件加上拉格朗日乘子 $\alpha _{i}$,且 $\alpha _{i}\geq 0$ ，那么我们得到的拉格朗日函数可写为:  </p>
-<script type="math/tex; mode=display">L\left(w,b, \alpha \right) =\dfrac {1}{2}\left\| w\right\| ^{2}+\sum ^{m}_{i=1}\alpha _{i}\left( 1-y_{i}\left( w^{T}x_{i}+b\right) \right) $$其中 $\alpha =\left( \alpha _{1};\alpha _{2};\ldots ;\alpha _{m}\right)$。  
-此时令目标函数 $L$ 对 $w$ 和 $b$ 的偏导均为零可得:  
-
-$w=\sum ^{m}_{i=1}\alpha _{i}y_{i}x_{i}\quad,$        $\quad0=\sum ^{m}_{i=1}\alpha _{i}y_{i}$    
-接下来带入$0=\sum ^{m}_{i=1}\alpha _{i}y_{i}$，消去 $b$ 后得:  
-$$ L\left(w,\alpha \right) =\dfrac {1}{2}\left\| w\right\| ^{2}+\sum ^{m}_{i=1}\alpha _{i}\left( 1-y_{i}w^{T}x_{i}\right)</script><p>再带入$w=\sum ^{m}_{i=1}\alpha _{i}y_{i}x_{i}$，消去 w，即：</p>
+<h1 id="对偶问题"><a href="#对偶问题" class="headerlink" title="对偶问题"></a>对偶问题</h1><p>首先我们将上述支持向量机的基本型中的每个约束条件加上拉格朗日乘子 \(\alpha _{i}\),且 \(\alpha _{i}\geq 0\) ，那么我们得到的拉格朗日函数可写为:  </p>
+<script type="math/tex; mode=display">L\left(w,b, \alpha \right) =\dfrac {1}{2}\left\| w\right\| ^{2}+\sum ^{m}_{i=1}\alpha _{i}\left( 1-y_{i}\left( w^{T}x_{i}+b\right) \right)</script><p>其中 \(\alpha =\left( \alpha _{1};\alpha _{2};\ldots ;\alpha _{m}\right)\)。<br>此时令目标函数 \(L\) 对 \(w\) 和 \(b\) 的偏导均为零可得:  </p>
+<p>\(w=\sum ^{m}_{i=1}\alpha _{i}y_{i}x_{i}\quad,\(        \(\quad0=\sum ^{m}_{i=1}\alpha _{i}y_{i}\(<br>接下来带入 \(0=\sum ^{m}_{i=1}\alpha _{i}y_{i}\(，消去 \(b\) 后得:  </p>
+<script type="math/tex; mode=display">L\left(w,\alpha \right) =\dfrac {1}{2}\left\| w\right\| ^{2}+\sum ^{m}_{i=1}\alpha _{i}\left( 1-y_{i}w^{T}x_{i}\right)</script><p>再带入\(w=\sum ^{m}_{i=1}\alpha _{i}y_{i}x_{i}\)，消去 w，即：</p>
 <script type="math/tex; mode=display">\begin{aligned}L\left( \alpha \right) =\dfrac {1}{2}\left\| w\right\| ^{2}+\sum ^{m}_{i=1}\alpha _{i}-\sum ^{m}_{i=1}w^{T}\alpha _{i}y_{i}x_{i}\\
 =\dfrac {1}{2}w^{T}w+\sum ^{m}_{i=1}\alpha _{i}-w^{T}w\\
 =\sum ^{m}_{i=1}\alpha _{i}-\dfrac {1}{2}w^{T}w\end{aligned}</script><p>再来，先取一个固定的 \(\alpha ‘\quad \alpha ‘_{i}\geq 0\)，由于 \(\max L\left(w,b, \alpha \right) \geq L\left(w,b, \alpha ‘\right) \)，即函数 \(L\) 的最大值一定会大于等于其任意函数值,那么如果先对 \(w\) 和 \(b\) 最小化时，即等式两边分别加上 \(\min _{w,b}\)，则有：  </p>
