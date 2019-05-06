@@ -113,7 +113,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fq6oh1ovtyj20l008u74k.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/8992ce25ly1fq7wtuwsxqj20960813yz.jpg">
-<meta property="og:updated_time" content="2018-07-02T06:14:03.812Z">
+<meta property="og:updated_time" content="2019-04-21T08:58:59.616Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SVM系列之核函数与KKT条件(二)">
 <meta name="twitter:description" content="前言在前一篇文章中介绍的 SVM 基本型，其实还可以进行优化。主要是利用核函数对向量内积的计算进行优化。另外，我们还将详细分析拉格朗日乘子法与KKT条件,以及KKT条件对SVM分类的作用。那我们先来看看核函数是什么。 核函数在异或问题中，由于 \(0\oplus 0=0\)、\(1\oplus 1=0\)、\(0\oplus 1=1\)、\(1\oplus 0=1\)，所有只有两类结果，我们将 0">
@@ -432,7 +432,7 @@
 <script type="math/tex; mode=display">\begin{cases}\alpha _{i}\geq 0,\quad \mu_{i}\geq 0\\
 y_{i}f\left( x_{i}\right) -1+\xi _{i}\geq 0\\
 \alpha _{i}\left( y_{i}f\left( x_{i}\right) -1+\xi _{i}\right) =0\\
-\xi _{i}\geq 0,u_{i}\xi _{i}=0\end{cases}</script><p>再结合求解出的约束 \(0\leq \alpha _{i}\leq C\) 以及 \(C=\alpha_{i}+\mu_{i}\)。<br>那么，对于任意一个样本 \(\left(x _{i},y _{i}\right)\)，由括号中的第三个条件可知，总有 \(\alpha _{i}=0\) 或者 \(y_{i}f\left( x_{i}\right)=1-\xi _{i}\);<br>那么当 \(\alpha _{i}=0\)，即样本被分类正确，它们处在边界的外面，不会影响到函数 f,即 \(y_{i}\left( w^{T}x_{i}+b\right) \geq 1\);<br>当 \(\alpha_{i}&gt;0\) 时，该样本是支持向量;<br>若 \(0&lt;\alpha _{i}&lt;C\),则 \(\mu_{i}&lt;0\)，推出  \(\xi_{i}=0\),所以 \(y_{i}f\left( x_{i}\right)=1-\xi _{i}\)，即该样本恰好落在最大间隔的边界线上，即 \(y_{i}\left( w^{T}x_{i}+b\right)=1\);<br>若 \(\alpha_{i}=C\)，则有 \(\mu_{i}=0\)，那么此时若 \(\xi_{i}\leq 1\)，则样本落在最大间隔的内部，否则该样本被错误分类了，即它跑到了对面的间隔边界外了，即 \(y_{i}\left( w^{T}x_{i}+b\right) \leq 1\)。<br>总之，软间隔的支持向量可以在边界上，边界内或者错误的边界外。</p>
+\xi _{i}\geq 0,u_{i}\xi _{i}=0\end{cases}</script><p>再结合求解出的约束 \(0\leq \alpha _{i}\leq C\) 以及 \(C=\alpha_{i}+\mu_{i}\)。<br>那么，对于任意一个样本 \(\left(x _{i},y _{i}\right)\)，由括号中的第三个条件可知，总有 \(\alpha _{i}=0\) 或者 \(y_{i}f\left( x_{i}\right)=1-\xi _{i}\);<br>那么当 \(\alpha _{i}=0\)，即样本被分类正确，它们处在边界的外面，不会影响到函数 f,即 \(y_{i}\left( w^{T}x_{i}+b\right) \geq 1\);<br>当 \(\alpha_{i}&gt;0\) 时，该样本是支持向量;<br>若 \(0&lt;\alpha _{i}<c\\),则 \\(\mu_{i}="">0\)，推出  \(\xi_{i}=0\),所以 \(y_{i}f\left( x_{i}\right)=1-\xi _{i}\)，即该样本恰好落在最大间隔的边界线上，即 \(y_{i}\left( w^{T}x_{i}+b\right)=1\);<br>若 \(\alpha_{i}=C\)，则有 \(\mu_{i}=0\)，那么此时若 \(\xi_{i}\leq 1\)，则样本落在最大间隔的内部，否则该样本被错误分类了，即它跑到了对面的间隔边界外了，即 \(y_{i}\left( w^{T}x_{i}+b\right) \leq 1\)。<br>总之，软间隔的支持向量可以在边界上，边界内或者错误的边界外。</c\\),则></p>
 <blockquote>
 <p>注意硬间隔支持向量与软间隔支持向量的区别。</p>
 </blockquote>
