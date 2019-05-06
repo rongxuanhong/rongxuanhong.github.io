@@ -878,7 +878,8 @@ a^{\left( n-1\right) /2}\cdot a^{\left( n-1\right) /2}\qquad n为奇数\end{case
 <p>注：为了更好优化||w||，我们对式子进行变形以方便计算，但不会影响最后的优化结果。  </p>
 </blockquote>
 <h1 id="对偶问题"><a href="#对偶问题" class="headerlink" title="对偶问题"></a>对偶问题</h1><p>首先我们将上述支持向量机的基本型中的每个约束条件加上拉格朗日乘子 $\alpha _{i}$,且 $\alpha _{i}\geq 0$ ，那么我们得到的拉格朗日函数可写为:  </p>
-<script type="math/tex; mode=display">L\left(w,b, \alpha \right) =\dfrac {1}{2}\left\| w\right\| ^{2}+\sum ^{m}_{i=1}\alpha _{i}\left( 1-y_{i}\left( w^{T}x_{i}+b\right) \right)  $$其中 $\alpha =\left( \alpha _{1};\alpha _{2};\ldots ;\alpha _{m}\right)$。此时令目标函数 $L$ 对 $w$ 和 $b$ 的偏导均为零可得:  
+<script type="math/tex; mode=display">L\left(w,b, \alpha \right) =\dfrac {1}{2}\left\| w\right\| ^{2}+\sum ^{m}_{i=1}\alpha _{i}\left( 1-y_{i}\left( w^{T}x_{i}+b\right) \right) $$其中 $\alpha =\left( \alpha _{1};\alpha _{2};\ldots ;\alpha _{m}\right)$。  
+此时令目标函数 $L$ 对 $w$ 和 $b$ 的偏导均为零可得:  
 
 $w=\sum ^{m}_{i=1}\alpha _{i}y_{i}x_{i}\quad,$        $\quad0=\sum ^{m}_{i=1}\alpha _{i}y_{i}$    
 接下来带入$0=\sum ^{m}_{i=1}\alpha _{i}y_{i}$，消去 $b$ 后得:  
