@@ -483,159 +483,6 @@ y_{i}f\left( x_{i}\right) -1+\xi _{i}\geq 0\\
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/22/剑指offer2之数值的整数次方/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="洪荣宣">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rongxuanhong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/22/剑指offer2之数值的整数次方/" itemprop="url">Untitled</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-22T20:41:01+08:00">2018-04-22</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/04/22/剑指offer2之数值的整数次方/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/22/剑指offer2之数值的整数次方/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在面试编程的时候，代码的规范性和完整性非常重要，可能成为能否拿到 offer 的关键因素。那么代码的规范性如何体现呢？比如清晰的书写、代码布局清晰(如缩进，括号对齐)、变量和函数的命名易懂。而代码的完整性体现在代码基本功能实现的正确性以及在边界值、错误处理等方面的全面考虑。</p>
-<p>那么完整的代码需要从功能测试、边界测试以及负面测试来提高鲁棒性。例如，在功能测试中，除了完成基本功能，还需要考虑数值的表示范围；在边界测试中，需要考虑循环条件和递归终止条件的正确性；在负面测试中，需要考虑边界值和特殊值的输入，以解决一些不合法的情况。</p>
-<p>那么对于错误处理的方式主要有三种，分别是函数用返回值来告知API调用者是否出错，如返回 0 表示出错；当错误发生时设置一个全局变量来记录；对错误情况，采用抛异常的处理方式。</p>
-<h1 id="题目-数值的整数次方"><a href="#题目-数值的整数次方" class="headerlink" title="题目(数值的整数次方)"></a>题目(数值的整数次方)</h1><p>题目：实现函数 double Power(double base,int exponent)，求 base 的 exponent 次方。不得使用库函数，同时不需要考虑大数范围。</p>
-<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>首先我们应该对输入参数的各种情况进行讨论。</p>
-<ol>
-<li>如果基 base 是 0 而且 指数 exponent 是负数，那么情况判为不合法输入；</li>
-<li>注意基 base 是 0 而且 指数 exponent 也是 0 ，这种情况在数学上是无意义的。</li>
-<li>无论指数 exponent 是正还是负都统一先转成无符号的整形类型，方便统一计算整数次方。然后，对于 exponent 为负的情况，只需将结果变为倒数即可。</li>
-</ol>
-<p>优化多次乘方的思路：<br>如果输入的指数 exponent 为 32，那么需要进行 31 次乘法操作。那么，如果我们能先算出数字的 16 次方，然后再平方一次即可；那么假如知道了数字的 16 次方，那么只需要在数字的 16 次方的基础上平方一次即可得到结果，那如果知道了数字的 8 次方，那么就可以在数字的 8 次方基础上平方一次得到数字的 16 次方的结果；那么如果知道数字的 4 次方，就可以在数字 4 此方的基础上平方一次得到数字的 8 次方；一次类推，直到知道了数字的 1 次方。  </p>
-<p>那么可用如下公式表示 a 的 n 次方:</p>
-<script type="math/tex; mode=display">a^{n}=\begin{cases}a^{n/2}\cdot a^{n/2}\qquad n为偶数 \\
-a^{\left( n-1\right) /2}\cdot a^{\left( n-1\right) /2}\qquad n为奇数\end{cases}</script><h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><h2 id="剑指offer版"><a href="#剑指offer版" class="headerlink" title="剑指offer版"></a>剑指offer版</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fqeg3s6edkj20v10iywfl.jpg" alt=""></p>
-<h2 id="个人写法"><a href="#个人写法" class="headerlink" title="个人写法"></a>个人写法</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1g0r432ys3lj20v80i2aaj.jpg" alt=""></p>
-<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>时间主要消耗在求解乘法运算结果上面，而使用递归方法(二分原问题)进行乘法求解的时间复杂度为 O(logn)，空间复杂度为 O(1)。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-	<div>
-
-</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/20/剑指offer2之打印从1到最大的n位数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1098,6 +945,160 @@ a^{\left( n-1\right) /2}\cdot a^{\left( n-1\right) /2}\qquad n为奇数\end{case
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/16/剑指offer2之剪绳子/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/16/剑指offer2之剪绳子/" itemprop="url">剑指offer2之剪绳子</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-16T14:40:41+08:00">2018-04-16</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/16/剑指offer2之剪绳子/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/16/剑指offer2之剪绳子/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>动态规划也是编程面试中的常考题。如果所求问题是求最优解，而且问题能够分解为若干个子问题，并且<strong>子问题之间还有重叠的更小的子问题</strong>，那么应该考虑应用动态规划思想求解。</p>
+<p>在应用动态规划之前要分析能否把大问题分解成小问题，分解的每个小问题也存在最优解。如果把小问题的最优解组合起来能够得到这个问题的最优解，那么我们就可以应用动态规划解决这个问题。</p>
+<p>总之，动态规划存在以下几个特点：  </p>
+<ol>
+<li>目标问题是求最优解；</li>
+<li>整体的最优解可以由子问题的最优解参与或组合得到；</li>
+<li>大问题可以分成若干个子问题，且子问题之间还有相互重叠的更小的子问题；</li>
+<li>为避免重复求解子问题(后面求大问题的时候可能多次用到)，采用自下而上的顺序先计算小问题的最优解并记录到一维或二维数组中，再根据已经解出的小问题来求出大问题的最优解。简而言之，就是自上而下分析问题，自下而上求解问题。</li>
+</ol>
+<h1 id="题目-剪绳子"><a href="#题目-剪绳子" class="headerlink" title="题目(剪绳子)"></a>题目(剪绳子)</h1><p>题目：给定一根长度为n的绳子，请把绳子剪成 m 段(m,n 都是整数且均大于 1，至少剪一刀)，每段绳子的长度记为 k[0],k[1],…,k[m]。请问 k[0]xk[k1]x…xk[m] 可能的最大乘积是多少？例如，绳子长度为 8，可分成 2，3，3，三段，最大乘积为 18。</p>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><h3 id="动态规划法"><a href="#动态规划法" class="headerlink" title="动态规划法"></a>动态规划法</h3><p>首先定义函数 f(n) 为把长度为 n 的绳子剪成若干段后的最大乘积值。<br>剪绳子求的是最大乘积值满足特点 1；如果在绳子的 i 处剪一刀，那么 f(n) 要达到乘积最大，则 f(i)与 f(n-i) 也要达到乘积最大，满足特点 2；假设 n=6，那么 f(2) 和 f(4) 都是问题的子问题，但其实 f(2)  也是 f(4) 的子问题，那么就出现了重叠的更小的子问题，满足特点 3；所以，我们为了求解目标问题，都是先从小问题开始求解，即自下而上求解，并将每个子问题的乘积最大值记录到数组中备查，满足特点4。因此，本题的确适合采用动态规划求解。</p>
+<p>当绳子长度为 2 的时候，只能剪成两段长度为 1，所以 f(2)=1；当绳子长度为 3 的时候，有两种剪法，其中最大的 f(3)=2。</p>
+<p>那么当 n&gt;4 的时候，我们要求出把长度为 i 的绳子剪成若干段之后各段长度乘积的最大值，即求 f(i)，而4&lt;=i&lt;=n，即要求出所有子问题的最优解。那么对于每个子问题 f(i)，由于可以有 i/2 种切法，所以我们应该遍历每种切法，并计算出乘积最大的那种切法。当切点在 j(1&lt;=j&lt;=i/2) 处时，子问题 f(i)=max(f(j)xf(i-j)),其中 f(j),f(i-j)，都可以从备忘数组中查询得到。</p>
+<h3 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a>贪心算法</h3><p>即选择一个能够得到乘积最大值的策略进行。当 n&gt;=5 时，我们尽可能的剪出长度为 3 的小绳子；当剩下的绳子长度为 4 时，改为把绳子剪成两段。<br>证明 :首先，当 n&gt;=5 时，我们可以证明 2(n-2)&gt;n 并且 3(n-3)&gt;n。也就是说，当绳子剩下的长度大于或者等于 5 的时候，我们就把它剪成长度为 3 或者 2 的绳子段。另外，当 n&gt;=5 时，3(n-3)&gt;=2(n-2)，因此我们应该尽可能地多剪长度为3的绳子段。而当 n=4 时，由于 2x2&gt;1x3 所以应该剪成两条长度分别为 2 的绳子段。</p>
+<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><h2 id="动态规划实现"><a href="#动态规划实现" class="headerlink" title="动态规划实现"></a>动态规划实现</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fq8pbk8btdj20v50hct9s.jpg" alt=""></p>
+<h2 id="贪心算法实现"><a href="#贪心算法实现" class="headerlink" title="贪心算法实现"></a>贪心算法实现</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fq8par1k9fj20v60audgj.jpg" alt=""></p>
+<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>对于动态规划法，两层循环，时间复杂度为 O(n^2)，另外，建立了辅助容器，空间复杂度为 O(n)；对于贪心算法，复杂度均为 O(1)。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>&lt;&lt;剑指offer2&gt;&gt;</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -1473,9 +1474,9 @@ a^{\left( n-1\right) /2}\cdot a^{\left( n-1\right) /2}\qquad n为奇数\end{case
       
     
       
-    
-      
         
+      
+    
       
     
       
