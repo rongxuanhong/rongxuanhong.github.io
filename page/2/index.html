@@ -306,6 +306,147 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/26/剑指offer2之n个骰子点数之和/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洪荣宣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rongxuanhong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/26/剑指offer2之n个骰子点数之和/" itemprop="url">剑指offer2之n个骰子点数之和</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-26T19:32:19+08:00">2018-09-26</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/26/剑指offer2之n个骰子点数之和/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/09/26/剑指offer2之n个骰子点数之和/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="题目-n-个骰子点数之和"><a href="#题目-n-个骰子点数之和" class="headerlink" title="题目(n 个骰子点数之和)"></a>题目(n 个骰子点数之和)</h1><p>把 n 个骰子仍在地上，所有骰子朝上一面的点数之和为 s。输入 n，打印出 s 的所有可能的值出现的概率。</p>
+<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>首先，剑指offer上的本题题解过于晦涩，作者未明确指出其实这道题是一题dp(动态规划)题。<br>首先，扔 n 个骰子的解可以由扔 n-1 骰子的解推出，即原问题包含了子问题的解(状态转移)；其次，对于如果使用递归的话，那么必定存在重复的子问题；因此，本题适用于动态规划的解法。<br>那么，首先构造状态转移方程：设扔 n 个骰子时排列数之和为 s 的函数为f(n,s)，那么如果先扔了 n-1 个骰子，则扔最后一个骰子就有 6 种情况(最后一个投出1、2、3、4、5、6)来得到排列数之和 s(前面的 6 种状态(解)可以推出当前状态(解))。即，f(n,s)=f(n-1,s-1)+f(n-1,s-2)+f(n-1,s-3)+f(n-1,s-4)+f(n-1,s-5)+f(n-1,s-6),n&lt;=s&lt;=6n。而当 s<n 或者="" s="">6n，则f(n,s)=0。初始状态位 n=1，f(1,1)=f(1,2)=f(1,3)=f(1,4)=f(1,5)=f(1,6)=1。</n></p>
+<h1 id="算法实现-递归版"><a href="#算法实现-递归版" class="headerlink" title="算法实现(递归版)"></a>算法实现(递归版)</h1><p>递归版的实现只需要对 N 个骰子遍历每种可能的排列数即可。(自顶向上递归下去，自底向上回溯到顶得解)<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fvhfgpyd1sj20zl0kcmxv.jpg" alt=""></p>
+<h1 id="算法实现-循环版"><a href="#算法实现-循环版" class="headerlink" title="算法实现(循环版)"></a>算法实现(循环版)</h1><p>循环版首先需要遍历每个骰子的情况，然后针对每个骰子的，再遍历其可能的排列数范围。(自底向上求出所有解)<br><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fvhfmyu6x9j20zr0o90to.jpg" alt=""></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] &lt;&lt;剑指offer2&gt;&gt; </p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/24/剑指offer2之队列的最大值/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -830,148 +971,6 @@
 <h1 id="算法思路-1"><a href="#算法思路-1" class="headerlink" title="算法思路"></a>算法思路</h1><p>现在题目是重复的数字出现了三次，那么异或运算就不行了，需要另寻它路。<br>如果仍然从位运算的角度考虑，可以发现：如果一个数字出现三次，那么它的二进制表示的每一位(0 或者 1)也出现三次。如果把所有出现三次的数字的二进制表示的每一位都分别加起来，那么每一位的和都能被 3 整除。如果每一位的和都能被 3 整除，那么那个只出现一次的数字的二进制表示中对应的那一位是0；否则就是 1 (不可能是 2，二进制位只有 0、1)。</p>
 <h1 id="算法实现-1"><a href="#算法实现-1" class="headerlink" title="算法实现"></a>算法实现</h1><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fu77k0jv03j20zm0cpdg7.jpg" alt=""></p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] &lt;&lt;剑指offer2&gt;&gt;<br>[2] <a href="https://www.nowcoder.com/questionTerminal/e02fdb54d7524710a7d664d082bb7811" target="_blank" rel="noopener">牛客网</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-	<div>
-
-</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/02/剑指offer2之二叉搜索树的第K大节点/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="洪荣宣">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/8992ce25gy1fengvigdatj205k05k0t0.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rongxuanhong's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/02/剑指offer2之二叉搜索树的第K大节点/" itemprop="url">剑指offer2之二叉搜索树的第K大节点</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-02T20:19:12+08:00">2018-09-02</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/09/02/剑指offer2之二叉搜索树的第K大节点/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments:</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/09/02/剑指offer2之二叉搜索树的第K大节点/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="题目-二叉搜索树的第-K-大节点"><a href="#题目-二叉搜索树的第-K-大节点" class="headerlink" title="题目(二叉搜索树的第 K 大节点)"></a>题目(二叉搜索树的第 K 大节点)</h1><p>题目：给定一棵二叉搜索树，请找出其中的第 K 大的节点。</p>
-<h1 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h1><p>说到二叉搜索树，然后要求第 k 大的节点，即涉及到顺序问题，那么立即联想到二叉搜索树的中序遍历就是递增序列。因此只要对二叉搜索树进行中序遍历，记录中序序列中的第 K 个节点即可。算法可以有递归版和非递归版</p>
-<h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><h2 id="递归版"><a href="#递归版" class="headerlink" title="递归版"></a>递归版</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fu3nbwi913j20zp0g7dg8.jpg" alt=""></p>
-<h2 id="非递归版"><a href="#非递归版" class="headerlink" title="非递归版"></a>非递归版</h2><p><img src="http://ww1.sinaimg.cn/large/8992ce25gy1fu3nbplek7j20zl0i4dg9.jpg" alt=""></p>
-<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><p>时间和空间复杂度均为 O(n)。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] &lt;&lt;剑指offer2&gt;&gt;   </p>
 
           
         
